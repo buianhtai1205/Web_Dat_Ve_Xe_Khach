@@ -36,7 +36,7 @@ public class DButils {
 			user.setPassword(password);
 			user.setNumberPhone(numberPhone);
 			user.setEmail(email);
-			
+			System.out.println(user);
 			return user;
 		}
 		return null;

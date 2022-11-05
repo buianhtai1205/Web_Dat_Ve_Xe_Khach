@@ -6,9 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" type="text/css" href="../assets/user/css/chitietve.css">
+<link rel="stylesheet" type="text/css" href="../assets/user/css/util.css">
 </head>
 <body>
+
+
 	<div id="chitietve" class="bg">
 		<h1 align="center">Chi tiết đặt chỗ</h1>
 		<hr />

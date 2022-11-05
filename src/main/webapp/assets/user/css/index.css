@@ -121,7 +121,7 @@ btn--
 }
 
 .btn--white {
-	background-color: rgb(2, 201, 2) !important;
+	background-color: #007bff !important;
 	color: #fbfbfb !important;
 	font-weight: 600 !important;
 	border: 1px solid #505763;
@@ -222,6 +222,12 @@ form>button.button3 {
 /**/
 
 /* dang nhap */
+body {
+	font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica,
+		Arial, sans-serif;
+}
+
 .login.modal-content {
 	background-color: rgba(0, 0, 0, 0);
 	border: none;
@@ -373,7 +379,8 @@ a.forgot:hover {
 }
 
 .myNavBar .navbar-brand img {
-	width: 110px;
+	width: 180px;
+	height:55px;
 }
 
 .myNavBar .Categories {

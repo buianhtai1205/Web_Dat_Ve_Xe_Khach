@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import utils.Router;
 
 
 @WebServlet("/home")
@@ -22,10 +23,7 @@ public class HomeServlet extends HttpServlet {
 	   protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	           throws ServletException, IOException {
 
-	       // Forward toi trang /WEB-INF/views/homeView.jsp
-	       // (Người dùng không bao giờ truy cập trực tiếp được vào các trang JSP
-	       // đặt trong WEB-INF)
-	       RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/homeView.jsp");
+	       RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.HOME_VIEW_USER);
 	       
 	       dispatcher.forward(request, response);
 	       
