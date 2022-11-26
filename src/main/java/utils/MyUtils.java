@@ -45,7 +45,7 @@ public class MyUtils {
 	// Lưu thông tin người dùng vào Cookie.
 	public static void storeUserCookie(HttpServletResponse response, Customer user) {
 
-		Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getUserName());
+		Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getFullname());
 		// 1 ngày (Đã đổi ra giây)
 		cookieUserName.setMaxAge(24 * 60 * 60);
 		response.addCookie(cookieUserName);

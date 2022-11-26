@@ -16,7 +16,7 @@ public class SQLServerConnUtils_SQLJDBC {
 
 	// Kết nối vào SQL Server.
 	// (Sử dụng thư viện SQLJDBC)
-	public static Connection getSQLServerConnection_SQLJDBC() //
+	public static Connection getSQLServerConnection_SQLJDBC2() //
 			throws ClassNotFoundException, SQLException {
 
 		Connection conn = null;
@@ -44,5 +44,27 @@ public class SQLServerConnUtils_SQLJDBC {
 		} catch (Exception e) {
 		}
 	}
+	
+	public static Connection getSQLServerConnection_SQLJDBC() 
+	        throws SQLException, ClassNotFoundException 
+	    { 
+	        String dbDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
+	        String dbURL = "jdbc:sqlserver://localhost:1433"; 
+	        // Database name to access 
+	        String dbName = "VEXEONLINE"; 
+	        String dbUsername = "sa"; 
+	        String dbPassword = "123456"; 
+	        String connectionURL = dbURL + ";databaseName=" + dbName;
+	        Connection conn = null;
+	        try {
+	            Class.forName(dbDriver);
+	            conn = DriverManager.getConnection(connectionURL, dbUsername, dbPassword);
+	            System.out.println("connect successfully!");
+	        } catch (Exception ex) {
+	            System.out.println("connect failure!");
+	            ex.printStackTrace();
+	        }
+	        return conn; 
+	    } 
 
 }

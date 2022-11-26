@@ -19,6 +19,13 @@
 	integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<link rel="stylesheet" href="assets/user/css/index.css">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="../assets/user/css/index.css">
 <link rel="stylesheet" href="../assets/user/css/profileUser.css">
 
@@ -56,9 +63,8 @@
 									alt="Admin" class="`rounded-circle" width="150">
 								<div class="mt-3">
 							
-									<h4>${user.userName}</h4>
+									<h4>${user.fullname}</h4>
 									<p class="text-secondary mb-1">Customer</p>
-
 
 								</div>
 							</div>
@@ -74,7 +80,7 @@
 									<h6 class="mb-0">Full Name</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<p>${user.userName}</p>
+									<p>${user.fullname}</p>
 								</div>
 							</div>
 							<hr>
@@ -89,7 +95,7 @@
 								<div class="col-sm-3">
 									<h6 class="mb-0">Phone</h6>
 								</div>
-								<div class="col-sm-9 text-secondary">${user.numberPhone}</div>
+								<div class="col-sm-9 text-secondary">${user.phone_number}</div>
 							</div>
 							<hr>
 							<hr>
@@ -103,7 +109,7 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<a class="btn btn-info " target="__blank"
-										href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+										href="#">Edit</a>
 								</div>
 							</div>
 						</div>

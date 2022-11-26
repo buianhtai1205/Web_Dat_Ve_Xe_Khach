@@ -1,3 +1,6 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.Locale"%>
+<%@page import="utils.Router"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -42,23 +45,71 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <link rel="stylesheet" href="../assets/user/css/listCoachSearch.css">
+<link rel="stylesheet" type="text/css" href="/assets/user/css/timve.css">
+<link rel="stylesheet" type="text/css" href="/assets/user/css/util.css">
+
+<link rel="stylesheet" type="text/css"
+	href="/assets/user/css/sweet-alert.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script type="text/javascript"
+	src="/Web_Dat_Ve_Xe_Khach/js/sweet-alert.min.js"></script>
+<script type="text/javascript"
+	src="/Web_Dat_Ve_Xe_Khach/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="/Web_Dat_Ve_Xe_Khach/js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="/Web_Dat_Ve_Xe_Khach/js/util.js"></script>
+<script type="text/javascript" src="/Web_Dat_Ve_Xe_Khach/js/xe.js"></script>
+<style type="text/css">
+.invalid {
+	border-color: red !important;
+}
+
+.invalid2 {
+	border-color: red !important;
+}
+
+#error1 {
+	color: red
+}
+
+#error2 {
+	color: red
+}
+
+#error3 {
+	color: red
+}
+</style>
+
 
 <script type="text/javascript">
-	var disabled1 = document.getElementsByClassName(`navlink_1`);
-	disabled1.onClick = function a() {
-	
-		disabled1.classList.add('disabled');
+function chonXe(scrollid,time, chuyenDiOrVe, chuyen, id) {
+/* 		console.log(id); */
+		console.log(chuyen)
+}
 
-		console.log(disabled1)
+  
+function choose1(id) {
+	const div1 = document.getElementsByClassName('ghe')[0];
+	var idGhe = div1.getAttribute('id');
 	
-	}
+	const input = document.getElementById('inputGheDangChon');
+
+	
+	input.setAttribute('value',id);
+	console.log(input.getAttribute('value'))
+
+}
 </script>
 </head>
 
 <body>
 
-	<%@ include file="../views/header.jsp"%>
-
+	<%@ include file="../layout/user/header.jsp"%>
 	<!-- body -->
 	<section class="mid" style="padding: 40px 135px;">
 		<div class="container-fluid">
@@ -403,184 +454,190 @@
 							</ul>
 
 							<div class="tab-content" id="pills-tabContent">
-								<div class="tab-pane fade show active" id="all" role="tabpanel"
-									aria-labelledby="pills-home-tab"
-									aria-labelledby="pills-home-tab">
-									<div class="vexe">
-										<div class="card__top" style="font-size: small">
-											<div class="card__right">
-												<img src="../assets/user/images/xe2.jpg" alt="">
+								<form action="${pageContext.request.contextPath}/timghe"
+									method="POST">
+									<div class="tab-pane fade show active" id="all" role="tabpanel"
+										aria-labelledby="pills-home-tab"
+										aria-labelledby="pills-home-tab">
+										<div class="vexe">
+											<div class="card__top" style="font-size: small">
+												<div class="card__right">
+													<img src="../assets/user/images/xe2.jpg" alt="">
 
-												<div class="div">
-													<div class="div__content" style="font-size: 16px">
-														<h3 style="font-size: 20px">Trang Hòa</h3>
-														<!-- 	<i class="fa fa-star">3.9</i> -->
-														<p class="content__1">300.000đ</p>
+													<div class="div">
+														<div class="div__content" style="font-size: 16px">
+															<h3 style="font-size: 20px">Trang Hòa</h3>
+															<!-- 	<i class="fa fa-star">3.9</i> -->
+															<p class="content__1">300.000đ</p>
+														</div>
+														<p>Giường nằm 44 chỗ</p>
+														<i class="fa fa-map-pin">6h30P</i><br> <i
+															class="fa fa-map-marker-alt">18h30P</i>
 													</div>
-													<p>Giường nằm 44 chỗ</p>
-													<i class="fa fa-map-pin">6h30P</i><br> <i
-														class="fa fa-map-marker-alt">18h30P</i>
+
+												</div>
+												<div class="collasp">
+													<div class="card__link">
+														<a data-toggle="collapse" href="#collapseExample"
+															role="button" aria-expanded="false"
+															aria-controls="collapseExample"> Thông tin chi tiết <i
+															class="fa fa-angle-down"></i>
+														</a>
+													</div>
+													<div class="button">
+														<button data-toggle="collapse"
+															onclick="chonXe('#scroll1<%=1%>',800,'chuyendi',3,<%=3%>)"
+															data-target="#collapseChonChuyen" aria-expanded="false"
+															aria-controls="collapseChonChuyen" name="idChuyenXe"
+															value="3" type="button">Chọn chuyến</button>
+														<input class="form-check-input" type="hidden" value="3"
+															name="inputIdChuyenXe" id="inputIdChuyenXe">
+													</div>
 												</div>
 
 											</div>
-											<div class="collasp">
-												<div class="card__link">
-													<a data-toggle="collapse" href="#collapseExample"
-														role="button" aria-expanded="false"
-														aria-controls="collapseExample"> Thông tin chi tiết <i
-														class="fa fa-angle-down"></i>
-													</a>
-												</div>
-												<div class="button">
-													<button data-toggle="collapse"
-														data-target="#collapseChonChuyen" aria-expanded="false"
-														aria-controls="collapseChonChuyen">Chọn chuyến</button>
-												</div>
-											</div>
+											<!-- cardbottom1 -->
+											<div class="card__bottom">
+												<div class="collapse" id="collapseExample">
+													<div class="card card-body">
+														<div class="project">
+															<ul class="nav nav-pills mb-3" id="pills-tab"
+																role="tablist">
+																<li class="nav-item" role="presentation"><a
+																	class="nav-link active" id="pills-img-tab"
+																	data-toggle="pill" href="#img" role="tab"
+																	aria-controls="pills-img" aria-selected="true">Hình
+																		ảnh</a></li>
+																<li class="nav-item" role="presentation"><a
+																	class="nav-link" id="pills-cmt-tab" data-toggle="pill"
+																	href="#pills-cmt" role="tab" aria-controls="pills-cmt"
+																	aria-selected="false">Tiện ích </a></li>
+																<li class="nav-item" role="presentation"><a
+																	class="nav-link" id="pills-travel-tab"
+																	data-toggle="pill" href="#pills-travel" role="tab"
+																	aria-controls="pills-travel" aria-selected="false">Điểm
+																		Đón Trả</a></li>
 
-										</div>
-										<!-- cardbottom1 -->
-										<div class="card__bottom">
-											<div class="collapse" id="collapseExample">
-												<div class="card card-body">
-													<div class="project">
-														<ul class="nav nav-pills mb-3" id="pills-tab"
-															role="tablist">
-															<li class="nav-item" role="presentation"><a
-																class="nav-link active" id="pills-img-tab"
-																data-toggle="pill" href="#img" role="tab"
-																aria-controls="pills-img" aria-selected="true">Hình
-																	ảnh</a></li>
-															<li class="nav-item" role="presentation"><a
-																class="nav-link" id="pills-cmt-tab" data-toggle="pill"
-																href="#pills-cmt" role="tab" aria-controls="pills-cmt"
-																aria-selected="false">Tiện ích </a></li>
-															<li class="nav-item" role="presentation"><a
-																class="nav-link" id="pills-travel-tab"
-																data-toggle="pill" href="#pills-travel" role="tab"
-																aria-controls="pills-travel" aria-selected="false">Điểm
-																	Đón Trả</a></li>
+															</ul>
 
-														</ul>
+															<div class="tab-content" id="pills-tabContent">
+																<div class="tab-pane fade show active" id="img"
+																	role="tabpanel" aria-labelledby="pills-img-tab"></div>
 
-														<div class="tab-content" id="pills-tabContent">
-															<div class="tab-pane fade show active" id="img"
-																role="tabpanel" aria-labelledby="pills-img-tab"></div>
+																<div class="tab-pane fade" id="pills-cmt"
+																	role="tabpanel" aria-labelledby="pills-cmt-tab">
+																	<div class="row">
+																		<div class="col-12">
+																			<div class="card animate__animated animate__zoomIn">
+																				<div class="card-body cmt1">
+																					<p>
+																						<i class="fa fa-capsules">Gối Ôm</i> <span>Nhà
+																							xe có trang bị gối ôm cho hành khách</span>
+																					</p>
 
-															<div class="tab-pane fade" id="pills-cmt" role="tabpanel"
-																aria-labelledby="pills-cmt-tab">
-																<div class="row">
-																	<div class="col-12">
-																		<div class="card animate__animated animate__zoomIn">
-																			<div class="card-body cmt1">
-																				<p>
-																					<i class="fa fa-capsules">Gối Ôm</i> <span>Nhà
-																						xe có trang bị gối ôm cho hành khách</span>
-																				</p>
+																					<p>
+																						<i class="fa fa-hammer">búa thoát hiểm</i> <span>Dùng
+																							để phá kính ô tô thoát hiểm trong trường hợp khẩn
+																							cấp.</span>
+																					</p>
 
-																				<p>
-																					<i class="fa fa-hammer">búa thoát hiểm</i> <span>Dùng
-																						để phá kính ô tô thoát hiểm trong trường hợp khẩn
-																						cấp.</span>
-																				</p>
+																					<p>
+																						<i class="fa fa-wifi">wifi</i> <span>Nhà xe
+																							có trang bị wifi cho hành khách</span>
+																					</p>
 
-																				<p>
-																					<i class="fa fa-wifi">wifi</i> <span>Nhà xe
-																						có trang bị wifi cho hành khách</span>
-																				</p>
+																					<p>
+																						<i class="fa fa-hamburger">Trạm nghỉ</i> <span>Nhà
+																							xe cung cấp chỗ dừng chân cho hành khách</span>
+																					</p>
 
-																				<p>
-																					<i class="fa fa-hamburger">Trạm nghỉ</i> <span>Nhà
-																						xe cung cấp chỗ dừng chân cho hành khách</span>
-																				</p>
+																					<p>
+																						<i class="fa fa-mug-hot">Nước</i> <span>Nhà
+																							xe có trang bị Nước cho hành khách</span>
+																					</p>
 
-																				<p>
-																					<i class="fa fa-mug-hot">Nước</i> <span>Nhà
-																						xe có trang bị Nước cho hành khách</span>
-																				</p>
+																					<p>
+																						<i class="fa fa-bed">Chăn</i> <span>Nhà xe
+																							có trang bị chăn cho hành khách</span>
+																					</p>
 
-																				<p>
-																					<i class="fa fa-bed">Chăn</i> <span>Nhà xe
-																						có trang bị chăn cho hành khách</span>
-																				</p>
+																					<p>
+																						<i class="fa fa-hand-holding">Nước rửa tay</i> <span>Nhà
+																							xe có trang bị nước rửa tay cho hành khách</span>
+																					</p>
 
-																				<p>
-																					<i class="fa fa-hand-holding">Nước rửa tay</i> <span>Nhà
-																						xe có trang bị nước rửa tay cho hành khách</span>
-																				</p>
-
+																				</div>
 																			</div>
 																		</div>
 																	</div>
 																</div>
-															</div>
 
-															<div class="tab-pane fade" id="pills-travel"
-																role="tabpanel" aria-labelledby="pills-travel-tab">
-																<div class="row">
-																	<div class="col-12">
-																		<div class="card animate__animated animate__zoomIn">
-																			<div class="card-body">
+																<div class="tab-pane fade" id="pills-travel"
+																	role="tabpanel" aria-labelledby="pills-travel-tab">
+																	<div class="row">
+																		<div class="col-12">
+																			<div class="card animate__animated animate__zoomIn">
+																				<div class="card-body">
 
-																				<p class="card-text">Lưu ý Các mốc thời gian
-																					đón, trả bên dưới là thời gian dự kiến. Lịch này có
-																					thể thay đổi tùy tình hình thưc tế.</p>
-																				<div class="card__2">
-																					<div class="card__right1">
-																						<h4>Điểm đón</h4>
-																						<ul>
-																							<li>06:30 • Bãi Xe Thành Thái</li>
-																							<li>06:40 • Lý Thường Kiệt</li>
-																							<li>06:50 • Cây xăng mũi tàu Trường Chinh</li>
-																							<li>07:00 • Tây Thạnh</li>
-																							<li>07:00 • Cầu Tham Lương</li>
-																							<li>07:02 • Ngã Tư An Sương</li>
-																							<li>07:03 • Cầu vượt Ngã Tư Ga</li>
-																							<li>07:05 • Lê Trọng Tấn</li>
-																							<li>07:15 • Bến xe Miền Đông</li>
-																							<li>07:20 • Ngã Tư Thủ Đức</li>
-																							<li>07:25 • Trường Đại học Sư phạm Kỹ thuật
-																								Tp. Hồ Chí Minh (cổng Võ Văn Ngân)</li>
-																							<li>07:30 • Cầu Ông Bố</li>
-																							<li>07:50 • Cổng Chào Bình Dương, Km số 1,
-																								QL13, Thuận AN, Bình Dương</li>
-																							<li>08:00 • Có trung chuyển Đại lộ Bình
-																								Dương</li>
-																						</ul>
-																					</div>
+																					<p class="card-text">Lưu ý Các mốc thời gian
+																						đón, trả bên dưới là thời gian dự kiến. Lịch này
+																						có thể thay đổi tùy tình hình thưc tế.</p>
+																					<div class="card__2">
+																						<div class="card__right1">
+																							<h4>Điểm đón</h4>
+																							<ul>
+																								<li>06:30 • Bãi Xe Thành Thái</li>
+																								<li>06:40 • Lý Thường Kiệt</li>
+																								<li>06:50 • Cây xăng mũi tàu Trường Chinh</li>
+																								<li>07:00 • Tây Thạnh</li>
+																								<li>07:00 • Cầu Tham Lương</li>
+																								<li>07:02 • Ngã Tư An Sương</li>
+																								<li>07:03 • Cầu vượt Ngã Tư Ga</li>
+																								<li>07:05 • Lê Trọng Tấn</li>
+																								<li>07:15 • Bến xe Miền Đông</li>
+																								<li>07:20 • Ngã Tư Thủ Đức</li>
+																								<li>07:25 • Trường Đại học Sư phạm Kỹ thuật
+																									Tp. Hồ Chí Minh (cổng Võ Văn Ngân)</li>
+																								<li>07:30 • Cầu Ông Bố</li>
+																								<li>07:50 • Cổng Chào Bình Dương, Km số 1,
+																									QL13, Thuận AN, Bình Dương</li>
+																								<li>08:00 • Có trung chuyển Đại lộ Bình
+																									Dương</li>
+																							</ul>
+																						</div>
 
-																					<div class="card__left2">
-																						<h4>Điểm trả</h4>
-																						<p>17:50 • Văn Phòng Đắk Lắk</p>
+																						<div class="card__left2">
+																							<h4>Điểm trả</h4>
+																							<p>17:50 • Văn Phòng Đắk Lắk</p>
+																						</div>
+
 																					</div>
 
 																				</div>
-
 																			</div>
 																		</div>
+
+
 																	</div>
-
-
 																</div>
+
 															</div>
 
+
 														</div>
-
-
 													</div>
 												</div>
+
+												<!-- 			//tab2 -->
+
+
+
+
 											</div>
-
-											<!-- 			//tab2 -->
-
-
-
-
 										</div>
 									</div>
-								</div>
 
-								<!-- div class="tab-pane fade" id="pills-profile" role="tabpanel"
+									<!-- div class="tab-pane fade" id="pills-profile" role="tabpanel"
 										aria-labelledby="pills-profile-tab"
 										aria-labelledby="pills-home-tab"
 										aria-labelledby="pills-home-tab">
@@ -749,110 +806,223 @@
 												</div>
 											</div> -->
 
-								<!-- cardbottom2 -->
-								<div class="card__bottom">
-									<div class="collapse" id="collapseChonChuyen">
-										<div class="card card-body">
-											<div class="project">
-												<ul class="nav nav-pills mb-3" id="pills-tab2"
-													role="tablist">
-													<li class="nav-item" role="presentation"><a
-														class="nav-link nav-link_1 active" id="pills-img-tab2"
-														data-toggle="pill" href="#img2" role="tab"
-														aria-controls="pills-img2" aria-selected="true"><div
-																class="form-check form-check-inline">
-																<input class="form-check-input" type="checkbox"
-																	name="inlineRadioOptions" id="inlineRadio1"
-																	value="option1" checked> <label
-																	class="form-check-label line-connect"
-																	for="inlineRadio1">1.Chỗ mong muốn -></label>
+									<!-- cardbottom2 -->
+									<div class="card__bottom">
+										<div class="collapse" id="collapseChonChuyen">
+											<div class="card card-body">
+												<div class="project">
+													<ul class="nav nav-pills mb-3 nav-tabs" id="pills-tab2"
+														role="tablist">
 
-															</div></a></li>
-													<li class="nav-item" role="presentation"><a
-														class="nav-link nav-link_2" id="pills-cmt-tab2"
-														data-toggle="pill" href="#pills-cmt2" role="tab"
-														aria-controls="pills-cmt" aria-selected="false" disabled><div
-																class="form-check form-check-inline">
-																<input class="form-check-input" type="checkbox"
-																	name="inlineRadioOptions" id="inlineRadio2"
-																	value="option2"> <label
-																	class="form-check-label" for="inlineRadio2">2.Điểm
-																	đón trả -></label>
-															</div> </a></li>
-													<li class="nav-item" role="presentation"><a
-														class="nav-link nav-link_3" id="pills-travel-tab2"
-														data-toggle="pill" href="#pills-travel2" role="tab"
-														aria-controls="pills-travel" aria-selected="false"><div
-																class="form-check form-check-inline">
-																<input class="form-check-input" type="checkbox"
-																	name="inlineRadioOptions" id="inlineRadio3"
-																	value="option3"> <label
-																	class="form-check-label" for="inlineRadio3">3.Nhập
-																	thông tin </label>
-															</div></a></li>
+														<li class="nav-item " role="presentation"><a
+															class="nav-link active nav-link_1" id="pills-img-tab2"
+															data-toggle="pill" href="#img2" role="tab"
+															aria-controls="pills-img" aria-selected="true"><input
+																class="form-check-input" type="hidden"
+																name="inlineRadioOptions" id="inlineRadio1"
+																value="option1" checked> <label
+																class="form-check-label line-connect" for="inlineRadio1">1.Chỗ
+																	mong muốn -></label></a></li>
 
+														<li class="nav-item" role="presentation"><a
+															class="nav-link nav-link_2" id="pills-cmt-tab2"
+															data-toggle="pill" href="#pills-cmt2" role="tab"
+															aria-controls="pills-cmt" aria-selected="false"><input
+																class="form-check-input" type="hidden"
+																name="inlineRadioOptions" id="inlineRadio2"
+																value="option2"> <label class="form-check-label"
+																for="inlineRadio2">2.Điểm đón trả -></label> </a></li>
+														<li class="nav-item " role="presentation"><a
+															class="nav-link nav-link_3" id="pills-travel-tab3"
+															data-toggle="pill" href="#pills-travel3" role="tab"
+															aria-controls="pills-travel" aria-selected="false"><input
+																class="form-check-input" type="hidden"
+																name="inlineRadioOptions" id="inlineRadio3"
+																value="option3"> <label class="form-check-label"
+																for="inlineRadio3">3.Nhập thông tin </label></a></li>
 
+													</ul>
 
-												</ul>
+													<div class="tab-content" id="pills-tabContent">
+														<div class="tab-pane fade show active" id="img2"
+															role="tabpanel" aria-labelledby="pills-img-tab2">
+															<div>
+																<img id="img-16" style="float: left; clear: right;"
+																	alt="Chu Thich" src="../assets/user/images/ghes.png">
+																<div id="xe16cho" style="position: relative;">
 
-												<div class="tab-content" id="pills-tabContent">
-													<div class="tab-pane fade show active" id="img2"
-														role="tabpanel" aria-labelledby="pills-img-tab2">
-														<%@ include file="xe16.jsp"%>
-														<div style="border-top: 1px solid;">
+																	<%
+																	/* int idChuyen = (Integer) session.getAttribute("chuyen");
+																	Chuyen chuyen = null;
+																	if (idChuyen == 1) {
+																		chuyen = (Chuyen) session.getAttribute("chuyenDi");
+																	} else {
+																		chuyen = (Chuyen) session.getAttribute("chuyenVe");
+																	}
+																	List<Ghe> danhSachghe = chuyen.getDanhSachGheNgoi(); */
 
-															<div class="line"
-																style="display: block; border-bottom: 10px;"></div>
-															<div
-																style="display: flex; justify-content: flex-end; margin-top: 10px;">
-																<p
-																	style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
-																	cộng: 0đ</p>
-																<button type="button" class="btn btn-primary"
-																	onclick="a(1)">Tiếp tục</button>
+																	
+																	%>
+
+																	<input type="hidden" value="" id="idChuyen" /> <img
+																		alt="dauxe" src="../assets/user/images/p.png"
+																		width="260px" height="150px">
+																	<%
+																	
+																	for (int i = 0; i < 15; i++) {
+																		int hang = 0;
+																		int cot = 0;
+
+																		switch (i) {
+																			case 0 :
+																			case 1 :
+																		hang = 0;
+																		break;
+																			case 2 :
+																			case 3 :
+																			case 4 :
+																		hang = 1;
+																		break;
+																			case 5 :
+																			case 6 :
+																			case 7 :
+																		hang = 2;
+																		break;
+																			case 8 :
+																			case 9 :
+																			case 10 :
+																		hang = 3;
+																		break;
+																			case 11 :
+																			case 12 :
+																			case 13 :
+																			case 14 :
+																		hang = 4;
+																		break;
+																			default :
+																		break;
+																		}
+																		switch (i) {
+																			case 2 :
+																			case 5 :
+																			case 8 :
+																			case 11 :
+
+																		cot = 0;
+																		break;
+																			case 0 :
+																			case 3 :
+																			case 6 :
+																			case 9 :
+																			case 12 :
+																		cot = 1;
+																		break;
+																			case 1 :
+																			case 4 :
+																			case 7 :
+																			case 10 :
+																			case 13 :
+																		cot = 2;
+																		break;
+																			default :
+																		cot = 3;
+																		break;
+																		}
+																		
+																		/* if (danhSachghe.get(i).getTrangThai() == Ghe.DA_DAT) */ {
+																	%>
+																	
+																	<img alt="ghe<%=i%>"
+																		src="../assets/user/images/ghe3.png" id="<%=i%>"
+																		class="ghe hang<%=hang%> cot<%=cot%> a"
+																		onclick="choose1(<%=i%>)" name="<%=i%> inputGheDaDat">
+
+																			
+
+																	<%
+																	}
+																	/* else if (danhSachghe.get(i).getTrangThai() == Ghe.CHUA_DAT)  */ {
+																	%>
+
+																	<img alt="ghe<%=i%>"
+																		src="../assets/user/images/ghe1.png" id="<%=i%>"
+																		class="ghe chuadat hang<%=hang%> cot<%=cot%> b"
+																		onclick="choose1(<%=i%>)" name="<%=i%> inputGheChuaDat">
+																			
+																	<%
+																	}
+																	/* else */ {
+																	%>
+
+																	<img alt="ghe<%=i%>"
+																		src="../assets/user/images/ghe2.png" id="<%=i%>"
+																		class="ghe danggiu hang<%=hang%> cot<%=cot%> c"
+																		onclick="choose1(<%=i%>)" name="<%=i%> inputGheDangChon">
+
+																			
+																	<%
+																	}
+																	
+																	
+																	}
+																			
+																	
+																	%>
+																		<input class="form-check-input inputGheDangChon" type="text"
+																			value="1" name="gheDangChon" id="inputGheDangChon">
+																</div>
+															</div>
+															<div style="border-top: 1px solid;">
+
+																<div class="line"
+																	style="display: block; border-bottom: 10px;"></div>
+																<div
+																	style="display: flex; justify-content: flex-end; margin-top: 10px;">
+																	<p
+																		style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
+																		cộng: 0đ</p>
+																	<button type="button" class="btn btn-primary btnNext">Tiếp
+																		tục</button>
+																</div>
 															</div>
 														</div>
-													</div>
 
-													<div class="tab-pane fade" id="pills-cmt2" role="tabpanel"
-														aria-labelledby="pills-cmt-tab2">
-														<div class="row">
+														<div class="tab-pane fade" id="pills-cmt2" role="tabpanel"
+															aria-labelledby="pills-cmt-tab2">
 															<div class="row">
-																<div class="col-12">
-																	<div class="card animate__animated animate__zoomIn">
-																		<div class="card-body">
-																			<p class="card-text">Lưu ý Các mốc thời gian đón,
-																				trả bên dưới là thời gian dự kiến. Lịch này có thể
-																				thay đổi tùy tình hình thưc tế.</p>
-																			<div class="card__2">
-																				<div class="card__right1">
-																					<h6>Điểm đón</h6>
-																					<ul>
-																						<div class="form-check" style="display: flex">
-																							<input class="form-check-input" type="radio"
-																								name="exampleRadios" id="exampleRadios1"
-																								value="option1" checked> <label
-																								class="form-check-label" for="exampleRadios1"
-																								style="font-size: 16px"> 06:30 • Bãi Xe
-																								Thành Thái </label>
-																						</div>
-																						<div class="form-check" style="display: flex">
-																							<input class="form-check-input" type="radio"
-																								name="exampleRadios" id="exampleRadios1"
-																								value="option1" checked> <label
-																								class="form-check-label" for="exampleRadios1"
-																								style="font-size: 16px"> 06:40 • Lý
-																								Thường Kiệt </label>
-																						</div>
-																						<div class="form-check" style="display: flex">
-																							<input class="form-check-input" type="radio"
-																								name="exampleRadios" id="exampleRadios1"
-																								value="option1" checked> <label
-																								class="form-check-label" for="exampleRadios1"
-																								style="font-size: 16px"> 06:50 • Cây
-																								xăng mũi tàu Trường Chinh</label>
-																						</div>
-																						<!-- <li>06:30 • Bãi Xe Thành Thái</li>
+																<div class="row">
+																	<div class="col-12">
+																		<div class="card animate__animated animate__zoomIn">
+																			<div class="card-body">
+																				<p class="card-text">Lưu ý Các mốc thời gian
+																					đón, trả bên dưới là thời gian dự kiến. Lịch này có
+																					thể thay đổi tùy tình hình thưc tế.</p>
+																				<div class="card__2">
+																					<div class="card__right1">
+																						<h6>Điểm đón</h6>
+																						<ul>
+																							<li class="form-check" style="display: flex">
+																								<input class="form-check-input" type="radio"
+																								name="checkbox1" id="checkbox1" value="1"
+																								checked> <label class="form-check-label"
+																								for="exampleRadios1" style="font-size: 16px">
+																									06:30 • Bãi Xe Thành Thái </label>
+																							</li>
+																							<li class="form-check" style="display: flex">
+																								<input class="form-check-input" type="radio"
+																								name="checkbox1" id="checkbox1" value="2"
+																								checked> <label class="form-check-label"
+																								for="exampleRadios1" style="font-size: 16px">
+																									06:40 • Lý Thường Kiệt </label>
+																							</li>
+																							<li class="form-check" style="display: flex">
+																								<input class="form-check-input" type="radio"
+																								name="checkbox1" id="checkbox1" value="3"
+																								checked> <label class="form-check-label"
+																								for="exampleRadios1" style="font-size: 16px">
+																									06:50 • Cây xăng mũi tàu Trường Chinh</label>
+																							</li>
+																							<!-- <li>06:30 • Bãi Xe Thành Thái</li>
 																						<li>06:40 • Lý Thường Kiệt</li>
 																						<li>06:50 • Cây xăng mũi tàu Trường Chinh</li>
 																						<li>07:00 • Tây Thạnh</li>
@@ -868,117 +1038,114 @@
 																						<li>07:50 • Cổng Chào Bình Dương, Km số 1,
 																							QL13, Thuận AN, Bình Dương</li>
 																						<li>08:00 • Có trung chuyển Đại lộ Bình Dương</li> -->
-																					</ul>
-																				</div>
+																						</ul>
+																					</div>
 
-																				<div class="card__left2">
-																					<h6>Điểm trả</h6>
+																					<div class="card__left2">
+																						<h6>Điểm trả</h6>
 
-																					<ul>
-																						<div class="form-check" style="display: flex">
-																							<input class="form-check-input" type="radio"
-																								name="exampleRadios2" id="exampleRadios2"
-																								value="option2" checked> <label
-																								class="form-check-label" style="font-size: 16px"
-																								for="exampleRadios2"> 06:30 • Bãi Xe
-																								Thành Thái </label>
-																						</div>
-																						<div class="form-check" style="display: flex">
-																							<input class="form-check-input" type="radio"
-																								name="exampleRadios2" id="exampleRadios2"
-																								value="option2" checked> <label
-																								class="form-check-label" for="exampleRadios2"
-																								style="font-size: 16px"> 06:40 • Lý
-																								Thường Kiệt </label>
-																						</div>
-																						<div class="form-check" style="display: flex">
-																							<input class="form-check-input" type="radio"
-																								name="exampleRadios2" id="exampleRadios2"
-																								value="option2" checked> <label
-																								class="form-check-label" for="exampleRadios2"
-																								style="font-size: 16px"> 06:50 • Cây
-																								xăng mũi tàu Trường Chinh</label>
-																						</div>
-																					</ul>
+																						<ul>
+																							<li class="form-check" style="display: flex">
+																								<input class="form-check-input" type="radio"
+																								name="checkbox4" id="checkbox4" value="4"
+																								checked> <label class="form-check-label"
+																								style="font-size: 16px" for="exampleRadios2">
+																									06:30 • Bãi Xe Thành Thái </label>
+																							</li>
+																							<li class="form-check" style="display: flex">
+																								<input class="form-check-input" type="radio"
+																								name="checkbox4" id="checkbox4" value="5"
+																								checked> <label class="form-check-label"
+																								for="exampleRadios2" style="font-size: 16px">
+																									06:40 • Lý Thường Kiệt </label>
+																							</li>
+																							<li class="form-check" style="display: flex">
+																								<input class="form-check-input" type="radio"
+																								name="checkbox4" id="checkbox4" value="6"
+																								checked> <label class="form-check-label"
+																								for="exampleRadios2" style="font-size: 16px">
+																									06:50 • Cây xăng mũi tàu Trường Chinh</label>
+																							</li>
+																						</ul>
+																					</div>
+
 																				</div>
 
 																			</div>
-
 																		</div>
-																	</div>
 
-																	<div style="border-top: 1px solid;">
+																		<div style="border-top: 1px solid;">
 
-																		<div
-																			style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px;">
-																			<button type="button" class="btn btn-secondary">Secondary</button>
-																			<div style="display: flex;">
-																				<p
-																					style="margin-right: 16px; margin-bottom: 0; margin-top: 10px;">Tổng
-																					cộng: 0đ</p>
-																				<button type="button" class="btn btn-primary"
-																					onclick="a(2)" style="">Tiếp tục</button>
+																			<div
+																				style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px;">
+																				<button type="button"
+																					class="btn btn-secondary btnPrevious">Quay
+																					lại</button>
+																				<div style="display: flex;">
+																					<p
+																						style="margin-right: 16px; margin-bottom: 0; margin-top: 10px;">Tổng
+																						cộng: 0đ</p>
+																					<button type="button"
+																						class="btn btn-primary btnNext" style="">Tiếp
+																						tục</button>
+																				</div>
 																			</div>
 																		</div>
 																	</div>
+
 																</div>
-
-
 															</div>
 														</div>
-													</div>
 
-													<div class="tab-pane fade" id="pills-travel2"
-														role="tabpanel" aria-labelledby="pills-travel-ta2">
-														<div class="row">
-															<div class="col-12">
-																<div class="card animate__animated animate__zoomIn">
-																	<div class="card-body">
-																		<p>Chúng tôi chỉ dùng thông tin của bạn trong việc
-																			ghi nhận vé.</p>
+														<div class="tab-pane fade" id="pills-travel3"
+															role="tabpanel" aria-labelledby="pills-travel-tab3">
+															<div class="row">
+																<div class="col-12">
+																	<div class="card animate__animated animate__zoomIn">
+																		<div class="card-body">
+																			<p>Chúng tôi chỉ dùng thông tin của bạn trong
+																				việc ghi nhận vé.</p>
 
-																		<form action="#" method="POST">
-																			<div class="form-group ">
-																				<input type="text" class="form-control top"
-																					id="inputName" aria-describedby="nameHelp"
-																					placeholder="First and Last name " name="nameUser"
-																					value="" required>
-																				<div>
-																					<p id="error"></p>
+																			<div>
+																				<div class="form-group ">
+																					<input type="text" class="form-control top"
+																						id="inputName" placeholder="First and Last name "
+																						name="nameUser" value="" required="required">
+																					<div>
+																						<p id="error1"></p>
+																					</div>
 																				</div>
-																			</div>
 
+																				<div class="form-group ">
+																					<input type="text"
+																						class="form-control top inputPhone1"
+																						id="inputPhone" placeholder="Number phone "
+																						name="phoneUser" value="" required="required">
 
-																			<div class="form-group ">
-																				<input type="text" class="form-control top"
-																					id="inputPhone" aria-describedby="numberphoneHelp"
-																					placeholder="Number phone" name="phoneUser"
-																					value="" required>
-																				<div>
 																					<p id="error2"></p>
-																				</div>
-																			</div>
 
-																			<div class="form-group ">
-																				<input type="text" class="form-control top"
-																					id="inputEmail" aria-describedby="mailHelp"
-																					placeholder="Email" name="emailUser" value=""
-																					required>
-																				<div>
-																					<p id="error3"></p>
 																				</div>
-																			</div>
-																			<div class="form-group ">
-																				<input type="text" class="form-control top"
-																					id="inputOther" aria-describedby="otherHelp"
-																					placeholder="Note" name="noteUser" value="">
-																				<div>
+
+																				<div class="form-group ">
+																					<input type="text" class="form-control top"
+																						id="inputEmail"
+																						placeholder="Email (abc@gmail.com)"
+																						name="emailUser" value="" required="required">
+																					<div>
+																						<p id="error3"></p>
+																					</div>
+																				</div>
+																				<div class="form-group ">
+																					<input type="text" class="form-control top"
+																						id="inputOther" aria-describedby="otherHelp"
+																						placeholder="Note" name="noteUser" value="">
+																					<!-- <div>
 																					<p id="error4"></p>
+																				</div> -->
 																				</div>
-																			</div>
-																			<p>Bằng việc nhấn nút Tiếp Tục, bạn đồng ý với
-																				Chính sách bảo mật thông tin và Quy chế</p>
-																			<!-- <div class="form-group form-check content">
+																				<p>Bằng việc nhấn nút Tiếp Tục, bạn đồng ý với
+																					Chính sách bảo mật thông tin và Quy chế</p>
+																				<!-- <div class="form-group form-check content">
 																				<input type="checkbox" class="form-check-input"
 																					id="exampleCheck1" name="rememberMe" value="Y">
 																				<label class="form-check-label" for="exampleCheck1">Remember</label>
@@ -986,43 +1153,46 @@
 																					style="text-decoration: none;">Forgot password</a>
 																			</div>
 																			<button class="button3" type="submit">Login</button> -->
-																		</form>
-																	</div>
-																	<div style="border-top: 1px solid;">
-
-																		<div class="line"
-																			style="display: block; border-bottom: 10px;"></div>
-																		<div
-																			style="display: flex; align-items: center; justify-content: space-between;">
-																			<button type="button" class="btn btn-secondary"
-																				style="margin-top: 20px">Quay lại</button>
-																			<div style="display: flex; margin-top: 10px;">
-																				<p
-																					style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
-																					cộng: 0đ</p>
-																				<button type="button" class="btn btn-primary"
-																					onclick="a(3)">Tiếp tục</button>
 																			</div>
+																		</div>
+																		<div style="border-top: 1px solid;">
 
+																			<div class="line"
+																				style="display: block; border-bottom: 10px;"></div>
+																			<div
+																				style="display: flex; align-items: center; justify-content: space-between;">
+																				<button type="button"
+																					class="btn btn-secondary btnPrevious"
+																					style="margin-top: 20px">Quay lại</button>
+																				<div style="display: flex; margin-top: 10px;">
+																					<p
+																						style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
+																						cộng: 0đ</p>
+																					<button type="submit" class="btn btn-primary">Xác
+																						nhận</button>
+																				</div>
+
+																			</div>
 																		</div>
 																	</div>
 																</div>
 															</div>
+
+
 														</div>
-
-
 													</div>
+
 												</div>
 
+
 											</div>
-
-
 										</div>
-									</div>
-								</div>
+								</form>
 
-								<!-- 				//tinh tien -->
-								<!-- 	<div class="collapse multi-collapse"
+							</div>
+
+							<!-- 				//tinh tien -->
+							<!-- 	<div class="collapse multi-collapse"
 												id="multiCollapseExample1">
 												<div class="card card-body">
 													<form>
@@ -1081,13 +1251,13 @@
 													</form>
 												</div>
 											</div> -->
-							</div>
-
-
-
 						</div>
 
-						<!-- <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+
+
+					</div>
+
+					<!-- <div class="tab-pane fade" id="pills-contact" role="tabpanel"
 										aria-labelledby="pills-contact-tab"
 										aria-labelledby="pills-home-tab"
 										aria-labelledby="pills-home-tab">
@@ -1554,10 +1724,10 @@
 
 
 
-					</div>
 				</div>
-
 			</div>
+
+		</div>
 		</div>
 		</div>
 
@@ -1582,9 +1752,132 @@
 
 	<!-- owlCousel -->
 	<script src="assets/lib/owl.carousel.min.js"></script>
+	<script type="text/javascript">
+var onClick =(n)=>{
+	/* var disabled2= document.querySelector(`.nav-link_1`);
+	disabled2.classList.add('disabled');  */
+	
+}
 
+var onClick2 =(n)=>{
+	var disabled2= document.querySelector(`.nav-link_2`);
+	disabled2.classList.add('disabled');  
+	
+}
+
+var onClick3 =(n)=>{
+	/* var disabled2= document.querySelector(`.nav-link_3`);
+	disabled2.classList.add('disabled');  */
+	
+}
+
+var goBack =(n)=>{
+	var disabled2= document.querySelector(`.nav-link_2`);
+	if (disabled2.classList.contains('disabled')) {
+		disabled2.classList.remove('disabled');
+	}
+	
+}
+
+var goBack2 =(n)=>{
+	var disabled2= document.querySelector(`.nav-link_3`);
+	if (disabled2.classList.contains('disabled')) {
+		disabled2.classList.remove('disabled');
+	}
+	
+}
+/* nextTab */
+const nextBtn = document.querySelectorAll(".btnNext");
+const prevBtn = document.querySelectorAll(".btnPrevious");
+
+nextBtn.forEach(function(item, index){
+	
+    item.addEventListener('click', function(){
+      let id1 = index;
+      let id2 = index + 1;
+/*       let tabElement1 = document.querySelectorAll("#pills-tab2 li a")[id1]; */
+      let tabElement2 = document.querySelectorAll("#pills-tab2 li a")[id2];
+      var lastTab = new bootstrap.Tab(tabElement2);
+/*       tabElement1.classList.add('disabled'); */
+      lastTab.show();   
+    });
+});
+
+prevBtn.forEach(function(item, index){
+    item.addEventListener('click', function(){
+      let id = index;
+      let id2 = index - 1;
+      let tabElement = document.querySelectorAll("#pills-tab2 li a")[id];
+      
+/*       let tabElement2 = document.querySelectorAll("#pills-tab2 li a")[id2]; */
+/*       tabElement?.classList?.remove('disabled'); */
+
+      var lastTab = new bootstrap.Tab(tabElement);
+      lastTab.show();
+    });
+});
+
+/* //check validatate */
+
+		var input1 = document.getElementById("inputName");
+		var input2 = document.getElementById("inputPhone");
+		var input3 = document.getElementById("inputEmail");
+		
+		var error2 = document.getElementById("error2");
+		input1.onblur = function() {
+			if (input1.value.length == 0) {
+				input1.classList.add('invalid');
+				error1.innerHTML = 'Please enter a correct first name and last name.'
+			}
+		};
+
+		input1.onfocus = function() {
+				input1.classList.remove('invalid');
+				error1.innerHTML = "";
+		};
+		
+		function validatePhoneNumber(input_str) {
+			var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+
+			return re.test(input_str);
+		}
+		
+		
+		input2.onblur = function() {
+			if (!validatePhoneNumber(input2.value)) {
+				input2.classList.add('invalid');
+				error2.innerHTML = 'Please enter a correct number phone.';
+/* 				error2.innerText = 'Please enter a correct number phone.'; */
+/* 				console.log(error2) */
+			}
+		};
+
+		input2.onfocus = function() {
+			if (this.classList.contains('invalid2')) {
+				this.classList.remove('invalid2');
+				error2.innerHTML = "";
+			}
+		};
+
+		
+		input3.onblur = function() {
+			if (input3.value.length === 0) {
+				input3.classList.add('invalid');
+				error3.innerHTML = 'Please enter a correct email.'
+			}
+		};
+
+		input3.onfocus = function() {
+			if (this.classList.contains('invalid')) {
+				this.classList.remove('invalid');
+				error3.innerHTML = "";
+			}
+		};
+
+</script>
 	<!-- tinhtien -->
 	<!-- <script src="./js/tinhtien.js"></script> -->
+
 </body>
 
 </html>

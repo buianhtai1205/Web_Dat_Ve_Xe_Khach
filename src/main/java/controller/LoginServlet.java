@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
 		// Trong trường hợp có lỗi,
 		if (hasError) {
 			user = new Customer();
-			user.setUserName(numberPhone);
+			user.setPhone_number(numberPhone);
 			user.setPassword(password);
 
 			// Lưu các thông tin vào request attribute trước khi forward.
@@ -79,8 +79,8 @@ public class LoginServlet extends HttpServlet {
 			String pageLogin = Router.LOGIN;
 			// Forward (Chuyển tiếp) tới trang /WEB-INF/views/login.jsp
 			RequestDispatcher dispatcher //
-					= this.getServletContext().getRequestDispatcher(pageLogin);
-
+					= this.getServletContext().getRequestDispatcher("/views/login_View.jsp");
+			
 			dispatcher.forward(request, response);
 		}
 		// Trường hợp không có lỗi.

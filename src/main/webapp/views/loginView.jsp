@@ -5,7 +5,7 @@
 <html>
 <style>
 .invalid {
-	border-color: red;
+	border-color: red !important;
 }
 
 #error {
@@ -15,20 +15,36 @@
 #error2 {
 	color: red
 }
-
 </style>
 <head>
+<link rel="stylesheet" href="../assets/user/css/index.css">
 <script src="/assets/lib/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="/assets/lib/dist/sweetalert2.min.css">
 <link rel="stylesheet" href="/assets/lib/dist/sweetalert2.css">
+
+<!-- font awesome -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+	integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
 </head>
 
 <body>
 
 
 	<section class="dangnhap">
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true"
+			>
 			<div class="modal-dialog modal-dialog-centered modal-xl">
 				<div class="modal-content  login">
 					<div class="modal-bodys">
@@ -36,7 +52,7 @@
 							<div class="log__content">
 								<div class="left">
 									<div class="logo">
-										<img src="assets/user/images/icon_vxr_full.svg" alt="">
+										<img src="assets/user/images/logo4.png" alt="">
 
 									</div>
 
@@ -70,7 +86,7 @@
 										<div class="form-group ">
 											<input type="text" class="form-control top" id="input"
 												aria-describedby="phoneHelp" placeholder="Phone number"
-												name="numberPhone" value="${user.numberPhone}" required>
+												name="numberPhone" value="${user.phone_number}" required>
 											<div>
 												<p id="error"></p>
 											</div>
@@ -87,9 +103,6 @@
 										</div>
 
 										<div class="form-group form-check content">
-											<input type="checkbox" class="form-check-input"
-												id="exampleCheck1" name="rememberMe" value="Y"> <label
-												class="form-check-label" for="exampleCheck1">Remember</label>
 											<a class="forgot" href="login" style="text-decoration: none;">Forgot
 												password</a>
 										</div>
@@ -104,6 +117,7 @@
 				</div>
 			</div>
 		</div>
+
 	</section>
 	<script type="text/javascript">
 		function validatePhoneNumber(input_str) {
@@ -133,6 +147,7 @@
 			if (password.value.length === 0) {
 				password.classList.add('invalid');
 				error2.innerHTML = 'Please enter a correct password.'
+
 			}
 		};
 
@@ -152,7 +167,7 @@
 				confirmButtonText : 'Cool'
 			})
 		}
-	sweetAlert();
+		sweetAlert();
 	</script>
 </body>
 </html>

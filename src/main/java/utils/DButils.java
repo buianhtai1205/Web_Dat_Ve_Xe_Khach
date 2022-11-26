@@ -20,49 +20,41 @@ public class DButils {
 			throws SQLException 
 	{
 
-		String sql = "Select * from User_Account " //
-				+ " where numberPhone = ? and password= ?";
+		String sql = "Select * from Customer " //
+				+ " where phone_number = ? and password= ?";
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		pstm.setString(1, numberPhone);
 		pstm.setString(2, password);
 		ResultSet rs = pstm.executeQuery();
 
 		if (rs.next()) {
-			String userName = rs.getString("userName");
+			String userName = rs.getString("fullname");
 			String email = rs.getString("email");
-			
 			Customer user = new Customer();
-			user.setUserName(userName);
-			user.setPassword(password);
-			user.setNumberPhone(numberPhone);
 			user.setEmail(email);
-			System.out.println(user);
+			user.setFullname(userName);
+			user.setPassword(password);
+			user.setPhone_number(numberPhone);
 			return user;
 		}
 		return null;
 	}
 	
-	public static Customer findUser(Connection conn, String userName) throws SQLException {
+	public static Customer findUser(Connection conn, String phone_number) throws SQLException {
 
-		String sql = "Select * from User_Account a "//
-				+ " where a.userName = ? ";
+		String sql = "Select * from Customer a "//
+				+ " where a.phone_number = ? ";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
-		pstm.setString(1, userName);
+		pstm.setString(1, phone_number);
 
 		ResultSet rs = pstm.executeQuery();
 
 		if (rs.next()) {
-			String password = rs.getString("password");
-			String phone = rs.getString("numberPhone");
-			String email = rs.getString("email");
-			
+			int id = rs.getInt("id");
 			Customer user = new Customer();
-			user.setUserName(userName);
-			user.setPassword(password);
-			user.setNumberPhone(phone);
-			user.setEmail(email);
-			
+			user.setId(id);
+			System.out.println(id);
 			return user;
 		}
 		return null;

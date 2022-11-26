@@ -36,22 +36,21 @@ public class UserInfoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 
-		// Kiểm tra người dùng đã đăng nhập (login) chưa.
+	
 		Customer loginedUser = MyUtils.getLoginedUser(session);
 
-		// Nếu chưa đăng nhập (login).
+
 		if (loginedUser == null) {
-			// Redirect (Chuyển hướng) tới trang login.
-			response.sendRedirect(request.getContextPath() + Router.LOGIN);
+
+			response.sendRedirect(request.getContextPath() + "/");
 			return;
 		}
-		// Lưu thông tin vào request attribute trước khi forward (chuyển tiếp).
+	
 		request.setAttribute("user", loginedUser);
 
-		// Nếu người dùng đã login thì forward (chuyển tiếp) tới trang
-		//views/userInfoView.jsp
+	
 		RequestDispatcher dispatcher //
-				= this.getServletContext().getRequestDispatcher(Router.HOME_VIEW_USER);
+				= this.getServletContext().getRequestDispatcher(Router.USER_INFO_VIEW);
 		dispatcher.forward(request, response);
 	}
 

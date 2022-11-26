@@ -1,24 +1,68 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@page import="model.Ghe"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Chuyen"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title></title>
+<link rel="stylesheet" type="text/css" href="/assets/user/css/xe16.css">
+<script src="/Web_Dat_Ve_Xe_Khach/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/Web_Dat_Ve_Xe_Khach/js/xe.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+						$("#btnPrint")
+								.click(
+										function() {
+											var divContents = $("body").html();
+											var printWindow = window.open('',
+													'', 'height=400,width=800');
+											printWindow.document
+													.write('<html><head><title>DIV Contents</title>');
+											printWindow.document
+													.write('</head><body >');
+											printWindow.document
+													.write(divContents);
+											printWindow.document
+													.write('</body></html>');
+											printWindow.document.close();
+											printWindow.print();
+										});
+					});
+	
+	function choose1(id) {
+		const div1 = document.getElementsByClassName('ghe')[0];
+		var idGhe = div1.getAttribute('id');
+		console.log(id)
 
-
-
+	}
+</script>
 </head>
 <body>
-	<img id="img-16" style="float: left; clear: right;" alt="Chu Thich"
-		src="../assets/user/images/ghes.png">
-	<div id="xe16cho" style="position: relative;">
+	<div>
+		<img id="img-16" style="float: left; clear: right;" alt="Chu Thich"
+			src="../assets/user/images/ghes.png">
+		<div id="xe16cho" style="position: relative;">
 
-		<input type="hidden" value="" id="idChuyen" /> <img alt="dauxe"
-			src="../assets/user/images/p.png" width="260px" height="150px">
-	<%-- 	<%
+			<%
+			/* int idChuyen = (Integer) session.getAttribute("chuyen");
+			Chuyen chuyen = null;
+			if (idChuyen == 1) {
+				chuyen = (Chuyen) session.getAttribute("chuyenDi");
+			} else {
+				chuyen = (Chuyen) session.getAttribute("chuyenVe");
+			}
+			List<Ghe> danhSachghe = chuyen.getDanhSachGheNgoi(); */
+			%>
+
+			<input type="hidden" value="" id="idChuyen" /> <img alt="dauxe"
+				src="../assets/user/images/p.png" width="260px" height="150px">
+			<%
 			for (int i = 0; i < 15; i++) {
 				int hang = 0;
 				int cot = 0;
@@ -78,18 +122,34 @@
 					cot = 3;
 					break;
 				}
-			
-		%> --%>
+				/* if (danhSachghe.get(i).getTrangThai() == Ghe.DA_DAT) */ {
+			%>
+			<img alt="ghe<%=i%>" src="../assets/user/images/ghe3.png" id="<%=i%>"
+				class="ghe hang<%=hang%> cot<%=cot%> a" onclick="choose1(<%=i%>)"
+				name="<%=i%>" />
 
+			<%
+			}
+			/* else if (danhSachghe.get(i).getTrangThai() == Ghe.CHUA_DAT)  */ {
+			%>
+			<img alt="ghe<%=i%>" src="../assets/user/images/ghe1.png" id="<%=i%>"
+				class="ghe chuadat hang<%=hang%> cot<%=cot%> b"
+				onclick="choose1(<%=i%>)" name="<%=i%>" />
+			<%
+			}
+			/* else */ {
+			%>
+			<img alt="ghe<%=i%>" src="../assets/user/images/ghe2.png" id="<%=i%>"
+				class="ghe danggiu hang<%=hang%> cot<%=cot%> c"
+				onclick="choose1(<%=i%>)" name="<%=i%>" />
+			<%
+			}
+			}
+			%>
 
-		<img alt="" src="../assets/user/images/ghe3.png" id=""
-			class="ghe hang cot" /> <img alt="ghe"
-			src="../assets/user/images/ghe1.png" id=""
-			class="ghe chuadat hang cot" /> <img
-			alt="ghe" src="../assets/user/images/ghe2.png" id=""
-			class="ghe danggiu hang cot" />
-
+		</div>
 	</div>
+
 
 </body>
 </html>

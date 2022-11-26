@@ -1,22 +1,21 @@
 package model;
 
 public class Customer {
-	
-
-	private String userName;
+	private int id;
+	private String fullname;
 	private String password;
-	private String numberPhone;
+	private String phone_number;
 	private String email;
 	
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
-	public String getUserName() {
-		return userName;
+	public String getFullname() {
+		return fullname;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 	public String getPassword() {
@@ -27,7 +26,13 @@ public class Customer {
 		this.password = password;
 	}
 
+	public String getPhone_number() {
+		return phone_number;
+	}
 
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
 
 	public String getEmail() {
 		return email;
@@ -36,12 +41,15 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getNumberPhone() {
-		return numberPhone;
+	public int getId() {
+		return id;
 	}
-	public void setNumberPhone(String numberPhone) {
-		this.numberPhone = numberPhone;
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
+	
 
 
 	
