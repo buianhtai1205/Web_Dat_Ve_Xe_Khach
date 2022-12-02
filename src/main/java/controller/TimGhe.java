@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import utils.*;
 
@@ -15,11 +17,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
-
 import DAO.ChuyenDAOImpl;
-
+import DAO.SeatDAO;
+import DAO.TripDAO;
 import model.Customer;
+import model.Seat;
+
 
 
 
@@ -62,16 +65,26 @@ public class TimGhe extends HttpServlet {
 		HttpSession session = request.getSession();
 		Connection con = MyUtils.getStoredConnection(request);
 		ChuyenDAOImpl c = new ChuyenDAOImpl();
-		String idChuyen = request.getParameter("inputIdChuyenXe");
+	
+		boolean hasError = false;
+		String errorString = null;
+
+		String idChuyen= request.getParameter("inputIdChuyenXe");
 		String idGhe = request.getParameter("gheDangChon");
+		List<String> listSeat = new ArrayList<String>(Arrays.asList(idGhe.split(",")));
+//		String idGhe2 = request.getParameter("gheDangChon3");
+		
+		System.out.println(listSeat);
+//		System.out.println(idGhe2);
+		session.setAttribute("idGhe", idGhe);
+		
 		String tenKh = request.getParameter("nameUser");
 		String phoneUser = request.getParameter("phoneUser");
 		String email = request.getParameter("emailUser");
 		String pass = generatePassword(8);
-		String noiDung = "Chuyến số: " + idChuyen + "Ghế số: " + idGhe + "Địa điểm đón: "  + "Địa điểm trả: "
+		String noiDung = "Chuyến số: "  + "Ghế số: " + idGhe + "Địa điểm đón: "  + "Địa điểm trả: "
 				+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "Mật khẩu: "+ pass;
-		boolean hasError = false;
-		String errorString = null;
+
 		
 		Customer user = null;
 		try {
@@ -85,22 +98,36 @@ public class TimGhe extends HttpServlet {
 					user = DButils.findUser(con, phoneUser);
 					int idUser = user.getId();
 					if (idChuyen != null && idGhe != null && String.valueOf(idUser) != null) {
-						int id = Integer.parseInt(idGhe);
-						int chuyen = Integer.parseInt(idChuyen);
-						System.out.println(id);
-						System.out.println(chuyen);
-//						session.setAttribute("chuyen", chuyen);
-						c.addChuyen(con, chuyen, id, idUser);
+//						int id = Integer.parseInt(idGhe);
+						int idchuyen = Integer.parseInt(idChuyen);
+						try {
+							SeatDAO seatDAO = new SeatDAO();
+							Seat seat = new Seat();
+							seat = seatDAO.getIdSeat(con, idGhe);
+							int idSeat = seat.getId();
+							
+							if(String.valueOf(idSeat) != null) {
+								c.addChuyen(con, idchuyen, idSeat, idUser);
+								
+								SendEmail.getInstant().guiMail(email, noiDung);
+								String mes = "Email của quý khách đã gửi thành công!";
+								request.setAttribute("mes", mes);
+								
+							}
+							
+						} catch (Exception e) {
+							// TODO: handle exception
+							e.printStackTrace();
+							response.sendRedirect(Router.THONG_BAO);
+						}
+						
 						
 					}else{
 						errorString = "Có lỗi";
 						response.sendRedirect(Router.PAGE_BUY_TICKET);
 						
 					}
-					SendEmail.getInstant().guiMail(email, noiDung);
-					String mes = "Email của quý khách đã gửi thành công!";
-					request.setAttribute("mes", mes);
-					response.sendRedirect(Router.THONG_BAO);
+					
 					
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -111,19 +138,14 @@ public class TimGhe extends HttpServlet {
 			else {
 				errorString = "Vui lòng nhập thông tin đầy đủ";
 				session.setAttribute("errorString", errorString);
-				System.out.print("có lỗi của kh");
 				response.sendRedirect(Router.PAGE_BUY_TICKET);
 			}
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			hasError = true;
 			errorString = e.getMessage();
-		}
-
-		
-		
+		}		
 	}
 
 	public String generatePassword(int len) {

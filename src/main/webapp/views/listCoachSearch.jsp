@@ -1,3 +1,11 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="connect_db.SQLServerConnUtils_SQLJDBC"%>
+<%@page import="DAO.TripDAO"%>
+<%@page import="utils.*"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="model.Trip"%>
+<%@page import="model.Seat"%>
+<%@page import="java.util.List"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Locale"%>
 <%@page import="utils.Router"%>
@@ -21,8 +29,9 @@
 	integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<link rel="stylesheet" href="../assets/user/css/index.css">
-
+<link rel="stylesheet" type="text/css" href="../assets/user/css/index.css">
+<link rel="stylesheet" type="text/css"
+	href="../assets/user/css/xe16.css">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -50,11 +59,11 @@
 
 <link rel="stylesheet" type="text/css"
 	href="/assets/user/css/sweet-alert.css">
+
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 <script type="text/javascript"
 	src="/Web_Dat_Ve_Xe_Khach/js/sweet-alert.min.js"></script>
 <script type="text/javascript"
@@ -109,7 +118,7 @@ function choose1(id) {
 
 <body>
 
-	<%@ include file="../layout/user/header.jsp"%>
+	<%@ include file="/layout/user/header.jsp"%>
 	<!-- body -->
 	<section class="mid" style="padding: 40px 135px;">
 		<div class="container-fluid">
@@ -490,7 +499,11 @@ function choose1(id) {
 															data-target="#collapseChonChuyen" aria-expanded="false"
 															aria-controls="collapseChonChuyen" name="idChuyenXe"
 															value="3" type="button">Chọn chuyến</button>
-														<input class="form-check-input" type="hidden" value="3"
+														<input class="form-check-input" type="hidden"
+															value="<%session.setAttribute("idChuyen", "3");%>"
+															name="inputIdChuyenXe" id="inputIdChuyenXe">
+														<input class="form-check-input" type="hidden"
+															value="3"
 															name="inputIdChuyenXe" id="inputIdChuyenXe">
 													</div>
 												</div>
@@ -852,24 +865,38 @@ function choose1(id) {
 																<div id="xe16cho" style="position: relative;">
 
 																	<%
-																	/* int idChuyen = (Integer) session.getAttribute("chuyen");
-																	Chuyen chuyen = null;
-																	if (idChuyen == 1) {
-																		chuyen = (Chuyen) session.getAttribute("chuyenDi");
-																	} else {
-																		chuyen = (Chuyen) session.getAttribute("chuyenVe");
-																	}
-																	List<Ghe> danhSachghe = chuyen.getDanhSachGheNgoi(); */
+																	//Trip chuyen = null;
+																	Connection con = SQLServerConnUtils_SQLJDBC.getSQLServerConnection_SQLJDBC();
+																	//List<Seat> danhSachghe = (List<Seat>)session.getAttribute("listSeatOfTrip"); 
+																	List<Seat> list = null;
+																	List<Integer> listStatus = new ArrayList<>();
+																	String errorString = null;
+																	TripDAO tr = new TripDAO();
+																	String idChuyen = (String) session.getAttribute("idChuyen");
+																	Object[] arr = null;
+																	try {
+																		list = tr.getAllGheOnTrip(con, Integer.parseInt(idChuyen));
 
-																	
+																		for (int i = 0; i <= 15; i++) {
+																			listStatus.add(Integer.parseInt(list.get(i).getStatus()));
+																		}
+																		arr = listStatus.toArray();
+																		System.out.println("arr" + arr);
+
+																	} catch (Exception e) {
+																		e.printStackTrace();
+																		errorString = e.getMessage();
+
+																	}
 																	%>
 
-																	<input type="hidden" value="" id="idChuyen" /> <img
-																		alt="dauxe" src="../assets/user/images/p.png"
-																		width="260px" height="150px">
+																	<input type="hidden" value="<%=idChuyen%>"
+																		id="idChuyen" /> <img alt="dauxe"
+																		src="../assets/user/images/p.png" width="260px"
+																		height="150px">
+
 																	<%
-																	
-																	for (int i = 0; i < 15; i++) {
+																	for (int i = 0; i <= 15; i++) {
 																		int hang = 0;
 																		int cot = 0;
 
@@ -897,6 +924,7 @@ function choose1(id) {
 																			case 12 :
 																			case 13 :
 																			case 14 :
+																			case 15 :
 																		hang = 4;
 																		break;
 																			default :
@@ -915,6 +943,7 @@ function choose1(id) {
 																			case 6 :
 																			case 9 :
 																			case 12 :
+																			case 15 :
 																		cot = 1;
 																		break;
 																			case 1 :
@@ -928,48 +957,50 @@ function choose1(id) {
 																		cot = 3;
 																		break;
 																		}
-																		
-																		/* if (danhSachghe.get(i).getTrangThai() == Ghe.DA_DAT) */ {
+
+																		if (Integer.parseInt(arr[i].toString()) == 1) {
 																	%>
-																	
+
+
+
 																	<img alt="ghe<%=i%>"
 																		src="../assets/user/images/ghe3.png" id="<%=i%>"
-																		class="ghe hang<%=hang%> cot<%=cot%> a"
-																		onclick="choose1(<%=i%>)" name="<%=i%> inputGheDaDat">
+																		class="ghe hang<%=hang%> cot<%=cot%>" style="margin: 3px;position:initial !important;"><%=i %></img>
 
-																			
+
 
 																	<%
-																	}
-																	/* else if (danhSachghe.get(i).getTrangThai() == Ghe.CHUA_DAT)  */ {
+																	} else {
 																	%>
+
 
 																	<img alt="ghe<%=i%>"
 																		src="../assets/user/images/ghe1.png" id="<%=i%>"
-																		class="ghe chuadat hang<%=hang%> cot<%=cot%> b"
-																		onclick="choose1(<%=i%>)" name="<%=i%> inputGheChuaDat">
-																			
+																		class="ghe chuadat hang<%=hang%> cot<%=cot%> "
+																		onclick="choose1(<%=i%>)"
+																		name="<%=i%> inputGheChuaDat" style="margin: 3px;position:initial !important;">
+																	
+																		<input class="form-check-input inputGheDangChon"
+																		type="checkbox" value="" name="gheDangChon[<%=i%>]"
+																		id="inputGheDangChon" onclick="choose1(<%=i%>)"> 
+																		<%=i %>
+																		</img>
+
+
 																	<%
 																	}
 																	/* else */ {
 																	%>
 
-																	<img alt="ghe<%=i%>"
-																		src="../assets/user/images/ghe2.png" id="<%=i%>"
-																		class="ghe danggiu hang<%=hang%> cot<%=cot%> c"
-																		onclick="choose1(<%=i%>)" name="<%=i%> inputGheDangChon">
 
-																			
 																	<%
 																	}
-																	
-																	
+
 																	}
-																			
-																	
 																	%>
-																		<input class="form-check-input inputGheDangChon" type="text"
-																			value="1" name="gheDangChon" id="inputGheDangChon">
+																	<!-- <input class="form-check-input inputGheDangChon"
+																		type="text" value="1" name="gheDangChon"
+																		id="inputGheDangChon"> -->
 																</div>
 															</div>
 															<div style="border-top: 1px solid;">

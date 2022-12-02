@@ -1,6 +1,6 @@
-<%@page import="model.Ghe"%>
+
 <%@page import="java.util.List"%>
-<%@page import="model.Chuyen"%>
+
 
 <!DOCTYPE html>
 <html>

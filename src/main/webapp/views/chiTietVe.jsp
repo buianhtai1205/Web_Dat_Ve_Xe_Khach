@@ -1,6 +1,9 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@page import="model.Trip"%>
+	<%@page import="model.Garage"%>
+		<%@page import="model.Seat"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,102 +15,37 @@
 <body>
 
 
-	<div id="chitietve" class="bg">
+	<div id="chitietve" class="bg"  style="width:500px">
 		<h1 align="center">Chi tiết đặt chỗ</h1>
 		<hr />
 		<table>
 			<tr>
-				<td id="td1">Công ty:</td>
-				<td id="td2">Mai Linh</td>
+				<td id="td1" style="width:200px">Công ty: ${xe.fullname}</td>
+				<td id="td2">Mô tả: ${xe.description}</td>
 			</tr>
 			<tr>
-				<td colspan="2"><h1>Tuyến đi</h1></td>
+				<td id="td1">Điểm đón: ${tr.departure}</td>
+				<td id="td2">Điểm trả: ${tr.destination}</td>
 			</tr>
 			<tr>
-				<td id="td1">Tuyến xe:</td>
+				<td id="td1">Giờ khởi hành: </td>
+				<td id="td2">${tr.departure_time} <td>
+				
+			</tr>
+			<tr>
+				<td id="td1">Giá vé: ${tr.price}</td>
 				<td id="td2"></td>
 			</tr>
 			<tr>
-				<td id="td1">Ngày đi:</td>
+				<td id="td1" width="150px">Số lượng chỗ ngồi:</td>
 				<td id="td2"></td>
 			</tr>
 			<tr>
-				<td id="td1">Giờ khởi hành:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Nơi khởi hành:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Giá vé:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1" width="150px">Số lượng:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Mã ghế:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Thành tiền:</td>
+				<td id="td1">Mã ghế: ${seat.number_chair}</td>
 				<td id="td2"></td>
 			</tr>
 		</table>
 		<hr />
-
-		<table>
-			<tr>
-				<td colspan="2"><h1>Tuyến về</h1></td>
-			</tr>
-			<tr>
-				<td id="td1">Tuyến xe:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Ngày đi:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Giờ khởi hành:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Nơi khởi hành:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Giá vé:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Số lượng:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Mã ghế:</td>
-				<td id="td2"></td>
-			</tr>
-			<tr>
-				<td id="td1">Thành tiền:</td>
-				<td id="td2"></td>
-			</tr>
-
-		</table>
-		<hr />
-		<table>
-			<tr>
-				<td id="td1">Tổng tiền:</td>
-				<td id="td2"></td>
-			</tr>
-		</table>
-
-		<!-- <input type="image" id="xacnhan" src="../assets/user/images/xacnhan.png" width="80px"
-			style="margin-left: 100px; margin-top: 5px; float: left; clear: right;">
-		<a href=""><input type="image" src="../assets/user/images/huyve.png" width="80px"
-			style="margin-left: 10px; margin-top: 5px;"></a> -->
 	</div>
 </body>
 </html>

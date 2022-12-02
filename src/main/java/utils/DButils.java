@@ -54,7 +54,6 @@ public class DButils {
 			int id = rs.getInt("id");
 			Customer user = new Customer();
 			user.setId(id);
-			System.out.println(id);
 			return user;
 		}
 		return null;

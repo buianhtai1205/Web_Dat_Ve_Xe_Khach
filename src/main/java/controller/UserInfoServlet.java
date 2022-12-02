@@ -8,10 +8,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Customer;
+import model.Garage;
+import model.Seat;
+import model.Trip;
 import utils.MyUtils;
 import utils.Router;
 
 import java.io.IOException;
+import java.sql.Connection;
+
+import DAO.ChuyenDAOImpl;
+import DAO.GarageDAO;
+import DAO.SeatDAO;
+import DAO.TripDAO;
 
 /**
  * Servlet implementation class UserInfoServlet
@@ -35,25 +44,44 @@ public class UserInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-
-	
+		Connection conn = MyUtils.getStoredConnection(request);
 		Customer loginedUser = MyUtils.getLoginedUser(session);
 
-
 		if (loginedUser == null) {
-
 			response.sendRedirect(request.getContextPath() + "/");
 			return;
 		}
-	
+		
 		request.setAttribute("user", loginedUser);
-
 	
+		String phone = (String) session.getAttribute("phone");
+		
+		TripDAO trDAO = new TripDAO();
+		Trip tr = new Trip();
+		
+		GarageDAO grDAO = new GarageDAO();
+		Garage xe = new Garage();
+		
+		SeatDAO seatDAO = new SeatDAO();
+		Seat seat = new Seat();
+		try {
+			tr = trDAO.getTripByTicket(conn, phone);
+			session.setAttribute("tr", tr);
+			String idGarage = String.valueOf(tr.getGarage_id());
+			xe = grDAO.getGarage(conn, idGarage);
+			session.setAttribute("xe", xe);
+			
+			seat = seatDAO.getSeat(conn, phone);
+			session.setAttribute("seat", seat);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		RequestDispatcher dispatcher //
 				= this.getServletContext().getRequestDispatcher(Router.USER_INFO_VIEW);
 		dispatcher.forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -61,5 +89,7 @@ public class UserInfoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	
 
 }
