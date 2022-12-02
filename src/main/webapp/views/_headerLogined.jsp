@@ -1,7 +1,7 @@
 <%@page import="utils.Router"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@page import="model.Customer"%>
 <!-- header -->
 <header class="container-fluid myNavBar">
 	<nav class="navbar navbar-expand-md navbar-light">
@@ -9,9 +9,8 @@
 			<a class="navbar-brand" href="${pageContext.request.contextPath}/">
 				<img src="assets/user/images/logo4.png" alt="">
 			</a>
-			<!-- 	<div class="Categories">
-				<i class="fa fa-th"></i> Categories
-			</div> -->
+			<div class="Categories">
+			</div> 
 			<div class="input-search">
 				<form action="abc.com">
 					<div class="input-group">

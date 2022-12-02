@@ -131,7 +131,7 @@
 </head>
 
 <body>
-	<%@ include file="header.jsp"%>
+	<%@ include file="header_login.jsp"%>
 	<!-- Cover -->
 	<section class="myCover">
 		<div class="cover__content">

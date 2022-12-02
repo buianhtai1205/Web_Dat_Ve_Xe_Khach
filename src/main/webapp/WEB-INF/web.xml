@@ -9,4 +9,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-</web-app>		
+  <servlet>
+    <description></description>
+    <display-name>InfoTripTicket</display-name>
+    <servlet-name>InfoTripTicket</servlet-name>
+    <servlet-class>controller.InfoTripTicket</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InfoTripTicket</servlet-name>
+    <url-pattern>/InfoTripTicket</url-pattern>
+  </servlet-mapping>
+</web-app>

@@ -38,7 +38,8 @@ public class ChuyenDAOImpl implements ChuyenDAO {
 	@Override
 	public void addChuyen(Connection con, int idChuyen, int idGhe, int idKhahcHang) {
 		//String sqlThongTinKhachHang = "insert into Customer (fullname, phone_number, email,password) values (?,?,?,?)";
-		String sqlAddChuyen = "INSERT into Ticket(trip_id,seat_id,customer_id) VALUES (?,?,?)";
+		String sqlAddChuyen = ""
+				+ "INSERT into Ticket(trip_id,seat_id,customer_id) VALUES (?,?,?)";
 		PreparedStatement pre = null;
 		try {
 			con.setAutoCommit(false);

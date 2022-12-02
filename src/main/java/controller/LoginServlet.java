@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
+import DAO.TripDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Customer;
+import model.Trip;
 import utils.DButils;
 import utils.MyUtils;
 import utils.Router;
@@ -38,6 +39,8 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Connection conn = MyUtils.getStoredConnection(request);
+		HttpSession session = request.getSession();
 		String numberPhone = request.getParameter("numberPhone");
 		String password = request.getParameter("password");
 		String rememberMeStr = request.getParameter("rememberMe");
@@ -46,12 +49,13 @@ public class LoginServlet extends HttpServlet {
 		Customer user = null;
 		boolean hasError = false;
 		String errorString = null;
-
+		
+		session.setAttribute("phone", numberPhone);
 		if (numberPhone == null || password == null || numberPhone.length() == 0 || password.length() == 0) {
 			hasError = true;
 			errorString = "Required number phone and password!";
 		} else {
-			Connection conn = MyUtils.getStoredConnection(request);
+			
 			try {
 				// Tìm user trong DB.
 				user = DButils.findUser(conn, numberPhone, password);
@@ -76,7 +80,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("errorString", errorString);
 			request.setAttribute("user", user);
 			
-			String pageLogin = Router.LOGIN;
+			
 			// Forward (Chuyển tiếp) tới trang /WEB-INF/views/login.jsp
 			RequestDispatcher dispatcher //
 					= this.getServletContext().getRequestDispatcher("/views/login_View.jsp");
@@ -87,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 		// Lưu thông tin người dùng vào Session.
 		// Và chuyển hướng sang trang userInfo.
 		else {
-			HttpSession session = request.getSession();
+
 
 			MyUtils.storeLoginedUser(session, user);
 			// Nếu người dùng chọn tính năng "Remember me".
@@ -98,7 +102,7 @@ public class LoginServlet extends HttpServlet {
 			else {
 				MyUtils.deleteUserCookie(response);
 			}
-
+			
 			// Redirect (Chuyển hướng) sang trang /userInfo.
 			response.sendRedirect(request.getContextPath() + "/userInfo");
 		}
