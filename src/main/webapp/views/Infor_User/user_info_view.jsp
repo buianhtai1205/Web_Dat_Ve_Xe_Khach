@@ -38,7 +38,7 @@
 </head>
 <body>
 
-	<jsp:include page="_headerLogined.jsp"></jsp:include>
+	<jsp:include page="../Login/header_logined.jsp"></jsp:include>
 	
 	<div class="container">
 		<div class="main-body">
@@ -122,8 +122,7 @@
 	</div>
 
 
-
-	<jsp:include page="../layout/user/footer.jsp"></jsp:include>
+	<jsp:include page="../../layout/user/footer.jsp"></jsp:include>
 
 </body>
 </html>

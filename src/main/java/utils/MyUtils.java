@@ -1,5 +1,6 @@
 package utils;
 
+import java.security.SecureRandom;
 import java.sql.Connection;
 
 import jakarta.servlet.ServletRequest;
@@ -69,5 +70,24 @@ public class MyUtils {
 		// 0 giây. (Cookie này sẽ hết hiệu lực ngay lập tức)
 		cookieUserName.setMaxAge(0);
 		response.addCookie(cookieUserName);
+	}
+	
+	public static String generatePassword(int len) {
+		// ASCII range – alphanumeric (0-9, a-z, A-Z)
+        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+ 
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder();
+ 
+        // each iteration of the loop randomly chooses a character from the given
+        // ASCII range and appends it to the `StringBuilder` instance
+ 
+        for (int i = 0; i < len; i++)
+        {
+            int randomIndex = random.nextInt(chars.length());
+            sb.append(chars.charAt(randomIndex));
+        }
+ 
+        return sb.toString();
 	}
 }

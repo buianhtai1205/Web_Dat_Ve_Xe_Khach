@@ -8,10 +8,7 @@
 			<a class="navbar-brand" href="${pageContext.request.contextPath}/">
 				<img src="assets/user/images/logo4.png" alt="logo">
 			</a>
-			<!--  <div class="Categories">
-          <i class="fa fa-th"></i>
-          Categories
-        </div> -->
+
 			<div class="input-search">
 				<form action="abc.com">
 					<div class="input-group">
@@ -32,30 +29,7 @@
 							xe</a></li>
 					<li class="nav-item teach"><a class="nav-link" href="#">Quản
 							lý Chuyến đi</a></li>
-					<li class="nav-item">
-						<!--   <div class="drop">
-                <div class="dropdown">
-                  <button class="dropdown__btn d-flex">
-                    <i class="fas fa-user"></i>
-                  </button>
-                  <div class="dropdown__list">
-                    <a href="#" class="dropdown__item"><i class="fas mr-2 fa-user-alt"></i></i>Thông tin tài khoản</a>
-                    <a href="#" class="dropdown__item"><i class="fas mr-2 fa-bus-alt"></i>Quản lý chuyến đi</a>
-                    <a href="#" class="dropdown__item"><i class="fas mr-2 fa-charging-station"></i>Quản lý trạm</a>
-                    <a href="#" class="dropdown__item"><i class="fas mr-2 fa-sign-out-alt"></i>Đăng xuất</a>
-                  </div>
-                </div>
-              </div> -->
-					</li>
-					<%-- 	<li class="nav-item item4 ">
-						<div class="d-flex">
-							<a class="navbar-brand"
-								href="${pageContext.request.contextPath}/viewLogin">
-								<button type="button" class="btn btn--white mr-2"
-									data-toggle="modal" data-target="#exampleModal">Login</button>
-							</a>
-						</div>
-					</li> --%>
+					<li class="nav-item"></li>
 				</ul>
 			</div>
 		</div>
@@ -112,9 +86,10 @@
 								<form action="${pageContext.request.contextPath}/login"
 									method="POST">
 									<div class="form-group ">
-										<input type="text" class="form-control top" id="input"
+										<input type="tel" class="form-control top" id="input"
 											aria-describedby="phoneHelp" placeholder="Phone number"
-											name="numberPhone" value="${user.phone_number}" required>
+											name="numberPhone" value="${user.phone_number}"
+											pattern="[0-9]{10}" required>
 										<div>
 											<p id="error"></p>
 										</div>
@@ -130,9 +105,10 @@
 										</div>
 									</div>
 
-									<div class="form-group form-check content">
-										<a class="forgot" href="login" style="text-decoration: none;">Forgot
-											password</a>
+									<div class="form-group content">
+										<button type="button" class="btn  btn--white "
+											data-toggle="modal" data-target="#modalForgot">
+											Forgot password</button>
 									</div>
 									<button class="button3" type="submit">Login</button>
 								</form>
@@ -147,6 +123,60 @@
 	</div>
 	<div class="modal-backdrop show"></div>
 </section>
+<!-- ForgotPassword -->
+<section class="forgotPassword">
+		<div class="modal fade" id="modalForgot" tabindex="-1"
+			aria-labelledby="modalForgot" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-xl">
+				<div class="modal-content  forgot">
+					<div class="modal-bodys">
+						<div class="container ">
+							<div class="log__content">
+								<div class="left" style="margin-right: 35px;">
+									<div class="logo">
+										<img src="assets/user/images/logo1.png" alt="">
+									</div>
+									<
+									<div class="log">
+										<img alt="" src="assets/user/images/buy_ticket_login.jpg"
+											style="width: 300px; height: 300px;">
+									</div>
+								</div>
+								<div class="right">
+									<div class=""
+										style="display: flex; justify-content: flex-end; margin: -25px 15px 0 0; height: auto">
+										<a class="" href="${pageContext.request.contextPath}/">
+											<button type="button"
+												class="btn btn-outline-danger btn-sm btn-close"
+												data-bs-dismiss="modal" aria-label="Close">X</button>
+										</a>
+									</div>
+									<H2>Forgot password</H2>
+									<form action="${pageContext.request.contextPath}/forgotPassword" method="POST">
+										<div class="form-group">
+											<input type="tel" class="form-control top" id="_phoneNumber"
+												aria-describedby="phoneHelp" placeholder="Phone number"
+												name="numberPhoneForgotPassword" value=""
+												pattern="[0-9]{10}" required />
+
+											<p id="errorNumberPhone" style="display: flex;"></p>
+										</div>
+										<div class=""
+											style="display: flex; justify-content: space-between;">
+											<button class="button3"
+												style="margin: 0; margin-right: auto; width: 23%; margin-left: 0px;"
+												type="submit">Submit</button>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 <script type="text/javascript">
 	function validatePhoneNumber(input_str) {
@@ -187,14 +217,19 @@
 			error2.innerHTML = "";
 		}
 	};
+	
+	  var _phoneNumber = document.getElementById("_phoneNumber");
+	  _phoneNumber.onblur = function () {
+	    if (!validatePhoneNumber(_phoneNumber.value)) {
+	      _phoneNumber.classList.add("invalid");
+	      errorNumberPhone.innerHTML = "Please enter a correct number phone.";
+	    }
+	  };
 
-	function sweetAlert() {
-		Swal.fire({
-			title : 'Error!',
-			text : 'Do you want to continue',
-			icon : 'error',
-			confirmButtonText : 'Cool'
-		})
-	}
-	sweetAlert();
+	  _phoneNumber.onfocus = function () {
+	    if (this.classList.contains("invalid")) {
+	      this.classList.remove("invalid");
+	      errorNumberPhone.innerHTML = "";
+	    }
+	  };
 </script>

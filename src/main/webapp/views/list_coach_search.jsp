@@ -73,25 +73,14 @@
 <script type="text/javascript" src="/Web_Dat_Ve_Xe_Khach/js/util.js"></script>
 <script type="text/javascript" src="/Web_Dat_Ve_Xe_Khach/js/xe.js"></script>
 <style type="text/css">
-.invalid {
+.invalid ,.invalid2{
 	border-color: red !important;
 }
 
-.invalid2 {
-	border-color: red !important;
-}
-
-#error1 {
+#error1,#error2,#error3,#errorPhone{
 	color: red
 }
 
-#error2 {
-	color: red
-}
-
-#error3 {
-	color: red
-}
 </style>
 
 
@@ -463,7 +452,7 @@ function choose1(id) {
 							</ul>
 
 							<div class="tab-content" id="pills-tabContent">
-								<form action="${pageContext.request.contextPath}/timghe"
+								<form action="${pageContext.request.contextPath}/dat_ve"
 									method="POST">
 									<div class="tab-pane fade show active" id="all" role="tabpanel"
 										aria-labelledby="pills-home-tab"
@@ -960,15 +949,10 @@ function choose1(id) {
 
 																		if (Integer.parseInt(arr[i].toString()) == 1) {
 																	%>
-
-
-
 																	<img alt="ghe<%=i%>"
 																		src="../assets/user/images/ghe3.png" id="<%=i%>"
 																		class="ghe hang<%=hang%> cot<%=cot%>" style="margin: 3px;position:initial !important;"><%=i %></img>
-
-
-
+																		
 																	<%
 																	} else {
 																	%>
@@ -981,7 +965,7 @@ function choose1(id) {
 																		name="<%=i%> inputGheChuaDat" style="margin: 3px;position:initial !important;">
 																	
 																		<input class="form-check-input inputGheDangChon"
-																		type="checkbox" value="" name="gheDangChon[<%=i%>]"
+																		type="checkbox" value="2" name="gheDangChon"
 																		id="inputGheDangChon" onclick="choose1(<%=i%>)"> 
 																		<%=i %>
 																		</img>
@@ -1153,7 +1137,7 @@ function choose1(id) {
 																						id="inputPhone" placeholder="Number phone "
 																						name="phoneUser" value="" required="required">
 
-																					<p id="error2"></p>
+																					<p id="errorPhone"></p>
 
 																				</div>
 
@@ -1764,7 +1748,7 @@ function choose1(id) {
 
 	</section>
 
-	<%@ include file="../layout/user/footer.jsp"%>
+	<%@ include file="/layout/user/footer.jsp"%>
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -1877,16 +1861,14 @@ prevBtn.forEach(function(item, index){
 		input2.onblur = function() {
 			if (!validatePhoneNumber(input2.value)) {
 				input2.classList.add('invalid');
-				error2.innerHTML = 'Please enter a correct number phone.';
-/* 				error2.innerText = 'Please enter a correct number phone.'; */
-/* 				console.log(error2) */
+				errorPhone.innerHTML = 'Please enter a correct number phone.';
 			}
 		};
 
 		input2.onfocus = function() {
 			if (this.classList.contains('invalid2')) {
 				this.classList.remove('invalid2');
-				error2.innerHTML = "";
+				errorPhone.innerHTML = "";
 			}
 		};
 

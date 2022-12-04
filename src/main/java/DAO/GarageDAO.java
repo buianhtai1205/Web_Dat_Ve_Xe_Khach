@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import model.Garage;
 
-import utils.MyUtils;
 
 public class GarageDAO {
 

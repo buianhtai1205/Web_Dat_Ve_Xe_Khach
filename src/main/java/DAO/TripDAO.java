@@ -25,11 +25,9 @@ public class TripDAO {
 		PreparedStatement pstm1 = conn.prepareStatement(idTrip);
 		ResultSet rs1 = pstm1.executeQuery();
 		String _idTrip = null;
-		String _idSeat = null;
 
 		if(rs1.next()) {
 			_idTrip = rs1.getString("trip_id");
-			_idSeat = rs1.getString("seat_id");
 		}
 		//get trip
 		String trip = "select * from Trip where Trip.id =" + _idTrip;

@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import model.Customer;
 import model.Seat;
 
 public class SeatDAO {
@@ -55,10 +53,12 @@ public class SeatDAO {
 	public Seat getIdSeat(Connection conn, String idGhe) throws SQLException {
 
 		String sql = "Select id from Seat "
-				+ " where id= " + idGhe;
+				+ "where id = ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
+
+		pstm.setString(1,idGhe);
 		ResultSet rs = pstm.executeQuery();
 
 		if (rs.next()) {

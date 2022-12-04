@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import DAO.TripDAO;
+import DAO.CustomerDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,8 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Customer;
-import model.Trip;
-import utils.DButils;
 import utils.MyUtils;
 import utils.Router;
 
@@ -43,8 +41,6 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String numberPhone = request.getParameter("numberPhone");
 		String password = request.getParameter("password");
-		String rememberMeStr = request.getParameter("rememberMe");
-		boolean remember = "Y".equals(rememberMeStr);
 
 		Customer user = null;
 		boolean hasError = false;
@@ -58,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 			
 			try {
 				// Tìm user trong DB.
-				user = DButils.findUser(conn, numberPhone, password);
+				user = CustomerDAO.findUser(conn, numberPhone, password);
 				
 				if (user == null) {
 					hasError = true;
@@ -80,28 +76,17 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("errorString", errorString);
 			request.setAttribute("user", user);
 			
-			
-			// Forward (Chuyển tiếp) tới trang /WEB-INF/views/login.jsp
 			RequestDispatcher dispatcher //
-					= this.getServletContext().getRequestDispatcher("/views/login_View.jsp");
+					= this.getServletContext().getRequestDispatcher(Router.LOGIN_NOTIFY);
 			
 			dispatcher.forward(request, response);
 		}
 		// Trường hợp không có lỗi.
-		// Lưu thông tin người dùng vào Session.
-		// Và chuyển hướng sang trang userInfo.
+		// chuyển hướng sang trang userInfo.
 		else {
 
 
 			MyUtils.storeLoginedUser(session, user);
-			// Nếu người dùng chọn tính năng "Remember me".
-			if (remember) {
-				MyUtils.storeUserCookie(response, user);
-			}
-			// Ngược lại xóa Cookie
-			else {
-				MyUtils.deleteUserCookie(response);
-			}
 			
 			// Redirect (Chuyển hướng) sang trang /userInfo.
 			response.sendRedirect(request.getContextPath() + "/userInfo");

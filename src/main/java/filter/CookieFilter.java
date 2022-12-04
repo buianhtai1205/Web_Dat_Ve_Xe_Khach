@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import DAO.CustomerDAO;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -13,7 +14,6 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import model.Customer;
-import utils.DButils;
 import utils.MyUtils;
 
 public class CookieFilter implements Filter{
@@ -54,7 +54,7 @@ public class CookieFilter implements Filter{
 		if (checked == null && conn != null) {
 			String userName = MyUtils.getUserNameInCookie(req);
 			try {
-				Customer user = DButils.findUser(conn, userName);
+				Customer user = CustomerDAO.findUser(conn, userName);
 				MyUtils.storeLoginedUser(session, user);
 			} catch (SQLException e) {
 				e.printStackTrace();

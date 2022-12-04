@@ -32,13 +32,10 @@
 
 </head>
 <body>
+	<!-- Page Home For User Logined -->
+	<jsp:include page="../Login/header_logined.jsp"></jsp:include>
 
-	<jsp:include page="_headerLogined.jsp"></jsp:include>
-
-	<div class="myCover"></div>
-
-
-	<jsp:include page="../layout/user/footer.jsp"></jsp:include>
+	<jsp:include page="../../layout/user/footer.jsp"></jsp:include>
 
 </body>
 </html>
