@@ -19,14 +19,4 @@
     <servlet-name>InfoTripTicket</servlet-name>
     <url-pattern>/InfoTripTicket</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ForgotPassword</display-name>
-    <servlet-name>ForgotPassword</servlet-name>
-    <servlet-class>controller.ForgotPassword</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ForgotPassword</servlet-name>
-    <url-pattern>/ForgotPassword</url-pattern>
-  </servlet-mapping>
-</web-app>
+ </web-app>

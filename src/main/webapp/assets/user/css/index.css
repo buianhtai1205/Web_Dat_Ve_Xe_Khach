@@ -552,7 +552,7 @@ header {
 }
 
 .cover__content button {
-	padding: 13px 60px;
+	padding: 13px 40px;
 	font-weight: 600;
 }
 
@@ -1148,6 +1148,11 @@ table, th, td {
 	border-bottom: 1px gray solid !important;
 }
 
+.custom_flex {
+  margin: 0 6px;
+  align-items: center;
+  height: 50px!important;
+}
 /* ///////  xe 16*/
 
 #xe16cho {
