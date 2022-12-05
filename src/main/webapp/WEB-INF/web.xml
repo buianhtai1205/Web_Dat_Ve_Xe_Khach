@@ -19,4 +19,24 @@
     <servlet-name>InfoTripTicket</servlet-name>
     <url-pattern>/InfoTripTicket</url-pattern>
   </servlet-mapping>
- </web-app>
+  <servlet>
+    <description></description>
+    <display-name>AdminDAO</display-name>
+    <servlet-name>AdminDAO</servlet-name>
+    <servlet-class>DAO.AdminDAO</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminDAO</servlet-name>
+    <url-pattern>/AdminDAO</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckLoginManagerServlet</display-name>
+    <servlet-name>CheckLoginManagerServlet</servlet-name>
+    <servlet-class>controller.CheckLoginManagerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckLoginManagerServlet</servlet-name>
+    <url-pattern>/CheckLoginManagerServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
