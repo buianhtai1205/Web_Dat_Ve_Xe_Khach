@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.Admin;
 import model.Manager;
 
 public class ManagerDAO {
-	public static Manager findManager(Connection connection,String phoneManager,String passManager) throws SQLException{
+	public static Manager findManager(Connection connection, String phoneManager, String passManager)
+			throws SQLException {
 		String sql = "Select * from Manager " //
 				+ " where phone_number = ? and password= ?";
 		PreparedStatement pstm = connection.prepareStatement(sql);

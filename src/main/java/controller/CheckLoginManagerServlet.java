@@ -1,21 +1,19 @@
 package controller;
 
+import java.io.IOException;
+import java.sql.Connection;
+
+import DAO.ManagerDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Admin;
+import jakarta.servlet.http.HttpSession;
 import model.Manager;
 import utils.MyUtils;
 import utils.Router;
-
-import java.io.IOException;
-import java.sql.Connection;
-
-import DAO.AdminDAO;
-import DAO.ManagerDAO;
 
 /**
  * Servlet implementation class CheckLoginManagerServlet
@@ -52,7 +50,7 @@ public class CheckLoginManagerServlet extends HttpServlet {
 		Connection conn = MyUtils.getStoredConnection(request);
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-
+		HttpSession session = request.getSession();
 		Manager manager = null;
 		boolean hasError = false;
 		String errorString = null;
@@ -65,6 +63,8 @@ public class CheckLoginManagerServlet extends HttpServlet {
 				if (manager == null) {
 					hasError = true;
 					errorString = "Phone number or password invalid";
+				} else {
+					session.setAttribute("userManager", userName);
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
