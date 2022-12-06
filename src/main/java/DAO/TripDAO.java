@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import model.Admin;
 import model.Seat;
 import model.Trip;
 
@@ -121,36 +123,66 @@ public class TripDAO {
 
 	public void addTrip(Connection conn, String departure, String destination, String departure_time, int price,
 			int num_seat, String trip_board, String userManager) throws SQLException {
-		String garage_id = "select garage_id from Manager where phone_number = " + userManager;
-		PreparedStatement pstm1 = conn.prepareStatement(garage_id);
-		ResultSet rs1 = pstm1.executeQuery();
-		int _garageid = 0;
+		// kiểm tra xem có tốn tại chuyến xe nào có trùng biển số và thời gian chạy
+		// không
+		// nếu có thì retunt 1 đã tồn tại, hoặc 0 thì chưa tồn tại và insert
+		String checkTrip = "select * from Trip where trip_board = ? and departure_time = ?";
+		PreparedStatement pstm3 = conn.prepareStatement(checkTrip);
+		pstm3.setString(1, trip_board);
+		pstm3.setString(2, departure_time);
+		ResultSet rs3 = pstm3.executeQuery();
+		int check = 0;
+		if (rs3.next()) {
+			check = rs3.getInt("id");
+		}
+		// nếu không tồn tại chuyến xe trùng
+		if (check == 0) {
+			String garage_id = "select garage_id from Manager where phone_number = " + userManager;
+			PreparedStatement pstm1 = conn.prepareStatement(garage_id);
+			ResultSet rs1 = pstm1.executeQuery();
+			int _garageid = 0;
 
-		if (rs1.next()) {
-			_garageid = rs1.getInt("garage_id");
-		}
-		System.out.println(_garageid);
-		String sqlAddTrip = "insert into Trip (departure, destination, departure_time,price,num_seat,trip_board,garage_id) values (?,?,?,?,?,?,?)";
-		PreparedStatement pre = null;
-		try {
-			conn.setAutoCommit(false);
-			pre = conn.prepareStatement(sqlAddTrip);
-			pre.setString(1, departure);
-			pre.setString(2, destination);
-			pre.setString(3, departure_time);
-			pre.setInt(4, price);
-			pre.setInt(5, num_seat);
-			pre.setString(6, trip_board);
-			pre.setInt(7, _garageid);
-			pre.executeUpdate();
-			conn.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+			if (rs1.next()) {
+				_garageid = rs1.getInt("garage_id");
 			}
+			String sqlAddTrip = "insert into Trip (departure, destination, departure_time,price,num_seat,trip_board,garage_id) values (?,?,?,?,?,?,?)";
+			PreparedStatement pre = null;
+			try {
+				conn.setAutoCommit(false);
+				pre = conn.prepareStatement(sqlAddTrip);
+				pre.setString(1, departure);
+				pre.setString(2, destination);
+				pre.setString(3, departure_time);
+				pre.setInt(4, price);
+				pre.setInt(5, num_seat);
+				pre.setString(6, trip_board);
+				pre.setInt(7, _garageid);
+				pre.executeUpdate();
+				conn.commit();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} else {
+			System.out.println("99999999999999999999999999999999");
 		}
+	}
+
+	public int getIdTrip(Connection conn, String tripBoard) throws SQLException {
+		String trip_id = "select id from Trip where trip_board = '" + tripBoard + "' ";
+		PreparedStatement pstm2 = conn.prepareStatement(trip_id);
+		ResultSet rs2 = pstm2.executeQuery();
+		int tripid = 0;
+		if (rs2.next()) {
+			tripid = rs2.getInt("id");
+			System.out.println(tripid);
+			return tripid;
+		}
+		return 0;
 	}
 }

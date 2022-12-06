@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.Connection;
 
+import DAO.SeatDAO;
 import DAO.TripDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -59,11 +60,50 @@ public class AddTripServlet extends HttpServlet {
 		int priceM = Integer.parseInt(price);
 		int numSeat = Integer.parseInt(num_seat);
 		// Trip trip = new Trip();
+
 		TripDAO tripDAO = new TripDAO();
+		SeatDAO seatDAO = new SeatDAO();
 		String errStr = null;
+
+		int numSeat1 = Integer.parseInt(num_seat);
 		try {
-			tripDAO.addTrip(conn, departure, destination, departure_time, priceM, numSeat, trip_board, userManager);
-			System.out.println("23333333");
+			tripDAO.addTrip(conn, departure, destination, departure_time, priceM, numSeat1, trip_board, userManager);
+			int tripId = tripDAO.getIdTrip(conn, trip_board);
+			if (numSeat1 == 16) {
+				if (tripId == 0) {
+					System.out.println("5678999999");
+				} else {
+					for (int i = 1; i < 8; i += 2) {
+						int a = i;
+						int b = i + 1;
+						String ghe1 = "A" + a;
+						String ghe2 = "A" + b;
+						String ghe3 = "B" + a;
+						String ghe4 = "B" + b;
+						seatDAO.insertSeat(conn, ghe1, tripId);
+						seatDAO.insertSeat(conn, ghe2, tripId);
+						seatDAO.insertSeat(conn, ghe3, tripId);
+						seatDAO.insertSeat(conn, ghe4, tripId);
+					}
+				}
+			} else {
+				for (int i = 1; i < 8; i += 2) {
+					int a = i;
+					int b = i + 1;
+					String ghe1 = "A" + a;
+					String ghe2 = "A" + b;
+					String ghe3 = "B" + a;
+					String ghe4 = "B" + b;
+					String ghe5 = "C" + a;
+					String ghe6 = "C" + b;
+					seatDAO.insertSeat(conn, ghe1, tripId);
+					seatDAO.insertSeat(conn, ghe2, tripId);
+					seatDAO.insertSeat(conn, ghe3, tripId);
+					seatDAO.insertSeat(conn, ghe4, tripId);
+					seatDAO.insertSeat(conn, ghe5, tripId);
+					seatDAO.insertSeat(conn, ghe6, tripId);
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -72,13 +112,11 @@ public class AddTripServlet extends HttpServlet {
 		if (errStr != null) {
 			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(Router.MANAGER_ADDTRIP);
 			dispatcher.forward(request, response);
-			System.out.println("111111");
 		} else {
 //			RequestDispatcher dispatcher = request.getServletContext()
 //					.getRequestDispatcher(Router.MANAGER_TRIPMANAGEMENT);
 //			dispatcher.forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/tripManagement");
-			System.out.println("222222");
 		}
 	}
 
