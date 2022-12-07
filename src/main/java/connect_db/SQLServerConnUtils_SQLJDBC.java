@@ -10,7 +10,6 @@ public class SQLServerConnUtils_SQLJDBC {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public static void closeQuietly(Connection conn) {
 		try {
 			conn.close();
@@ -24,27 +23,25 @@ public class SQLServerConnUtils_SQLJDBC {
 		} catch (Exception e) {
 		}
 	}
-	
-	public static Connection getSQLServerConnection_SQLJDBC() 
-	        throws SQLException, ClassNotFoundException 
-	    { 
-	        String dbDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
-	        String dbURL = "jdbc:sqlserver://localhost:1433"; 
-	        // Database name to access 
-	        String dbName = "VEXEONLINE"; 
-	        String dbUsername = "sa"; 
-	        String dbPassword = "linhtando"; 
-	        String connectionURL = dbURL + ";databaseName=" + dbName;
-	        Connection conn = null;
-	        try {
-	            Class.forName(dbDriver);
-	            conn = DriverManager.getConnection(connectionURL, dbUsername, dbPassword);
-	            System.out.println("connect successfully!");
-	        } catch (Exception ex) {
-	            System.out.println("connect failure!");
-	            ex.printStackTrace();
-	        }
-	        return conn; 
-	    } 
+
+	public static Connection getSQLServerConnection_SQLJDBC() throws SQLException, ClassNotFoundException {
+		String dbDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+		String dbURL = "jdbc:sqlserver://localhost:1433";
+		// Database name to access
+		String dbName = "VEXEONLINE";
+		String dbUsername = "sa";
+		String dbPassword = "123456";
+		String connectionURL = dbURL + ";databaseName=" + dbName;
+		Connection conn = null;
+		try {
+			Class.forName(dbDriver);
+			conn = DriverManager.getConnection(connectionURL, dbUsername, dbPassword);
+			System.out.println("connect successfully!");
+		} catch (Exception ex) {
+			System.out.println("connect failure!");
+			ex.printStackTrace();
+		}
+		return conn;
+	}
 
 }

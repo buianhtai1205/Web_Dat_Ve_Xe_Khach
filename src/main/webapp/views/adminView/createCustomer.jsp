@@ -24,7 +24,7 @@
 </head>
 <body>
 
-	<jsp:include page="sidebar.jsp" />  
+	<jsp:include page="/views/adminView/layout/sidebar.jsp" />  
 
 	<section class="home">
 		<div class="text">Thêm Tài Khoản</div>

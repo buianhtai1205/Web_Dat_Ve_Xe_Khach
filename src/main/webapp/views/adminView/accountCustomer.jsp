@@ -22,19 +22,48 @@
 	rel='stylesheet'>
 
 </head>
+<style>
+.Options a{
+     text-decoration: none;
+   
+     
+}
+.Options{
+  margin-top: 15px;
+     }
+.text__Customer{
+cursor: pointer;
+    margin-left: 25%;}
+.text__Manager{
+cursor: pointer;
+}
+.Options a{font-size:110%;font-weight:700;transition:border-bottom .5s;padding:3px 0}
+.Options a:active,
+.Options a:hover{border-bottom:2px solid #ccc}
+.clearfix::after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+</style>
 <body>
 	
 
-	<jsp:include page="sidebar.jsp" />  
+	<jsp:include page="/views/adminView/layout/sidebar.jsp" />  
 
 	<section class="home">
-		<div class="text">Danh sách hãng xe</div>
-		<div class="area-feat">
-			<a class="btn btn-success" href="createMonHoc">Thêm hãng xe</a>
+		<div class="text" style="float:left;">Tài Khoản Customer</div>
+		<div class="Options">
+			<a class="text text__Customer" href="customerList">Customer</a>
+			<a class="text text__Manager" href="managerList">Manager</a>
+		</div>
+		<div class="clearfix"></div>
+		<div class="area-feat" >
+			<a class="btn btn-success" href="createCustomer">Thêm Tài Khoản</a>
 		</div>
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
-        		<input id="searchContent" class="form-control me-1" type="search" placeholder="Nhập Mã hãng xe" aria-label="Search">
+        		<input id="searchContent" class="form-control me-1" type="search" placeholder="Nhập Thông Tin" aria-label="Search">
         		<a onclick="Search();" class="btn btn-primary" type="submit">Search</a>
       		</div>
 			<br>
@@ -42,29 +71,29 @@
 				<thead>
 				    <tr>
 				
-				      <th scope="col">Tên hãng xe</th>
-				      <th scope="col">Mô tả</th>
-				      <th scope="col">Chi Tiết</th>
-				      
-				 
+				      <th scope="col">Tên Khách Hàng</th>
+				      <th scope="col">Số điện thoại</th>
+				      <th scope="col">Email</th>
+				      <th scope="col">Password</th>
+				 	
 				      <th>Cập nhật</th>
 				      <th>Xóa</th>
 				    </tr>
 		  		</thead>
 			  	<tbody>
-			  	<c:forEach items="${ garaList }" var="gara" varStatus="loop">
+			  	<c:forEach items="${ customerList }" var="khachhang" varStatus="loop">
 				    <tr>
 					      
-					      <td>${ gara.fullname }</td>
-					     <td>${ gara.description }</td> 
-					     <td>
-					      	<a class="btn btn-danger" href="#" onclick="#">Xem</a>
+					      <td>${ khachhang.fullname }</td>
+					     <td>${ khachhang.phone_number }</td> 
+					     <td>${ khachhang.email }</td>
+					     <td>${ khachhang.password }</td>
+					   
+					      <td>
+					      	<a class="btn btn-primary" href="editCustomer?id=${khachhang.id}">Cập nhập</a>
 					      </td>
 					      <td>
-					      	<a class="btn btn-primary" href="${gara.fullname}">Cập nhập</a>
-					      </td>
-					      <td>
-					      	<a class="btn btn-danger" href="#" onclick="testConfirmDialog(${gara.fullname});">Xóa</a>
+					      	<a class="btn btn-danger" href="#" onclick="testConfirmDialog(${khachhang.id});">Xóa</a>
 					      </td>
 				    </tr>
 				</c:forEach>
@@ -107,15 +136,15 @@
     </script>
     <script type="text/javascript" src="lib.js"></script>
     <script type="text/javascript">
-    	function testConfirmDialog(fullname) {
-    		var result = confirm("Bạn chắc chắn muốn xóa hãng xe này?");
-    		
-    		if (result) {
-    			window.location.href = "deleteGarage?fullname=" + fullname;
-    		} else {
-    			return false;
-    		}
-    	};
+    function testConfirmDialog(id) {
+		var result = confirm("Bạn chắc chắn muốn xóa tài khoản này?");
+		
+		if (result) {
+			window.location.href = "deleteCustomer?id=" + id;
+		} else {
+			return false;
+		}
+	};
     	function Search() {
     		let searchContent = document.getElementById("searchContent").value;
     		

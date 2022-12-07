@@ -24,20 +24,20 @@
 </head>
 <body>
 
-	<jsp:include page="sidebar.jsp" />  
+	<jsp:include page="/views/adminView/layout/sidebar.jsp" />  
 
 	<section class="home">
 		<div class="text">Sửa Thông Tin Khách Hàng</div>
 		
 		<div class="content">
 			<p style="color: red;">${ errorString }</p>
-			<form action="${ pageContext.request.contextPath }/editCustomer" method="POST">
-			 <input type="hidden" name="id" value="${khachhang.id}" />
+			<form action="${ pageContext.request.contextPath }/editManager" method="POST">
+			 <input type="hidden" name="id" value="${manager.id}" />
 	            <div class="form-row">
 	            	
 	                <div class="form-group col-md-4">
-	                    <label for="simpleinput">Tên khách hàng</label>
-	                     <td><input class="form-control" type="text" name="fullname" value="${khachhang.fullname}" /></td>
+	                    <label for="simpleinput">Tên quản lý</label>
+	                     <td><input class="form-control" type="text" name="fullname" value="${manager.fullname}" /></td>
 	                  
 	                </div>
 	            </div>
@@ -46,7 +46,7 @@
 	            	
 	                <div class="form-group col-md-4">
 	                    <label for="simpleinput">Số điện thoại</label>
-	                     <td><input class="form-control" type="text" name="phone_number" value="${khachhang.phone_number}" /></td>
+	                     <td><input class="form-control" type="text" name="phone_number" value="${manager.phone_number}" /></td>
 	                  
 	                </div>
 	            </div>
@@ -55,7 +55,7 @@
 	            	
 	                <div class="form-group col-md-4">
 	                    <label for="simpleinput">Email</label>
-	                     <td> <input class="form-control" type="text" name="email" value="${khachhang.email}" /></td>
+	                     <td> <input class="form-control" type="text" name="email" value="${manager.email}" /></td>
 	                  
 	                </div>
 	            </div>
@@ -64,13 +64,13 @@
 	            	
 	                <div class="form-group col-md-4">
 	                    <label for="simpleinput">Password</label>
-	                     <td><input class="form-control" type="text" name="password" value="${khachhang.password}" /></td>
+	                     <td><input class="form-control" type="text" name="password" value="${manager.password}" /></td>
 	                  
 	                </div>
 	            </div>
 	            <br>
 	            <button class="btn btn-success">Cập nhật</button>
-	            <a class="btn btn-primary" href="${ pageContext.request.contextPath }/customerList">Hủy</a>
+	            <a class="btn btn-primary" href="${ pageContext.request.contextPath }/managerList">Hủy</a>
         </form>
 		</div> 
 	</section>

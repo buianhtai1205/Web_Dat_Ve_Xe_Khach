@@ -22,7 +22,7 @@
 				type="text" placeholder="Search..."></li>
 
 			<ul class="menu-links">
-				<li class="nav-link"><a href="#"> <i
+				<li class="nav-link"><a href="thongKe"> <i
 						class='bx bx-home-alt icon'></i> <span class="text nav-text">Dashboard</span>
 				</a></li>
 
@@ -35,8 +35,8 @@
 						class='bx bx-bell icon'></i> <span class="text nav-text">Notifications</span>
 				</a></li>
 
-				<li class="nav-link"><a href="#"> <i
-						class='bx bx-pie-chart-alt icon'></i> <span class="text nav-text">Analytics</span>
+				<li class="nav-link"><a href="customerList"> <i
+						class='bx bx-pie-chart-alt icon'></i> <span class="text nav-text">Quản Lý ACCOUNT</span>
 				</a></li>
 
 				<li class="nav-link"><a href="#"> <i

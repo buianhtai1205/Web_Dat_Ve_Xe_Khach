@@ -29,7 +29,7 @@
 <body>
 	
 
-	<jsp:include page="sidebar.jsp" />  
+	<jsp:include page="/views/adminView/layout/sidebar.jsp" />  
 
 	<section class="home" style="background-color: white;">
 		 <div class="section-skills">

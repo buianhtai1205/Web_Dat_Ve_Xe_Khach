@@ -49,17 +49,17 @@ cursor: pointer;
 <body>
 	
 
-	<jsp:include page="sidebar.jsp" />  
+	<jsp:include page="/views/adminView/layout/sidebar.jsp" />  
 
 	<section class="home">
-		<div class="text" style="float:left;">Tài Khoản Customer</div>
+		<div class="text" style="float:left;">Tài Khoản Manager</div>
 		<div class="Options">
 			<a class="text text__Customer" href="customerList">Customer</a>
 			<a class="text text__Manager" href="managerList">Manager</a>
 		</div>
 		<div class="clearfix"></div>
 		<div class="area-feat" >
-			<a class="btn btn-success" href="createCustomer">Thêm Tài Khoản</a>
+			<a class="btn btn-success" href="createManager">Thêm Tài Khoản</a>
 		</div>
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
@@ -71,7 +71,7 @@ cursor: pointer;
 				<thead>
 				    <tr>
 				
-				      <th scope="col">Tên Khách Hàng</th>
+				      <th scope="col">Họ Tên</th>
 				      <th scope="col">Số điện thoại</th>
 				      <th scope="col">Email</th>
 				      <th scope="col">Password</th>
@@ -81,19 +81,19 @@ cursor: pointer;
 				    </tr>
 		  		</thead>
 			  	<tbody>
-			  	<c:forEach items="${ customerList }" var="khachhang" varStatus="loop">
+			  	<c:forEach items="${ managerList }" var="manager" varStatus="loop">
 				    <tr>
-					      
-					      <td>${ khachhang.fullname }</td>
-					     <td>${ khachhang.phone_number }</td> 
-					     <td>${ khachhang.email }</td>
-					     <td>${ khachhang.password }</td>
+					     
+					      <td>${ manager.fullname }</td>
+					     <td>${ manager.phone_number }</td> 
+					     <td>${ manager.email }</td>
+					     <td>${ manager.password }</td>
 					   
 					      <td>
-					      	<a class="btn btn-primary" href="editCustomer?id=${khachhang.id}">Cập nhập</a>
+					      	<a class="btn btn-primary" href="editManager?id=${manager.id}">Cập nhập</a>
 					      </td>
 					      <td>
-					      	<a class="btn btn-danger" href="#" onclick="testConfirmDialog(${khachhang.id});">Xóa</a>
+					      	<a class="btn btn-danger" href="#" onclick="testConfirmDialog(${manager.id});">Xóa</a>
 					      </td>
 				    </tr>
 				</c:forEach>
@@ -136,22 +136,16 @@ cursor: pointer;
     </script>
     <script type="text/javascript" src="lib.js"></script>
     <script type="text/javascript">
-    function testConfirmDialog(id) {
-		var result = confirm("Bạn chắc chắn muốn xóa tài khoản này?");
-		
-		if (result) {
-			window.location.href = "deleteCustomer?id=" + id;
-		} else {
-			return false;
-		}
-	};
-    	function Search() {
-    		let searchContent = document.getElementById("searchContent").value;
+    	function testConfirmDialog(id) {
+    		var result = confirm("Bạn chắc chắn muốn xóa tài khoản này?");
     		
-    		if (searchContent != null) {
-    			window.location.href = "searchListMonHoc?searchContent=" + searchContent;
+    		if (result) {
+    			window.location.href = "deleteManager?id=" + id;
+    		} else {
+    			return false;
     		}
     	};
+    	
     </script>
 </body>
 </html>
