@@ -64,4 +64,34 @@
     <servlet-name>AddTripServlet</servlet-name>
     <url-pattern>/AddTripServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditTripServlet</display-name>
+    <servlet-name>EditTripServlet</servlet-name>
+    <servlet-class>controller.EditTripServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditTripServlet</servlet-name>
+    <url-pattern>/EditTripServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteTrip</display-name>
+    <servlet-name>DeleteTrip</servlet-name>
+    <servlet-class>controller.DeleteTrip</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTrip</servlet-name>
+    <url-pattern>/DeleteTrip</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchListTripsServlet</display-name>
+    <servlet-name>SearchListTripsServlet</servlet-name>
+    <servlet-class>controller.SearchListTripsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchListTripsServlet</servlet-name>
+    <url-pattern>/SearchListTripsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

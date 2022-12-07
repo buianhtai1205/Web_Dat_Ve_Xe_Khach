@@ -24,4 +24,5 @@ public class Router {
 	public static final String MANAGER_TRIPMANAGEMENT = "/views/managerView/tripManagement.jsp";
 	public static final String MANAGER_TICKETMANAGEMENT = "/views/managerView/ticketManagement.jsp";
 	public static final String MANAGER_ADDTRIP = "/views/managerView/addTrip.jsp";
+	public static final String MANAGER_EDITTRIP = "/views/managerView/editTrip.jsp";
 }

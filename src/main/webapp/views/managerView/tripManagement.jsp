@@ -37,7 +37,7 @@
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
 				<input id="searchContent" class="form-control me-1" type="search"
-					placeholder="Nhập Mã môn học hoặc Tên môn học" aria-label="Search">
+					placeholder="Nhập biển số xe" aria-label="Search">
 				<a onclick="Search();" class="btn btn-primary" type="submit">Search</a>
 			</div>
 			<br>
@@ -51,7 +51,7 @@
 						<th scope="col">Giá</th>
 						<th scope="col">Loại xe</th>
 						<th scope="col">Biển số</th>
-						<!-- <th scope="col">Garage id</th> -->
+						<th scope="col">Garage id</th>
 						<th>Cập nhật</th>
 						<th>Xóa</th>
 					</tr>
@@ -66,9 +66,9 @@
 							<td>${ item.price }</td>
 							<td>${ item.num_seat }</td>
 							<td>${ item.trip_board }</td>
-							<%-- <td>${ item.garage_id }</td> --%>
+							<td>${ item.getGarageID() }</td>
 							<td><a class="btn btn-primary"
-								href="editTrip?idTrip=${ item.id }">Cập
+								href="editTrip?id=${ item.id }">Cập
 									nhập</a></td>
 							<td><a class="btn btn-danger" href="#"
 								onclick="testConfirmDialog('${ item.id }');">Xóa</a>
@@ -114,11 +114,11 @@
     </script>
 	<script type="text/javascript" src="lib.js"></script>
 	<script type="text/javascript">
-    	function testConfirmDialog(maso_monhoc) {
-    		var result = confirm("Bạn chắc chắn muốn xóa môn học này?");
+    	function testConfirmDialog(id) {
+    		var result = confirm("Bạn chắc chắn muốn xóa chuyến xe này?");
     		
     		if (result) {
-    			window.location.href = "deleteMonHoc?maso_monhoc=" + maso_monhoc;
+    			window.location.href = "deleteTrip?id=" + id;
     		} else {
     			return false;
     		}
@@ -127,7 +127,7 @@
     		let searchContent = document.getElementById("searchContent").value;
     		
     		if (searchContent != null) {
-    			window.location.href = "searchListMonHoc?searchContent=" + searchContent;
+    			window.location.href = "searchListTrips?searchContent=" + searchContent;
     		}
     	};
     </script>
