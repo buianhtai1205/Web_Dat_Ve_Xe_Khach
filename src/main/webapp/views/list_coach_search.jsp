@@ -658,7 +658,7 @@
 																				<% if (indexSeat % 4 == 1) { %>
 																					<tr class="coach-row">
 																				<% } %>
-																					<td class="seat ${ seat.id } ${ seat.number_chair } ${ seat.status == 1 ? 'ArHJS' : 'K20TTDL'}" onclick="clickSeatFunction('${ seat.id }')">
+																					<td class="seat ${ seat.id } ${ seat.number_chair } ${ seat.status == 1 ? 'ArHJS' : 'K20TTDL'}" onclick="clickSeatFunction('${ seat.id }','${ trip.id }')">
 																						<div
 																						class="Seat__SeatContainer-sc-6hr0u8-0 iaQDbI seat-container ${ trip.id }"
 																						data-disabled="true"
@@ -728,7 +728,7 @@
                                                                       </div>
                                                                     </div>
                                                                   </div>
-                                                            <div id="seat_result"></div>
+                                                            <div id="seat_result${trip.id}"></div>
 															
 															<div style="border-top: 1px solid;">
 																<div class="line"
@@ -956,9 +956,9 @@
     <script>
         var count = 0;
       
-        function clickSeatFunction(seat_id) {
+        function clickSeatFunction(seat_id,trip_id) {
           let seat = document.getElementsByClassName(seat_id);
-          let seat_result = document.getElementById("seat_result");
+          let seat_result = document.getElementById("seat_result"+trip_id);
           if (seat[0].classList[3] != "ArHJS")
           {
             if (seat[0].classList[4] == null) {
