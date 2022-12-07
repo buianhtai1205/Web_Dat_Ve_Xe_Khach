@@ -47,8 +47,10 @@
 						<th scope="col">id</th>
 						<th scope="col">Họ Tên</th>
 						<th scope="col">Số điện thoại</th>
+						<th scope="col">Điểm đón</th>
 						<th scope="col">Điểm đến</th>
 						<th scope="col">Số ghế</th>
+						<th scope="col">Biển số xe</th>
 						<th scope="col">Giá</th>
 					</tr>
 				</thead>
@@ -59,8 +61,10 @@
 					      <td>${ticket.tripid }</td>
 					     <td>${ ticket.fullname }</td> 
 					     <td>${ ticket.phonenumber }</td>
+					     <td>${ ticket.starts }</td>
 					     <td>${ ticket.musty }</td>
 					   <td>${ ticket.numberchair }</td>
+					   <td>${ ticket.tripbroad }</td>
 					   <td>${ ticket.price }</td>
 					      
 				    </tr>

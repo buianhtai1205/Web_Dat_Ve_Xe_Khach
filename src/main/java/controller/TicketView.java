@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Ticket;
 
 /**
@@ -45,10 +46,11 @@ public class TicketView extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		HttpSession session = request.getSession();
+		String userManager = (String) session.getAttribute("userManager");
 		List<Ticket> list = null;
 		try {
-			list = DAO.TicketDAO.getlistTicket(conn);
+			list = DAO.TicketDAO.getlistTicket(conn, userManager);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
