@@ -659,7 +659,7 @@
 																				<%! int indexSeat = 1; %>  
 																				<c:forEach var="seat" items="${trip.list_seat}">
 																				<% if (indexSeat % 4 == 1) { %>
-																					<tr class="coach-row"></tr>
+																					<tr class="coach-row">
 																				<% } %>
 																					<td class="seat ${ seat.id } ${ seat.number_chair } ${ seat.status == 1 ? 'ArHJS' : 'K20TTDL'}" onclick="clickSeatFunction('${ seat.id }')">
 																						<div
