@@ -67,7 +67,7 @@ public class UserInfoServlet extends HttpServlet {
 		try {
 			tr = trDAO.getTripByTicket(conn, phone);
 			session.setAttribute("tr", tr);
-			String idGarage = String.valueOf(tr.getGarage_id());
+			String idGarage = String.valueOf(tr.getGarageID());
 			xe = grDAO.getGarage(conn, idGarage);
 			session.setAttribute("xe", xe);
 			

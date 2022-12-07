@@ -3,7 +3,8 @@ package model;
 public class Seat {
 	private int id;
 	private String number_chair;
-	private String status;
+	private int status;
+	private Trip trip = new Trip();
 	
 	public String getNumber_chair() {
 		return number_chair;
@@ -27,12 +28,20 @@ public class Seat {
 		this.id = id;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public Trip getTrip() {
+		return trip;
+	}
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
 	}
 	
 	

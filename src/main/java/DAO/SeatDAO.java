@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.Customer;
 import model.Seat;
@@ -39,7 +40,7 @@ public class SeatDAO {
 			res = pre.executeQuery();
 			while (res.next()) {
 				String number_chair = res.getString("number_chair");
-				String status = res.getString("status");
+				int status = res.getInt("status");
 				seat.setNumber_chair(number_chair);
 				seat.setStatus(status);
 			}
@@ -68,5 +69,27 @@ public class SeatDAO {
 			return seat;
 		}
 		return null;
+	}
+	
+	public static ArrayList<Seat> getListSeat(Connection con, int trip_id)
+	{
+		ArrayList<Seat> list = new ArrayList<Seat>();
+		String sql = "SELECT * FROM Seat WHERE trip_id =  " + trip_id;
+		
+		PreparedStatement pre = null;
+		try {
+			pre = con.prepareStatement(sql);
+			ResultSet res = pre.executeQuery();
+			while (res.next()) {
+				Seat seat = new Seat();
+				seat.setId(res.getInt("id"));
+				seat.setNumber_chair(res.getString("number_chair"));
+				seat.setStatus(res.getInt("status"));
+				list.add(seat);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

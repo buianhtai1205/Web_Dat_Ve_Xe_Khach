@@ -7,8 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
+import model.Garage;
 import model.Seat;
 import model.Trip;
 
@@ -48,7 +47,7 @@ public class TripDAO {
 			tr.setDestination(destination);
 			tr.setDeparture_time(departure_time);
 			tr.setPrice(price);
-			tr.setGarage_id(idGara);
+			tr.setGarageID(idGara);
 			return tr;
 		}
 		return null;
@@ -70,8 +69,8 @@ public class TripDAO {
 				Seat seat = new Seat();
 				int id = res.getInt("id");
 				String numberChair = res.getString("number_chair");
-				String status = res.getString("status");
-				seat.setId(id);;
+				int status = res.getInt("status");
+				seat.setId(id);
 				seat.setNumber_chair(numberChair);
 				seat.setStatus(status);
 				list.add(seat);
@@ -85,6 +84,76 @@ public class TripDAO {
 		
 		return list;
 	}
-
+	
+	public static ArrayList<String> getListDeparture(Connection con)
+	{
+		ArrayList<String> list = new ArrayList<String>();
+		String sql = "SELECT DISTINCT departure FROM Trip";
+		PreparedStatement pre = null;
+		
+		try {
+			pre = con.prepareStatement(sql);
+			ResultSet res = pre.executeQuery();
+			while (res.next()) {
+				String departure = res.getString("departure");
+				list.add(departure);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public static ArrayList<String> getListDestination(Connection con)
+	{
+		ArrayList<String> list = new ArrayList<String>();
+		String sql = "SELECT DISTINCT destination FROM Trip";
+		PreparedStatement pre = null;
+		
+		try {
+			pre = con.prepareStatement(sql);
+			ResultSet res = pre.executeQuery();
+			while (res.next()) {
+				String destination = res.getString("destination");
+				list.add(destination);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public static ArrayList<Trip> getListTrip(Connection con, String departute, String destination, String departure_time) 
+	{
+		ArrayList<Trip> list_trip = new ArrayList<Trip>();
+		String sql = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
+				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute + "' and destination = N'" + destination + "' and Garage.deleted = 0";
+		PreparedStatement pre = null;
+		
+		try {
+			pre = con.prepareStatement(sql);
+			ResultSet res = pre.executeQuery();
+			while (res.next()) {
+				Trip trip = new Trip();
+				trip.setId(res.getInt("id"));
+				trip.setDeparture(res.getString("departure"));
+				trip.setDestination(res.getString("destination"));
+				trip.setDeparture_time(res.getString("departure_time"));
+				trip.setPrice(res.getInt("price"));
+				trip.setNum_seat(res.getInt("num_seat"));
+				trip.setTrip_board(res.getString("trip_board"));
+				trip.garage.setId(res.getInt("garage_id"));
+				trip.garage.setAddress(res.getString("address"));
+				trip.garage.setFullname(res.getString("fullname"));
+				trip.garage.setDescription(res.getString("description"));
+				list_trip.add(trip);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return list_trip;
+	}
 
 }

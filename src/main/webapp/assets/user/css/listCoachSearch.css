@@ -19,7 +19,7 @@
 
 .mid {
 	max-height: 2500px;
-	padding: 135px;
+	padding: 32px;
 	display: flex;
 }
 
@@ -290,8 +290,8 @@ p {
 }
 
 .div>i {
-	font-size: 21px;
-	color: gray;
+	font-size: 18px;
+	color: #000;
 	padding: 4px;
 }
 
@@ -310,7 +310,7 @@ p {
 
 .content__1 {
 	position: relative;
-	left: 260px;
+	left: 305px;
 	top: 0px;
 	font-size: 20px;
 	color: blue;
