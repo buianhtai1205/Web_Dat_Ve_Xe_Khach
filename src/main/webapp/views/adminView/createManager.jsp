@@ -70,13 +70,6 @@
 	                </div>
 	            </div>
 	            <br>
-	            <div class="form-row">
-	                <div class="form-group col-md-4">
-	                    <label for="simpleinput">ID Garager</label>
-	                    <input required type="text" id="simpleinput" class="form-control" name="garaid">
-	                </div>
-	            </div>
-	            <br>
 	             <input class="btn btn-success" type="submit" value="Thêm" />
 	            <a class="btn btn-primary" href="${ pageContext.request.contextPath }/garageacctive">Hủy</a>
         </form>

@@ -196,7 +196,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-<<<<<<< HEAD
     <display-name>GarageManagementServlet</display-name>
     <servlet-name>GarageManagementServlet</servlet-name>
     <servlet-class>controller.ADMIN.GarageManagementServlet</servlet-class>
@@ -231,18 +230,6 @@
     <servlet-name>AddManagementGarageServlet</servlet-name>
     <servlet-class>controller.ADMIN.AddManagementGarageServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>AddManagementGarageServlet</servlet-name>
-    <url-pattern>/AddManagementGarageServlet</url-pattern>
-=======
-    <display-name>TicketView</display-name>
-    <servlet-name>TicketView</servlet-name>
-    <servlet-class>controller.TicketView</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TicketView</servlet-name>
-    <url-pattern>/TicketView</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>SearchTicket</display-name>
@@ -272,6 +259,5 @@
   <servlet-mapping>
     <servlet-name>SearchManager</servlet-name>
     <url-pattern>/SearchManager</url-pattern>
->>>>>>> 290eec1027a904a6578a97b312d2d33637ed2292
   </servlet-mapping>
 </web-app>
