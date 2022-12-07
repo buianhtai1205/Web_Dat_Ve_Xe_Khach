@@ -391,13 +391,13 @@
 									aria-selected="false">Giá cao nhất</a></li>
 							</ul>
 
-							<div class="tab-content" id="pills-tabContent">
+							
 							<c:forEach items="${ list_trip }" var="trip" varStatus="loop">
 								<% Trip tr = (Trip) pageContext.getAttribute("trip"); %>  
-								<form action="${pageContext.request.contextPath}/timghe" method="POST" style="margin-bottom: 32px;">
-									<div class="tab-pane fade show active" id="all" role="tabpanel"
-										aria-labelledby="pills-home-tab"
-										aria-labelledby="pills-home-tab">
+								<form action="${pageContext.request.contextPath}/timghe" method="POST" style="margin-bottom: 32px;" id ="${ trip.id }">
+									<div class="tab-pane fade show active" id="all${ trip.id }" role="tabpanel"
+										aria-labelledby="pills-home-tab${ trip.id }"
+										>
 										<div class="vexe">
 											<div class="card__top" style="font-size: small">
 												<div class="card__right">
@@ -417,23 +417,20 @@
 												</div>
 												<div class="collasp">
 													<div class="card__link">
-														<a data-toggle="collapse" href="#collapseExample"
+														<a data-toggle="collapse" href="#collapseExample${ trip.id }"
 															role="button" aria-expanded="false"
-															aria-controls="collapseExample"> Thông tin chi tiết <i
+															aria-controls="collapseExample${ trip.id }"> Thông tin chi tiết <i
 															class="fa fa-angle-down"></i>
 														</a>
 													</div>
 													<div class="button">
 														<button data-toggle="collapse"
-															onclick="chonXe('#scroll1<%=1%>',800,'chuyendi',3,<%=3%>)"
-															data-target="#collapseChonChuyen" aria-expanded="false"
-															aria-controls="collapseChonChuyen" name="idChuyenXe"
-															value="3" type="button">Chọn chuyến</button>
+															onclick="chonXe('#scroll1<%=1%>',800,'chuyendi','${ trip.id }','${ trip.id }')" aria-expanded="false"
+															aria-controls="collapseChonChuyen${ trip.id }" name="idChuyenXe"
+															value="${ trip.id }" type="button"  data-target="#collapseChonChuyen${ trip.id }">Chọn chuyến</button>
 														<input class="form-check-input" type="hidden"
-															value="<%session.setAttribute("idChuyen", "3");%>"
-															name="inputIdChuyenXe" id="inputIdChuyenXe"> <input
-															class="form-check-input" type="hidden" value="3"
-															name="inputIdChuyenXe" id="inputIdChuyenXe">
+															value="${ trip.id }"
+															name="inputIdChuyenXe" id="inputIdChuyenXe"> 
 													</div>
 												</div>
 
@@ -441,46 +438,46 @@
 											</div>
 									</div>
 									
-									<!-- cardbottom2 -->
+									<!-- cardbottom-chon chuyen -->
 									<div class="card__bottom">
-										<div class="collapse" id="collapseChonChuyen">
+										<div class="collapse" id="collapseChonChuyen${ trip.id }">
 											<div class="card card-body">
 												<div class="project">
-													<ul class="nav nav-pills mb-3 nav-tabs" id="pills-tab2"
+													<ul class="nav nav-pills mb-3 nav-tabs" id="pills-tab${ trip.id }"
 														role="tablist">
 
 														<li class="nav-item " role="presentation"><a
-															class="nav-link active nav-link_1" id="pills-img-tab2"
-															data-toggle="pill" href="#img2" role="tab"
+															class="nav-link active nav-link_1" id="pills-img-tab${ trip.id }"
+															data-toggle="pill" href="#img${ trip.id }" role="tab"
 															aria-controls="pills-img" aria-selected="true"><input
 																class="form-check-input" type="hidden"
-																name="inlineRadioOptions" id="inlineRadio1"
-																value="option1" checked> <label
-																class="form-check-label line-connect" for="inlineRadio1">1.Chỗ
+																name="inlineRadioOptions" id="inlineRadio${ trip.id }"
+																value="option${ trip.id }" checked> <label
+																class="form-check-label line-connect" for="inlineRadio${ trip.id }">1.Chỗ
 																	mong muốn -></label></a></li>
 
 														<li class="nav-item" role="presentation"><a
-															class="nav-link nav-link_2" id="pills-cmt-tab2"
-															data-toggle="pill" href="#pills-cmt2" role="tab"
+															class="nav-link nav-link_${ trip.id }" id="pills-cmt-tab${ trip.id }"
+															data-toggle="pill" href="#pills-cmt${ trip.id }" role="tab"
 															aria-controls="pills-cmt" aria-selected="false"><input
 																class="form-check-input" type="hidden"
-																name="inlineRadioOptions" id="inlineRadio2"
-																value="option2"> <label class="form-check-label"
-																for="inlineRadio2">2.Điểm đón trả -></label> </a></li>
+																name="inlineRadioOptions" id="inlineRadio${ trip.id }"
+																value="option${ trip.id }"> <label class="form-check-label"
+																for="inlineRadio${ trip.id }">2.Điểm đón trả -></label> </a></li>
 														<li class="nav-item " role="presentation"><a
-															class="nav-link nav-link_3" id="pills-travel-tab3"
-															data-toggle="pill" href="#pills-travel3" role="tab"
+															class="nav-link nav-link_${ trip.id }" id="pills-travel-tab${ trip.id }"
+															data-toggle="pill" href="#pills-travel${ trip.id }" role="tab"
 															aria-controls="pills-travel" aria-selected="false"><input
 																class="form-check-input" type="hidden"
-																name="inlineRadioOptions" id="inlineRadio3"
-																value="option3"> <label class="form-check-label"
-																for="inlineRadio3">3.Nhập thông tin </label></a></li>
+																name="inlineRadioOptions" id="inlineRadio${ trip.id }"
+																value="option${ trip.id }"> <label class="form-check-label"
+																for="inlineRadio${ trip.id }">3.Nhập thông tin </label></a></li>
 
 													</ul>
 
 													<div class="tab-content" id="pills-tabContent">
-														<div class="tab-pane fade show active" id="img2"
-															role="tabpanel" aria-labelledby="pills-img-tab2">
+														<div class="tab-pane fade show active" id="img${ trip.id }"
+															role="tabpanel" aria-labelledby="pills-img-tab${ trip.id }">
 															
 															<div class="SeatSelectionOnline__SeatSelection-sc-167eirc-0 hqRXwu">
                                                             	<div class="seat-groups">
@@ -535,7 +532,7 @@
                                                                       </div>
                                                                       <div class="seat-info">
                                                                         <div
-                                                                          class="SeatThumbnail__SeatContainer-sc-1ooosi9-0 daMVvn seat-thumbnail"
+                                                                          class="SeatThumbnail__SeatContainer-sc-1ooosi9-0${ trip.id } daMVvn seat-thumbnail"
                                                                           disabled=""
                                                                         >
                                                                           <svg
@@ -663,7 +660,7 @@
 																				<% } %>
 																					<td class="seat ${ seat.id } ${ seat.number_chair } ${ seat.status == 1 ? 'ArHJS' : 'K20TTDL'}" onclick="clickSeatFunction('${ seat.id }')">
 																						<div
-																						class="Seat__SeatContainer-sc-6hr0u8-0 iaQDbI seat-container"
+																						class="Seat__SeatContainer-sc-6hr0u8-0 iaQDbI seat-container ${ trip.id }"
 																						data-disabled="true"
 																						disabled=""
 																						color="#b8b8b8"
@@ -741,14 +738,14 @@
 																	<p
 																		style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
 																		cộng: 0đ</p>
-																	<button type="button" class="btn btn-primary btnNext">Tiếp
+																	<button type="button" class="btn btn-primary btnNext"  onclick="btnNext('${ trip.id }',0)">Tiếp
 																		tục</button>
 																</div>
 															</div>
 														</div>
 
-														<div class="tab-pane fade" id="pills-cmt2" role="tabpanel"
-															aria-labelledby="pills-cmt-tab2">
+														<div class="tab-pane fade" id="pills-cmt${ trip.id }" role="tabpanel"
+															aria-labelledby="pills-cmt-tab${ trip.id }">
 															<div class="row">
 																<div class="row">
 																	<div class="col-12">
@@ -767,7 +764,7 @@
 																									<% if (mt.getStatus() == 1) { %>
 																										<li class="form-check" style="display: flex">
 																											<input class="form-check-input" type="radio"
-																											name="checkbox1" id="checkbox1" value="${ musty.id }"> 
+																											name="checkbox_${ trip.id }" id="checkbox_${ trip.id }" value="${ musty.id }"> 
 																											<label class="form-check-label" for="exampleRadios1" style="font-size: 16px">
 																												${ musty.musty } 
 																											</label>
@@ -780,7 +777,7 @@
 																									<% if (mt.getStatus() == 0) { %>
 																										<li class="form-check" style="display: flex">
 																											<input class="form-check-input" type="radio"
-																											name="checkbox1" id="checkbox1" value="${ musty.id }"> 
+																											name="checkbox_${ trip.id }" id="checkbox_${ trip.id }" value="${ musty.id }"> 
 																											<label class="form-check-label" for="exampleRadios1" style="font-size: 16px">
 																												${ musty.musty } 
 																											</label>
@@ -801,7 +798,7 @@
 																									<% if (mt.getStatus() == 0) { %>
 																										<li class="form-check" style="display: flex">
 																											<input class="form-check-input" type="radio"
-																											name="checkbox1" id="checkbox1" value="${ musty.id }"> 
+																											name="checkbox${ trip.id }" id="checkbox${ trip.id }" value="${ musty.id }"> 
 																											<label class="form-check-label" for="exampleRadios1" style="font-size: 16px">
 																												${ musty.musty } 
 																											</label>
@@ -814,7 +811,7 @@
 																									<% if (mt.getStatus() == 1) { %>
 																										<li class="form-check" style="display: flex">
 																											<input class="form-check-input" type="radio"
-																											name="checkbox1" id="checkbox1" value="${ musty.id }"> 
+																											name="checkbox${ trip.id }" id="checkbox${ trip.id }" value="${ musty.id }"> 
 																											<label class="form-check-label" for="exampleRadios1" style="font-size: 16px">
 																												${ musty.musty } 
 																											</label>
@@ -835,14 +832,14 @@
 																			<div
 																				style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px;">
 																				<button type="button"
-																					class="btn btn-secondary btnPrevious">Quay
+																					class="btn btn-secondary btnPrevious" onclick="btnPrevious('${trip.id}',0)">Quay
 																					lại</button>
 																				<div style="display: flex;">
-																					<p
+																					<!-- <p
 																						style="margin-right: 16px; margin-bottom: 0; margin-top: 10px;">Tổng
-																						cộng: 0đ</p>
+																						cộng: 0đ</p> -->
 																					<button type="button"
-																						class="btn btn-primary btnNext" style="">Tiếp
+																						class="btn btn-primary btnNext" style="" onclick="btnNext('${ trip.id }',1)" >Tiếp
 																						tục</button>
 																				</div>
 																			</div>
@@ -853,8 +850,8 @@
 															</div>
 														</div>
 
-														<div class="tab-pane fade" id="pills-travel3"
-															role="tabpanel" aria-labelledby="pills-travel-tab3">
+														<div class="tab-pane fade" id="pills-travel${trip.id}"
+															role="tabpanel" aria-labelledby="pills-travel-tab${trip.id}">
 															<div class="row">
 																<div class="col-12">
 																	<div class="card animate__animated animate__zoomIn">
@@ -865,8 +862,8 @@
 																			<div>
 																				<div class="form-group ">
 																					<input type="text" class="form-control top"
-																						id="inputName" placeholder="First and Last name "
-																						name="nameUser" value="" required="required">
+																						id="inputName${trip.id}" placeholder="First and Last name "
+																						name="nameUser${trip.id}" value="" required="required">
 																					<div>
 																						<p id="error1"></p>
 																					</div>
@@ -875,8 +872,8 @@
 																				<div class="form-group ">
 																					<input type="text"
 																						class="form-control top inputPhone1"
-																						id="inputPhone" placeholder="Number phone "
-																						name="phoneUser" value="" required="required">
+																						id="inputPhone${trip.id}" placeholder="Number phone "
+																						name="phoneUser${trip.id}" value="" required="required">
 
 																					<p id="error2"></p>
 
@@ -884,9 +881,9 @@
 
 																				<div class="form-group ">
 																					<input type="text" class="form-control top"
-																						id="inputEmail"
+																						id="inputEmail${trip.id}"
 																						placeholder="Email (abc@gmail.com)"
-																						name="emailUser" value="" required="required">
+																						name="emailUser${trip.id}" value="" required="required">
 																					<div>
 																						<p id="error3"></p>
 																					</div>
@@ -901,14 +898,6 @@
 																				</div>
 																				<p>Bằng việc nhấn nút Tiếp Tục, bạn đồng ý với
 																					Chính sách bảo mật thông tin và Quy chế</p>
-																				<!-- <div class="form-group form-check content">
-																				<input type="checkbox" class="form-check-input"
-																					id="exampleCheck1" name="rememberMe" value="Y">
-																				<label class="form-check-label" for="exampleCheck1">Remember</label>
-																				<a class="forgot" href="login"
-																					style="text-decoration: none;">Forgot password</a>
-																			</div>
-																			<button class="button3" type="submit">Login</button> -->
 																			</div>
 																		</div>
 																		<div style="border-top: 1px solid;">
@@ -919,11 +908,11 @@
 																				style="display: flex; align-items: center; justify-content: space-between;">
 																				<button type="button"
 																					class="btn btn-secondary btnPrevious"
-																					style="margin-top: 20px">Quay lại</button>
+																					style="margin-top: 20px" onclick="btnPrevious('${ trip.id }',1)">Quay lại</button>
 																				<div style="display: flex; margin-top: 10px;">
 																					<p
 																						style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
-																						cộng: 0đ</p>
+																						cộng: ${trip.price}0đ</p>
 																					<button type="submit" class="btn btn-primary">Xác
 																						nhận</button>
 																				</div>
@@ -933,20 +922,14 @@
 																	</div>
 																</div>
 															</div>
-
-
 														</div>
 													</div>
-
 												</div>
-
-
 											</div>
 										</div>
 									</div>
 								</form>
 							</c:forEach>
-							</div>
 						</div>
 					</div>
 			</div>
@@ -1009,117 +992,115 @@
           
         }
     </script>
-	<script type="text/javascript">
-        const nextBtn = document.querySelectorAll(".btnNext");
-        const prevBtn = document.querySelectorAll(".btnPrevious");
-            var btnNext = (n,index=0) => {
-                   let id1 = index;
-                    let id2 = index + 1;
-                    let tabElement2 = document.querySelectorAll("#pills-tab" + n + " li a")[id2];
-                    var lastTab = new bootstrap.Tab(tabElement2);
-                    lastTab.show();
-                    console.log(n)
-    
-            }
+	 <script type="text/javascript">
+		const nextBtn = document.querySelectorAll(".btnNext");
+		const prevBtn = document.querySelectorAll(".btnPrevious");
+				var btnNext = (n,index=0) => {
+							 let id1 = index;
+								let id2 = index + 1;
+								let tabElement2 = document.querySelectorAll("#pills-tab" + n + " li a")[id2];
+								var lastTab = new bootstrap.Tab(tabElement2);
+								lastTab.show();
 
-        var btnPrevious = (n,index=0) => {
-            let id = index;
-            let id2 = index - 1;
-            let tabElement = document.querySelectorAll("#pills-tab" + n +" li a")[id];
-            var lastTab = new bootstrap.Tab(tabElement);
-            lastTab.show();
-            console.log(n)
-        }
+				}
 
-        var goBack2 = (n) => {
-            var disabled2 = document.querySelector(`.nav-link_3`);
-            if (disabled2.classList.contains('disabled')) {
-                disabled2.classList.remove('disabled');
-            }
+		var btnPrevious = (n,index=0) => {
+				let id = index;
+				let id2 = index - 1;
+				let tabElement = document.querySelectorAll("#pills-tab" + n +" li a")[id];
+				var lastTab = new bootstrap.Tab(tabElement);
+				lastTab.show();
+		}
 
-        }
-        /* nextTab */
-     
+		var goBack2 = (n) => {
+				var disabled2 = document.querySelector(`.nav-link_3`);
+				if (disabled2.classList.contains('disabled')) {
+						disabled2.classList.remove('disabled');
+				}
 
-        nextBtn.forEach(function (item, index) {
+		}
+		/* nextTab */
+ 
 
-            item.addEventListener('click', function () {
-                let id1 = index;
-                let id2 = index + 1;
-                let tabElement2 = document.querySelectorAll("#pills-tab2 li a")[id2];
-                var lastTab = new bootstrap.Tab(tabElement2);
-                lastTab.show();
-            });
-        });
+		nextBtn.forEach(function (item, index) {
 
-        prevBtn.forEach(function (item, index) {
-            item.addEventListener('click', function () {
-                let id = index;
-                let id2 = index - 1;
-                let tabElement = document.querySelectorAll("#pills-tab2 li a")[id];
-                var lastTab = new bootstrap.Tab(tabElement);
-                lastTab.show();
-            });
-        });
+				item.addEventListener('click', function () {
+						let id1 = index;
+						let id2 = index + 1;
+						let tabElement2 = document.querySelectorAll("#pills-tab2 li a")[id2];
+						var lastTab = new bootstrap.Tab(tabElement2);
+						lastTab.show();
+				});
+		});
 
-        /* //check validatate */
+		prevBtn.forEach(function (item, index) {
+				item.addEventListener('click', function () {
+						let id = index;
+						let id2 = index - 1;
+						let tabElement = document.querySelectorAll("#pills-tab2 li a")[id];
+						var lastTab = new bootstrap.Tab(tabElement);
+						lastTab.show();
+				});
+		});
 
-        var input1 = document.getElementById("inputName");
-        var input2 = document.getElementById("inputPhone");
-        var input3 = document.getElementById("inputEmail");
+		/* //check validatate */
 
-        var error2 = document.getElementById("error2");
-        input1.onblur = function () {
-            if (input1.value.length == 0) {
-                input1.classList.add('invalid');
-                error1.innerHTML = 'Please enter a correct first name and last name.'
-            }
-        };
+		var input1 = document.getElementById("inputName");
+		var input2 = document.getElementById("inputPhone");
+		var input3 = document.getElementById("inputEmail");
 
-        input1.onfocus = function () {
-            input1.classList.remove('invalid');
-            error1.innerHTML = "";
-        };
+		var error2 = document.getElementById("error2");
+		input1.onblur = function () {
+				if (input1.value.length == 0) {
+						input1.classList.add('invalid');
+						error1.innerHTML = 'Please enter a correct first name and last name.'
+				}
+		};
 
-        function validatePhoneNumber(input_str) {
-            var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+		input1.onfocus = function () {
+				input1.classList.remove('invalid');
+				error1.innerHTML = "";
+		};
 
-            return re.test(input_str);
-        }
+		function validatePhoneNumber(input_str) {
+				var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+
+				return re.test(input_str);
+		}
 
 
-        input2.onblur = function () {
-            if (!validatePhoneNumber(input2.value)) {
-                input2.classList.add('invalid');
-                error2.innerHTML = 'Please enter a correct number phone.';
-                /* 				error2.innerText = 'Please enter a correct number phone.'; */
-                /* 				console.log(error2) */
-            }
-        };
+		input2.onblur = function () {
+				if (!validatePhoneNumber(input2.value)) {
+						input2.classList.add('invalid');
+						error2.innerHTML = 'Please enter a correct number phone.';
+						/* 				error2.innerText = 'Please enter a correct number phone.'; */
+						/* 				console.log(error2) */
+				}
+		};
 
-        input2.onfocus = function () {
-            if (this.classList.contains('invalid2')) {
-                this.classList.remove('invalid2');
-                error2.innerHTML = "";
-            }
-        };
+		input2.onfocus = function () {
+				if (this.classList.contains('invalid2')) {
+						this.classList.remove('invalid2');
+						error2.innerHTML = "";
+				}
+		};
 
 
-        input3.onblur = function () {
-            if (input3.value.length === 0) {
-                input3.classList.add('invalid');
-                error3.innerHTML = 'Please enter a correct email.'
-            }
-        };
+		input3.onblur = function () {
+				if (input3.value.length === 0) {
+						input3.classList.add('invalid');
+						error3.innerHTML = 'Please enter a correct email.'
+				}
+		};
 
-        input3.onfocus = function () {
-            if (this.classList.contains('invalid')) {
-                this.classList.remove('invalid');
-                error3.innerHTML = "";
-            }
-        };
+		input3.onfocus = function () {
+				if (this.classList.contains('invalid')) {
+						this.classList.remove('invalid');
+						error3.innerHTML = "";
+				}
+		};
 
-    </script>
+</script>
 </body>
 
 </html>

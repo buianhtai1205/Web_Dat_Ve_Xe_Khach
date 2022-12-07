@@ -57,8 +57,6 @@ public class DatVe extends HttpServlet {
 		String idChuyen = (String) session.getAttribute("idChuyen");
 		//String idChuyen= request.getParameter("inputIdChuyenXe");
 		String idGhe = request.getParameter("gheDangChon");
-		System.out.println(idChuyen);
-		System.out.println(idGhe);
 		session.setAttribute("idGhe", idGhe);
 		
 		String tenKh = request.getParameter("nameUser");

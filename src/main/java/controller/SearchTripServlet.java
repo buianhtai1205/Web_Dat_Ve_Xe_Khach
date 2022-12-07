@@ -10,6 +10,7 @@ import model.Schedule;
 import model.Seat;
 import model.Trip;
 import utils.MyUtils;
+import utils.Router;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -78,7 +79,7 @@ public class SearchTripServlet extends HttpServlet {
 		
 		request.setAttribute("list_trip", list_trip);
 		
-		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/list_coach_search.jsp");
+		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(Router.PAGE_BUY_TICKET);
 		dispatcher.forward(request, response);
 		
 	}
