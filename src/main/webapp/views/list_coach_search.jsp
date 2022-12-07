@@ -479,8 +479,8 @@
 														<div class="tab-pane fade show active" id="img${ trip.id }"
 															role="tabpanel" aria-labelledby="pills-img-tab${ trip.id }">
 															
-															<div class="SeatSelectionOnline__SeatSelection-sc-167eirc-0${ trip.id } hqRXwu${ trip.id }">
-                                                            	<div class="seat-groups${ trip.id }">
+															<div class="SeatSelectionOnline__SeatSelection-sc-167eirc-0 hqRXwu">
+                                                            	<div class="seat-groups">
                                                                 	<div class="note">Chú thích</div>
                                                                 	<div class="seat-info">
                                                                         <div
@@ -580,7 +580,7 @@
                                                                       </div>
                                                                       <div class="seat-info">
                                                                         <div
-                                                                          class="SeatThumbnail__SeatContainer-sc-1ooosi9-0${ trip.id } dLgsTe seat-thumbnail"
+                                                                          class="SeatThumbnail__SeatContainer-sc-1ooosi9-0 dLgsTe seat-thumbnail"
                                                                         >
                                                                           <svg
                                                                             width="32"
@@ -626,7 +626,7 @@
                                                                         <span class="seat-name">Đang chọn</span>
                                                                       </div>
                                                                     </div>
-                                                                    <div class="SeatTemplate-sc-1ilqewh-0${ trip.id } llUipg seat-template">
+                                                                    <div class="SeatTemplate-sc-1ilqewh-0 llUipg seat-template">
                                                                       <div class="coach-container">
                                                                         <div class="coach">
                                                                           <table>
@@ -634,7 +634,7 @@
                                                                               	<tr class="coach-row">
                                                                                 <td class="seat">
                                                                                   <div
-                                                                                    class="Seat__SeatContainer-sc-6hr0u8-0 buebkj${ trip.id } seat-container"
+                                                                                    class="Seat__SeatContainer-sc-6hr0u8-0 buebkj seat-container"
                                                                                     data-disabled="true"
                                                                                     disabled=""
                                                                                   >
@@ -656,9 +656,9 @@
 																				<%! int indexSeat = 1; %>  
 																				<c:forEach var="seat" items="${trip.list_seat}">
 																				<% if (indexSeat % 4 == 1) { %>
-																					<tr class="coach-row"></tr>
+																					<tr class="coach-row">
 																				<% } %>
-																					<td class="seat ${ seat.id } ${ seat.number_chair } ${ seat.status == 1 ? 'ArHJS' : 'K20TTDL'}" onclick="clickSeatFunction('${ seat.id }')">
+																					<td class="seat ${ seat.id } ${ seat.number_chair } ${ seat.status == 1 ? 'ArHJS' : 'K20TTDL'}" onclick="clickSeatFunction('${ seat.id }','${ trip.id }')">
 																						<div
 																						class="Seat__SeatContainer-sc-6hr0u8-0 iaQDbI seat-container ${ trip.id }"
 																						data-disabled="true"
@@ -728,7 +728,7 @@
                                                                       </div>
                                                                     </div>
                                                                   </div>
-                                                            <div id="seat_result"></div>
+                                                            <div id="seat_result${trip.id}"></div>
 															
 															<div style="border-top: 1px solid;">
 																<div class="line"
@@ -956,9 +956,9 @@
     <script>
         var count = 0;
       
-        function clickSeatFunction(seat_id) {
+        function clickSeatFunction(seat_id,trip_id) {
           let seat = document.getElementsByClassName(seat_id);
-          let seat_result = document.getElementById("seat_result");
+          let seat_result = document.getElementById("seat_result"+trip_id);
           if (seat[0].classList[3] != "ArHJS")
           {
             if (seat[0].classList[4] == null) {
