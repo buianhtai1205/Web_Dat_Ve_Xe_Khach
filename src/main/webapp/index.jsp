@@ -150,10 +150,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="overlay">
-						<p>BESTSERVICE</p>
-					</div>
-					<div class="overlay1"></div>
+				
 
 				</div>
 
@@ -170,10 +167,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="overlay">
-						<p>BESTSERVICE</p>
-					</div>
-					<div class="overlay1"></div>
+					
 
 				</div>
 
@@ -191,11 +185,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="overlay">
-						<p>BESTSERVICE</p>
-					</div>
-					<div class="overlay1"></div>
-
+				
 				</div>
 
 				<div class="item">
@@ -212,10 +202,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="overlay">
-						<p>BESTSERVICE</p>
-					</div>
-					<div class="overlay1"></div>
+					
 
 				</div>
 
@@ -233,10 +220,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="overlay">
-						<p>BESTSERVICE</p>
-					</div>
-					<div class="overlay1"></div>
+					
 
 				</div>
 
@@ -254,11 +238,6 @@
 									class="fas fa-star"></i> <span>4.4</span> <span>(39,470)</span>
 							</div>
 						</div>
-<!-- 					</div>
-					<div class="overlay">
-						<p>BESTSERVICE</p>
-					</div>
-					<div class="overlay1"></div>
 
 				</div> -->
 			</div>

@@ -38,6 +38,8 @@ public class TripDAO {
 			String departure_time = rs2.getString("departure_time");
 			int price = rs2.getInt("price");
 			int idGara = rs2.getInt("garage_id");
+			int numseat = rs2.getInt("num_seat");
+			String tripBoard = rs2.getString("trip_board");
 
 			Trip tr = new Trip();
 			tr.setDeparture(departure);
@@ -45,6 +47,8 @@ public class TripDAO {
 			tr.setDeparture_time(departure_time);
 			tr.setPrice(price);
 			tr.setGarageID(idGara);
+			tr.setNum_seat(numseat);
+			tr.setTrip_board(tripBoard);
 			return tr;
 		}
 		return null;

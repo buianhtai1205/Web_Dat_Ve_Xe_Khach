@@ -22,6 +22,9 @@ import="model.Garage"%> <%@page import="model.Seat"%>
           <td id="td1" style="width: 200px">Công ty: ${xe.fullname}</td>
           <td id="td2">Mô tả: ${xe.description}</td>
         </tr>
+         <tr>
+          <td id="td1" style="width: 200px">Biển số xe: ${tr.trip_board}</td>
+        </tr>
         <tr>
           <td id="td1">Điểm đón: ${tr.departure}</td>
           <td id="td2">Điểm trả: ${tr.destination}</td>
@@ -33,13 +36,13 @@ import="model.Garage"%> <%@page import="model.Seat"%>
         </tr>
 
         <tr>
-          <td id="td1">Giá vé: ${tr.price}</td>
+          <td id="td1">Giá vé: ${tr.price}.000</td>
           <td id="td2"></td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td id="td1" width="150px">Số lượng chỗ ngồi:</td>
           <td id="td2"></td>
-        </tr>
+        </tr> -->
         <tr>
           <td id="td1">Mã ghế: ${seat.number_chair}</td>
           <td id="td2"></td>

@@ -394,7 +394,7 @@
 							
 							<c:forEach items="${ list_trip }" var="trip" varStatus="loop">
 								<% Trip tr = (Trip) pageContext.getAttribute("trip"); %>  
-								<form action="${pageContext.request.contextPath}/timghe" method="POST" style="margin-bottom: 32px;" id ="${ trip.id }">
+								<form action="${pageContext.request.contextPath}/dat_ve" method="POST" style="margin-bottom: 32px;" id ="${ trip.id }">
 									<div class="tab-pane fade show active" id="all${ trip.id }" role="tabpanel"
 										aria-labelledby="pills-home-tab${ trip.id }"
 										>
