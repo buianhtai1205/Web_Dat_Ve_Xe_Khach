@@ -49,9 +49,11 @@ public class TripManagementServlet extends HttpServlet {
 		String userManager = (String) session.getAttribute("userManager");
 		try {
 			list = tripDAO.listTrips(conn, userManager);
+			System.out.println("7777777777777");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			System.out.println("7777777777777");
 		}
 		session.setAttribute("listTrips", list);
 		RequestDispatcher dispatcher //

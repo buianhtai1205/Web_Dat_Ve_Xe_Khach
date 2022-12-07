@@ -51,7 +51,7 @@
 						<th scope="col">Giá</th>
 						<th scope="col">Loại xe</th>
 						<th scope="col">Biển số</th>
-						<th scope="col">Garage id</th>
+						<!-- <th scope="col">Garage id</th> -->
 						<th>Cập nhật</th>
 						<th>Xóa</th>
 					</tr>
@@ -59,19 +59,19 @@
 				<tbody>
 					<c:forEach var="item" items="${ listTrips }" >
 						<tr>
-							<td>${ item.idTrip }</td>
+							<td>${ item.id }</td>
 							<td>${ item.departure }</td>
 							<td>${ item.destination }</td>
 							<td>${ item.departure_time }</td>
 							<td>${ item.price }</td>
 							<td>${ item.num_seat }</td>
 							<td>${ item.trip_board }</td>
-							<td>${ item.garage_id }</td>
+							<%-- <td>${ item.garage_id }</td> --%>
 							<td><a class="btn btn-primary"
-								href="editTrip?idTrip=${ item.idTrip }">Cập
+								href="editTrip?idTrip=${ item.id }">Cập
 									nhập</a></td>
 							<td><a class="btn btn-danger" href="#"
-								onclick="testConfirmDialog('${ item.idTrip }');">Xóa</a>
+								onclick="testConfirmDialog('${ item.id }');">Xóa</a>
 							</td>
 						</tr>
 					</c:forEach> 
