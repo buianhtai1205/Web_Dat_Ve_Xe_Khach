@@ -1,16 +1,8 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="connect_db.SQLServerConnUtils_SQLJDBC"%>
-<%@page import="DAO.TripDAO"%>
-<%@page import="utils.*"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="model.Trip"%>
-<%@page import="model.Seat"%>
-<%@page import="java.util.List"%>
-<%@page import="java.text.NumberFormat"%>
-<%@page import="java.util.Locale"%>
-<%@page import="utils.Router"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ page import="model.Schedule" %>
+<%@ page import="model.Trip" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,133 +11,110 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>List Coach</title>
-
+<title>Đặt vé xe</title>
 <!-- font awesome -->
-
-<link rel="stylesheet" type="text/css" href="../assets/user/css/index.css">
-<link rel="stylesheet" type="text/css"
-	href="../assets/user/css/xe16.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+	integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="assets/user/css/index.css">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 	integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
 	crossorigin="anonymous">
-
 <!-- owlCousel -->
-<link rel="stylesheet" href="../assets/lib/owl.carousel.min.css">
-<link rel="stylesheet" href="../assets/lib/owl.theme.default.min.css">
+<link rel="stylesheet" href="assets/lib/owl.carousel.min.css">
+<link rel="stylesheet" href="assets/lib/owl.theme.default.min.css">
 
 <!-- slick -->
 
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+<!-- animated -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-<link rel="stylesheet" href="../assets/user/css/listCoachSearch.css">
-<link rel="stylesheet" type="text/css" href="/assets/user/css/timve.css">
-<link rel="stylesheet" type="text/css" href="/assets/user/css/util.css">
-
-<link rel="stylesheet" type="text/css"
-	href="/assets/user/css/sweet-alert.css">
-
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript"
-	src="/Web_Dat_Ve_Xe_Khach/js/sweet-alert.min.js"></script>
-<script type="text/javascript"
-	src="/Web_Dat_Ve_Xe_Khach/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript"
-	src="/Web_Dat_Ve_Xe_Khach/js/jquery-1.11.1.js"></script>
-<script type="text/javascript" src="/Web_Dat_Ve_Xe_Khach/js/util.js"></script>
-<script type="text/javascript" src="/Web_Dat_Ve_Xe_Khach/js/xe.js"></script>
-<style type="text/css">
-.invalid ,.invalid2{
+<link rel="stylesheet" href="assets/user/css/ve16.css">
+<link rel="stylesheet" href="assets/user/css/timve.css">
+<link rel="stylesheet" href="assets/user/css/datvexe.css">
+<link rel="stylesheet" href="assets/user/css/seatSelect.css">
+<link rel="stylesheet" href="assets/user/css/listCoachSearch.css">
+<style>
+.invalid {
 	border-color: red !important;
 }
 
-#error1,#error2,#error3,#errorPhone{
+#error {
 	color: red
 }
 
+#error2 {
+	color: red
+}
 </style>
 
 
-<script type="text/javascript">
-function chonXe(scrollid,time, chuyenDiOrVe, chuyen, id) {
-/* 		console.log(id); */
-		console.log(chuyen)
-}
-
-  
-function choose1(id) {
-	const div1 = document.getElementsByClassName('ghe')[0];
-	var idGhe = div1.getAttribute('id');
-	
-	const input = document.getElementById('inputGheDangChon');
-
-	
-	input.setAttribute('value',id);
-	console.log(input.getAttribute('value'))
-
-}
-</script>
 </head>
 
 <body>
+	<!-- Header -->
+	<%@ include file="/layout/user/header.jsp"%>
 
-	<%@ include file="../layout/user/header.jsp"%>
-	<!-- body -->
-	<section class="mid" style="padding: 40px 135px;">
-		<div class="container-fluid">
+	<!-- Content -->
+	<section class="mid">
+		<div class="container">
 			<div class="row">
 				<div class="col-4">
 					<div
-						class="boloc animate__animated animate__fadeInLeft animate__delay-1s"
-						style="font-size: 16px;">
-						<p>Bộ lọc tìm kiếm</p>
+						class="boloc animate__animated animate__fadeInLeft animate__delay-1s">
+						<p>Bộ lọc tìm kím</p>
 						<p class="clear">Xóa lọc</p>
 
 					</div>
 
 					<div
-						class="mid__left animate__animated animate__fadeInLeft animate__delay-1s"
-						style="width: fix-content; font-size: 16px;">
+						class="mid__left animate__animated animate__fadeInLeft animate__delay-1s">
 
-						<div class="giodi" style="font-size: 16px;">
+						<div class="giodi">
 							<div class="giodi_test">
 								<p>Sáng sớm</p>
 								<p>00:00-06:00</p>
 							</div>
 							<div class="giodi_test">
-								<p>Sáng sớm</p>
-								<p>00:00-06:00</p>
+								<p>Buổi sáng</p>
+                                <p>06:01-12:00</p>
 							</div>
 							<div class="giodi_test">
-								<p>Sáng sớm</p>
-								<p>00:00-06:00</p>
+								<p>Buổi chiều</p>
+                                <p>12:01-18:00</p>
 							</div>
 							<div class="giodi_test">
-								<p>Sáng sớm</p>
-								<p>00:00-06:00</p>
+								<p>Buổi tối</p>
+                                <p>18:01-23:59</p>
 							</div>
 						</div>
 
 
-						<div class="giave" style="font-size: 16px;">
+						<div class="giave">
 							<form>
 								<div class="form-group">
 									<label for="formControlRange">Giá vé</label> <input
 										type="range" class="form-control-range" id="formControlRange">
 									<div class="info">
 										<p>0</p>
-										<p>20000</p>
+										<p>200000</p>
 									</div>
 								</div>
 							</form>
 						</div>
 
-						<div class="vitrighe" style="font-size: 16px;">
+						<div class="vitrighe">
 							<p>Chọn Vị Trí Ghế</p>
 							<div class="hangghe">
 								<span class="chair">Hàng ghế Trống</span>
@@ -398,24 +367,8 @@ function choose1(id) {
 						</div>
 					</div>
 				</div>
-
 				<div class="col-8">
-					<div
-						class="mid__right animate__animated animate__fadeInRight animate__delay-1s">
-						<!-- <h2>Đặt mua vé xe đi Đắk Lắk từ Sài Gòn chất lượng cao và giá vé ưu đãi nhất: 296 chuyến</h2>
-                        <div class="flash__sale">
-                            <img class="animate__animated animate__fadeInRight animate__delay-1s"
-                                src="assets/user/images/img2.jpg" alt="">
-                            <img class="img1 animate__animated animate__fadeInRight animate__delay-2s"
-                                src="assets/user/images/img5.jpg" alt="">
-                            <img class="img1 animate__animated animate__fadeInRight animate__delay-3s"
-                                src="assets/user/images/img1.jpg" alt="">
-                            <img class="img1 animate__animated animate__fadeInRight animate__delay-3.5s"
-                                src="assets/user/images/img4.jpg" alt="">
-                        </div> -->
-
-
-
+					<div class="mid__right animate__animated animate__fadeInRight animate__delay-1s">
 						<div class="project__content">
 							<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"
 								style="font-size: 16px;">
@@ -438,544 +391,346 @@ function choose1(id) {
 									aria-selected="false">Giá cao nhất</a></li>
 							</ul>
 
-							<div class="tab-content" id="pills-tabContent">
-								<form action="${pageContext.request.contextPath}/dat_ve"
-									method="POST">
-									<div class="tab-pane fade show active" id="all" role="tabpanel"
-										aria-labelledby="pills-home-tab"
-										aria-labelledby="pills-home-tab">
+							
+							<c:forEach items="${ list_trip }" var="trip" varStatus="loop">
+								<% Trip tr = (Trip) pageContext.getAttribute("trip"); %>  
+								<form action="${pageContext.request.contextPath}/timghe" method="POST" style="margin-bottom: 32px;" id ="${ trip.id }">
+									<div class="tab-pane fade show active" id="all${ trip.id }" role="tabpanel"
+										aria-labelledby="pills-home-tab${ trip.id }"
+										>
 										<div class="vexe">
 											<div class="card__top" style="font-size: small">
 												<div class="card__right">
-													<img src="../assets/user/images/xe2.jpg" alt="">
+													<img src="assets/user/images/xe2.jpg" alt="">
 
 													<div class="div">
 														<div class="div__content" style="font-size: 16px">
-															<h3 style="font-size: 20px">Trang Hòa</h3>
+															<h3 style="font-size: 20px">${ trip.garage.fullname }</h3>
 															<!-- 	<i class="fa fa-star">3.9</i> -->
-															<p class="content__1">300.000đ</p>
+															<p class="content__1">${ trip.price } 000 VNĐ</p>
 														</div>
-														<p>Giường nằm 44 chỗ</p>
-														<i class="fa fa-map-pin">6h30P</i><br> <i
-															class="fa fa-map-marker-alt">18h30P</i>
+														<p>Giường nằm ${ trip.num_seat } chỗ</p>
+														<i class="fa fa-map-pin">18h00P</i><br> <i
+															class="fa fa-map-marker-alt"></i>
 													</div>
 
 												</div>
 												<div class="collasp">
 													<div class="card__link">
-														<a data-toggle="collapse" href="#collapseExample"
+														<a data-toggle="collapse" href="#collapseExample${ trip.id }"
 															role="button" aria-expanded="false"
-															aria-controls="collapseExample"> Thông tin chi tiết <i
+															aria-controls="collapseExample${ trip.id }"> Thông tin chi tiết <i
 															class="fa fa-angle-down"></i>
 														</a>
 													</div>
 													<div class="button">
 														<button data-toggle="collapse"
-															onclick="chonXe('#scroll1<%=1%>',800,'chuyendi',3,<%=3%>)"
-															data-target="#collapseChonChuyen" aria-expanded="false"
-															aria-controls="collapseChonChuyen" name="idChuyenXe"
-															value="3" type="button">Chọn chuyến</button>
+															onclick="chonXe('#scroll1<%=1%>',800,'chuyendi','${ trip.id }','${ trip.id }')" aria-expanded="false"
+															aria-controls="collapseChonChuyen${ trip.id }" name="idChuyenXe"
+															value="${ trip.id }" type="button"  data-target="#collapseChonChuyen${ trip.id }">Chọn chuyến</button>
 														<input class="form-check-input" type="hidden"
-															value="<%session.setAttribute("idChuyen", "3");%>"
-															name="inputIdChuyenXe" id="inputIdChuyenXe">
-														<input class="form-check-input" type="hidden"
-															value="3"
-															name="inputIdChuyenXe" id="inputIdChuyenXe">
+															value="${ trip.id }"
+															name="inputIdChuyenXe" id="inputIdChuyenXe"> 
 													</div>
 												</div>
 
 											</div>
-											<!-- cardbottom1 -->
-											<div class="card__bottom">
-												<div class="collapse" id="collapseExample">
-													<div class="card card-body">
-														<div class="project">
-															<ul class="nav nav-pills mb-3" id="pills-tab"
-																role="tablist">
-																<li class="nav-item" role="presentation"><a
-																	class="nav-link active" id="pills-img-tab"
-																	data-toggle="pill" href="#img" role="tab"
-																	aria-controls="pills-img" aria-selected="true">Hình
-																		ảnh</a></li>
-																<li class="nav-item" role="presentation"><a
-																	class="nav-link" id="pills-cmt-tab" data-toggle="pill"
-																	href="#pills-cmt" role="tab" aria-controls="pills-cmt"
-																	aria-selected="false">Tiện ích </a></li>
-																<li class="nav-item" role="presentation"><a
-																	class="nav-link" id="pills-travel-tab"
-																	data-toggle="pill" href="#pills-travel" role="tab"
-																	aria-controls="pills-travel" aria-selected="false">Điểm
-																		Đón Trả</a></li>
-
-															</ul>
-
-															<div class="tab-content" id="pills-tabContent">
-																<div class="tab-pane fade show active" id="img"
-																	role="tabpanel" aria-labelledby="pills-img-tab"></div>
-
-																<div class="tab-pane fade" id="pills-cmt"
-																	role="tabpanel" aria-labelledby="pills-cmt-tab">
-																	<div class="row">
-																		<div class="col-12">
-																			<div class="card animate__animated animate__zoomIn">
-																				<div class="card-body cmt1">
-																					<p>
-																						<i class="fa fa-capsules">Gối Ôm</i> <span>Nhà
-																							xe có trang bị gối ôm cho hành khách</span>
-																					</p>
-
-																					<p>
-																						<i class="fa fa-hammer">búa thoát hiểm</i> <span>Dùng
-																							để phá kính ô tô thoát hiểm trong trường hợp khẩn
-																							cấp.</span>
-																					</p>
-
-																					<p>
-																						<i class="fa fa-wifi">wifi</i> <span>Nhà xe
-																							có trang bị wifi cho hành khách</span>
-																					</p>
-
-																					<p>
-																						<i class="fa fa-hamburger">Trạm nghỉ</i> <span>Nhà
-																							xe cung cấp chỗ dừng chân cho hành khách</span>
-																					</p>
-
-																					<p>
-																						<i class="fa fa-mug-hot">Nước</i> <span>Nhà
-																							xe có trang bị Nước cho hành khách</span>
-																					</p>
-
-																					<p>
-																						<i class="fa fa-bed">Chăn</i> <span>Nhà xe
-																							có trang bị chăn cho hành khách</span>
-																					</p>
-
-																					<p>
-																						<i class="fa fa-hand-holding">Nước rửa tay</i> <span>Nhà
-																							xe có trang bị nước rửa tay cho hành khách</span>
-																					</p>
-
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-
-																<div class="tab-pane fade" id="pills-travel"
-																	role="tabpanel" aria-labelledby="pills-travel-tab">
-																	<div class="row">
-																		<div class="col-12">
-																			<div class="card animate__animated animate__zoomIn">
-																				<div class="card-body">
-
-																					<p class="card-text">Lưu ý Các mốc thời gian
-																						đón, trả bên dưới là thời gian dự kiến. Lịch này
-																						có thể thay đổi tùy tình hình thưc tế.</p>
-																					<div class="card__2">
-																						<div class="card__right1">
-																							<h4>Điểm đón</h4>
-																							<ul>
-																								<li>06:30 • Bãi Xe Thành Thái</li>
-																								<li>06:40 • Lý Thường Kiệt</li>
-																								<li>06:50 • Cây xăng mũi tàu Trường Chinh</li>
-																								<li>07:00 • Tây Thạnh</li>
-																								<li>07:00 • Cầu Tham Lương</li>
-																								<li>07:02 • Ngã Tư An Sương</li>
-																								<li>07:03 • Cầu vượt Ngã Tư Ga</li>
-																								<li>07:05 • Lê Trọng Tấn</li>
-																								<li>07:15 • Bến xe Miền Đông</li>
-																								<li>07:20 • Ngã Tư Thủ Đức</li>
-																								<li>07:25 • Trường Đại học Sư phạm Kỹ thuật
-																									Tp. Hồ Chí Minh (cổng Võ Văn Ngân)</li>
-																								<li>07:30 • Cầu Ông Bố</li>
-																								<li>07:50 • Cổng Chào Bình Dương, Km số 1,
-																									QL13, Thuận AN, Bình Dương</li>
-																								<li>08:00 • Có trung chuyển Đại lộ Bình
-																									Dương</li>
-																							</ul>
-																						</div>
-
-																						<div class="card__left2">
-																							<h4>Điểm trả</h4>
-																							<p>17:50 • Văn Phòng Đắk Lắk</p>
-																						</div>
-
-																					</div>
-
-																				</div>
-																			</div>
-																		</div>
-
-
-																	</div>
-																</div>
-
-															</div>
-
-
-														</div>
-													</div>
-												</div>
-
-												<!-- 			//tab2 -->
-
-
-
-
 											</div>
-										</div>
 									</div>
-
-									<!-- div class="tab-pane fade" id="pills-profile" role="tabpanel"
-										aria-labelledby="pills-profile-tab"
-										aria-labelledby="pills-home-tab"
-										aria-labelledby="pills-home-tab">
-										<div class="card__top">
-											<div class="card__right">
-												<img src="assets/user/images/xe1.jpg" alt="">
-
-												<div class="div">
-													<div class="div__content">
-														<h3>Anh ba</h3>
-														<i class="fa fa-star">3.9</i>
-														<p class="content__1">300.000đ</p>
-													</div>
-													<p>Giường nằm 44 chỗ</p>
-													<i class="fa fa-map-pin">6h30P</i><br> <i
-														class="fa fa-map-marker-alt">18h30P</i>
-												</div>
-
-											</div>
-											<div class="collasp">
-												<div class="card__link">
-													<a data-toggle="collapse" href="#collapseExample"
-														role="button" aria-expanded="false"
-														aria-controls="collapseExample"> thông tin chi tiết <i
-														class="fa fa-angle-down"></i>
-													</a>
-												</div>
-												<div class="button">
-													<button data-toggle="collapse"
-														data-target=".multi-collapse" aria-expanded="false"
-														aria-controls="multiCollapseExample1">chọn chuyến</button>
-												</div>
-											</div>
-
-										</div>
-
-
-										<div class="card__bottom">
-											<div class="collapse" id="collapseExample">
-												<div class="card card-body">
-													<div class="project">
-														<ul class="nav nav-pills mb-3" id="pills-tab"
-															role="tablist">
-															<li class="nav-item" role="presentation"><a
-																class="nav-link active" id="pills-home-tab"
-																data-toggle="pill" href="#all" role="tab"
-																aria-controls="pills-img" aria-selected="true">Hình
-																	ảnh</a></li>
-															<li class="nav-item" role="presentation"><a
-																class="nav-link" id="pills-cmt-tab" data-toggle="pill"
-																href="#pills-cmt" role="tab" aria-controls="pills-cmt"
-																aria-selected="false">Tiện ích </a></li>
-															<li class="nav-item" role="presentation"><a
-																class="nav-link" id="pills-travel-tab"
-																data-toggle="pill" href="#pills-travel" role="tab"
-																aria-controls="pills-travel" aria-selected="false">Điểm
-																	Đón Trả</a></li>
-
-														</ul>
-
-														<div class="tab-content" id="pills-tabContent">
-															<div class="tab-pane fade show active" id="all"
-																role="tabpanel" aria-labelledby="pills-home-tab"></div>
-
-															<div class="tab-pane fade" id="pills-cmt" role="tabpanel"
-																aria-labelledby="pills-cmt-tab">
-																<div class="row">
-																	<div class="col-12">
-																		<div class="card animate__animated animate__zoomIn">
-																			<div class="card-body cmt1">
-																				<p>
-																					<i class="fa fa-capsules">Gối Ôm</i> <span>Nhà
-																						xe có trang bị gối ôm cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-hammer">búa thoát hiểm</i> <span>Dùng
-																						để phá kính ô tô thoát hiểm trong trường hợp khẩn
-																						cấp.</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-wifi">wifi</i> <span>Nhà xe
-																						có trang bị wifi cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-hamburger">Trạm nghỉ</i> <span>Nhà
-																						xe cung cấp chỗ dừng chân cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-mug-hot">Nước</i> <span>Nhà
-																						xe có trang bị Nước cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-bed">Chăn</i> <span>Nhà xe
-																						có trang bị chăn cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-hand-holding">Nước rửa tay</i> <span>Nhà
-																						xe có trang bị nước rửa tay cho hành khách</span>
-																				</p>
-
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-
-															<div class="tab-pane fade" id="pills-travel"
-																role="tabpanel" aria-labelledby="pills-travel-tab">
-																<div class="row">
-																	<div class="col-12">
-																		<div class="card animate__animated animate__zoomIn">
-																			<div class="card-body">
-
-																				<p class="card-text">Lưu ý Các mốc thời gian
-																					đón, trả bên dưới là thời gian dự kiến. Lịch này có
-																					thể thay đổi tùy tình hình thưc tế.</p>
-																				<div class="card__2">
-																					<div class="card__right1">
-																						<h4>Điểm đón</h4>
-																						<ul>
-																							<li>06:30 • Bãi Xe Thành Thái</li>
-																							<li>06:40 • Lý Thường Kiệt</li>
-																							<li>06:50 • Cây xăng mũi tàu Trường Chinh</li>
-																							<li>07:00 • Tây Thạnh</li>
-																							<li>07:00 • Cầu Tham Lương</li>
-																							<li>07:02 • Ngã Tư An Sương</li>
-																							<li>07:03 • Cầu vượt Ngã Tư Ga</li>
-																							<li>07:05 • Lê Trọng Tấn</li>
-																							<li>07:15 • Bến xe Miền Đông</li>
-																							<li>07:20 • Ngã Tư Thủ Đức</li>
-																							<li>07:25 • Trường Đại học Sư phạm Kỹ thuật
-																								Tp. Hồ Chí Minh (cổng Võ Văn Ngân)</li>
-																							<li>07:30 • Cầu Ông Bố</li>
-																							<li>07:50 • Cổng Chào Bình Dương, Km số 1,
-																								QL13, Thuận AN, Bình Dương</li>
-																							<li>08:00 • Có trung chuyển Đại lộ Bình
-																								Dương</li>
-																						</ul>
-																					</div>
-
-																					<div class="card__left2">
-																						<h4>Điểm trả</h4>
-																						<p>17:50 • Văn Phòng Đắk Lắk</p>
-																					</div>
-
-																				</div>
-
-																			</div>
-																		</div>
-																	</div>
-
-
-																</div>
-															</div>
-
-														</div>
-
-
-													</div>
-												</div>
-											</div> -->
-
-									<!-- cardbottom2 -->
+									
+									<!-- cardbottom-chon chuyen -->
 									<div class="card__bottom">
-										<div class="collapse" id="collapseChonChuyen">
+										<div class="collapse" id="collapseChonChuyen${ trip.id }">
 											<div class="card card-body">
 												<div class="project">
-													<ul class="nav nav-pills mb-3 nav-tabs" id="pills-tab2"
+													<ul class="nav nav-pills mb-3 nav-tabs" id="pills-tab${ trip.id }"
 														role="tablist">
 
 														<li class="nav-item " role="presentation"><a
-															class="nav-link active nav-link_1" id="pills-img-tab2"
-															data-toggle="pill" href="#img2" role="tab"
+															class="nav-link active nav-link_1" id="pills-img-tab${ trip.id }"
+															data-toggle="pill" href="#img${ trip.id }" role="tab"
 															aria-controls="pills-img" aria-selected="true"><input
 																class="form-check-input" type="hidden"
-																name="inlineRadioOptions" id="inlineRadio1"
-																value="option1" checked> <label
-																class="form-check-label line-connect" for="inlineRadio1">1.Chỗ
+																name="inlineRadioOptions" id="inlineRadio${ trip.id }"
+																value="option${ trip.id }" checked> <label
+																class="form-check-label line-connect" for="inlineRadio${ trip.id }">1.Chỗ
 																	mong muốn -></label></a></li>
 
 														<li class="nav-item" role="presentation"><a
-															class="nav-link nav-link_2" id="pills-cmt-tab2"
-															data-toggle="pill" href="#pills-cmt2" role="tab"
+															class="nav-link nav-link_${ trip.id }" id="pills-cmt-tab${ trip.id }"
+															data-toggle="pill" href="#pills-cmt${ trip.id }" role="tab"
 															aria-controls="pills-cmt" aria-selected="false"><input
 																class="form-check-input" type="hidden"
-																name="inlineRadioOptions" id="inlineRadio2"
-																value="option2"> <label class="form-check-label"
-																for="inlineRadio2">2.Điểm đón trả -></label> </a></li>
+																name="inlineRadioOptions" id="inlineRadio${ trip.id }"
+																value="option${ trip.id }"> <label class="form-check-label"
+																for="inlineRadio${ trip.id }">2.Điểm đón trả -></label> </a></li>
 														<li class="nav-item " role="presentation"><a
-															class="nav-link nav-link_3" id="pills-travel-tab3"
-															data-toggle="pill" href="#pills-travel3" role="tab"
+															class="nav-link nav-link_${ trip.id }" id="pills-travel-tab${ trip.id }"
+															data-toggle="pill" href="#pills-travel${ trip.id }" role="tab"
 															aria-controls="pills-travel" aria-selected="false"><input
 																class="form-check-input" type="hidden"
-																name="inlineRadioOptions" id="inlineRadio3"
-																value="option3"> <label class="form-check-label"
-																for="inlineRadio3">3.Nhập thông tin </label></a></li>
+																name="inlineRadioOptions" id="inlineRadio${ trip.id }"
+																value="option${ trip.id }"> <label class="form-check-label"
+																for="inlineRadio${ trip.id }">3.Nhập thông tin </label></a></li>
 
 													</ul>
 
 													<div class="tab-content" id="pills-tabContent">
-														<div class="tab-pane fade show active" id="img2"
-															role="tabpanel" aria-labelledby="pills-img-tab2">
-															<div>
-																<img id="img-16" style="float: left; clear: right;"
-																	alt="Chu Thich" src="../assets/user/images/ghes.png">
-																<div id="xe16cho" style="position: relative;">
-
-																	<%
-																	//Trip chuyen = null;
-																	Connection con = SQLServerConnUtils_SQLJDBC.getSQLServerConnection_SQLJDBC();
-																	//List<Seat> danhSachghe = (List<Seat>)session.getAttribute("listSeatOfTrip"); 
-																	List<Seat> list = null;
-																	List<Integer> listStatus = new ArrayList<>();
-																	String errorString = null;
-																	TripDAO tr = new TripDAO();
-																	String idChuyen = (String) session.getAttribute("idChuyen");
-																	Object[] arr = null;
-																	try {
-																		list = tr.getAllGheOnTrip(con, Integer.parseInt(idChuyen));
-
-																		for (int i = 0; i <= 15; i++) {
-																			listStatus.add(Integer.parseInt(list.get(i).getStatus()));
-																		}
-																		arr = listStatus.toArray();
-																		System.out.println("arr" + arr);
-
-																	} catch (Exception e) {
-																		e.printStackTrace();
-																		errorString = e.getMessage();
-
-																	}
-																	%>
-
-																	<input type="hidden" value="<%=idChuyen%>"
-																		id="idChuyen" /> <img alt="dauxe"
-																		src="../assets/user/images/p.png" width="260px"
-																		height="150px">
-
-																	<%
-																	for (int i = 0; i <= 15; i++) {
-																		int hang = 0;
-																		int cot = 0;
-
-																		switch (i) {
-																			case 0 :
-																			case 1 :
-																		hang = 0;
-																		break;
-																			case 2 :
-																			case 3 :
-																			case 4 :
-																		hang = 1;
-																		break;
-																			case 5 :
-																			case 6 :
-																			case 7 :
-																		hang = 2;
-																		break;
-																			case 8 :
-																			case 9 :
-																			case 10 :
-																		hang = 3;
-																		break;
-																			case 11 :
-																			case 12 :
-																			case 13 :
-																			case 14 :
-																			case 15 :
-																		hang = 4;
-																		break;
-																			default :
-																		break;
-																		}
-																		switch (i) {
-																			case 2 :
-																			case 5 :
-																			case 8 :
-																			case 11 :
-
-																		cot = 0;
-																		break;
-																			case 0 :
-																			case 3 :
-																			case 6 :
-																			case 9 :
-																			case 12 :
-																			case 15 :
-																		cot = 1;
-																		break;
-																			case 1 :
-																			case 4 :
-																			case 7 :
-																			case 10 :
-																			case 13 :
-																		cot = 2;
-																		break;
-																			default :
-																		cot = 3;
-																		break;
-																		}
-
-																		if (Integer.parseInt(arr[i].toString()) == 1) {
-																	%>
-																	<img alt="ghe<%=i%>"
-																		src="../assets/user/images/ghe3.png" id="<%=i%>"
-																		class="ghe hang<%=hang%> cot<%=cot%>" style="margin: 3px;position:initial !important;"><%=i %></img>
-																		
-																	<%
-																	} else {
-																	%>
-
-
-																	<img alt="ghe<%=i%>"
-																		src="../assets/user/images/ghe1.png" id="<%=i%>"
-																		class="ghe chuadat hang<%=hang%> cot<%=cot%> "
-																		onclick="choose1(<%=i%>)"
-																		name="<%=i%> inputGheChuaDat" style="margin: 3px;position:initial !important;">
-																	
-																		<input class="form-check-input inputGheDangChon"
-																		type="checkbox" value="2" name="gheDangChon"
-																		id="inputGheDangChon" onclick="choose1(<%=i%>)"> 
-																		<%=i %>
-																		</img>
-
-
-																	<%
-																	}
-																	/* else */ {
-																	%>
-
-
-																	<%
-																	}
-
-																	}
-																	%>
-																	<!-- <input class="form-check-input inputGheDangChon"
-																		type="text" value="1" name="gheDangChon"
-																		id="inputGheDangChon"> -->
-																</div>
-															</div>
+														<div class="tab-pane fade show active" id="img${ trip.id }"
+															role="tabpanel" aria-labelledby="pills-img-tab${ trip.id }">
+															
+															<div class="SeatSelectionOnline__SeatSelection-sc-167eirc-0${ trip.id } hqRXwu${ trip.id }">
+                                                            	<div class="seat-groups${ trip.id }">
+                                                                	<div class="note">Chú thích</div>
+                                                                	<div class="seat-info">
+                                                                        <div
+                                                                          class="SeatThumbnail__SeatContainer-sc-1ooosi9-0 oWlko seat-thumbnail"
+                                                                          color="#b8b8b8"
+                                                                        >
+                                                                          <svg
+                                                                            width="32"
+                                                                            height="40"
+                                                                            viewBox="0 0 28 40"
+                                                                            fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                          >
+                                                                            <rect
+                                                                              x="2.75"
+                                                                              y="2.75"
+                                                                              width="22.5"
+                                                                              height="34.5"
+                                                                              rx="2.25"
+                                                                              fill="#FFF"
+                                                                              stroke="#B8B8B8"
+                                                                              stroke-width="1.5"
+                                                                              stroke-linejoin="round"
+                                                                            ></rect>
+                                                                            <rect
+                                                                              x="5.75"
+                                                                              y="27.75"
+                                                                              width="16.5"
+                                                                              height="6.5"
+                                                                              rx="2.25"
+                                                                              fill="#FFF"
+                                                                              stroke="#B8B8B8"
+                                                                              stroke-width="1.5"
+                                                                              stroke-linejoin="round"
+                                                                            ></rect>
+                                                                            <path
+                                                                              class="icon-selected"
+                                                                              d="M14 8.333A6.67 6.67 0 0 0 7.333 15 6.67 6.67 0 0 0 14 21.667 6.67 6.67 0 0 0 20.667 15 6.669 6.669 0 0 0 14 8.333zm-1.333 10L9.334 15l.94-.94 2.393 2.387 5.06-5.06.94.946-6 6z"
+                                                                              fill="transparent"
+                                                                            ></path>
+                                                                            <path
+                                                                              class="icon-disabled"
+                                                                              d="M18.96 11.46l-1.42-1.42L14 13.59l-3.54-3.55-1.42 1.42L12.59 15l-3.55 3.54 1.42 1.42L14 16.41l3.54 3.55 1.42-1.42L15.41 15l3.55-3.54z"
+                                                                              fill="transparent"
+                                                                            ></path>
+                                                                          </svg>
+                                                                        </div>
+                                                                        <span class="seat-name">Còn trống</span>
+                                                                      </div>
+                                                                      <div class="seat-info">
+                                                                        <div
+                                                                          class="SeatThumbnail__SeatContainer-sc-1ooosi9-0${ trip.id } daMVvn seat-thumbnail"
+                                                                          disabled=""
+                                                                        >
+                                                                          <svg
+                                                                            width="32"
+                                                                            height="40"
+                                                                            viewBox="0 0 28 40"
+                                                                            fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                          >
+                                                                            <rect
+                                                                              x="2.75"
+                                                                              y="2.75"
+                                                                              width="22.5"
+                                                                              height="34.5"
+                                                                              rx="2.25"
+                                                                              fill="#FFF"
+                                                                              stroke="#B8B8B8"
+                                                                              stroke-width="1.5"
+                                                                              stroke-linejoin="round"
+                                                                            ></rect>
+                                                                            <rect
+                                                                              x="5.75"
+                                                                              y="27.75"
+                                                                              width="16.5"
+                                                                              height="6.5"
+                                                                              rx="2.25"
+                                                                              fill="#FFF"
+                                                                              stroke="#B8B8B8"
+                                                                              stroke-width="1.5"
+                                                                              stroke-linejoin="round"
+                                                                            ></rect>
+                                                                            <path
+                                                                              class="icon-selected"
+                                                                              d="M14 8.333A6.67 6.67 0 0 0 7.333 15 6.67 6.67 0 0 0 14 21.667 6.67 6.67 0 0 0 20.667 15 6.669 6.669 0 0 0 14 8.333zm-1.333 10L9.334 15l.94-.94 2.393 2.387 5.06-5.06.94.946-6 6z"
+                                                                              fill="transparent"
+                                                                            ></path>
+                                                                            <path
+                                                                              class="icon-disabled"
+                                                                              d="M18.96 11.46l-1.42-1.42L14 13.59l-3.54-3.55-1.42 1.42L12.59 15l-3.55 3.54 1.42 1.42L14 16.41l3.54 3.55 1.42-1.42L15.41 15l3.55-3.54z"
+                                                                              fill="transparent"
+                                                                            ></path>
+                                                                          </svg>
+                                                                        </div>
+                                                                        <span class="seat-name">Ghế đã bán</span>
+                                                                      </div>
+                                                                      <div class="seat-info">
+                                                                        <div
+                                                                          class="SeatThumbnail__SeatContainer-sc-1ooosi9-0${ trip.id } dLgsTe seat-thumbnail"
+                                                                        >
+                                                                          <svg
+                                                                            width="32"
+                                                                            height="40"
+                                                                            viewBox="0 0 28 40"
+                                                                            fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                          >
+                                                                            <rect
+                                                                              x="2.75"
+                                                                              y="2.75"
+                                                                              width="22.5"
+                                                                              height="34.5"
+                                                                              rx="2.25"
+                                                                              fill="#FFF"
+                                                                              stroke="#B8B8B8"
+                                                                              stroke-width="1.5"
+                                                                              stroke-linejoin="round"
+                                                                            ></rect>
+                                                                            <rect
+                                                                              x="5.75"
+                                                                              y="27.75"
+                                                                              width="16.5"
+                                                                              height="6.5"
+                                                                              rx="2.25"
+                                                                              fill="#FFF"
+                                                                              stroke="#B8B8B8"
+                                                                              stroke-width="1.5"
+                                                                              stroke-linejoin="round"
+                                                                            ></rect>
+                                                                            <path
+                                                                              class="icon-selected"
+                                                                              d="M14 8.333A6.67 6.67 0 0 0 7.333 15 6.67 6.67 0 0 0 14 21.667 6.67 6.67 0 0 0 20.667 15 6.669 6.669 0 0 0 14 8.333zm-1.333 10L9.334 15l.94-.94 2.393 2.387 5.06-5.06.94.946-6 6z"
+                                                                              fill="transparent"
+                                                                            ></path>
+                                                                            <path
+                                                                              class="icon-disabled"
+                                                                              d="M18.96 11.46l-1.42-1.42L14 13.59l-3.54-3.55-1.42 1.42L12.59 15l-3.55 3.54 1.42 1.42L14 16.41l3.54 3.55 1.42-1.42L15.41 15l3.55-3.54z"
+                                                                              fill="transparent"
+                                                                            ></path>
+                                                                          </svg>
+                                                                        </div>
+                                                                        <span class="seat-name">Đang chọn</span>
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="SeatTemplate-sc-1ilqewh-0${ trip.id } llUipg seat-template">
+                                                                      <div class="coach-container">
+                                                                        <div class="coach">
+                                                                          <table>
+                                                                            <tbody>
+                                                                              	<tr class="coach-row">
+                                                                                <td class="seat">
+                                                                                  <div
+                                                                                    class="Seat__SeatContainer-sc-6hr0u8-0 buebkj${ trip.id } seat-container"
+                                                                                    data-disabled="true"
+                                                                                    disabled=""
+                                                                                  >
+                                                                                    <svg
+                                                                                      width="24"
+                                                                                      height="24"
+                                                                                      viewBox="0 0 24 24"
+                                                                                      fill="none"
+                                                                                      xmlns="http://www.w3.org/2000/svg"
+                                                                                    >
+                                                                                      <path
+                                                                                        d="M12.305 24h-.61c-.035-.004-.07-.01-.105-.012a11.783 11.783 0 0 1-2.117-.261 12.027 12.027 0 0 1-6.958-4.394A11.933 11.933 0 0 1 .027 12.78L0 12.411v-.822c.005-.042.013-.084.014-.127a11.845 11.845 0 0 1 1.102-4.508 12.007 12.007 0 0 1 2.847-3.852A11.935 11.935 0 0 1 11.728.003c.947-.022 1.883.07 2.81.27 1.22.265 2.369.71 3.447 1.335a11.991 11.991 0 0 1 3.579 3.164 11.876 11.876 0 0 1 2.073 4.317c.178.712.292 1.434.334 2.168.008.146.02.292.029.439v.609c-.004.03-.011.06-.012.089a11.81 11.81 0 0 1-1.05 4.521 12.02 12.02 0 0 1-1.92 2.979 12.046 12.046 0 0 1-6.395 3.812c-.616.139-1.24.23-1.872.265-.149.008-.297.02-.446.03zm8.799-13.416c-.527-3.976-4.078-7.808-9.1-7.811-5.02-.003-8.583 3.823-9.11 7.809h.09c.64-.035 1.278-.092 1.912-.195.815-.131 1.614-.326 2.378-.639.625-.255 1.239-.54 1.855-.816.82-.368 1.673-.593 2.575-.62a7.123 7.123 0 0 1 1.947.187c.585.146 1.136.382 1.68.634.57.264 1.14.526 1.733.736 1.2.424 2.442.62 3.706.7.11.006.222.01.334.015zm-10.95 10.471v-.094c0-1.437 0-2.873-.002-4.31 0-.141-.011-.284-.035-.423a2.787 2.787 0 0 0-.775-1.495c-.564-.582-1.244-.896-2.067-.892-1.414.007-2.827.002-4.24.002h-.09a9.153 9.153 0 0 0 3.125 5.256 9.15 9.15 0 0 0 4.083 1.956zm3.689.001c1.738-.36 3.25-1.137 4.528-2.355 1.4-1.334 2.287-2.956 2.685-4.855l-.077-.003h-4.362c-.237 0-.47.038-.695.112-.667.22-1.188.635-1.588 1.206a2.673 2.673 0 0 0-.494 1.59c.008 1.4.003 2.801.003 4.202v.103zM12.05 14.22c1.215-.035 2.204-1.083 2.165-2.275-.039-1.223-1.095-2.215-2.29-2.166-1.211.05-2.2 1.108-2.15 2.302.051 1.191 1.108 2.186 2.275 2.139z"
+                                                                                        fill="#858585"
+                                                                                      ></path>
+                                                                                    </svg>
+                                                                                  </div>
+                                                                                </td>
+                                                                              	</tr>
+																				<%! int indexSeat = 1; %>  
+																				<c:forEach var="seat" items="${trip.list_seat}">
+																				<% if (indexSeat % 4 == 1) { %>
+																					<tr class="coach-row"></tr>
+																				<% } %>
+																					<td class="seat ${ seat.id } ${ seat.number_chair } ${ seat.status == 1 ? 'ArHJS' : 'K20TTDL'}" onclick="clickSeatFunction('${ seat.id }')">
+																						<div
+																						class="Seat__SeatContainer-sc-6hr0u8-0 iaQDbI seat-container ${ trip.id }"
+																						data-disabled="true"
+																						disabled=""
+																						color="#b8b8b8"
+																						>
+																						<svg
+																							width="32"
+																							height="40"
+																							viewBox="0 0 28 40"
+																							fill="none"
+																							xmlns="http://www.w3.org/2000/svg"
+																							style="width: 27px; height: 40px"
+																						>
+																							<rect
+																							x="2.75"
+																							y="2.75"
+																							width="22.5"
+																							height="34.5"
+																							rx="2.25"
+																							fill="#FFF"
+																							stroke="#B8B8B8"
+																							stroke-width="1.5"
+																							stroke-linejoin="round"
+																							></rect>
+																							<rect
+																							x="5.75"
+																							y="27.75"
+																							width="16.5"
+																							height="6.5"
+																							rx="2.25"
+																							fill="#FFF"
+																							stroke="#B8B8B8"
+																							stroke-width="1.5"
+																							stroke-linejoin="round"
+																							></rect>
+																							<path
+																							class="icon-selected"
+																							d="M14 8.333A6.67 6.67 0 0 0 7.333 15 6.67 6.67 0 0 0 14 21.667 6.67 6.67 0 0 0 20.667 15 6.669 6.669 0 0 0 14 8.333zm-1.333 10L9.334 15l.94-.94 2.393 2.387 5.06-5.06.94.946-6 6z"
+																							fill="transparent"
+																							></path>
+																							<path
+																							class="icon-disabled"
+																							d="M18.96 11.46l-1.42-1.42L14 13.59l-3.54-3.55-1.42 1.42L12.59 15l-3.55 3.54 1.42 1.42L14 16.41l3.54 3.55 1.42-1.42L15.41 15l3.55-3.54z"
+																							fill="transparent"
+																							></path>
+																						</svg>
+																						</div>
+																					</td>
+																				<% if (indexSeat % 4 == 2) { %>
+																					<td class="">
+																						<div
+																						  class="Seat__SeatContainer-sc-6hr0u8-0 buebkj seat-container"
+																						  data-disabled="true"
+																						  disabled=""
+																						></div>
+																					</td>
+																				<% } %>
+																				<% if (indexSeat % 4 == 0) { %>
+																					</tr>
+																				<% } %>
+																				<% indexSeat++; %>
+																				</c:forEach>
+                                                                            </tbody>
+                                                                          </table>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                            <div id="seat_result"></div>
+															
 															<div style="border-top: 1px solid;">
-
 																<div class="line"
 																	style="display: block; border-bottom: 10px;"></div>
 																<div
@@ -983,14 +738,14 @@ function choose1(id) {
 																	<p
 																		style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
 																		cộng: 0đ</p>
-																	<button type="button" class="btn btn-primary btnNext">Tiếp
+																	<button type="button" class="btn btn-primary btnNext"  onclick="btnNext('${ trip.id }',0)">Tiếp
 																		tục</button>
 																</div>
 															</div>
 														</div>
 
-														<div class="tab-pane fade" id="pills-cmt2" role="tabpanel"
-															aria-labelledby="pills-cmt-tab2">
+														<div class="tab-pane fade" id="pills-cmt${ trip.id }" role="tabpanel"
+															aria-labelledby="pills-cmt-tab${ trip.id }">
 															<div class="row">
 																<div class="row">
 																	<div class="col-12">
@@ -1003,43 +758,33 @@ function choose1(id) {
 																					<div class="card__right1">
 																						<h6>Điểm đón</h6>
 																						<ul>
-																							<li class="form-check" style="display: flex">
-																								<input class="form-check-input" type="radio"
-																								name="checkbox1" id="checkbox1" value="1"
-																								checked> <label class="form-check-label"
-																								for="exampleRadios1" style="font-size: 16px">
-																									06:30 • Bãi Xe Thành Thái </label>
-																							</li>
-																							<li class="form-check" style="display: flex">
-																								<input class="form-check-input" type="radio"
-																								name="checkbox1" id="checkbox1" value="2"
-																								checked> <label class="form-check-label"
-																								for="exampleRadios1" style="font-size: 16px">
-																									06:40 • Lý Thường Kiệt </label>
-																							</li>
-																							<li class="form-check" style="display: flex">
-																								<input class="form-check-input" type="radio"
-																								name="checkbox1" id="checkbox1" value="3"
-																								checked> <label class="form-check-label"
-																								for="exampleRadios1" style="font-size: 16px">
-																									06:50 • Cây xăng mũi tàu Trường Chinh</label>
-																							</li>
-																							<!-- <li>06:30 • Bãi Xe Thành Thái</li>
-																						<li>06:40 • Lý Thường Kiệt</li>
-																						<li>06:50 • Cây xăng mũi tàu Trường Chinh</li>
-																						<li>07:00 • Tây Thạnh</li>
-																						<li>07:00 • Cầu Tham Lương</li>
-																						<li>07:02 • Ngã Tư An Sương</li>
-																						<li>07:03 • Cầu vượt Ngã Tư Ga</li>
-																						<li>07:05 • Lê Trọng Tấn</li>
-																						<li>07:15 • Bến xe Miền Đông</li>
-																						<li>07:20 • Ngã Tư Thủ Đức</li>
-																						<li>07:25 • Trường Đại học Sư phạm Kỹ thuật
-																							Tp. Hồ Chí Minh (cổng Võ Văn Ngân)</li>
-																						<li>07:30 • Cầu Ông Bố</li>
-																						<li>07:50 • Cổng Chào Bình Dương, Km số 1,
-																							QL13, Thuận AN, Bình Dương</li>
-																						<li>08:00 • Có trung chuyển Đại lộ Bình Dương</li> -->
+																							<% if (tr.getDeparture() == tr.garage.getAddress()) { %>
+																								<c:forEach var="musty" items="${trip.list_musty}">
+																									<% Schedule mt = (Schedule) pageContext.getAttribute("musty"); %>
+																									<% if (mt.getStatus() == 1) { %>
+																										<li class="form-check" style="display: flex">
+																											<input class="form-check-input" type="radio"
+																											name="checkbox_${ trip.id }" id="checkbox_${ trip.id }" value="${ musty.id }"> 
+																											<label class="form-check-label" for="exampleRadios1" style="font-size: 16px">
+																												${ musty.musty } 
+																											</label>
+																										</li>
+																									<% } %>
+																								</c:forEach>
+																							<% } else { %>
+																								<c:forEach var="musty" items="${trip.list_musty}">
+																									<% Schedule mt = (Schedule) pageContext.getAttribute("musty"); %>
+																									<% if (mt.getStatus() == 0) { %>
+																										<li class="form-check" style="display: flex">
+																											<input class="form-check-input" type="radio"
+																											name="checkbox_${ trip.id }" id="checkbox_${ trip.id }" value="${ musty.id }"> 
+																											<label class="form-check-label" for="exampleRadios1" style="font-size: 16px">
+																												${ musty.musty } 
+																											</label>
+																										</li>
+																									<% } %>
+																								</c:forEach>
+																							<% } %>
 																						</ul>
 																					</div>
 
@@ -1047,27 +792,33 @@ function choose1(id) {
 																						<h6>Điểm trả</h6>
 
 																						<ul>
-																							<li class="form-check" style="display: flex">
-																								<input class="form-check-input" type="radio"
-																								name="checkbox4" id="checkbox4" value="4"
-																								checked> <label class="form-check-label"
-																								style="font-size: 16px" for="exampleRadios2">
-																									06:30 • Bãi Xe Thành Thái </label>
-																							</li>
-																							<li class="form-check" style="display: flex">
-																								<input class="form-check-input" type="radio"
-																								name="checkbox4" id="checkbox4" value="5"
-																								checked> <label class="form-check-label"
-																								for="exampleRadios2" style="font-size: 16px">
-																									06:40 • Lý Thường Kiệt </label>
-																							</li>
-																							<li class="form-check" style="display: flex">
-																								<input class="form-check-input" type="radio"
-																								name="checkbox4" id="checkbox4" value="6"
-																								checked> <label class="form-check-label"
-																								for="exampleRadios2" style="font-size: 16px">
-																									06:50 • Cây xăng mũi tàu Trường Chinh</label>
-																							</li>
+																							<% if (tr.getDeparture() == tr.garage.getAddress()) { %>
+																								<c:forEach var="musty" items="${trip.list_musty}">
+																									<% Schedule mt = (Schedule) pageContext.getAttribute("musty"); %>
+																									<% if (mt.getStatus() == 0) { %>
+																										<li class="form-check" style="display: flex">
+																											<input class="form-check-input" type="radio"
+																											name="checkbox${ trip.id }" id="checkbox${ trip.id }" value="${ musty.id }"> 
+																											<label class="form-check-label" for="exampleRadios1" style="font-size: 16px">
+																												${ musty.musty } 
+																											</label>
+																										</li>
+																									<% } %>
+																								</c:forEach>
+																							<% } else { %>
+																								<c:forEach var="musty" items="${trip.list_musty}">
+																									<% Schedule mt = (Schedule) pageContext.getAttribute("musty"); %>
+																									<% if (mt.getStatus() == 1) { %>
+																										<li class="form-check" style="display: flex">
+																											<input class="form-check-input" type="radio"
+																											name="checkbox${ trip.id }" id="checkbox${ trip.id }" value="${ musty.id }"> 
+																											<label class="form-check-label" for="exampleRadios1" style="font-size: 16px">
+																												${ musty.musty } 
+																											</label>
+																										</li>
+																									<% } %>
+																								</c:forEach>
+																							<% } %>
 																						</ul>
 																					</div>
 
@@ -1081,14 +832,14 @@ function choose1(id) {
 																			<div
 																				style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px;">
 																				<button type="button"
-																					class="btn btn-secondary btnPrevious">Quay
+																					class="btn btn-secondary btnPrevious" onclick="btnPrevious('${trip.id}',0)">Quay
 																					lại</button>
 																				<div style="display: flex;">
-																					<p
+																					<!-- <p
 																						style="margin-right: 16px; margin-bottom: 0; margin-top: 10px;">Tổng
-																						cộng: 0đ</p>
+																						cộng: 0đ</p> -->
 																					<button type="button"
-																						class="btn btn-primary btnNext" style="">Tiếp
+																						class="btn btn-primary btnNext" style="" onclick="btnNext('${ trip.id }',1)" >Tiếp
 																						tục</button>
 																				</div>
 																			</div>
@@ -1099,8 +850,8 @@ function choose1(id) {
 															</div>
 														</div>
 
-														<div class="tab-pane fade" id="pills-travel3"
-															role="tabpanel" aria-labelledby="pills-travel-tab3">
+														<div class="tab-pane fade" id="pills-travel${trip.id}"
+															role="tabpanel" aria-labelledby="pills-travel-tab${trip.id}">
 															<div class="row">
 																<div class="col-12">
 																	<div class="card animate__animated animate__zoomIn">
@@ -1111,28 +862,28 @@ function choose1(id) {
 																			<div>
 																				<div class="form-group ">
 																					<input type="text" class="form-control top"
-																						id="inputName" placeholder="First and Last name "
-																						name="nameUser" value="" required="required">
+																						id="inputName${trip.id}" placeholder="First and Last name "
+																						name="nameUser${trip.id}" value="" required="required">
 																					<div>
 																						<p id="error1"></p>
 																					</div>
 																				</div>
 
 																				<div class="form-group ">
-																					<input type="tel"
+																					<input type="text"
 																						class="form-control top inputPhone1"
-																						id="inputPhone" placeholder="Number phone "
-																						name="phoneUser" value="" required="required"  pattern="[0-9]{10}">
+																						id="inputPhone${trip.id}" placeholder="Number phone "
+																						name="phoneUser${trip.id}" value="" required="required">
 
-																					<p id="errorPhone"></p>
+																					<p id="error2"></p>
 
 																				</div>
 
 																				<div class="form-group ">
-																					<input type="email" class="form-control top"
-																						id="inputEmail"
+																					<input type="text" class="form-control top"
+																						id="inputEmail${trip.id}"
 																						placeholder="Email (abc@gmail.com)"
-																						name="emailUser" value="" required="required">
+																						name="emailUser${trip.id}" value="" required="required">
 																					<div>
 																						<p id="error3"></p>
 																					</div>
@@ -1147,14 +898,6 @@ function choose1(id) {
 																				</div>
 																				<p>Bằng việc nhấn nút Tiếp Tục, bạn đồng ý với
 																					Chính sách bảo mật thông tin và Quy chế</p>
-																				<!-- <div class="form-group form-check content">
-																				<input type="checkbox" class="form-check-input"
-																					id="exampleCheck1" name="rememberMe" value="Y">
-																				<label class="form-check-label" for="exampleCheck1">Remember</label>
-																				<a class="forgot" href="login"
-																					style="text-decoration: none;">Forgot password</a>
-																			</div>
-																			<button class="button3" type="submit">Login</button> -->
 																			</div>
 																		</div>
 																		<div style="border-top: 1px solid;">
@@ -1165,11 +908,11 @@ function choose1(id) {
 																				style="display: flex; align-items: center; justify-content: space-between;">
 																				<button type="button"
 																					class="btn btn-secondary btnPrevious"
-																					style="margin-top: 20px">Quay lại</button>
+																					style="margin-top: 20px" onclick="btnPrevious('${ trip.id }',1)">Quay lại</button>
 																				<div style="display: flex; margin-top: 10px;">
 																					<p
 																						style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
-																						cộng: 0đ</p>
+																						cộng: ${trip.price}0đ</p>
 																					<button type="submit" class="btn btn-primary">Xác
 																						nhận</button>
 																				</div>
@@ -1179,705 +922,185 @@ function choose1(id) {
 																	</div>
 																</div>
 															</div>
-
-
 														</div>
 													</div>
-
-												</div>
-
-
-											</div>
-										</div>
-								</form>
-
-							</div>
-
-							<!-- 				//tinh tien -->
-							<!-- 	<div class="collapse multi-collapse"
-												id="multiCollapseExample1">
-												<div class="card card-body">
-													<form>
-														<p>Tổng tiền thanh toán:</p>
-														<div class="form-group">
-															<input type="text" class="form-control" id="inputTotal"
-																placeholder="Tổng tiền">
-														</div>
-														<div class="form-group">
-															<label for="">Bạn muốn chọn chuyến nào ?</label> <select
-																class="form-control" id="selectPercent">
-																<option>--Chọn chuyến--</option>
-																<option value="Bãi Xe Thành Thái">06:30 •option
-																	Bãi Xe Thành Thái</option>
-																<option value="  Lý Thường Kiệt">06:40 • Lý
-																	Thường Kiệt</option>
-																<option value=" Cây xăng mũi tàu Trường Chinh">06:50
-																	• Cây xăng mũi tàu Trường Chinh</option>
-																<option value="Tây Thạnh">07:00 • Tây Thạnh</option>
-																<option value="Cầu Tham Lương">07:00 • Cầu Tham
-																	Lương</option>
-																<option value="Ngã Tư An Sương">07:02 • Ngã Tư
-																	An Sương</option>
-																<option value="Cầu vượt Ngã Tư Ga">07:03 • Cầu
-																	vượt Ngã Tư Ga</option>
-																<option value="Lê Trọng Tấn">07:05 • Lê Trọng
-																	Tấn</option>
-																<option value="Bến xe Miền Đông">07:15 • Bến xe
-																	Miền Đông</option>
-																<option value="Ngã Tư Thủ Đức">07:20 • Ngã Tư
-																	Thủ Đức</option>
-																<option
-																	value=" Trường Đại học Sư phạm Kỹ thuật
-                                                    Tp. Hồ Chí Minh (cổng Võ Văn
-                                                    Ngân)">07:25
-																	• Trường Đại học Sư phạm Kỹ thuật Tp. Hồ Chí Minh (cổng
-																	Võ Văn Ngân)</option>
-																<option value=" Cầu Ông Bố">07:30 • Cầu Ông Bố</option>
-																<option
-																	value="Cổng Chào Bình Dương, Km số 1,
-                                                    QL13, Thuận AN, Bình Dương">07:50
-																	• Cổng Chào Bình Dương, Km số 1, QL13, Thuận AN, Bình
-																	Dương</option>
-																<option value=" Đại lộ Bình Dương">08:00 • Có
-																	trung chuyển Đại lộ Bình Dương</option>
-															</select>
-														</div>
-														<div class="form-group">
-															<p>Số ghế của bạn</p>
-															<input type="number" class="form-control"
-																id="inputPeople" placeholder="Nhập số ghế của bạn">
-														</div>
-														<button type="button" class="btn btn-danger" id="btnCalc">Hoàn
-															Tất</button>
-														<p id="txtResult"></p>
-													</form>
-												</div>
-											</div> -->
-						</div>
-
-
-
-					</div>
-
-					<!-- <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-										aria-labelledby="pills-contact-tab"
-										aria-labelledby="pills-home-tab"
-										aria-labelledby="pills-home-tab">
-										<div class="card__top">
-											<div class="card__right">
-												<img src="assets/user/images/xe2.jpg" alt="">
-
-												<div class="div">
-													<div class="div__content">
-														<h3>Chú Tư</h3>
-														<i class="fa fa-star">3.9</i>
-														<p class="content__1">300.000đ</p>
-													</div>
-													<p>Giường nằm 44 chỗ</p>
-													<i class="fa fa-map-pin">6h30P</i><br> <i
-														class="fa fa-map-marker-alt">18h30P</i>
-												</div>
-
-											</div>
-											<div class="collasp">
-												<div class="card__link">
-													<a data-toggle="collapse" href="#collapseExample"
-														role="button" aria-expanded="false"
-														aria-controls="collapseExample"> thông tin chi tiết <i
-														class="fa fa-angle-down"></i>
-													</a>
-												</div>
-												<div class="button">
-													<button data-toggle="collapse"
-														data-target=".multi-collapse" aria-expanded="false"
-														aria-controls="multiCollapseExample1">chọn chuyến</button>
-												</div>
-											</div>
-
-										</div>
-
-
-										<div class="card__bottom">
-											<div class="collapse" id="collapseExample">
-												<div class="card card-body">
-													<div class="project">
-														<ul class="nav nav-pills mb-3" id="pills-tab"
-															role="tablist">
-															<li class="nav-item" role="presentation"><a
-																class="nav-link active" id="pills-home-tab"
-																data-toggle="pill" href="#all" role="tab"
-																aria-controls="pills-img" aria-selected="true">Hình
-																	ảnh</a></li>
-															<li class="nav-item" role="presentation"><a
-																class="nav-link" id="pills-cmt-tab" data-toggle="pill"
-																href="#pills-cmt" role="tab" aria-controls="pills-cmt"
-																aria-selected="false">Tiện ích </a></li>
-															<li class="nav-item" role="presentation"><a
-																class="nav-link" id="pills-travel-tab"
-																data-toggle="pill" href="#pills-travel" role="tab"
-																aria-controls="pills-travel" aria-selected="false">Điểm
-																	Đón Trả</a></li>
-
-														</ul>
-
-														<div class="tab-content" id="pills-tabContent">
-															<div class="tab-pane fade show active" id="all"
-																role="tabpanel" aria-labelledby="pills-home-tab"></div>
-
-															<div class="tab-pane fade" id="pills-cmt" role="tabpanel"
-																aria-labelledby="pills-cmt-tab">
-																<div class="row">
-																	<div class="col-12">
-																		<div class="card animate__animated animate__zoomIn">
-																			<div class="card-body cmt1">
-																				<p>
-																					<i class="fa fa-capsules">Gối Ôm</i> <span>Nhà
-																						xe có trang bị gối ôm cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-hammer">búa thoát hiểm</i> <span>Dùng
-																						để phá kính ô tô thoát hiểm trong trường hợp khẩn
-																						cấp.</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-wifi">wifi</i> <span>Nhà xe
-																						có trang bị wifi cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-hamburger">Trạm nghỉ</i> <span>Nhà
-																						xe cung cấp chỗ dừng chân cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-mug-hot">Nước</i> <span>Nhà
-																						xe có trang bị Nước cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-bed">Chăn</i> <span>Nhà xe
-																						có trang bị chăn cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-hand-holding">Nước rửa tay</i> <span>Nhà
-																						xe có trang bị nước rửa tay cho hành khách</span>
-																				</p>
-
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-
-															<div class="tab-pane fade" id="pills-travel"
-																role="tabpanel" aria-labelledby="pills-travel-tab">
-																<div class="row">
-																	<div class="col-12">
-																		<div class="card animate__animated animate__zoomIn">
-																			<div class="card-body">
-
-																				<p class="card-text">Lưu ý Các mốc thời gian
-																					đón, trả bên dưới là thời gian dự kiến. Lịch này có
-																					thể thay đổi tùy tình hình thưc tế.</p>
-																				<div class="card__2">
-																					<div class="card__right1">
-																						<h4>Điểm đón</h4>
-																						<ul>
-																							<li>06:30 • Bãi Xe Thành Thái</li>
-																							<li>06:40 • Lý Thường Kiệt</li>
-																							<li>06:50 • Cây xăng mũi tàu Trường Chinh</li>
-																							<li>07:00 • Tây Thạnh</li>
-																							<li>07:00 • Cầu Tham Lương</li>
-																							<li>07:02 • Ngã Tư An Sương</li>
-																							<li>07:03 • Cầu vượt Ngã Tư Ga</li>
-																							<li>07:05 • Lê Trọng Tấn</li>
-																							<li>07:15 • Bến xe Miền Đông</li>
-																							<li>07:20 • Ngã Tư Thủ Đức</li>
-																							<li>07:25 • Trường Đại học Sư phạm Kỹ thuật
-																								Tp. Hồ Chí Minh (cổng Võ Văn Ngân)</li>
-																							<li>07:30 • Cầu Ông Bố</li>
-																							<li>07:50 • Cổng Chào Bình Dương, Km số 1,
-																								QL13, Thuận AN, Bình Dương</li>
-																							<li>08:00 • Có trung chuyển Đại lộ Bình
-																								Dương</li>
-																						</ul>
-																					</div>
-
-																					<div class="card__left2">
-																						<h4>Điểm trả</h4>
-																						<p>17:50 • Văn Phòng Đắk Lắk</p>
-																					</div>
-
-																				</div>
-
-																			</div>
-																		</div>
-																	</div>
-
-
-																</div>
-															</div>
-
-														</div>
-
-
-													</div>
-												</div>
-											</div>
-
-											<div class="collapse multi-collapse"
-												id="multiCollapseExample1">
-												<div class="card card-body">
-													<form>
-														<p>Tổng tiền thanh toán:</p>
-														<div class="form-group">
-															<input type="text" class="form-control" id="inputTotal"
-																placeholder="Tổng tiền">
-														</div>
-														<div class="form-group">
-															<label for="">Bạn muốn chọn chuyến nào ?</label> <select
-																class="form-control" id="selectPercent">
-																<option>--Chọn chuyến--</option>
-																<option value="Bãi Xe Thành Thái">06:30 •option
-																	Bãi Xe Thành Thái</option>
-																<option value="  Lý Thường Kiệt">06:40 • Lý
-																	Thường Kiệt</option>
-																<option value=" Cây xăng mũi tàu Trường Chinh">06:50
-																	• Cây xăng mũi tàu Trường Chinh</option>
-																<option value="Tây Thạnh">07:00 • Tây Thạnh</option>
-																<option value="Cầu Tham Lương">07:00 • Cầu Tham
-																	Lương</option>
-																<option value="Ngã Tư An Sương">07:02 • Ngã Tư
-																	An Sương</option>
-																<option value="Cầu vượt Ngã Tư Ga">07:03 • Cầu
-																	vượt Ngã Tư Ga</option>
-																<option value="Lê Trọng Tấn">07:05 • Lê Trọng
-																	Tấn</option>
-																<option value="Bến xe Miền Đông">07:15 • Bến xe
-																	Miền Đông</option>
-																<option value="Ngã Tư Thủ Đức">07:20 • Ngã Tư
-																	Thủ Đức</option>
-																<option
-																	value=" Trường Đại học Sư phạm Kỹ thuật
-                                                    Tp. Hồ Chí Minh (cổng Võ Văn
-                                                    Ngân)">07:25
-																	• Trường Đại học Sư phạm Kỹ thuật Tp. Hồ Chí Minh (cổng
-																	Võ Văn Ngân)</option>
-																<option value=" Cầu Ông Bố">07:30 • Cầu Ông Bố</option>
-																<option
-																	value="Cổng Chào Bình Dương, Km số 1,
-                                                    QL13, Thuận AN, Bình Dương">07:50
-																	• Cổng Chào Bình Dương, Km số 1, QL13, Thuận AN, Bình
-																	Dương</option>
-																<option value=" Đại lộ Bình Dương">08:00 • Có
-																	trung chuyển Đại lộ Bình Dương</option>
-															</select>
-														</div>
-														<div class="form-group">
-															<p>Số ghế của bạn</p>
-															<input type="number" class="form-control"
-																id="inputPeople" placeholder="Nhập số ghế của bạn">
-														</div>
-														<button type="button" class="btn btn-danger" id="btnCalc">Hoàn
-															Tất</button>
-														<p id="txtResult"></p>
-													</form>
 												</div>
 											</div>
 										</div>
-
-
-
-
 									</div>
-
-									<div class="tab-pane fade" id="pills-website" role="tabpanel"
-										aria-labelledby="pills-website-tab"
-										aria-labelledby="pills-home-tab"
-										aria-labelledby="pills-home-tab">
-										<div class="card__top">
-											<div class="card__right">
-												<img src="assets/user/images/xe5.jpg" alt="">
-
-												<div class="div">
-													<div class="div__content">
-														<h3>Man Đần</h3>
-														<i class="fa fa-star">3.9</i>
-														<p class="content__1">300.000đ</p>
-													</div>
-													<p>Giường nằm 44 chỗ</p>
-													<i class="fa fa-map-pin">6h30P</i><br> <i
-														class="fa fa-map-marker-alt">18h30P</i>
-												</div>
-
-											</div>
-											<div class="collasp">
-												<div class="card__link">
-													<a data-toggle="collapse" href="#collapseExample"
-														role="button" aria-expanded="false"
-														aria-controls="collapseExample"> thông tin chi tiết <i
-														class="fa fa-angle-down"></i>
-													</a>
-												</div>
-												<div class="button">
-													<button data-toggle="collapse"
-														data-target=".multi-collapse" aria-expanded="false"
-														aria-controls="multiCollapseExample1">chọn chuyến</button>
-												</div>
-											</div>
-
-										</div>
-
-
-										<div class="card__bottom">
-											<div class="collapse" id="collapseExample">
-												<div class="card card-body">
-													<div class="project">
-														<ul class="nav nav-pills mb-3" id="pills-tab"
-															role="tablist">
-															<li class="nav-item" role="presentation"><a
-																class="nav-link active" id="pills-home-tab"
-																data-toggle="pill" href="#all" role="tab"
-																aria-controls="pills-img" aria-selected="true">Hình
-																	ảnh</a></li>
-															<li class="nav-item" role="presentation"><a
-																class="nav-link" id="pills-cmt-tab" data-toggle="pill"
-																href="#pills-cmt" role="tab" aria-controls="pills-cmt"
-																aria-selected="false">Tiện ích </a></li>
-															<li class="nav-item" role="presentation"><a
-																class="nav-link" id="pills-travel-tab"
-																data-toggle="pill" href="#pills-travel" role="tab"
-																aria-controls="pills-travel" aria-selected="false">Điểm
-																	Đón Trả</a></li>
-
-														</ul>
-
-														<div class="tab-content" id="pills-tabContent">
-															<div class="tab-pane fade show active" id="all"
-																role="tabpanel" aria-labelledby="pills-home-tab"></div>
-
-															<div class="tab-pane fade" id="pills-cmt" role="tabpanel"
-																aria-labelledby="pills-cmt-tab">
-																<div class="row">
-																	<div class="col-12">
-																		<div class="card animate__animated animate__zoomIn">
-																			<div class="card-body cmt1">
-																				<p>
-																					<i class="fa fa-capsules">Gối Ôm</i> <span>Nhà
-																						xe có trang bị gối ôm cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-hammer">búa thoát hiểm</i> <span>Dùng
-																						để phá kính ô tô thoát hiểm trong trường hợp khẩn
-																						cấp.</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-wifi">wifi</i> <span>Nhà xe
-																						có trang bị wifi cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-hamburger">Trạm nghỉ</i> <span>Nhà
-																						xe cung cấp chỗ dừng chân cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-mug-hot">Nước</i> <span>Nhà
-																						xe có trang bị Nước cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-bed">Chăn</i> <span>Nhà xe
-																						có trang bị chăn cho hành khách</span>
-																				</p>
-
-																				<p>
-																					<i class="fa fa-hand-holding">Nước rửa tay</i> <span>Nhà
-																						xe có trang bị nước rửa tay cho hành khách</span>
-																				</p>
-
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-
-															<div class="tab-pane fade" id="pills-travel"
-																role="tabpanel" aria-labelledby="pills-travel-tab">
-																<div class="row">
-																	<div class="col-12">
-																		<div class="card animate__animated animate__zoomIn">
-																			<div class="card-body">
-
-																				<p class="card-text">Lưu ý Các mốc thời gian
-																					đón, trả bên dưới là thời gian dự kiến. Lịch này có
-																					thể thay đổi tùy tình hình thưc tế.</p>
-																				<div class="card__2">
-																					<div class="card__right1">
-																						<h4>Điểm đón</h4>
-																						<ul>
-																							<li>06:30 • Bãi Xe Thành Thái</li>
-																							<li>06:40 • Lý Thường Kiệt</li>
-																							<li>06:50 • Cây xăng mũi tàu Trường Chinh</li>
-																							<li>07:00 • Tây Thạnh</li>
-																							<li>07:00 • Cầu Tham Lương</li>
-																							<li>07:02 • Ngã Tư An Sương</li>
-																							<li>07:03 • Cầu vượt Ngã Tư Ga</li>
-																							<li>07:05 • Lê Trọng Tấn</li>
-																							<li>07:15 • Bến xe Miền Đông</li>
-																							<li>07:20 • Ngã Tư Thủ Đức</li>
-																							<li>07:25 • Trường Đại học Sư phạm Kỹ thuật
-																								Tp. Hồ Chí Minh (cổng Võ Văn Ngân)</li>
-																							<li>07:30 • Cầu Ông Bố</li>
-																							<li>07:50 • Cổng Chào Bình Dương, Km số 1,
-																								QL13, Thuận AN, Bình Dương</li>
-																							<li>08:00 • Có trung chuyển Đại lộ Bình
-																								Dương</li>
-																						</ul>
-																					</div>
-
-																					<div class="card__left2">
-																						<h4>Điểm trả</h4>
-																						<p>17:50 • Văn Phòng Đắk Lắk</p>
-																					</div>
-
-																				</div>
-
-																			</div>
-																		</div>
-																	</div>
-
-
-																</div>
-															</div>
-
-														</div>
-
-
-													</div>
-												</div>
-											</div>
-
-											<div class="collapse multi-collapse"
-												id="multiCollapseExample1">
-												<div class="card card-body">
-													<form>
-														<p>Tổng tiền thanh toán:</p>
-														<div class="form-group">
-															<input type="text" class="form-control" id="inputTotal"
-																placeholder="Tổng tiền">
-														</div>
-														<div class="form-group">
-															<label for="">Bạn muốn chọn chuyến nào ?</label> <select
-																class="form-control" id="selectPercent">
-																<option>--Chọn chuyến--</option>
-																<option value="Bãi Xe Thành Thái">06:30 •option
-																	Bãi Xe Thành Thái</option>
-																<option value="  Lý Thường Kiệt">06:40 • Lý
-																	Thường Kiệt</option>
-																<option value=" Cây xăng mũi tàu Trường Chinh">06:50
-																	• Cây xăng mũi tàu Trường Chinh</option>
-																<option value="Tây Thạnh">07:00 • Tây Thạnh</option>
-																<option value="Cầu Tham Lương">07:00 • Cầu Tham
-																	Lương</option>
-																<option value="Ngã Tư An Sương">07:02 • Ngã Tư
-																	An Sương</option>
-																<option value="Cầu vượt Ngã Tư Ga">07:03 • Cầu
-																	vượt Ngã Tư Ga</option>
-																<option value="Lê Trọng Tấn">07:05 • Lê Trọng
-																	Tấn</option>
-																<option value="Bến xe Miền Đông">07:15 • Bến xe
-																	Miền Đông</option>
-																<option value="Ngã Tư Thủ Đức">07:20 • Ngã Tư
-																	Thủ Đức</option>
-																<option
-																	value=" Trường Đại học Sư phạm Kỹ thuật
-                                                      Tp. Hồ Chí Minh (cổng Võ Văn
-                                                      Ngân)">07:25
-																	• Trường Đại học Sư phạm Kỹ thuật Tp. Hồ Chí Minh (cổng
-																	Võ Văn Ngân)</option>
-																<option value=" Cầu Ông Bố">07:30 • Cầu Ông Bố</option>
-																<option
-																	value="Cổng Chào Bình Dương, Km số 1,
-                                                      QL13, Thuận AN, Bình Dương">07:50
-																	• Cổng Chào Bình Dương, Km số 1, QL13, Thuận AN, Bình
-																	Dương</option>
-																<option value=" Đại lộ Bình Dương">08:00 • Có
-																	trung chuyển Đại lộ Bình Dương</option>
-															</select>
-														</div>
-														<div class="form-group">
-															<p>Số ghế của bạn</p>
-															<input type="number" class="form-control"
-																id="inputPeople" placeholder="Nhập số ghế của bạn">
-														</div>
-														<button type="button" class="btn btn-danger" id="btnCalc">Hoàn
-															Tất</button>
-														<p id="txtResult"></p>
-													</form>
-												</div>
-											</div>
-										</div> -->
-
-
-
-				</div>
+								</form>
+							</c:forEach>
+						</div>
+					</div>
 			</div>
-
-		</div>
-		</div>
-		</div>
-
 	</section>
 
+	<!-- Footer -->
 	<%@ include file="/layout/user/footer.jsp"%>
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-
-	<!-- owlCousel -->
-	<script src="assets/lib/owl.carousel.min.js"></script>
-	<script type="text/javascript">
-var onClick =(n)=>{
-	/* var disabled2= document.querySelector(`.nav-link_1`);
-	disabled2.classList.add('disabled');  */
 	
-}
-
-var onClick2 =(n)=>{
-	var disabled2= document.querySelector(`.nav-link_2`);
-	disabled2.classList.add('disabled');  
 	
-}
+	 <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
 
-var onClick3 =(n)=>{
-	/* var disabled2= document.querySelector(`.nav-link_3`);
-	disabled2.classList.add('disabled');  */
-	
-}
-
-var goBack =(n)=>{
-	var disabled2= document.querySelector(`.nav-link_2`);
-	if (disabled2.classList.contains('disabled')) {
-		disabled2.classList.remove('disabled');
-	}
-	
-}
-
-var goBack2 =(n)=>{
-	var disabled2= document.querySelector(`.nav-link_3`);
-	if (disabled2.classList.contains('disabled')) {
-		disabled2.classList.remove('disabled');
-	}
-	
-}
-/* nextTab */
-const nextBtn = document.querySelectorAll(".btnNext");
-const prevBtn = document.querySelectorAll(".btnPrevious");
-
-nextBtn.forEach(function(item, index){
-	
-    item.addEventListener('click', function(){
-      let id1 = index;
-      let id2 = index + 1;
-/*       let tabElement1 = document.querySelectorAll("#pills-tab2 li a")[id1]; */
-      let tabElement2 = document.querySelectorAll("#pills-tab2 li a")[id2];
-      var lastTab = new bootstrap.Tab(tabElement2);
-/*       tabElement1.classList.add('disabled'); */
-      lastTab.show();   
-    });
-});
-
-prevBtn.forEach(function(item, index){
-    item.addEventListener('click', function(){
-      let id = index;
-      let id2 = index - 1;
-      let tabElement = document.querySelectorAll("#pills-tab2 li a")[id];
+    <!-- owlCousel -->
+    <script src="/lib/owl.carousel.min.js"></script>
+    <script>
+        var count = 0;
       
-/*       let tabElement2 = document.querySelectorAll("#pills-tab2 li a")[id2]; */
-/*       tabElement?.classList?.remove('disabled'); */
+        function clickSeatFunction(seat_id) {
+          let seat = document.getElementsByClassName(seat_id);
+          let seat_result = document.getElementById("seat_result");
+          if (seat[0].classList[3] != "ArHJS")
+          {
+            if (seat[0].classList[4] == null) {
+            count++;
+            
+              if (count < 4)
+              {
+                  seat[0].classList.add("cUIhrn");
+                let seatItem = document.createElement("input");
+                let name = "seatID" + count.toString();
+                seatItem.setAttribute("id", name);
+                seatItem.setAttribute("name", name);
+                seatItem.setAttribute("value", seat_id);
+                // seatItem.setAttribute('hidden', true);
+                seat_result.appendChild(seatItem);
+              } else {
+                  alert(
+                "Bạn được chọn tối đa 3 ghế! Xin thông cảm vì sự bất tiện này. Nếu bạn muốn đặt nhiều hơn, Vui lòng liên hệ trực tiếp với thu ngân qua số điện thoại của hãng."
+              );
+              count--;
+              }
+            
+            } else {
+              seat[0].classList.remove("cUIhrn");
+              id = "seatID" + count.toString();
+              let seatItem = document.getElementById(id);
+              seatItem.parentNode.removeChild(seatItem);
+              count--;
+            }
+          }
+          
+        }
+    </script>
+	 <script type="text/javascript">
+		const nextBtn = document.querySelectorAll(".btnNext");
+		const prevBtn = document.querySelectorAll(".btnPrevious");
+				var btnNext = (n,index=0) => {
+							 let id1 = index;
+								let id2 = index + 1;
+								let tabElement2 = document.querySelectorAll("#pills-tab" + n + " li a")[id2];
+								var lastTab = new bootstrap.Tab(tabElement2);
+								lastTab.show();
 
-      var lastTab = new bootstrap.Tab(tabElement);
-      lastTab.show();
-    });
-});
+				}
 
-/* //check validatate */
+		var btnPrevious = (n,index=0) => {
+				let id = index;
+				let id2 = index - 1;
+				let tabElement = document.querySelectorAll("#pills-tab" + n +" li a")[id];
+				var lastTab = new bootstrap.Tab(tabElement);
+				lastTab.show();
+		}
+
+		var goBack2 = (n) => {
+				var disabled2 = document.querySelector(`.nav-link_3`);
+				if (disabled2.classList.contains('disabled')) {
+						disabled2.classList.remove('disabled');
+				}
+
+		}
+		/* nextTab */
+ 
+
+		nextBtn.forEach(function (item, index) {
+
+				item.addEventListener('click', function () {
+						let id1 = index;
+						let id2 = index + 1;
+						let tabElement2 = document.querySelectorAll("#pills-tab2 li a")[id2];
+						var lastTab = new bootstrap.Tab(tabElement2);
+						lastTab.show();
+				});
+		});
+
+		prevBtn.forEach(function (item, index) {
+				item.addEventListener('click', function () {
+						let id = index;
+						let id2 = index - 1;
+						let tabElement = document.querySelectorAll("#pills-tab2 li a")[id];
+						var lastTab = new bootstrap.Tab(tabElement);
+						lastTab.show();
+				});
+		});
+
+		/* //check validatate */
 
 		var input1 = document.getElementById("inputName");
 		var input2 = document.getElementById("inputPhone");
 		var input3 = document.getElementById("inputEmail");
-		
+
 		var error2 = document.getElementById("error2");
-		input1.onblur = function() {
-			if (input1.value.length == 0) {
-				input1.classList.add('invalid');
-				error1.innerHTML = 'Please enter a correct first name and last name.'
-			}
+		input1.onblur = function () {
+				if (input1.value.length == 0) {
+						input1.classList.add('invalid');
+						error1.innerHTML = 'Please enter a correct first name and last name.'
+				}
 		};
 
-		input1.onfocus = function() {
+		input1.onfocus = function () {
 				input1.classList.remove('invalid');
 				error1.innerHTML = "";
 		};
-		
+
 		function validatePhoneNumber(input_str) {
-			var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+				var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 
-			return re.test(input_str);
+				return re.test(input_str);
 		}
-		
-		
-		input2.onblur = function() {
-			if (!validatePhoneNumber(input2.value)) {
-				input2.classList.add('invalid');
-				errorPhone.innerHTML = 'Please enter a correct number phone.';
-			}
+
+
+		input2.onblur = function () {
+				if (!validatePhoneNumber(input2.value)) {
+						input2.classList.add('invalid');
+						error2.innerHTML = 'Please enter a correct number phone.';
+						/* 				error2.innerText = 'Please enter a correct number phone.'; */
+						/* 				console.log(error2) */
+				}
 		};
 
-		input2.onfocus = function() {
-			if (this.classList.contains('invalid')) {
-				this.classList.remove('invalid');
-				errorPhone.innerHTML = "";
-			}
+		input2.onfocus = function () {
+				if (this.classList.contains('invalid2')) {
+						this.classList.remove('invalid2');
+						error2.innerHTML = "";
+				}
 		};
 
-		
-		input3.onblur = function() {
-			if (input3.value.length === 0) {
-				input3.classList.add('invalid');
-				error3.innerHTML = 'Please enter a correct email.'
-			}
+
+		input3.onblur = function () {
+				if (input3.value.length === 0) {
+						input3.classList.add('invalid');
+						error3.innerHTML = 'Please enter a correct email.'
+				}
 		};
 
-		input3.onfocus = function() {
-			if (this.classList.contains('invalid')) {
-				this.classList.remove('invalid');
-				error3.innerHTML = "";
-			}
+		input3.onfocus = function () {
+				if (this.classList.contains('invalid')) {
+						this.classList.remove('invalid');
+						error3.innerHTML = "";
+				}
 		};
 
 </script>
-	<!-- tinhtien -->
-	<!-- <script src="./js/tinhtien.js"></script> -->
-
 </body>
 
 </html>

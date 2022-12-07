@@ -180,7 +180,7 @@ btn--
 	border-radius: 7px;
 	height: 50px;
 	padding-left: 20px;
-	border: 1px solid #dee2e6;
+	border: 1px solid #dee2e6; 
 }
 
 .logo__icon {
@@ -1080,7 +1080,7 @@ footer .footer__content .footer__bottom .row ul li a p {
 }
 
 table, th, td {
-	border: 1px solid gray;
+	
 	border-collapse: collapse;
 }
 
@@ -1145,7 +1145,6 @@ table, th, td {
 
 .datVeNhanh td, table, th {
 	border: none !important;
-	border-bottom: 1px gray solid !important;
 }
 
 .custom_flex {

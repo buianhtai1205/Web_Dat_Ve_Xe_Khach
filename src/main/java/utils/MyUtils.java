@@ -30,6 +30,7 @@ public class MyUtils {
 		Connection conn = (Connection) request.getAttribute(ATT_NAME_CONNECTION);
 		return conn;
 	}
+	
 
 	// Lưu trữ thông tin người dùng đã login vào Session.
 	public static void storeLoginedUser(HttpSession session, Customer loginedUser) {

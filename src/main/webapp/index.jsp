@@ -44,19 +44,23 @@
 	<section class="myCover">
 		<div class="cover__content">
 			<div class="row tool-search">
-				<form action="#" method="post" style="display: flex;">
+				<form action="seachTrip" method="post" style="display: flex;">
 
 					<select name="departure" class="form-select col-3 custom_flex"
 						aria-label="Default select example" required>
 						<option selected>Chọn nơi xuất phát</option>
-
-						<option value="">ABC</option>
+						
+						<c:forEach items="${ list_departure }" var="place" varStatus="loop">
+                			<option value="${place}">${place}</option>
+            			</c:forEach>
 
 					</select> <select name="destination" class="col-3 form-select custom_flex"
 						aria-label="Default select example" required>
 						<option selected>Chọn điểm đến</option>
 
-						<option value="">AAAA</option>
+						<c:forEach items="${ list_destination }" var="place" varStatus="loop">
+                			<option value="${place}">${place}</option>
+            			</c:forEach>
 
 					</select>
 					<div class="col-3 custom_flex">
@@ -250,13 +254,13 @@
 									class="fas fa-star"></i> <span>4.4</span> <span>(39,470)</span>
 							</div>
 						</div>
-					</div>
+<!-- 					</div>
 					<div class="overlay">
 						<p>BESTSERVICE</p>
 					</div>
 					<div class="overlay1"></div>
 
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</section>

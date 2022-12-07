@@ -11,10 +11,8 @@ public class CustomerDAO {
 	public CustomerDAO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public static Customer findUser(Connection conn, String numberPhone, String password) 
-			throws SQLException 
-	{
+
+	public static Customer findUser(Connection conn, String numberPhone, String password) throws SQLException {
 
 		String sql = "Select * from Customer " //
 				+ " where phone_number = ? and password= ?";
@@ -35,7 +33,7 @@ public class CustomerDAO {
 		}
 		return null;
 	}
-	
+
 	public static Customer findUser(Connection conn, String phone_number) throws SQLException {
 
 		String sql = "Select * from Customer a "//
@@ -54,19 +52,18 @@ public class CustomerDAO {
 			user.setId(id);
 			user.setEmail(email);
 			user.setFullname(userName);
-			
+
 			return user;
 		}
 		return null;
 	}
-	
-	
-	public static void updatePassword(Connection conn, String password,String numberPhone) throws SQLException {
+
+	public static void updatePassword(Connection conn, String password, String numberPhone) throws SQLException {
 		String sql = "Update Customer set password =? where phone_number=? ";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
-		pstm.setString(1,password);
+		pstm.setString(1, password);
 		pstm.setString(2, numberPhone);
 		pstm.executeUpdate();
 	}
