@@ -85,9 +85,7 @@ public class EditTripServlet extends HttpServlet {
 
 		try {
 			tripDAO.updateTrip(conn, departure, destination, departure_time, priceM, numSeat, trip_board, id_Trip);
-			System.out.println("777777777777777777777777777777777777777");
 		} catch (SQLException e) {
-			System.out.println("99999999999999999999999999999999999");
 			e.printStackTrace();
 			errStr = e.getMessage();
 		}

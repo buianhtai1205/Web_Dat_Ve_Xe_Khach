@@ -16,8 +16,10 @@ public class Router {
 	// admin
 	public static final String ADMIN_LOGIN = "/views/adminView/login.jsp";
 	public static final String ADMIN_HOME = "/views/adminView/adminHome.jsp";
-	public static final String ADMIN_CCMANAGEMENT = "/views/adminView/CarCompanyManagement.jsp";
-
+	public static final String ADMIN_GARAGEMANAGEMENT = "/views/adminView/garageAcctive.jsp";
+	public static final String ADMIN_EDITGARAGE = "/views/adminView/editGarage.jsp";
+	public static final String ADMIN_CREATEMANAGER = "/views/adminView/createManager.jsp";
+	public static final String ADMIN_LISTMANAGER = "/views/adminView/accountManager.jsp";
 	// manager
 	public static final String MANAGER_LOGIN = "/views/managerView/login.jsp";
 	public static final String MANAGER_HOME = "/views/managerView/managerHome.jsp";

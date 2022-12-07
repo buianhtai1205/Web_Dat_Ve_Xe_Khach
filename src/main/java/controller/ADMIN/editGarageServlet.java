@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import DAO.GarageDAO;
-import DAO.ManagerDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,16 +16,16 @@ import utils.MyUtils;
 import utils.Router;
 
 /**
- * Servlet implementation class CreateManager
+ * Servlet implementation class editGarageServlet
  */
-@WebServlet(urlPatterns = { "/createManager" })
-public class CreateManager extends HttpServlet {
+@WebServlet(urlPatterns = { "/editGarage" })
+public class editGarageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CreateManager() {
+	public editGarageServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -57,7 +56,7 @@ public class CreateManager extends HttpServlet {
 		}
 		request.setAttribute("errorString", errorString);
 		request.setAttribute("garage", garage);
-		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(Router.ADMIN_CREATEMANAGER);
+		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(Router.ADMIN_EDITGARAGE);
 		dispatcher.forward(request, response);
 	}
 
@@ -69,32 +68,31 @@ public class CreateManager extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request);
-		String id = request.getParameter("id");
-		int garage_id = Integer.parseInt(id);
+		GarageDAO garageDAO = new GarageDAO();
+		String idGarage = request.getParameter("id");
+		int id_Garage = Integer.parseInt(idGarage);
+		System.out.println(id_Garage);
 		String fullname = new String(request.getParameter("fullname").getBytes("UTF-8"));
-		String phone_number = new String(request.getParameter("phone_number").getBytes("ISO-8859-1"), "UTF-8");
-		String email = new String(request.getParameter("email").getBytes("ISO-8859-1"), "UTF-8");
-		String password = new String(request.getParameter("password").getBytes("ISO-8859-1"), "UTF-8");
-		ManagerDAO managerDAO = new ManagerDAO();
-		String errorString = null;
+		String address = new String(request.getParameter("address").getBytes("UTF-8"));
+		String description = new String(request.getParameter("description").getBytes("UTF-8"));
+
+		String errStr = null;
 
 		try {
-			managerDAO.insertManager(conn, fullname, phone_number, email, password, garage_id);
+			garageDAO.updateGarage(conn, id_Garage, fullname, address, description);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			errorString = e.getMessage();
+			errStr = e.getMessage();
 		}
 
-		request.setAttribute("errorString", errorString);
+		request.setAttribute("errorString", errStr);
 
-		if (errorString != null) {
+		if (errStr != null) {
 			RequestDispatcher dispatcher = request.getServletContext()
 					.getRequestDispatcher(Router.ADMIN_GARAGEMANAGEMENT);
 			dispatcher.forward(request, response);
-		}
-
-		else {
-			response.sendRedirect(request.getContextPath() + "/managerList");
+		} else {
+			response.sendRedirect(request.getContextPath() + "/garageacctive");
 		}
 	}
 

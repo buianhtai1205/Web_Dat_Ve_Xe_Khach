@@ -284,7 +284,6 @@ public class TripDAO {
 		return 0;
 	}
 
-
 	public static Trip getTripFromTripID(Connection conn, int id) throws SQLException {
 		String sql = "SELECT * FROM Trip WHERE id = ?";
 
@@ -327,7 +326,6 @@ public class TripDAO {
 		pstm.setInt(5, num_seat);
 		pstm.setString(6, trip_board);
 		pstm.setInt(7, id);
-		System.out.println("888888888888888888888888888888888888888");
 		pstm.executeUpdate();
 	}
 
@@ -342,5 +340,5 @@ public class TripDAO {
 		pstm2.setInt(1, id);
 		pstm2.executeUpdate();
 	}
-	
+
 }

@@ -26,13 +26,13 @@
 						class='bx bx-home-alt icon'></i> <span class="text nav-text">Dashboard</span>
 				</a></li>
 
-				<li class="nav-link"><a href="hangxehoatdong"> <i
+				<li class="nav-link"><a href="garageacctive"> <i
 						class='bx bx-bar-chart-alt-2 icon'></i> <span
-						class="text nav-text">Hãng xe đang hoạt động</span>
+						class="text nav-text">Hãng xe hoạt động</span>
 				</a></li>
 
-				<li class="nav-link"><a href="hangxetamngung"> <i
-						class='bx bx-bell icon'></i> <span class="text nav-text">Notifications</span>
+				<li class="nav-link"><a href="garagedesist"> <i
+						class='bx bx-bell icon'></i> <span class="text nav-text">Hãng xe tạm nghỉ</span>
 				</a></li>
 
 				<li class="nav-link"><a href="customerList"> <i

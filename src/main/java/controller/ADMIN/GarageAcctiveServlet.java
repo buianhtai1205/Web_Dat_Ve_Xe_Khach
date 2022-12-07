@@ -1,26 +1,32 @@
-package controller;
+package controller.ADMIN;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.util.List;
+
+import DAO.GarageDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Garage;
+import utils.MyUtils;
 import utils.Router;
 
-import java.io.IOException;
-
 /**
- * Servlet implementation class CarCompanyManagermentServlet
+ * Servlet implementation class GarageAcctiveServlet
  */
-@WebServlet(name = "quanlyhangxe", urlPatterns = { "/hangxehoatdong" })
-public class CarCompanyManagermentServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/garageacctive" })
+public class GarageAcctiveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CarCompanyManagermentServlet() {
+	public GarageAcctiveServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,10 +38,20 @@ public class CarCompanyManagermentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatcher //
-				= this.getServletContext().getRequestDispatcher(Router.ADMIN_CCMANAGEMENT);
-
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		Connection conn = MyUtils.getStoredConnection(request);
+		HttpSession session = request.getSession();
+		List<Garage> list = null;
+		GarageDAO garageDAO = new GarageDAO();
+		try {
+			list = garageDAO.listGaragesActivate(conn);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		session.setAttribute("listGaragesActivate", list);
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.ADMIN_GARAGEMANAGEMENT);
 		dispatcher.forward(request, response);
 	}
 
@@ -46,8 +62,7 @@ public class CarCompanyManagermentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("111111");
-
+		doGet(request, response);
 	}
 
 }

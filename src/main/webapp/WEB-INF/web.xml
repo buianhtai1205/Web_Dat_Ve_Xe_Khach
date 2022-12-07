@@ -194,4 +194,44 @@
     <servlet-name>EditManager</servlet-name>
     <url-pattern>/EditManager</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GarageManagementServlet</display-name>
+    <servlet-name>GarageManagementServlet</servlet-name>
+    <servlet-class>controller.ADMIN.GarageManagementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GarageManagementServlet</servlet-name>
+    <url-pattern>/GarageManagementServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GarageAcctiveServlet</display-name>
+    <servlet-name>GarageAcctiveServlet</servlet-name>
+    <servlet-class>controller.ADMIN.GarageAcctiveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GarageAcctiveServlet</servlet-name>
+    <url-pattern>/GarageAcctiveServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>editGarageServlet</display-name>
+    <servlet-name>editGarageServlet</servlet-name>
+    <servlet-class>controller.ADMIN.editGarageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>editGarageServlet</servlet-name>
+    <url-pattern>/editGarageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddManagementGarageServlet</display-name>
+    <servlet-name>AddManagementGarageServlet</servlet-name>
+    <servlet-class>controller.ADMIN.AddManagementGarageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddManagementGarageServlet</servlet-name>
+    <url-pattern>/AddManagementGarageServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
