@@ -14,15 +14,18 @@ public class Router {
 	public static final String THONG_BAO = "/views/thong_bao_success.jsp";
 
 	// admin
-	public static final String ADMIN_LOGIN = "/views/adminView/login.jsp";
+	public static final String ADMIN_LOGIN = "/views/Admin/login.jsp";
 	public static final String ADMIN_HOME = "/views/adminView/adminHome.jsp";
 	public static final String ADMIN_CCMANAGEMENT = "/views/adminView/CarCompanyManagement.jsp";
 
 	// manager
-	public static final String MANAGER_LOGIN = "/views/managerView/login.jsp";
+	public static final String MANAGER_LOGIN = "/views/Admin/login.jsp";
 	public static final String MANAGER_HOME = "/views/managerView/managerHome.jsp";
 	public static final String MANAGER_TRIPMANAGEMENT = "/views/managerView/tripManagement.jsp";
 	public static final String MANAGER_TICKETMANAGEMENT = "/views/managerView/ticketManagement.jsp";
 	public static final String MANAGER_ADDTRIP = "/views/managerView/addTrip.jsp";
 	public static final String MANAGER_EDITTRIP = "/views/managerView/editTrip.jsp";
+	
+	public static final String LOGIN_2 = "/views/Admin/login.jsp";
+	public static final String THONGKE = "/views/Admin/staticsView.jsp";
 }
