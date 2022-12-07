@@ -14,5 +14,54 @@
     <servlet-name>InfoTripTicket</servlet-name>
     <url-pattern>/InfoTripTicket</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <description></description>
+    <display-name>AdminDAO</display-name>
+    <servlet-name>AdminDAO</servlet-name>
+    <servlet-class>DAO.AdminDAO</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminDAO</servlet-name>
+    <url-pattern>/AdminDAO</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckLoginManagerServlet</display-name>
+    <servlet-name>CheckLoginManagerServlet</servlet-name>
+    <servlet-class>controller.CheckLoginManagerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckLoginManagerServlet</servlet-name>
+    <url-pattern>/CheckLoginManagerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TripManagementServlet</display-name>
+    <servlet-name>TripManagementServlet</servlet-name>
+    <servlet-class>controller.TripManagementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TripManagementServlet</servlet-name>
+    <url-pattern>/TripManagementServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TicketManagementServlet</display-name>
+    <servlet-name>TicketManagementServlet</servlet-name>
+    <servlet-class>controller.TicketManagementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TicketManagementServlet</servlet-name>
+    <url-pattern>/TicketManagementServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddTripServlet</display-name>
+    <servlet-name>AddTripServlet</servlet-name>
+    <servlet-class>controller.AddTripServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddTripServlet</servlet-name>
+    <url-pattern>/AddTripServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

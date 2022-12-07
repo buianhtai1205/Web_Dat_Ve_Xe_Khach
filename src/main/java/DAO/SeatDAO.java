@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import model.Customer;
 import model.Seat;
 
+import java.util.ArrayList;
 public class SeatDAO {
 
 	public SeatDAO() {
@@ -16,22 +14,23 @@ public class SeatDAO {
 	}
 
 	public Seat getSeat(Connection con, String phoneNumber) {
-		String idSeat = "select seat_id from Ticket join Customer on Customer.id= Ticket.customer_id where phone_number = " + phoneNumber;
+		String idSeat = "select seat_id from Ticket join Customer on Customer.id= Ticket.customer_id where phone_number = "
+				+ phoneNumber;
 		String _idSeat = null;
 		try {
 			PreparedStatement pstm1 = con.prepareStatement(idSeat);
 			ResultSet rs1 = pstm1.executeQuery();
-			
-			if(rs1.next()) {
+
+			if (rs1.next()) {
 				_idSeat = rs1.getString("seat_id");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
+
 		String sql1 = "SELECT number_chair,status FROM Seat WHERE id = " + _idSeat;
-		
+
 		Seat seat = new Seat();
 		PreparedStatement pre = null;
 		ResultSet res;
@@ -47,19 +46,19 @@ public class SeatDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+
 		}
 		return seat;
-		
+
 	}
-	
+
 	public Seat getIdSeat(Connection conn, String idGhe) throws SQLException {
 
-		String sql = "Select id from Seat "
-				+ " where id= " + idGhe;
+		String sql = "Select id from Seat " + "where id = ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
+		pstm.setString(1, idGhe);
 		ResultSet rs = pstm.executeQuery();
 
 		if (rs.next()) {
@@ -91,5 +90,27 @@ public class SeatDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	public void insertSeat(Connection conn, String numberChair, int garage_id) throws SQLException {
+		String sqlAddTrip = "insert into Seat (number_chair, status, trip_id) values (?,?,?)";
+		PreparedStatement pre = null;
+		int status = 0;
+		try {
+			conn.setAutoCommit(false);
+			pre = conn.prepareStatement(sqlAddTrip);
+			pre.setString(1, numberChair);
+			pre.setInt(2, status);
+			pre.setInt(3, garage_id);
+			pre.executeUpdate();
+			conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 }

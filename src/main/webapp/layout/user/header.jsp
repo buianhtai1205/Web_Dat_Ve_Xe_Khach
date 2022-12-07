@@ -6,7 +6,7 @@
 		<nav class="navbar navbar-expand-md navbar-light">
 			<div class="col-md-8 col-xl-7 col-lg-9 col-sm-6 d-flex">
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/">
-					<img src="assets/user/images/logo4.png" alt="logo">
+					<img src="assets/user/images/logo1.png" alt="logo">
 				</a>
 				<!--  <div class="Categories">
           <i class="fa fa-th"></i>
@@ -68,7 +68,7 @@
 		</nav>
 	</header>
 	<!-- đăng nhập -->
-	<%@ include file="/views/loginView.jsp"%>
+	<%@ include file="/views/Login/login_view.jsp"%>
 
 
 

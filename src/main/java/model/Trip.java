@@ -17,24 +17,31 @@ public class Trip{
 	public String getDeparture() {
 		return departure;
 	}
+
 	public void setDeparture(String departure) {
 		this.departure = departure;
 	}
+
 	public String getDestination() {
 		return destination;
 	}
+
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
+
 	public String getDeparture_time() {
 		return departure_time;
 	}
+
 	public void setDeparture_time(String departure_time) {
 		this.departure_time = departure_time;
 	}
+
 	public int getPrice() {
 		return price;
 	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
@@ -80,5 +87,5 @@ public class Trip{
 	public void setList_seat(ArrayList<Seat> list_seat) {
 		this.list_seat = list_seat;
 	}
-	
+
 }

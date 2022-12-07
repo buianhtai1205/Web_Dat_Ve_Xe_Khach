@@ -136,7 +136,7 @@
       <div class="footer__bottom">
         <div class="footer__bottom__content row">
           <div class="col-md-6 col-ml-12">
-            <img src="assets/user/images/logo4.png" alt="">
+            <img src="assets/user/images/logo1.png" alt="">
             <span>
               Bản quyền © 2020 thuộc về VeXeRe.Com</span>
           </div>
