@@ -78,7 +78,7 @@ public class SearchTripServlet extends HttpServlet {
 		
 		request.setAttribute("list_trip", list_trip);
 		
-		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/listCoachSearch.jsp");
+		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/list_coach_search.jsp");
 		dispatcher.forward(request, response);
 		
 	}

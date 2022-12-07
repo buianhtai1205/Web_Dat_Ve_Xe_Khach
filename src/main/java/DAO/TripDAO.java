@@ -154,37 +154,44 @@ public class TripDAO {
 		}
 		return list_trip;
 	}
+	
+	
+	public List<Trip> listTrips(Connection conn, String userManager) throws SQLException {
+		String garage_id = "select garage_id from Manager where phone_number = " + userManager;
+		PreparedStatement pstm1 = conn.prepareStatement(garage_id);
+		ResultSet rs1 = pstm1.executeQuery();
+		int _garageid = 0;
 
-	// 	if (rs1.next()) {
-	// 		_garageid = rs1.getInt("garage_id");
-	// 	}
-	// 	String sql = "select * from Trip where garage_id =" + _garageid;
-	// 	PreparedStatement pstm = conn.prepareStatement(sql);
-	// 	ResultSet rs = pstm.executeQuery();
-	// 	List<Trip> list = new ArrayList<Trip>();
-	// 	while (rs.next()) {
-	// 		String departure = rs.getString("departure");
-	// 		String destination = rs.getString("destination");
-	// 		String departure_time = rs.getString("departure_time");
-	// 		String trip_board = rs.getString("trip_board");
-	// 		int price = rs.getInt("price");
-	// 		int id = rs.getInt("id");
-	// 		int num_seat = rs.getInt("num_seat");
-	// 		// int garage_id = rs.getInt("garage_id");
-	// 		Trip trip = new Trip();
-	// 		trip.setIdTrip(id);
-	// 		trip.setDeparture(departure);
-	// 		trip.setDestination(destination);
-	// 		trip.setDeparture_time(departure_time);
-	// 		trip.setTrip_board(trip_board);
-	// 		trip.setNum_seat(num_seat);
-	// 		trip.setPrice(price);
-	// 		trip.setGarage_id(_garageid);
-	// 		list.add(trip);
-	// 	}
+		if (rs1.next()) {
+			_garageid = rs1.getInt("garage_id");
+		}
+		String sql = "select * from Trip where garage_id =" + _garageid;
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		ResultSet rs = pstm.executeQuery();
+		List<Trip> list = new ArrayList<Trip>();
+		while (rs.next()) {
+			String departure = rs.getString("departure");
+			String destination = rs.getString("destination");
+			String departure_time = rs.getString("departure_time");
+			String trip_board = rs.getString("trip_board");
+			int price = rs.getInt("price");
+			int id = rs.getInt("id");
+			int num_seat = rs.getInt("num_seat");
+			// int garage_id = rs.getInt("garage_id");
+			Trip trip = new Trip();
+//			trip.setIdTrip(id);
+			trip.setDeparture(departure);
+			trip.setDestination(destination);
+			trip.setDeparture_time(departure_time);
+			trip.setTrip_board(trip_board);
+			trip.setNum_seat(num_seat);
+			trip.setPrice(price);
+//			trip.setGarage_id(_garageid);
+			list.add(trip);
+		}
 
-	// 	return list;
-	// }
+		return list;
+	}
 
 	public void addTrip(Connection conn, String departure, String destination, String departure_time, int price,
 			int num_seat, String trip_board, String userManager) throws SQLException {
