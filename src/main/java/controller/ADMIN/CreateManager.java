@@ -62,8 +62,15 @@ public class CreateManager extends HttpServlet {
 		String phone_number = new String(request.getParameter("phone_number").getBytes("ISO-8859-1"), "UTF-8");
 		String email = new String(request.getParameter("email").getBytes("ISO-8859-1"), "UTF-8");
 		String password = new String(request.getParameter("password").getBytes("ISO-8859-1"), "UTF-8");
-
-		Manager mh = new Manager(fullname, phone_number, email, password);
+		String idgara= (String)request.getParameter("garaid");
+		 int id = 0;
+	        
+	        try {
+	            id = Integer.parseInt(idgara);
+	           
+	        } catch (Exception e) {
+	        }	
+		Manager mh = new Manager(fullname, phone_number, email, password,id);
 		String errorString = null;
 
 		try {

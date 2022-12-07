@@ -6,22 +6,25 @@ public class Manager {
 	private String password;
 	private String phone_number;
 	private String email;
+	private int garaid;
 	public Manager() {}
-	public Manager(String fullname,String phone_number,String email,String password) {
+	public Manager(String fullname,String phone_number,String email,String password,int idgara) {
 		super();
 		
 		this.setFullname(fullname);
 		this.setPassword(password);
 		this.setPhone_number(phone_number);
 		this.setEmail(email);
+		this.setGaraid(idgara);
 	}
-	public Manager(int id , String fullname,String phone_number,String email,String password) {
+	public Manager(int id , String fullname,String phone_number,String email,String password,int idgara) {
 		super();
 		this.setId(id);
 		this.setFullname(fullname);
 		this.setPassword(password);
 		this.setPhone_number(phone_number);
 		this.setEmail(email);
+		this.setGaraid(idgara);
 	}
 	public String getFullname() {
 		return fullname;
@@ -54,6 +57,12 @@ public class Manager {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getGaraid() {
+		return garaid;
+	}
+	public void setGaraid(int garaid) {
+		this.garaid = garaid;
 	}
 	
 }

@@ -149,7 +149,7 @@ cursor: pointer;
     		let searchContent = document.getElementById("searchContent").value;
     		
     		if (searchContent != null) {
-    			window.location.href = "searchListMonHoc?searchContent=" + searchContent;
+    			window.location.href = "searchCustomer?searchContent=" + searchContent;
     		}
     	};
     </script>
