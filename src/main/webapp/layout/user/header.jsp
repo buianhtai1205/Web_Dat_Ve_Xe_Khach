@@ -8,10 +8,6 @@
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/">
 					<img src="assets/user/images/logo1.png" alt="logo">
 				</a>
-				<!--  <div class="Categories">
-          <i class="fa fa-th"></i>
-          Categories
-        </div> -->
 				<div class="input-search">
 					<form action="abc.com">
 						<div class="input-group">
@@ -33,23 +29,9 @@
 						<li class="nav-item teach"><a class="nav-link" href="#">Quản
 								lý Chuyến đi</a></li>
 						<li class="nav-item">
-							<!--   <div class="drop">
-                <div class="dropdown">
-                  <button class="dropdown__btn d-flex">
-                    <i class="fas fa-user"></i>
-                  </button>
-                  <div class="dropdown__list">
-                    <a href="#" class="dropdown__item"><i class="fas mr-2 fa-user-alt"></i></i>Thông tin tài khoản</a>
-                    <a href="#" class="dropdown__item"><i class="fas mr-2 fa-bus-alt"></i>Quản lý chuyến đi</a>
-                    <a href="#" class="dropdown__item"><i class="fas mr-2 fa-charging-station"></i>Quản lý trạm</a>
-                    <a href="#" class="dropdown__item"><i class="fas mr-2 fa-sign-out-alt"></i>Đăng xuất</a>
-                  </div>
-                </div>
-              </div> -->
 						</li>
 						<li class="nav-item item4 ">
 							<div class="d-flex">
-
 
 								<button type="button" class="btn btn--white mr-2"
 									data-toggle="modal" data-target="#exampleModal">Login</button>

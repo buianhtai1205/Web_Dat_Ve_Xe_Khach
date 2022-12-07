@@ -84,8 +84,6 @@ public class LoginServlet extends HttpServlet {
 		// Trường hợp không có lỗi.
 		// chuyển hướng sang trang userInfo.
 		else {
-
-
 			MyUtils.storeLoginedUser(session, user);
 			
 			// Redirect (Chuyển hướng) sang trang /userInfo.

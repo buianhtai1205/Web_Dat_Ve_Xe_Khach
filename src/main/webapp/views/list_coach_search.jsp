@@ -22,12 +22,6 @@
 <title>List Coach</title>
 
 <!-- font awesome -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-	integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <link rel="stylesheet" type="text/css" href="../assets/user/css/index.css">
 <link rel="stylesheet" type="text/css"
@@ -44,13 +38,6 @@
 
 <!-- slick -->
 
-<!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-<!-- animated -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <link rel="stylesheet" href="../assets/user/css/listCoachSearch.css">
@@ -107,7 +94,7 @@ function choose1(id) {
 
 <body>
 
-	<%@ include file="/layout/user/header.jsp"%>
+	<%@ include file="../layout/user/header.jsp"%>
 	<!-- body -->
 	<section class="mid" style="padding: 40px 135px;">
 		<div class="container-fluid">
@@ -1132,17 +1119,17 @@ function choose1(id) {
 																				</div>
 
 																				<div class="form-group ">
-																					<input type="text"
+																					<input type="tel"
 																						class="form-control top inputPhone1"
 																						id="inputPhone" placeholder="Number phone "
-																						name="phoneUser" value="" required="required">
+																						name="phoneUser" value="" required="required"  pattern="[0-9]{10}">
 
 																					<p id="errorPhone"></p>
 
 																				</div>
 
 																				<div class="form-group ">
-																					<input type="text" class="form-control top"
+																					<input type="email" class="form-control top"
 																						id="inputEmail"
 																						placeholder="Email (abc@gmail.com)"
 																						name="emailUser" value="" required="required">
@@ -1866,8 +1853,8 @@ prevBtn.forEach(function(item, index){
 		};
 
 		input2.onfocus = function() {
-			if (this.classList.contains('invalid2')) {
-				this.classList.remove('invalid2');
+			if (this.classList.contains('invalid')) {
+				this.classList.remove('invalid');
 				errorPhone.innerHTML = "";
 			}
 		};
