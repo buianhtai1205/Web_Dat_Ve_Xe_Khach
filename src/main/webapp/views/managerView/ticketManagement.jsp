@@ -29,15 +29,15 @@
 	<jsp:include page="/views/managerView/layout/sidebar.jsp" />
 
 	<section class="home">
-		<div class="text">Danh Sách Các Chuyến Xe</div>
+		<div class="text">Danh Sách Vé</div>
 		<div class="area-feat">
-			<a class="btn btn-success" href="addTrip">Thêm Chuyến Xe</a>
+	
 			<a class="btn btn-success" href=‪C:\LTW\DTDM\Đề thi toiec đợt 2.docx>Tải Xuống</a>
 		</div>
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
 				<input id="searchContent" class="form-control me-1" type="search"
-					placeholder="Nhập Mã môn học hoặc Tên môn học" aria-label="Search">
+					placeholder="Nhập số điện thoại" aria-label="Search">
 				<a onclick="Search();" class="btn btn-primary" type="submit">Search</a>
 			</div>
 			<br>
@@ -45,17 +45,27 @@
 				<thead>
 					<tr>
 						<th scope="col">id</th>
-						<th scope="col">Điểm đi</th>
+						<th scope="col">Họ Tên</th>
+						<th scope="col">Số điện thoại</th>
 						<th scope="col">Điểm đến</th>
-						<th scope="col">Thời gian</th>
+						<th scope="col">Số ghế</th>
 						<th scope="col">Giá</th>
-						<th scope="col">Loại xe</th>
-						<th scope="col">Biển số</th>
-						<th scope="col">Garage id</th>
-						<th>Cập nhật</th>
-						<th>Xóa</th>
 					</tr>
 				</thead>
+					<tbody>
+			  	<c:forEach items="${ ticketList }" var="ticket" varStatus="loop">
+				    <tr>
+					      
+					      <td>${ticket.tripid }</td>
+					     <td>${ ticket.fullname }</td> 
+					     <td>${ ticket.phonenumber }</td>
+					     <td>${ ticket.musty }</td>
+					   <td>${ ticket.numberchair }</td>
+					   <td>${ ticket.price }</td>
+					      
+				    </tr>
+				</c:forEach>
+			  	</tbody>
 			</table>
 		</div>
 	</section>
@@ -107,7 +117,7 @@
     		let searchContent = document.getElementById("searchContent").value;
     		
     		if (searchContent != null) {
-    			window.location.href = "searchListMonHoc?searchContent=" + searchContent;
+    			window.location.href = "searchTicket?searchContent=" + searchContent;
     		}
     	};
     </script>

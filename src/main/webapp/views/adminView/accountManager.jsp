@@ -75,7 +75,7 @@ cursor: pointer;
 				      <th scope="col">Số điện thoại</th>
 				      <th scope="col">Email</th>
 				      <th scope="col">Password</th>
-				 	
+				 	  <th scope="col">Id Garager</th>
 				      <th>Cập nhật</th>
 				      <th>Xóa</th>
 				    </tr>
@@ -88,7 +88,7 @@ cursor: pointer;
 					     <td>${ manager.phone_number }</td> 
 					     <td>${ manager.email }</td>
 					     <td>${ manager.password }</td>
-					   
+					   <td>${ manager.garaid }</td>
 					      <td>
 					      	<a class="btn btn-primary" href="editManager?id=${manager.id}">Cập nhập</a>
 					      </td>
@@ -145,7 +145,13 @@ cursor: pointer;
     			return false;
     		}
     	};
-    	
+    	function Search() {
+    		let searchContent = document.getElementById("searchContent").value;
+    		
+    		if (searchContent != null) {
+    			window.location.href = "searchManager?searchContent=" + searchContent;
+    		}
+    	};
     </script>
 </body>
 </html>

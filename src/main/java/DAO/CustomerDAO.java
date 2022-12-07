@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Customer;
+import model.Ticket;
 
 public class CustomerDAO {
 
@@ -149,5 +150,32 @@ public class CustomerDAO {
         
         pstm.executeUpdate();
     }
-
+	public static List<Customer> findCustomer(Connection conn, String require) throws SQLException {
+		
+        String sql = "Select a.id, a.fullname, a.phone_number, a.email, a.password from Customer a where a.fullname like '%"+require +"%' or a.phone_number like '%"
+        		+ require +"%' or a.email like '%" + require + "%' or a.password like '%" + require + "%'";
+        
+        PreparedStatement pstm = conn.prepareStatement(sql);
+       
+        System.out.println(sql);
+     
+        ResultSet rs = pstm.executeQuery();
+        List<Customer> list = new ArrayList<Customer>();
+        while (rs.next()) {
+        	
+        	int id = rs.getInt("id");
+			String ten = rs.getString("fullname");
+			String phone = rs.getString("phone_number");
+			String email = rs.getString("email");
+			String pass = rs.getString("password");
+			Customer mh = new Customer();
+			mh.setId(id);
+			mh.setFullname(ten);
+			mh.setPhone_number(phone);
+			mh.setEmail(email);
+			mh.setPassword(pass);
+			list.add(mh);
+        }
+        return list;
+    }
 }
