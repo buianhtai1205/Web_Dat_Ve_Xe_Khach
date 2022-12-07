@@ -34,16 +34,17 @@ public class ChuyenDAO{
 		}
 	}
 	
-	public void addChuyen(Connection con, int idChuyen, int idGhe, int idKhahcHang) {
+	public void addChuyen(Connection con, int idChuyen, int idGhe,int id_diemDon, int idKhahcHang) {
 		String sqlAddChuyen = ""
-				+ "INSERT into Ticket(trip_id,seat_id,customer_id) VALUES (?,?,?)";
+				+ "INSERT into Ticket(trip_id,seat_id,schedule_id,customer_id) VALUES (?,?,?,?)";
 		PreparedStatement pre = null;
 		try {
 			con.setAutoCommit(false);
 			pre = con.prepareStatement(sqlAddChuyen);
 			pre.setInt(1, idChuyen);
 			pre.setInt(2, idGhe);
-			pre.setInt(3, idKhahcHang);
+			pre.setInt(3, id_diemDon);
+			pre.setInt(4, idKhahcHang);
 			pre.executeUpdate();
 			con.commit();
 		} catch (SQLException e) {

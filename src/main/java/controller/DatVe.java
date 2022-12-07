@@ -14,8 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import DAO.ChuyenDAO;
 import DAO.CustomerDAO;
+import DAO.ScheduleDAO;
 import DAO.SeatDAO;
 import model.Customer;
+import model.Schedule;
 import model.Seat;
 
 /**
@@ -54,50 +56,92 @@ public class DatVe extends HttpServlet {
 	
 		boolean hasError = false;
 		String errorString = null;
-		String idChuyen = (String) session.getAttribute("idChuyen");
-		//String idChuyen= request.getParameter("inputIdChuyenXe");
-		String idGhe = request.getParameter("gheDangChon");
-		System.out.println(idChuyen);
-		System.out.println(idGhe);
-		session.setAttribute("idGhe", idGhe);
-		
-		String tenKh = request.getParameter("nameUser");
-		String phoneUser = request.getParameter("phoneUser");
-		String email = request.getParameter("emailUser");
+		//String idChuyen = (String) session.getAttribute("idChuyen");
+		String idChuyen= request.getParameter("inputIdChuyenXe");
+		String idGhe1 = request.getParameter("seatID1");
+		String idGhe2= request.getParameter("seatID2");
+		String idGhe3= request.getParameter("seatID3");
+		String diemDon= request.getParameter("checkbox_"+idChuyen);
+		String diemTra= request.getParameter("checkbox"+idChuyen);
+		session.setAttribute("idGhe1", idGhe1);
+		session.setAttribute("idGhe2", idGhe2);
+		session.setAttribute("idGhe3", idGhe3);
+		String tenKh = request.getParameter("nameUser"+idChuyen);
+		String phoneUser = request.getParameter("phoneUser"+idChuyen);
+		String email = request.getParameter("emailUser"+idChuyen);
 		String pass = MyUtils.generatePassword(8);
-		String noiDung = "Chuyến số: "  + "Ghế số: " + idGhe + "Địa điểm đón: "  + "Địa điểm trả: "
-				+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "Mật khẩu: "+ pass;
-
+//		System.out.println("idChuyen" + idChuyen);
+//		System.out.println("idGhe1" +idGhe1);
+//		System.out.println("idGhe2" +idGhe2);
+//		System.out.println("idGhe3" +idGhe3);
+//		System.out.println("diemDon"+diemDon);
+//		System.out.println("diemTra"+diemTra);
+//		System.out.println("nameUser"+tenKh);
+//		System.out.println("phoneUser"+phoneUser);
+//		System.out.println("emailUser"+email);
+//		System.out.println(pass);
+		
 		
 		Customer user = null;
 		try {
-			if(idGhe !=null && idChuyen != null && tenKh !=null && phoneUser !=null && email != null) {
+			if(idGhe1 !=null && idChuyen != null && diemDon != null && diemTra != null && tenKh !=null && phoneUser !=null && email != null) {
+				ScheduleDAO sc = new ScheduleDAO();
+				String _diemDon = sc.getDiemDon(con,diemDon).toString();
+				String _diemTra =sc.getDiemDon(con,diemTra).toString();
+				System.out.println("_diemDon"+_diemDon);
+				System.out.println("_diemTra"+_diemTra);
+				String noiDung = "Chuyến số: "  + "Ghế số: " + idGhe1 + "Địa điểm đón: " + _diemDon + "Địa điểm trả: " + _diemTra
+				+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "Mật khẩu: "+ pass;
+
 				c.addKhachHang(con, tenKh, phoneUser, email, pass);
 				session.setAttribute("tenKh", tenKh);
 				session.setAttribute("phoneUser",phoneUser);
 				session.setAttribute("email", email);
+				session.setAttribute("_diemDon", _diemDon);
+				session.setAttribute("_diemTra",_diemTra);
+
 				try {
 					// Tìm user trong DB.
 					user = CustomerDAO.findUser(con, phoneUser);
 					int idUser = user.getId();
-					if (idChuyen != null && idGhe != null && String.valueOf(idUser) != null) {
+					if (idChuyen != null && idGhe1 != null && String.valueOf(idUser) != null) {
 //						int id = Integer.parseInt(idGhe);
 						int idchuyen = Integer.parseInt(idChuyen);
+						int idDiemDon = Integer.parseInt(diemDon);
+						int idDiemTra = Integer.parseInt(diemTra);
 						try {
+							//lay seat de them vao ticket
 							SeatDAO seatDAO = new SeatDAO();
 							Seat seat = new Seat();
-							seat = seatDAO.getIdSeat(con, idGhe);
-							int idSeat = seat.getId();
+							//kiem tra tung seat hop le thi se them chuyen
+							if(idGhe1!="") {
+								seat = seatDAO.getIdSeat(con, idGhe1);
+								int idSeat = seat.getId();		
+								if(String.valueOf(idSeat) != null) {
+									c.addChuyen(con, idchuyen, idSeat,idDiemDon, idUser);
+								}
+							}
+							if(idGhe2!="") {
+								seat = seatDAO.getIdSeat(con, idGhe2);
+								int idSeat2 = seat.getId();
+								if(String.valueOf(idSeat2) != null) {
+									c.addChuyen(con, idchuyen, idSeat2,idDiemDon, idUser);
+								}
+							}
 							
-							if(String.valueOf(idSeat) != null) {
-								c.addChuyen(con, idchuyen, idSeat, idUser);
+							if(idGhe3!="") {
+								seat = seatDAO.getIdSeat(con, idGhe3);
+								int idSeat3 = seat.getId();
+								if(String.valueOf(idSeat3) != null) {
+									c.addChuyen(con, idchuyen, idSeat3,idDiemDon, idUser);
+								}
+							}
 								
 								SendEmail.getInstant().guiMail(email, noiDung);
 								String mes = "Email của quý khách đã gửi thành công!";
 								request.setAttribute("mes", mes);
 								response.sendRedirect(request.getContextPath() + Router.THONG_BAO);
 								
-							}
 							
 						} catch (Exception e) {
 							// TODO: handle exception

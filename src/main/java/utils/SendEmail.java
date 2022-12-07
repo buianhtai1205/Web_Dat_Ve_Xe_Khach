@@ -25,8 +25,8 @@ import javax.mail.internet.*;
 public class SendEmail {
 	private static SendEmail instant = new SendEmail();
 	private static Session session;
-	private static final String USER = "voduytao3@gmail.com";
-	private static final String PASSWORD = "huujnitaugdvmoxv";
+	private static final String USER = "duytaovo@gmail.com";
+	private static final String PASSWORD = "etbnkphnuxajltbn";
 
 	private SendEmail() {
 		Properties prop = System.getProperties();

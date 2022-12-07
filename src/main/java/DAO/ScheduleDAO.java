@@ -32,4 +32,25 @@ public class ScheduleDAO {
 		return list;
 	}
 	
+
+		public String getDiemDon(Connection con, String diemDon)
+	{
+		String sql = "SELECT musty FROM Schedule WHERE id =  " + diemDon;
+		
+		PreparedStatement pre = null;
+		try {
+			pre = con.prepareStatement(sql);
+			ResultSet res = pre.executeQuery();
+			while (res.next()) {
+				//Schedule schedule = new Schedule();
+				String musty = res.getString("musty");
+				System.out.println(musty);
+				return musty;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

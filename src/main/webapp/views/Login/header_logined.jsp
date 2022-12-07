@@ -7,7 +7,7 @@
 	<nav class="navbar navbar-expand-md navbar-light">
 		<div class="col-md-8 col-xl-7 col-lg-9 col-sm-6 d-flex">
 			<a class="navbar-brand" href="${pageContext.request.contextPath}/">
-				<img src="assets/user/images/logo4.png" alt="">
+				<img src="assets/user/images/logo1.png" alt="">
 			</a>
 			<div class="Categories">
 			</div> 
