@@ -320,4 +320,14 @@
     <servlet-name>SearchListGarageDisist</servlet-name>
     <url-pattern>/SearchListGarageDisist</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateGarageServlet</display-name>
+    <servlet-name>CreateGarageServlet</servlet-name>
+    <servlet-class>controller.ADMIN.CreateGarageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateGarageServlet</servlet-name>
+    <url-pattern>/CreateGarageServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

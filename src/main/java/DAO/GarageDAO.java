@@ -88,6 +88,19 @@ public class GarageDAO {
 		return list;
 	}
 
+	public static void insertGarage(Connection conn, String fullname, String address, String description)
+			throws SQLException {
+		String sql = "Insert into Garage values (?, ?, ?, ?)";
+		//
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		int deleted = 0;
+		pstm.setString(1, fullname);
+		pstm.setString(2, address);
+		pstm.setString(3, description);
+		pstm.setInt(4, deleted);
+		pstm.executeUpdate();
+	}
+
 	public static List<Garage> findListGarages(Connection conn, String require, int deleted) throws SQLException {
 		String sql = "Select * from Garage a where (a.fullname like N'%" + require + "%' or a.address like '%" + require
 				+ "%') and a.deleted = " + deleted;

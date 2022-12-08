@@ -31,7 +31,7 @@
 	<section class="home">
 		<div class="text">Danh Sách Hãng Xe Đang Hoạt Động</div>
 		<div class="area-feat">
-			<a class="btn btn-success" href="addTrip">Thêm Chuyến Xe</a> <!-- <a
+			<a class="btn btn-success" href="createGarage">Thêm Hãng Xe</a> <!-- <a
 				class="btn btn-success" href=‪C:\LTW\DTDM\Đề thi toiec đợt 2.docx>Tải
 				Xuống</a> -->
 		</div>

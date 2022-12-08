@@ -22,6 +22,7 @@ public class Router {
 	public static final String ADMIN_CREATEMANAGER = "/views/adminView/createManager.jsp";
 	public static final String ADMIN_LISTMANAGER = "/views/adminView/accountManager.jsp";
 	public static final String ADMIN_GARAGEDESIST = "/views/adminView/garageDesist.jsp";
+	public static final String ADMIN_CREATEGARAGE = "/views/adminView/createGarage.jsp";
 	// manager
 	public static final String MANAGER_LOGIN = "/views/managerView/login.jsp";
 	public static final String MANAGER_HOME = "/views/managerView/managerHome.jsp";
