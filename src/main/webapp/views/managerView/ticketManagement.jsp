@@ -32,7 +32,7 @@
 		<div class="text">Danh Sách Vé</div>
 		<div class="area-feat">
 	
-			<a class="btn btn-success" href=‪C:\LTW\DTDM\Đề thi toiec đợt 2.docx>Tải Xuống</a>
+			<a class="btn btn-success" href= "exportTicket">Tải Xuống</a>
 		</div>
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">

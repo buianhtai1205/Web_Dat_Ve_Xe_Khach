@@ -340,4 +340,14 @@
     <servlet-name>homePageManager</servlet-name>
     <url-pattern>/homePageManager</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ExportTicket</display-name>
+    <servlet-name>ExportTicket</servlet-name>
+    <servlet-class>controller.ExportTicket</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExportTicket</servlet-name>
+    <url-pattern>/ExportTicket</url-pattern>
+  </servlet-mapping>
 </web-app>
