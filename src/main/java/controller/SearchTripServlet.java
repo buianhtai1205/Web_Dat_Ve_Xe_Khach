@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Schedule;
 import model.Seat;
 import model.Trip;
@@ -52,10 +53,15 @@ public class SearchTripServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		String departure = request.getParameter("departure");
 		String destination = request.getParameter("destination");
 		String date = request.getParameter("departure_time");
-		System.out.println(date);
+		
+		HttpSession session=request.getSession();
+		session.setAttribute("departure", departure);
+		session.setAttribute("destination", destination);
+		session.setAttribute("departure_time", date);
 		
 		ArrayList<Trip> list_trip = new ArrayList<Trip>();
 		Connection conn = MyUtils.getStoredConnection(request);

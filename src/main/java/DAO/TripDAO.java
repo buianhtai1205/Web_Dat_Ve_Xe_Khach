@@ -340,5 +340,205 @@ public class TripDAO {
 		pstm2.setInt(1, id);
 		pstm2.executeUpdate();
 	}
+	
+	public static ArrayList<Trip> getListTripOrderByTimeIncre(Connection con, String departute, String destination,
+			String departure_time) {
+		ArrayList<Trip> list_trip = new ArrayList<Trip>();
+		String sql = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
+				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ "' and destination = N'" + destination + "' and Garage.deleted = 0 ORDER BY departure_time";
+		PreparedStatement pre = null;
 
+		try {
+			pre = con.prepareStatement(sql);
+			ResultSet res = pre.executeQuery();
+			while (res.next()) {
+				Trip trip = new Trip();
+				trip.setId(res.getInt("id"));
+				trip.setDeparture(res.getString("departure"));
+				trip.setDestination(res.getString("destination"));
+				trip.setDeparture_time(res.getString("departure_time"));
+				trip.setPrice(res.getInt("price"));
+				trip.setNum_seat(res.getInt("num_seat"));
+				trip.setTrip_board(res.getString("trip_board"));
+				trip.garage.setId(res.getInt("garage_id"));
+				trip.garage.setAddress(res.getString("address"));
+				trip.garage.setFullname(res.getString("fullname"));
+				trip.garage.setDescription(res.getString("description"));
+				list_trip.add(trip);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list_trip;
+	}
+	
+	public static ArrayList<Trip> getListTripOrderByTimeDecre(Connection con, String departute, String destination,
+			String departure_time) {
+		ArrayList<Trip> list_trip = new ArrayList<Trip>();
+		String sql = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
+				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ "' and destination = N'" + destination + "' and Garage.deleted = 0 ORDER BY departure_time DESC";
+		PreparedStatement pre = null;
+
+		try {
+			pre = con.prepareStatement(sql);
+			ResultSet res = pre.executeQuery();
+			while (res.next()) {
+				Trip trip = new Trip();
+				trip.setId(res.getInt("id"));
+				trip.setDeparture(res.getString("departure"));
+				trip.setDestination(res.getString("destination"));
+				trip.setDeparture_time(res.getString("departure_time"));
+				trip.setPrice(res.getInt("price"));
+				trip.setNum_seat(res.getInt("num_seat"));
+				trip.setTrip_board(res.getString("trip_board"));
+				trip.garage.setId(res.getInt("garage_id"));
+				trip.garage.setAddress(res.getString("address"));
+				trip.garage.setFullname(res.getString("fullname"));
+				trip.garage.setDescription(res.getString("description"));
+				list_trip.add(trip);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list_trip;
+	}
+	
+	public static ArrayList<Trip> getListTripOrderByPriceIncre(Connection con, String departute, String destination,
+			String departure_time) {
+		ArrayList<Trip> list_trip = new ArrayList<Trip>();
+		String sql = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
+				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ "' and destination = N'" + destination + "' and Garage.deleted = 0 ORDER BY price";
+		PreparedStatement pre = null;
+
+		try {
+			pre = con.prepareStatement(sql);
+			ResultSet res = pre.executeQuery();
+			while (res.next()) {
+				Trip trip = new Trip();
+				trip.setId(res.getInt("id"));
+				trip.setDeparture(res.getString("departure"));
+				trip.setDestination(res.getString("destination"));
+				trip.setDeparture_time(res.getString("departure_time"));
+				trip.setPrice(res.getInt("price"));
+				trip.setNum_seat(res.getInt("num_seat"));
+				trip.setTrip_board(res.getString("trip_board"));
+				trip.garage.setId(res.getInt("garage_id"));
+				trip.garage.setAddress(res.getString("address"));
+				trip.garage.setFullname(res.getString("fullname"));
+				trip.garage.setDescription(res.getString("description"));
+				list_trip.add(trip);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list_trip;
+	}
+	
+	public static ArrayList<Trip> getListTripOrderByPriceDecre(Connection con, String departute, String destination,
+			String departure_time) {
+		ArrayList<Trip> list_trip = new ArrayList<Trip>();
+		String sql = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
+				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ "' and destination = N'" + destination + "' and Garage.deleted = 0 ORDER BY price DESC";
+		PreparedStatement pre = null;
+
+		try {
+			pre = con.prepareStatement(sql);
+			ResultSet res = pre.executeQuery();
+			while (res.next()) {
+				Trip trip = new Trip();
+				trip.setId(res.getInt("id"));
+				trip.setDeparture(res.getString("departure"));
+				trip.setDestination(res.getString("destination"));
+				trip.setDeparture_time(res.getString("departure_time"));
+				trip.setPrice(res.getInt("price"));
+				trip.setNum_seat(res.getInt("num_seat"));
+				trip.setTrip_board(res.getString("trip_board"));
+				trip.garage.setId(res.getInt("garage_id"));
+				trip.garage.setAddress(res.getString("address"));
+				trip.garage.setFullname(res.getString("fullname"));
+				trip.garage.setDescription(res.getString("description"));
+				list_trip.add(trip);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list_trip;
+	}
+	
+	public static ArrayList<Trip> getListTripFilter(Connection con, 
+			String departute, String destination, String departure_time, 
+			int filter_time1, int filter_time2, int filter_time3, int filter_time4,
+			int min, int max) {
+		ArrayList<Trip> list_trip = new ArrayList<Trip>();
+		String sql = "";
+		String sqlStart = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
+				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ "' and destination = N'" + destination + "' and Garage.deleted = 0 ";
+		String sqlFilterTime = "";
+		String timeStr = " and (\r\n"
+				+ "( 1 = 2";
+		if (filter_time1 == 1) {
+			timeStr = timeStr + " or (CONVERT(varchar(20),CONVERT(time, departure_time), 114) >= CONVERT(varchar(20),CONVERT(time, '00:00:00'), 114) \r\n"
+					+ "	and CONVERT(varchar(20),CONVERT(time, departure_time), 114) <= CONVERT(varchar(20),CONVERT(time, '06:00:00'), 114))";
+		}
+		if (filter_time2 == 1) {
+			timeStr = timeStr + " or (CONVERT(varchar(20),CONVERT(time, departure_time), 114) >= CONVERT(varchar(20),CONVERT(time, '06:01:00'), 114) \r\n"
+					+ "	and CONVERT(varchar(20),CONVERT(time, departure_time), 114) <= CONVERT(varchar(20),CONVERT(time, '12:00:00'), 114))";
+		}
+		if (filter_time3 == 1) {
+			timeStr = timeStr + " or (CONVERT(varchar(20),CONVERT(time, departure_time), 114) >= CONVERT(varchar(20),CONVERT(time, '12:01:00'), 114) \r\n"
+					+ "	and CONVERT(varchar(20),CONVERT(time, departure_time), 114) <= CONVERT(varchar(20),CONVERT(time, '18:00:00'), 114))";
+		}
+		if (filter_time4 == 1) {
+			timeStr = timeStr + " or(CONVERT(varchar(20),CONVERT(time, departure_time), 114) >= CONVERT(varchar(20),CONVERT(time, '18:01:00'), 114) \r\n"
+					+ "	and CONVERT(varchar(20),CONVERT(time, departure_time), 114) < CONVERT(varchar(20),CONVERT(time, '00:00:00'), 114))";
+		}
+		
+		if (filter_time1 == 0 && filter_time2 == 0 && filter_time3 == 0 && filter_time4 == 0) {
+			sqlFilterTime = "";
+			
+			sql = sqlStart 
+					+ " and (\r\n"
+					+ "	price >= " + min + " and price <= " + max + " )";
+		} else {
+			sqlFilterTime = timeStr + " )";
+			
+			sql = sqlStart + sqlFilterTime
+					+ " and (\r\n"
+					+ "	price >= " + min + " and price <= " + max + " ) )";
+		}
+		
+		
+		
+		
+		PreparedStatement pre = null;
+		System.out.println(sql);
+
+		try {
+			pre = con.prepareStatement(sql);
+			ResultSet res = pre.executeQuery();
+			while (res.next()) {
+				Trip trip = new Trip();
+				trip.setId(res.getInt("id"));
+				trip.setDeparture(res.getString("departure"));
+				trip.setDestination(res.getString("destination"));
+				trip.setDeparture_time(res.getString("departure_time"));
+				trip.setPrice(res.getInt("price"));
+				trip.setNum_seat(res.getInt("num_seat"));
+				trip.setTrip_board(res.getString("trip_board"));
+				trip.garage.setId(res.getInt("garage_id"));
+				trip.garage.setAddress(res.getString("address"));
+				trip.garage.setFullname(res.getString("fullname"));
+				trip.garage.setDescription(res.getString("description"));
+				list_trip.add(trip);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list_trip;
+	}
 }

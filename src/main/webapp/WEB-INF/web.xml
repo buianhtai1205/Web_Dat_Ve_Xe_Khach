@@ -260,4 +260,5 @@
     <servlet-name>SearchManager</servlet-name>
     <url-pattern>/SearchManager</url-pattern>
   </servlet-mapping>
+  
 </web-app>
