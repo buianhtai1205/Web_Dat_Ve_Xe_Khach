@@ -3,12 +3,11 @@
 <nav class="sidebar close">
 	<header>
 		<div class="image-text">
-			<span class="image"> <img src="assets/admin/images/logo.png" alt="">
+			<span class="image"> <img src="assets/admin/images/bus-car-icon.svg" alt="">
 			</span>
 
 			<div class="text logo-text">
-				<span class="name">HCMUTE</span> <span class="profession">Web
-					Manager </span>
+				<span class="name">VEXERE</span> <span class="profession">Admin</span>
 			</div>
 		</div>
 
@@ -23,7 +22,7 @@
 
 			<ul class="menu-links">
 				<li class="nav-link"><a href="thongKe"> <i
-						class='bx bx-home-alt icon'></i> <span class="text nav-text">Dashboard</span>
+						class='bx bx-home-alt icon'></i> <span class="text nav-text">Trang Chủ</span>
 				</a></li>
 
 				<li class="nav-link"><a href="garageacctive"> <i
@@ -31,27 +30,27 @@
 						class="text nav-text">Hãng xe hoạt động</span>
 				</a></li>
 
-				<li class="nav-link"><a href="garagedesist"> <i
+				<li class="nav-link"><a href="garageDesist"> <i
 						class='bx bx-bell icon'></i> <span class="text nav-text">Hãng xe tạm nghỉ</span>
 				</a></li>
 
 				<li class="nav-link"><a href="customerList"> <i
-						class='bx bx-pie-chart-alt icon'></i> <span class="text nav-text">Quản Lý ACCOUNT</span>
+						class='bx bx-pie-chart-alt icon'></i> <span class="text nav-text">Quản Lý Account</span>
 				</a></li>
-
+<!-- 
 				<li class="nav-link"><a href="#"> <i
 						class='bx bx-heart icon'></i> <span class="text nav-text">Likes</span>
 				</a></li>
 
 				<li class="nav-link"><a href="#"> <i
 						class='bx bx-wallet icon'></i> <span class="text nav-text">Wallets</span>
-				</a></li>
+				</a></li> -->
 
 			</ul>
 		</div>
 
 		<div class="bottom-content">
-			<li class=""><a href="#"> <i class='bx bx-log-out icon'></i>
+			<li class=""><a href="admin"> <i class='bx bx-log-out icon'></i>
 					<span class="text nav-text">Logout</span>
 			</a></li>
 

@@ -968,14 +968,19 @@
     <script>
         var count = 0;
       
-        
+				
         function clickSeatFunction(seat_id,trip_id) {
           let seat = document.getElementsByClassName(seat_id);
+          var price = document.getElementById("price"+trip_id).value;
+          var sumPrice = document.getElementById("sumPrice"+trip_id);
+          
           let seat_result = document.getElementById("seat_result"+trip_id);
           if (seat[0].classList[3] != "ArHJS")
           {
             if (seat[0].classList[4] == null) {
             count++;
+            
+           
             
               if (count < 4)
               {
@@ -987,12 +992,16 @@
                 seatItem.setAttribute("value", seat_id);
                 seatItem.setAttribute('hidden', true);
                 seat_result.appendChild(seatItem);
-              } else {
+              
+              } 
+              
+              else {
                   alert(
                 "Bạn được chọn tối đa 3 ghế! Xin thông cảm vì sự bất tiện này. Nếu bạn muốn đặt nhiều hơn, Vui lòng liên hệ trực tiếp với thu ngân qua số điện thoại của hãng."
               );
               count--;
               }
+							
             
             } else {
               seat[0].classList.remove("cUIhrn");
@@ -1002,7 +1011,10 @@
               count--;
             }
           }
-          
+
+					var priceSeat = count*price;
+          sumPrice.innerHTML = priceSeat + ".000đ"; 
+		  
         }
     </script>
 	 <script type="text/javascript">
@@ -1075,7 +1087,6 @@
 
 		
 		inputName.onblur = function () {
-			console.log(inputName)
 				if (inputName.value.length == 0) {
 						inputName.classList.add('invalid');
 						errorUserName.innerHTML = 'Please enter a correct first name and last name.'

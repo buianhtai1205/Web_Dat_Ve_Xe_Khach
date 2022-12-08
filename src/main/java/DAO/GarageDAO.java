@@ -88,6 +88,52 @@ public class GarageDAO {
 		return list;
 	}
 
+	public static List<Garage> findListGarages(Connection conn, String require, int deleted) throws SQLException {
+		String sql = "Select * from Garage a where (a.fullname like N'%" + require + "%' or a.address like '%" + require
+				+ "%') and a.deleted = " + deleted;
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		ResultSet rs = pstm.executeQuery();
+		List<Garage> list = new ArrayList<Garage>();
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			String fullname = rs.getString("fullname");
+			String address = rs.getString("address");
+			String description = rs.getString("description");
+			Garage garage = new Garage();
+			garage.setId(id);
+			garage.setFullname(fullname);
+			garage.setAddress(address);
+			garage.setDescription(description);
+			garage.setDeleted(deleted);
+			list.add(garage);
+		}
+
+		return list;
+	}
+
+	public List<Garage> listGaragesDesist(Connection conn) throws SQLException {
+		String sql = "select * from Garage where deleted = 1";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		ResultSet rs = pstm.executeQuery();
+		List<Garage> list = new ArrayList<Garage>();
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			String fullname = rs.getString("fullname");
+			String address = rs.getString("address");
+			String description = rs.getString("description");
+			int deleted = rs.getInt("deleted");
+			Garage garage = new Garage();
+			garage.setId(id);
+			garage.setFullname(fullname);
+			garage.setAddress(address);
+			garage.setDescription(description);
+			garage.setDeleted(deleted);
+			list.add(garage);
+		}
+
+		return list;
+	}
+
 	public static void updateGarage(Connection conn, int id, String fullname, String address, String description)
 			throws SQLException {
 		String sql = "UPDATE Garage SET fullname = ?, address = ?, description = ? WHERE id = ?";
@@ -98,6 +144,22 @@ public class GarageDAO {
 		pstm.setString(3, description);
 		pstm.setInt(4, id);
 		System.out.println("000000000000000000000000000009");
+		pstm.executeUpdate();
+	}
+
+	public static void setGarageDesist(Connection conn, int id) throws SQLException {
+		String sql = "update Garage set deleted = '1' where id = ?";
+
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setInt(1, id);
+		pstm.executeUpdate();
+	}
+
+	public static void setGarageAcctive(Connection conn, int id) throws SQLException {
+		String sql = "update Garage set deleted = '0' where id = ?";
+
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setInt(1, id);
 		pstm.executeUpdate();
 	}
 

@@ -260,5 +260,64 @@
     <servlet-name>SearchManager</servlet-name>
     <url-pattern>/SearchManager</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <description></description>
+    <display-name>GarageDesistServlet</display-name>
+    <servlet-name>GarageDesistServlet</servlet-name>
+    <servlet-class>controller.ADMIN.GarageDesistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GarageDesistServlet</servlet-name>
+    <url-pattern>/GarageDesistServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SetGarageDesistServlet</display-name>
+    <servlet-name>SetGarageDesistServlet</servlet-name>
+    <servlet-class>controller.ADMIN.SetGarageDesistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetGarageDesistServlet</servlet-name>
+    <url-pattern>/SetGarageDesistServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditGarageDesistServlet</display-name>
+    <servlet-name>EditGarageDesistServlet</servlet-name>
+    <servlet-class>controller.ADMIN.EditGarageDesistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditGarageDesistServlet</servlet-name>
+    <url-pattern>/EditGarageDesistServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ForgotPassManager</display-name>
+    <servlet-name>ForgotPassManager</servlet-name>
+    <servlet-class>controller.ForgotPassManager</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ForgotPassManager</servlet-name>
+    <url-pattern>/ForgotPassManager</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>searchGarage</display-name>
+    <servlet-name>searchGarage</servlet-name>
+    <servlet-class>controller.ADMIN.searchGarage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchGarage</servlet-name>
+    <url-pattern>/searchGarage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchListGarageDisist</display-name>
+    <servlet-name>SearchListGarageDisist</servlet-name>
+    <servlet-class>controller.ADMIN.SearchListGarageDisist</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchListGarageDisist</servlet-name>
+    <url-pattern>/SearchListGarageDisist</url-pattern>
+  </servlet-mapping>
 </web-app>
