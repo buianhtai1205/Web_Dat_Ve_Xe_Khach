@@ -88,6 +88,23 @@ public class ManagerDAO {
 		return null;
 	}
 
+	public static int checkDesist(Connection conn, String phoneManager, String passManager) throws SQLException {
+		String sql = "Select gr.deleted From Garage gr, Manager mg Where mg.phone_number=? and mg.password =? and gr.id = mg.garage_id";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setString(1, phoneManager);
+		pstm.setString(2, passManager);
+		int delete = 2;
+		System.out.println("11111111111" + delete);
+		ResultSet rs = pstm.executeQuery();
+		// delete = rs.getInt("delete");
+		// System.out.println("3333333333" + delete);
+		if (rs.next()) {
+			delete = rs.getInt("deleted");
+			System.out.println("11111111111" + delete);
+		}
+		return delete;
+	}
+
 	public static void insertManager(Connection conn, String fullname, String phone_number, String email,
 			String password, int garage_id) throws SQLException {
 		String sql = "Insert into Manager values (?, ?, ?, ?, ?)";

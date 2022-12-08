@@ -4,7 +4,8 @@
 <div id="wrapperAdmin">
 	<%@include file="layout/header.jsp"%>
 	<div id="Custome-div">
-		<form id="Customer-form" action="${pageContext.request.contextPath}/managerHome" method="POST">
+		<form id="Customer-form"
+			action="${pageContext.request.contextPath}/managerHome" method="POST">
 			<div>
 				<div id="Textbox">
 					<input type="text" name="username" id="username"
@@ -16,6 +17,7 @@
 						placeholder="Mật khẩu" aria-label="Mật khẩu">
 				</div>
 			</div>
+			<p style="color: red;">${ errorString }</p>
 			<div id="Button">
 				<button value="login" name="login" type="submit">Đăng nhập</button>
 			</div>

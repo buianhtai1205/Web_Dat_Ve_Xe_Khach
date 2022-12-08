@@ -52,6 +52,7 @@ public class CheckLoginManagerServlet extends HttpServlet {
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
+		// ManagerDAO managerDAO = new ManagerDAO();
 		Manager manager = null;
 		boolean hasError = false;
 		String errorString = null;
@@ -63,10 +64,17 @@ public class CheckLoginManagerServlet extends HttpServlet {
 				manager = ManagerDAO.findManager(conn, userName, password);
 				if (manager == null) {
 					hasError = true;
-					errorString = "Phone number or password invalid";
+					errorString = "Tài khoản hoặc mật khẩu không đúng!";
 				} else {
+					int check = ManagerDAO.checkDesist(conn, userName, password);
+					if (check == 1) {
+						errorString = "Tài khoản của bạn đã bị khóa!";
+						hasError = true;
+					}
+					System.out.println(check);
 					session.setAttribute("userManager", userName);
 				}
+
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -75,6 +83,8 @@ public class CheckLoginManagerServlet extends HttpServlet {
 			}
 		}
 		if (hasError) {
+			request.setAttribute("errorString", errorString);
+			System.out.println(errorString);
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.MANAGER_LOGIN);
 			dispatcher.forward(request, response);
 		} else {

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HomePage</title>
+<title>Hãng xe tạm ngưng</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -29,7 +29,7 @@
 	<jsp:include page="/views/adminView/layout/sidebar.jsp" />
 
 	<section class="home">
-		<div class="text">Danh Sách Các Chuyến Xe</div>
+		<div class="text">Danh Sách Hãng Xe Ngưng Hoạt Động</div>
 		<div class="area-feat">
 			<a class="btn btn-success" href="addTrip">Thêm Chuyến Xe</a> <a
 				class="btn btn-success" href=‪C:\LTW\DTDM\Đề thi toiec đợt 2.docx>Tải
@@ -50,13 +50,12 @@
 						<th scope="col">Địa Chỉ</th>
 						<th scope="col">Mô Tả</th>
 						<th scope="col">Trạng Thái</th>
-						<th>Cập nhật</th>
-						<th>Thêm tài khoản</th>
+						<th>Khôi phục</th>
 						<th>Xóa</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${ listGaragesActivate }">
+					<c:forEach var="item" items="${ listGaragesDesist }">
 						<tr>
 							<td>${ item.id }</td>
 							<td>${ item.fullname }</td>
@@ -64,9 +63,7 @@
 							<td>${ item.description }</td>
 							<td>Hoạt động</td>
 							<td><a class="btn btn-primary"
-								href="editGarage?id=${ item.id }">Cập nhập</a></td>
-							<td><a class="btn btn-primary"
-								href="createManager?id=${ item.id }">Thêm quản lý</a></td>
+								href="editGarageDesist?id=${ item.id }">Khôi phục</a></td>
 							<td><a class="btn btn-danger" href="#"
 								onclick="testConfirmDialog('${ item.id }');">Xóa</a></td>
 						</tr>
@@ -114,7 +111,7 @@
     		var result = confirm("Bạn chắc chắn muốn tạm ngưng hoạt động hãng xe này?");
     		
     		if (result) {
-    			window.location.href = "setGarageDesist?id=" + id;
+    			window.location.href = "garageDesist?id=" + id;
     		} else {
     			return false;
     		}

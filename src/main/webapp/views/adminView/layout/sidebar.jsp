@@ -31,7 +31,7 @@
 						class="text nav-text">Hãng xe hoạt động</span>
 				</a></li>
 
-				<li class="nav-link"><a href="garagedesist"> <i
+				<li class="nav-link"><a href="garageDesist"> <i
 						class='bx bx-bell icon'></i> <span class="text nav-text">Hãng xe tạm nghỉ</span>
 				</a></li>
 
