@@ -51,7 +51,47 @@ public class SeatDAO {
 		return seat;
 
 	}
+	
+	public Seat getChairByIdSeat(Connection con, String idSeat) {
 
+		String sql1 = "SELECT number_chair,status FROM Seat WHERE id = " + idSeat;
+
+		Seat seat = new Seat();
+		PreparedStatement pre = null;
+		ResultSet res;
+		try {
+			pre = con.prepareStatement(sql1);
+			res = pre.executeQuery();
+			while (res.next()) {
+				String number_chair = res.getString("number_chair");
+				int status = res.getInt("status");
+				seat.setNumber_chair(number_chair);
+				seat.setStatus(status);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+		return seat;
+
+	}
+	
+
+	public String getNumberSeat(Connection conn,String idChuyen) throws SQLException{
+		String sql = "Select count(*) as nb_seats from Ticket " + "where trip_id = ?";
+
+		PreparedStatement pstm = conn.prepareStatement(sql);
+
+		pstm.setString(1, idChuyen);
+		ResultSet rs = pstm.executeQuery();
+
+		if (rs.next()) {
+			String nbSeat = rs.getString("nb_seats");
+			return nbSeat;
+		}
+		return null;
+	}
 	public Seat getIdSeat(Connection conn, String idGhe) throws SQLException {
 
 		String sql = "Select id from Seat " + "where id = ?";

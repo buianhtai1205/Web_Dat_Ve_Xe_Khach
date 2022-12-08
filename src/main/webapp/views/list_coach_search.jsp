@@ -408,6 +408,7 @@
 															<h3 style="font-size: 20px">${ trip.garage.fullname }</h3>
 															<!-- 	<i class="fa fa-star">3.9</i> -->
 															<p class="content__1">${ trip.price } 000 VNĐ</p>
+															<input type="hidden" value="${trip.price}" name="priceTrip" id="price${trip.id}">
 														</div>
 														<p>Giường nằm ${ trip.num_seat } chỗ</p>
 														<i class="fa fa-map-pin">18h00P</i><br> <i
@@ -735,9 +736,7 @@
 																	style="display: block; border-bottom: 10px;"></div>
 																<div
 																	style="display: flex; justify-content: flex-end; margin-top: 10px;">
-																	<p
-																		style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
-																		cộng: 0đ</p>
+																	
 																	<button type="button" class="btn btn-primary btnNext"  onclick="btnNext('${ trip.id }',0)">Tiếp
 																		tục</button>
 																</div>
@@ -870,9 +869,9 @@
 																				</div>
 
 																				<div class="form-group ">
-																					<input type="text"
+																					<input type="tel"
 																						class="form-control top inputPhone"
-																						id="inputPhone${trip.id}" placeholder="Number phone "
+																						id="inputPhone${trip.id}" placeholder="Number phone " pattern="[0-9]{10}" 
 																						name="phoneUser${trip.id}" value="" required="required" onclick="onClickGetID('${ trip.id}')">
 
 																					<p id="errorNumberPhone"></p>
@@ -880,7 +879,7 @@
 																				</div>
 
 																				<div class="form-group ">
-																					<input type="text" class="form-control top inputEmail"
+																					<input type="email" class="form-control top inputEmail"
 																						id="inputEmail${trip.id}"
 																						placeholder="Email (abc@gmail.com)"
 																						name="emailUser${trip.id}" value="" required="required" onclick="onClickGetID('${ trip.id}')">
@@ -911,8 +910,7 @@
 																					style="margin-top: 20px" onclick="btnPrevious('${ trip.id }',1)">Quay lại</button>
 																				<div style="display: flex; margin-top: 10px;">
 																					<p
-																						style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
-																						cộng: ${trip.price}0đ</p>
+																						style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;" id="sumPrice${trip.id}"></p>
 																					<button type="submit" class="btn btn-primary">Xác
 																						nhận</button>
 																				</div>
@@ -956,14 +954,19 @@
     <script>
         var count = 0;
       
-        
+				
         function clickSeatFunction(seat_id,trip_id) {
           let seat = document.getElementsByClassName(seat_id);
+          var price = document.getElementById("price"+trip_id).value;
+          var sumPrice = document.getElementById("sumPrice"+trip_id);
+          
           let seat_result = document.getElementById("seat_result"+trip_id);
           if (seat[0].classList[3] != "ArHJS")
           {
             if (seat[0].classList[4] == null) {
             count++;
+            
+           
             
               if (count < 4)
               {
@@ -975,12 +978,16 @@
                 seatItem.setAttribute("value", seat_id);
                 seatItem.setAttribute('hidden', true);
                 seat_result.appendChild(seatItem);
-              } else {
+              
+              } 
+              
+              else {
                   alert(
                 "Bạn được chọn tối đa 3 ghế! Xin thông cảm vì sự bất tiện này. Nếu bạn muốn đặt nhiều hơn, Vui lòng liên hệ trực tiếp với thu ngân qua số điện thoại của hãng."
               );
               count--;
               }
+							
             
             } else {
               seat[0].classList.remove("cUIhrn");
@@ -990,7 +997,10 @@
               count--;
             }
           }
-          
+
+					var priceSeat = count*price;
+          sumPrice.innerHTML = priceSeat + ".000đ"; 
+		  
         }
     </script>
 	 <script type="text/javascript">
@@ -1063,7 +1073,6 @@
 
 		
 		inputName.onblur = function () {
-			console.log(inputName)
 				if (inputName.value.length == 0) {
 						inputName.classList.add('invalid');
 						errorUserName.innerHTML = 'Please enter a correct first name and last name.'

@@ -61,6 +61,7 @@ public class DatVe extends HttpServlet {
 		String idGhe1 = request.getParameter("seatID1");
 		String idGhe2= request.getParameter("seatID2");
 		String idGhe3= request.getParameter("seatID3");
+		String priceTrip= request.getParameter("priceTrip");
 		String diemDon= request.getParameter("checkbox_"+idChuyen);
 		String diemTra= request.getParameter("checkbox"+idChuyen);
 		session.setAttribute("idGhe1", idGhe1);
@@ -70,28 +71,14 @@ public class DatVe extends HttpServlet {
 		String phoneUser = request.getParameter("phoneUser"+idChuyen);
 		String email = request.getParameter("emailUser"+idChuyen);
 		String pass = MyUtils.generatePassword(8);
-//		System.out.println("idChuyen" + idChuyen);
-//		System.out.println("idGhe1" +idGhe1);
-//		System.out.println("idGhe2" +idGhe2);
-//		System.out.println("idGhe3" +idGhe3);
-//		System.out.println("diemDon"+diemDon);
-//		System.out.println("diemTra"+diemTra);
-//		System.out.println("nameUser"+tenKh);
-//		System.out.println("phoneUser"+phoneUser);
-//		System.out.println("emailUser"+email);
-//		System.out.println(pass);
-		
 		
 		Customer user = null;
 		try {
 			if(idGhe1 !=null && idChuyen != null && diemDon != null && diemTra != null && tenKh !=null && phoneUser !=null && email != null) {
 				ScheduleDAO sc = new ScheduleDAO();
+				
 				String _diemDon = sc.getDiemDon(con,diemDon).toString();
 				String _diemTra =sc.getDiemDon(con,diemTra).toString();
-				System.out.println("_diemDon"+_diemDon);
-				System.out.println("_diemTra"+_diemTra);
-				String noiDung = "Chuyến số: "  + "Ghế số: " + idGhe1 + "Địa điểm đón: " + _diemDon + "Địa điểm trả: " + _diemTra
-				+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "Mật khẩu: "+ pass;
 
 				c.addKhachHang(con, tenKh, phoneUser, email, pass);
 				session.setAttribute("tenKh", tenKh);
@@ -136,7 +123,14 @@ public class DatVe extends HttpServlet {
 									c.addChuyen(con, idchuyen, idSeat3,idDiemDon, idUser);
 								}
 							}
+								int _nbSeats =Integer.parseInt(seatDAO.getNumberSeat(con,idChuyen));
+								String priceSeat = String.valueOf(_nbSeats * Integer.parseInt(priceTrip));
+								Seat numberChairSeat1 = seatDAO.getChairByIdSeat(con, idGhe1);
+								Seat numberChairSeat2 = seatDAO.getChairByIdSeat(con, idGhe2);
+								Seat numberChairSeat3 = seatDAO.getChairByIdSeat(con, idGhe3);
 								
+								String noiDung = "Chuyến số: "  + "Ghế số: " + numberChairSeat1.getNumber_chair() + " "+numberChairSeat2.getNumber_chair() + " "+numberChairSeat3.getNumber_chair() + " "+ "Địa điểm đón: " + _diemDon + "\nĐịa điểm trả: " + _diemTra + "\nGìa vé: " + priceSeat  
+										+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "\nMật khẩu: "+ pass;
 								SendEmail.getInstant().guiMail(email, noiDung);
 								String mes = "Email của quý khách đã gửi thành công!";
 								request.setAttribute("mes", mes);
