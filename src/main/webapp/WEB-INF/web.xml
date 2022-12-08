@@ -300,4 +300,24 @@
     <servlet-name>ForgotPassManager</servlet-name>
     <url-pattern>/ForgotPassManager</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>searchGarage</display-name>
+    <servlet-name>searchGarage</servlet-name>
+    <servlet-class>controller.ADMIN.searchGarage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchGarage</servlet-name>
+    <url-pattern>/searchGarage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchListGarageDisist</display-name>
+    <servlet-name>SearchListGarageDisist</servlet-name>
+    <servlet-class>controller.ADMIN.SearchListGarageDisist</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchListGarageDisist</servlet-name>
+    <url-pattern>/SearchListGarageDisist</url-pattern>
+  </servlet-mapping>
 </web-app>

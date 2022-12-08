@@ -38,7 +38,7 @@
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
 				<input id="searchContent" class="form-control me-1" type="search"
-					placeholder="Nhập biển số xe" aria-label="Search"> <a
+					placeholder="Nhập thông tin" aria-label="Search"> <a
 					onclick="Search();" class="btn btn-primary" type="submit">Search</a>
 			</div>
 			<br>
@@ -123,7 +123,7 @@
     		let searchContent = document.getElementById("searchContent").value;
     		
     		if (searchContent != null) {
-    			window.location.href = "searchListTrips?searchContent=" + searchContent;
+    			window.location.href = "searchListGarages?searchContent=" + searchContent;
     		}
     	};
     </script>
