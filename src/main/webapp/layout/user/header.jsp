@@ -26,9 +26,13 @@
 					<ul class="navbar-nav">
 						<li class="nav-item business"><a class="nav-link" href="#">Thuê
 								xe</a></li>
-						<li class="nav-item teach"><a class="nav-link" href="#">Quản
-								lý Chuyến đi</a></li>
-						<li class="nav-item">
+						<li class="nav-item item4 ">
+							<div class="d-flex">
+
+								<button type="button" class="btn btn--white mr-2"
+									data-toggle="modal" data-target="#exampleModalll">Quản lý chuyến xe</button>
+							</div>
+						</li>
 						</li>
 						<li class="nav-item item4 ">
 							<div class="d-flex">
@@ -49,9 +53,10 @@
 			</button>
 		</nav>
 	</header>
+	<!-- <div class="modal-backdrop show"></div> -->
 	<!-- đăng nhập -->
 	<%@ include file="/views/Login/login_view.jsp"%>
-
-
+	 <%@ include file="/views/Login/login_manager.jsp"%>
+	
 
 

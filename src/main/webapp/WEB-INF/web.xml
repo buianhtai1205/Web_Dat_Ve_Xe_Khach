@@ -290,4 +290,14 @@
     <servlet-name>EditGarageDesistServlet</servlet-name>
     <url-pattern>/EditGarageDesistServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ForgotPassManager</display-name>
+    <servlet-name>ForgotPassManager</servlet-name>
+    <servlet-class>controller.ForgotPassManager</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ForgotPassManager</servlet-name>
+    <url-pattern>/ForgotPassManager</url-pattern>
+  </servlet-mapping>
 </web-app>

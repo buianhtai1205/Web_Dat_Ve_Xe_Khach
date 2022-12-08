@@ -51,6 +51,8 @@ public class CheckLoginManagerServlet extends HttpServlet {
 		Connection conn = MyUtils.getStoredConnection(request);
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
+		System.out.println(userName);
+		System.out.println(password);
 		HttpSession session = request.getSession();
 		// ManagerDAO managerDAO = new ManagerDAO();
 		Manager manager = null;
@@ -85,7 +87,7 @@ public class CheckLoginManagerServlet extends HttpServlet {
 		if (hasError) {
 			request.setAttribute("errorString", errorString);
 			System.out.println(errorString);
-			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.MANAGER_LOGIN);
+			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.LOGIN_MANAGER);
 			dispatcher.forward(request, response);
 		} else {
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.MANAGER_HOME);
