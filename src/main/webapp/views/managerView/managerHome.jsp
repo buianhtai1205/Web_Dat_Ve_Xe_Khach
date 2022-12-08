@@ -20,65 +20,135 @@
 <!----===== Boxicons CSS ===== -->
 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'
 	rel='stylesheet'>
-
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+     <link rel="stylesheet" href="././assets/admin/css/statics.css">
 </head>
 <body>
+	
 
+	<jsp:include page="/views/managerView/layout/sidebar.jsp" />  
 
-	<jsp:include page="/views/managerView/layout/sidebar.jsp" />
-
-	<section class="home">
-		<div class="text">Danh Sách Môn Học</div>
-		<div class="area-feat">
-			<a class="btn btn-success" href="createMonHoc">Thêm môn học</a>
-		</div>
-		<div class="content">
-			<div style="width: 50%;" class="d-flex">
-				<input id="searchContent" class="form-control me-1" type="search"
-					placeholder="Nhập Mã môn học hoặc Tên môn học" aria-label="Search">
-				<a onclick="Search();" class="btn btn-primary" type="submit">Search</a>
-			</div>
-			<br>
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Mã số môn học</th>
-						<th scope="col">Tên môn học</th>
-						<th scope="col">Số tín chỉ</th>
-						<th>Cập nhật</th>
-						<th>Xóa</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td width="2%"><br></td>
-						<td><strong>MS</strong><br></td>
-						<td><strong>Họ và Tên</strong></td>
-						<td><strong>Tên hãng xe</strong><br></td>
-						<td><strong>Số điện thoại</strong><br></td>
-						<td><strong>Email</strong><br></td>
-						<td><strong>Password</strong><br></td>
-						<td><strong>Mô tả</strong><br></td>
-						<td><strong>Thông tin khác</strong><br></td>
-					</tr>
-					<tr>
-						<td width="2%"><input type="checkbox" class="action"
-							name="remove_tutor" value="item"></td>
-						<td>01</td>
-						<td>Mai Hải Đăng</td>
-						<td>Nhà Xe Hải Đăng</td>
-						<td>0345888999</td>
-						<td>20110244@student.hcmute.edu.vn</td>
-						<td>maihaidang</td>
-						<td>acbhx</td>
-						<td>không có</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+	<section class="home" style="background-color: white;">
+		 <div class="section-skills">
+    <div class="row">
+        <div class="col-1-of-4">
+            <div class="skill-box skill-box-1">
+                <i class="skill-box__icon ion ion-bag"></i>
+                <h3 class="heading-tertiary">
+                    150
+                </h3>
+                <div class="skill-box__text">
+                    Đơn hàng mới
+                </div>
+            </div>
+        </div>
+        <div class="col-1-of-4">
+            <div class="skill-box skill-box-2">
+                <i class="skill-box__icon ion-stats-bars"></i>
+                <h3 class="heading-tertiary">
+                    50%
+                </h3>
+                <div class="skill-box__text">
+                    Tỉ lệ thoát
+                </div>
+            </div>
+        </div>
+        <div class="col-1-of-4">
+            <div class="skill-box skill-box-3">
+                <i class="skill-box__icon ion-person-add"></i>
+                <h3 class="heading-tertiary">
+                    44
+                </h3>
+                <div class="skill-box__text">
+                    Khách hàng mới
+                </div>
+            </div>
+        </div>
+        <div class="col-1-of-4">
+            <div class="skill-box skill-box-4">
+                <i class="skill-box__icon ion ion-pie-graph"></i>
+                <h3 class="heading-tertiary">
+                    65
+                </h3>
+                <div class="skill-box__text">
+                    Lượng truy cập mới nhất
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+    <div class="container">
+        <canvas height="150px" style="margin-top: 20px;
+        padding-left:100px;"  id="myChart"></canvas>
+    </div>
+    <script>
+        let myChart = document.getElementById('myChart').getContext('2d');
+        // Global Options
+        Chart.defaults.global.defaultFontFamily = 'Lato';
+        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.global.defaultFontColor = '#777';
+    
+        let massPopChart = new Chart(myChart, {
+          type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+          data:{
+            labels:['Số Chuyến', 'Số Vé', 'Lượt Request'],
+            datasets:[{
+              label:'Population',
+              data:[
+                5,
+                100,
+                153,
+                
+              ],
+              //backgroundColor:'green',
+              backgroundColor:[
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)',
+                'rgba(255, 99, 132, 0.6)'
+              ],
+              borderWidth:1,
+              borderColor:'#777',
+              hoverBorderWidth:3,
+              hoverBorderColor:'#000'
+            }]
+          },
+          options:{
+            title:{
+              display:true,
+              text:'Biểu Đồ Thống Kê Doanh Thu',
+              fontSize:25
+            },
+            legend:{
+              display:true,
+              position:'right',
+              labels:{
+                fontColor:'#000'
+              }
+            },
+            layout:{
+              padding:{
+                left:50,
+                right:0,
+                bottom:0,
+                top:0
+              }
+            },
+            tooltips:{
+              enabled:true
+            }
+          }
+        });
+      </script>
 	</section>
-
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
@@ -111,8 +181,8 @@
 		    }
 		});
     </script>
-	<script type="text/javascript" src="lib.js"></script>
-	<script type="text/javascript">
+    <script type="text/javascript" src="lib.js"></script>
+    <script type="text/javascript">
     	function testConfirmDialog(maso_monhoc) {
     		var result = confirm("Bạn chắc chắn muốn xóa môn học này?");
     		

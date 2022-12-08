@@ -31,9 +31,6 @@
 	<section class="home">
 		<div class="text">Danh Sách Hãng Xe Ngưng Hoạt Động</div>
 		<div class="area-feat">
-			<a class="btn btn-success" href="addTrip">Thêm Chuyến Xe</a> <a
-				class="btn btn-success" href=‪C:\LTW\DTDM\Đề thi toiec đợt 2.docx>Tải
-				Xuống</a>
 		</div>
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
@@ -51,7 +48,6 @@
 						<th scope="col">Mô Tả</th>
 						<th scope="col">Trạng Thái</th>
 						<th>Khôi phục</th>
-						<th>Xóa</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,8 +60,6 @@
 							<td>Hoạt động</td>
 							<td><a class="btn btn-primary"
 								href="editGarageDesist?id=${ item.id }">Khôi phục</a></td>
-							<td><a class="btn btn-danger" href="#"
-								onclick="testConfirmDialog('${ item.id }');">Xóa</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

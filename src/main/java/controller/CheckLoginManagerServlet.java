@@ -37,7 +37,7 @@ public class CheckLoginManagerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.MANAGER_HOME);
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.LOGIN_MANAGER);
 		dispatcher.forward(request, response);
 	}
 

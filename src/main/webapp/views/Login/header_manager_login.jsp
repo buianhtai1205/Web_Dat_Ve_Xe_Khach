@@ -161,7 +161,6 @@
 
 											<p id="errorNumberPhone" style="display: flex;"></p>
 										</div>
-										<p style="color: red;">${ notifi }</p>
 										<div class=""
 											style="display: flex; justify-content: space-between;">
 											<button class="button3"

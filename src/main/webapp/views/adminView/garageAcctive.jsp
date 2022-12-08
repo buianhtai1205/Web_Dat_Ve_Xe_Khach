@@ -29,11 +29,11 @@
 	<jsp:include page="/views/adminView/layout/sidebar.jsp" />
 
 	<section class="home">
-		<div class="text">Danh Sách Các Chuyến Xe</div>
+		<div class="text">Danh Sách Hãng Xe Đang Hoạt Động</div>
 		<div class="area-feat">
-			<a class="btn btn-success" href="addTrip">Thêm Chuyến Xe</a> <a
+			<a class="btn btn-success" href="addTrip">Thêm Chuyến Xe</a> <!-- <a
 				class="btn btn-success" href=‪C:\LTW\DTDM\Đề thi toiec đợt 2.docx>Tải
-				Xuống</a>
+				Xuống</a> -->
 		</div>
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">

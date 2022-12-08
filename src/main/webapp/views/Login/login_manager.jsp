@@ -8,8 +8,7 @@
 	border-color: red !important;
 }
 
-
-#error,#error2, #error3, #errorNumberPhone {
+#error, #error2, #error3, #errorNumberPhone {
 	color: red;
 }
 </style>
@@ -147,9 +146,11 @@
 										</a>
 									</div>
 									<H2>Forgot password</H2>
-									<form action="${pageContext.request.contextPath}/forgotPassManager" method="POST">
+									<form
+										action="${pageContext.request.contextPath}/forgotPassManager"
+										method="POST">
 										<div class="alert  d-flex align-items-center" role="alert">
-									
+
 											<div>${errorString}</div>
 										</div>
 										<div class="form-group">
@@ -166,7 +167,6 @@
 												style="margin: 0; margin-right: auto; width: 23%; margin-left: 0px;"
 												type="submit">Submit</button>
 										</div>
-
 									</form>
 								</div>
 							</div>
@@ -229,28 +229,26 @@
 	</script>
 
 	<script type="text/javascript">
-  function validatePhoneNumber(input_str) {
-    var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+		function validatePhoneNumber(input_str) {
+			var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 
-    return re.test(input_str);
-  }
+			return re.test(input_str);
+		}
 
-  var _phoneNumber = document.getElementById("_phoneNumber");
-  _phoneNumber.onblur = function () {
-    if (!validatePhoneNumber(_phoneNumber.value)) {
-      _phoneNumber.classList.add("invalid");
-      errorNumberPhone.innerHTML = "Please enter a correct number phone.";
-    }
-  };
+		var _phoneNumber = document.getElementById("_phoneNumber");
+		_phoneNumber.onblur = function() {
+			if (!validatePhoneNumber(_phoneNumber.value)) {
+				_phoneNumber.classList.add("invalid");
+				errorNumberPhone.innerHTML = "Please enter a correct number phone.";
+			}
+		};
 
-  _phoneNumber.onfocus = function () {
-    if (this.classList.contains("invalid")) {
-      this.classList.remove("invalid");
-      errorNumberPhone.innerHTML = "";
-    }
-  };
-
-  
-</script>
+		_phoneNumber.onfocus = function() {
+			if (this.classList.contains("invalid")) {
+				this.classList.remove("invalid");
+				errorNumberPhone.innerHTML = "";
+			}
+		};
+	</script>
 </body>
 </html>

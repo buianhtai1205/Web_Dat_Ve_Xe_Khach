@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HomePage</title>
+<title>Danh Sách Các Chuyến Xe</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -32,7 +32,6 @@
 		<div class="text">Danh Sách Các Chuyến Xe</div>
 		<div class="area-feat">
 			<a class="btn btn-success" href="addTrip">Thêm Chuyến Xe</a>
-			<a class="btn btn-success" href=‪C:\LTW\DTDM\Đề thi toiec đợt 2.docx>Tải Xuống</a>
 		</div>
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
