@@ -116,18 +116,7 @@
 
 						<div class="vitrighe">
 							<p>Chọn Vị Trí Ghế</p>
-							<div class="hangghe">
-								<span class="chair">Hàng ghế Trống</span>
-								<div class="add">
-									<button class="add__ve" id="button1">
-										<i class="fa fa-plus"></i>
-									</button>
-									<p>1</p>
-									<button class="add__ve" id="button2">
-										<i class="fa fa-minus"></i>
-									</button>
-								</div>
-							</div>
+							
 							<div class="border"></div>
 							<div class="hangghe">
 								<span class="chair">Hàng ghế Đầu</span> <input type="checkbox"
@@ -410,7 +399,7 @@
 															<p class="content__1">${ trip.price } 000 VNĐ</p>
 														</div>
 														<p>Giường nằm ${ trip.num_seat } chỗ</p>
-														<i class="fa fa-map-pin">18h00P</i><br> <i
+														<i class="fa fa-map-pin">${ trip.departure_time }</i><br> <i
 															class="fa fa-map-marker-alt"></i>
 													</div>
 
