@@ -330,4 +330,14 @@
     <servlet-name>CreateGarageServlet</servlet-name>
     <url-pattern>/CreateGarageServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>homePageManager</display-name>
+    <servlet-name>homePageManager</servlet-name>
+    <servlet-class>controller.homePageManager</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>homePageManager</servlet-name>
+    <url-pattern>/homePageManager</url-pattern>
+  </servlet-mapping>
 </web-app>

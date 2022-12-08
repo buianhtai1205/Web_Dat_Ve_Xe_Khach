@@ -23,7 +23,7 @@
 				type="text" placeholder="Search..."></li>
 
 			<ul class="menu-links">
-				<li class="nav-link"><a href="managerHome"> <i
+				<li class="nav-link"><a href="managerHomePage"> <i
 						class='bx bx-home-alt icon'></i> <span class="text nav-text">Trang
 							Chủ</span>
 				</a></li>
