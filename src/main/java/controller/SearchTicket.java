@@ -2,9 +2,10 @@ package controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
-import DAO.TripDAO;
+import connect_db.SQLServerConnUtils_SQLJDBC;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,21 +13,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Trip;
-import utils.MyUtils;
-import utils.Router;
+import model.Ticket;
 
 /**
- * Servlet implementation class TripManagementServlet
+ * Servlet implementation class SearchTicket
  */
-@WebServlet(name = "tripManagement", urlPatterns = { "/tripManagement" })
-public class TripManagementServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/searchTicket" })
+public class SearchTicket extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public TripManagementServlet() {
+	public SearchTicket() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,28 +34,33 @@ public class TripManagementServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// Connection conn = null;
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		Connection conn = MyUtils.getStoredConnection(request);
-		HttpSession session = request.getSession();
-		List<Trip> list = null;
-		TripDAO tripDAO = new TripDAO();
-		String userManager = (String) session.getAttribute("userManager");
+		Connection conn = null;
 		try {
-			list = tripDAO.listTrips(conn, userManager);
-		} catch (Exception e) {
-			// TODO: handle exception
+			conn = SQLServerConnUtils_SQLJDBC.getSQLServerConnection_SQLJDBC();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		session.setAttribute("listTrips", list);
-		RequestDispatcher dispatcher //
-				= this.getServletContext().getRequestDispatcher(Router.MANAGER_TRIPMANAGEMENT);
+		String idStr = (String) request.getParameter("searchContent");
+		HttpSession session = request.getSession();
+		String userManager = (String) session.getAttribute("userManager");
+		List<Ticket> list = null;
+		try {
+			list = DAO.TicketDAO.findTicket(conn, idStr, userManager);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
+		request.setAttribute("ticketList", list);
+
+		response.setContentType("text/html;charset=UTF-8");
+		RequestDispatcher dispatcher = request.getServletContext()
+				.getRequestDispatcher("/views/managerView/ticketManagement.jsp");
 		dispatcher.forward(request, response);
 	}
 

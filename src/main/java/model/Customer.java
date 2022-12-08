@@ -10,6 +10,24 @@ public class Customer {
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
+	public Customer(String fullname, String phone_number,String email, String password) {
+		super();
+		
+		this.setFullname(fullname);
+		
+		this.setPhone_number(phone_number);
+		this.setEmail(email);
+		this.setPassword(password);
+	}
+	public Customer(int id ,String fullname, String phone_number,String email, String password) {
+		super();
+		this.setId(id);
+		this.setFullname(fullname);
+		
+		this.setPhone_number(phone_number);
+		this.setEmail(email);
+		this.setPassword(password);
+	}
 	public String getFullname() {
 		return fullname;
 	}
@@ -47,7 +65,6 @@ public class Customer {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	
 

@@ -23,62 +23,56 @@
 
 </head>
 <body>
-
+	
 
 	<jsp:include page="/views/adminView/layout/sidebar.jsp" />
 
 	<section class="home">
-		<div class="text">Danh Sách Môn Học</div>
+		<div class="text">Danh sách hãng xe</div>
 		<div class="area-feat">
-			<a class="btn btn-success" href="createMonHoc">Thêm môn học</a>
+			<a class="btn btn-success" href="createMonHoc">Thêm hãng xe</a>
 		</div>
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
-				<input id="searchContent" class="form-control me-1" type="search"
-					placeholder="Nhập Mã môn học hoặc Tên môn học" aria-label="Search">
-				<a onclick="Search();" class="btn btn-primary" type="submit">Search</a>
-			</div>
+        		<input id="searchContent" class="form-control me-1" type="search" placeholder="Nhập Mã hãng xe" aria-label="Search">
+        		<a onclick="Search();" class="btn btn-primary" type="submit">Search</a>
+      		</div>
 			<br>
 			<table class="table table-striped table-hover">
 				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Mã số môn học</th>
-						<th scope="col">Tên môn học</th>
-						<th scope="col">Số tín chỉ</th>
-						<th>Cập nhật</th>
-						<th>Xóa</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td width="2%"><br></td>
-						<td><strong>MS</strong><br></td>
-						<td><strong>Họ và Tên</strong></td>
-						<td><strong>Tên hãng xe</strong><br></td>
-						<td><strong>Số điện thoại</strong><br></td>
-						<td><strong>Email</strong><br></td>
-						<td><strong>Password</strong><br></td>
-						<td><strong>Mô tả</strong><br></td>
-						<td><strong>Thông tin khác</strong><br></td>
-					</tr>
-					<tr>
-						<td width="2%"><input type="checkbox" class="action"
-							name="remove_tutor" value="item"></td>
-						<td>01</td>
-						<td>Mai Hải Đăng</td>
-						<td>Nhà Xe Hải Đăng</td>
-						<td>0345888999</td>
-						<td>20110244@student.hcmute.edu.vn</td>
-						<td>maihaidang</td>
-						<td>acbhx</td>
-						<td>không có</td>
-					</tr>
-				</tbody>
+				    <tr>
+				
+				      <th scope="col">Tên hãng xe</th>
+				      <th scope="col">Mô tả</th>
+				      <th scope="col">Chi Tiết</th>
+				      
+				 
+				      <th>Cập nhật</th>
+				      <th>Xóa</th>
+				    </tr>
+		  		</thead>
+			  	<tbody>
+			  	<c:forEach items="${ garaList }" var="gara" varStatus="loop">
+				    <tr>
+					      
+					      <td>${ gara.fullname }</td>
+					     <td>${ gara.description }</td> 
+					     <td>
+					      	<a class="btn btn-danger" href="#" onclick="#">Xem</a>
+					      </td>
+					      <td>
+					      	<a class="btn btn-primary" href="${gara.fullname}">Cập nhập</a>
+					      </td>
+					      <td>
+					      	<a class="btn btn-danger" href="#" onclick="testConfirmDialog(${gara.fullname});">Xóa</a>
+					      </td>
+				    </tr>
+				</c:forEach>
+			  	</tbody>
 			</table>
-		</div>
+		</div> 
 	</section>
-
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
@@ -111,13 +105,13 @@
 		    }
 		});
     </script>
-	<script type="text/javascript" src="lib.js"></script>
-	<script type="text/javascript">
-    	function testConfirmDialog(maso_monhoc) {
-    		var result = confirm("Bạn chắc chắn muốn xóa môn học này?");
+    <script type="text/javascript" src="lib.js"></script>
+    <script type="text/javascript">
+    	function testConfirmDialog(fullname) {
+    		var result = confirm("Bạn chắc chắn muốn xóa hãng xe này?");
     		
     		if (result) {
-    			window.location.href = "deleteMonHoc?maso_monhoc=" + maso_monhoc;
+    			window.location.href = "deleteGarage?fullname=" + fullname;
     		} else {
     			return false;
     		}

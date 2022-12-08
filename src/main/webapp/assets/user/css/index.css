@@ -713,6 +713,7 @@ header {
 
 .Students {
   margin-bottom: 2rem;
+  position: relative;
 }
 
 .Students .Students__content {

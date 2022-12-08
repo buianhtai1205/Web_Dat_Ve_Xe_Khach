@@ -1,5 +1,9 @@
 package controller;
 
+import java.io.IOException;
+import java.sql.Connection;
+
+import DAO.AdminDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,14 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Admin;
-import model.Customer;
 import utils.MyUtils;
 import utils.Router;
-
-import java.io.IOException;
-import java.sql.Connection;
-
-import DAO.AdminDAO;
 
 /**
  * Servlet implementation class CheckLoginAdminServlet
@@ -54,33 +52,31 @@ public class CheckLoginAdminServlet extends HttpServlet {
 		Admin admin = null;
 		boolean hasError = false;
 		String errorString = null;
-		if(userName == null || password == null)
-		{
-			hasError=true;
-			errorString="Required username and password!";
-			//RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.ADMIN_HOME);
-			//dispatcher.forward(request, response);
-		}
-		else {
+		if (userName == null || password == null) {
+			hasError = true;
+			errorString = "Required username and password!";
+			// RequestDispatcher dispatcher =
+			// this.getServletContext().getRequestDispatcher(Router.ADMIN_HOME);
+			// dispatcher.forward(request, response);
+		} else {
 			try {
-				admin= AdminDAO.findAdmin(conn, userName, password);
+				admin = AdminDAO.findAdmin(conn, userName, password);
 				if (admin == null) {
-					hasError= true;
-					errorString="Username or password invalid";
+					hasError = true;
+					errorString = "Username or password invalid";
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 				hasError = true;
-				errorString= e.getMessage();
+				errorString = e.getMessage();
 			}
 		}
 		if (hasError) {
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.ADMIN_LOGIN);
 			dispatcher.forward(request, response);
-		}
-		else {
-			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.ADMIN_HOME);
+		} else {
+			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.THONGKE);
 			dispatcher.forward(request, response);
 		}
 	}

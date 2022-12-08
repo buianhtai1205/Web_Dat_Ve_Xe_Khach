@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <nav class="sidebar close">
 	<header>
 		<div class="image-text">
-			<span class="image"> <img src="assets/admin/images/logo.png" alt="">
+			<span class="image"> <img src="assets/user/images/logo4.png" style="margin-left:0; width:100px;" alt="">
 			</span>
 
-			<div class="text logo-text">
-				<span class="name">HCMUTE</span> <span class="profession">Web
-					Manager </span>
+			<div class="text logo-text" style="text-align: center; margin-left: 10px;" >
+				<span class="name" style="font-size: 30px;">Admin</span> <span class="profession">Vexere </span>
 			</div>
 		</div>
 
@@ -22,17 +22,17 @@
 				type="text" placeholder="Search..."></li>
 
 			<ul class="menu-links">
+				<li class="nav-link"><a href="#"> <i
+						class='bx bx-home-alt icon'></i> <span class="text nav-text">Giới Thiệu</span>
+				</a></li>
+
 				<li class="nav-link"><a href="thongKe"> <i
-						class='bx bx-home-alt icon'></i> <span class="text nav-text">Dashboard</span>
-				</a></li>
-
-				<li class="nav-link"><a href="garageacctive"> <i
 						class='bx bx-bar-chart-alt-2 icon'></i> <span
-						class="text nav-text">Hãng xe hoạt động</span>
+						class="text nav-text">Thống Kê</span>
 				</a></li>
 
-				<li class="nav-link"><a href="garagedesist"> <i
-						class='bx bx-bell icon'></i> <span class="text nav-text">Hãng xe tạm nghỉ</span>
+				<li class="nav-link"><a href="garaList"> <i
+						class='bx bx-bell icon'></i> <span class="text nav-text">Quản Lý Hãng Xe</span>
 				</a></li>
 
 				<li class="nav-link"><a href="customerList"> <i
@@ -40,13 +40,10 @@
 				</a></li>
 
 				<li class="nav-link"><a href="#"> <i
-						class='bx bx-heart icon'></i> <span class="text nav-text">Likes</span>
+						class='bx bx-heart icon'></i> <span class="text nav-text">Liên Hệ</span>
 				</a></li>
 
-				<li class="nav-link"><a href="#"> <i
-						class='bx bx-wallet icon'></i> <span class="text nav-text">Wallets</span>
-				</a></li>
-
+			
 			</ul>
 		</div>
 
