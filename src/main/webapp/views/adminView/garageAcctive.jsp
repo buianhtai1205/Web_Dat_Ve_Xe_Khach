@@ -26,55 +26,51 @@
 <body>
 
 
-	<jsp:include page="/views/managerView/layout/sidebar.jsp" />
+	<jsp:include page="/views/adminView/layout/sidebar.jsp" />
 
 	<section class="home">
 		<div class="text">Danh Sách Các Chuyến Xe</div>
 		<div class="area-feat">
-			<a class="btn btn-success" href="addTrip">Thêm Chuyến Xe</a>
-			<a class="btn btn-success" href=‪C:\LTW\DTDM\Đề thi toiec đợt 2.docx>Tải Xuống</a>
+			<a class="btn btn-success" href="addTrip">Thêm Chuyến Xe</a> <a
+				class="btn btn-success" href=‪C:\LTW\DTDM\Đề thi toiec đợt 2.docx>Tải
+				Xuống</a>
 		</div>
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
 				<input id="searchContent" class="form-control me-1" type="search"
-					placeholder="Nhập biển số xe" aria-label="Search">
-				<a onclick="Search();" class="btn btn-primary" type="submit">Search</a>
+					placeholder="Nhập biển số xe" aria-label="Search"> <a
+					onclick="Search();" class="btn btn-primary" type="submit">Search</a>
 			</div>
 			<br>
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
 						<th scope="col">id</th>
-						<th scope="col">Điểm đi</th>
-						<th scope="col">Điểm đến</th>
-						<th scope="col">Thời gian</th>
-						<th scope="col">Giá</th>
-						<th scope="col">Loại xe</th>
-						<th scope="col">Biển số</th>
-						<th scope="col">Garage id</th>
+						<th scope="col">Tên Hãng Xe</th>
+						<th scope="col">Địa Chỉ</th>
+						<th scope="col">Mô Tả</th>
+						<th scope="col">Trạng Thái</th>
 						<th>Cập nhật</th>
+						<th>Thêm tài khoản</th>
 						<th>Xóa</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${ listTrips }" >
+					<c:forEach var="item" items="${ listGaragesActivate }">
 						<tr>
 							<td>${ item.id }</td>
-							<td>${ item.departure }</td>
-							<td>${ item.destination }</td>
-							<td>${ item.departure_time }</td>
-							<td>${ item.price }</td>
-							<td>${ item.num_seat }</td>
-							<td>${ item.trip_board }</td>
-							<td>${ item.getGarageID() }</td>
+							<td>${ item.fullname }</td>
+							<td>${ item.address }</td>
+							<td>${ item.description }</td>
+							<td>Hoạt động</td>
 							<td><a class="btn btn-primary"
-								href="editTrip?id=${ item.id }">Cập
-									nhập</a></td>
+								href="editGarage?id=${ item.id }">Cập nhập</a></td>
+							<td><a class="btn btn-primary"
+								href="createManager?id=${ item.id }">Thêm quản lý</a></td>
 							<td><a class="btn btn-danger" href="#"
-								onclick="testConfirmDialog('${ item.id }');">Xóa</a>
-							</td>
+								onclick="testConfirmDialog('${ item.id }');">Xóa</a></td>
 						</tr>
-					</c:forEach> 
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

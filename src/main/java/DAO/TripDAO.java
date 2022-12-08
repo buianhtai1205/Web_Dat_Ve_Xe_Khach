@@ -38,6 +38,8 @@ public class TripDAO {
 			String departure_time = rs2.getString("departure_time");
 			int price = rs2.getInt("price");
 			int idGara = rs2.getInt("garage_id");
+			int numseat = rs2.getInt("num_seat");
+			String tripBoard = rs2.getString("trip_board");
 
 			Trip tr = new Trip();
 			tr.setDeparture(departure);
@@ -45,6 +47,8 @@ public class TripDAO {
 			tr.setDeparture_time(departure_time);
 			tr.setPrice(price);
 			tr.setGarageID(idGara);
+			tr.setNum_seat(numseat);
+			tr.setTrip_board(tripBoard);
 			return tr;
 		}
 		return null;
@@ -172,7 +176,6 @@ public class TripDAO {
 			int price = rs.getInt("price");
 			int id = rs.getInt("id");
 			int num_seat = rs.getInt("num_seat");
-			// int garage_id = rs.getInt("garage_id");
 			Trip trip = new Trip();
 			trip.setId(id);
 			trip.setDeparture(departure);
@@ -185,6 +188,34 @@ public class TripDAO {
 			list.add(trip);
 		}
 
+		return list;
+	}
+
+	public List<Trip> searchListTrips(Connection conn, String trip_board) throws SQLException {
+		String sql = "select * from Trip where trip_board = '" + trip_board + "' ";
+		PreparedStatement pstm1 = conn.prepareStatement(sql);
+		ResultSet rs = pstm1.executeQuery();
+
+		List<Trip> list = new ArrayList<Trip>();
+		while (rs.next()) {
+			String departure = rs.getString("departure");
+			String destination = rs.getString("destination");
+			String departure_time = rs.getString("departure_time");
+			int garage_id = rs.getInt("garage_id");
+			int price = rs.getInt("price");
+			int id = rs.getInt("id");
+			int num_seat = rs.getInt("num_seat");
+			Trip trip = new Trip();
+			trip.setId(id);
+			trip.setDeparture(departure);
+			trip.setDestination(destination);
+			trip.setDeparture_time(departure_time);
+			trip.setTrip_board(trip_board);
+			trip.setNum_seat(num_seat);
+			trip.setPrice(price);
+			trip.setGarageID(garage_id);
+			list.add(trip);
+		}
 		return list;
 	}
 
@@ -252,7 +283,62 @@ public class TripDAO {
 		}
 		return 0;
 	}
-	
-	
-	
+
+	public static Trip getTripFromTripID(Connection conn, int id) throws SQLException {
+		String sql = "SELECT * FROM Trip WHERE id = ?";
+
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setInt(1, id);
+
+		ResultSet rs = pstm.executeQuery();
+		while (rs.next()) {
+			String departure = rs.getString("departure");
+			String destination = rs.getString("destination");
+			String departure_time = rs.getString("departure_time");
+			String trip_board = rs.getString("trip_board");
+			int price = rs.getInt("price");
+			int num_seat = rs.getInt("num_seat");
+			int garageid = rs.getInt("garage_id");
+			Trip trip = new Trip();
+			trip.setId(id);
+			trip.setDeparture(departure);
+			trip.setDestination(destination);
+			trip.setDeparture_time(departure_time);
+			trip.setTrip_board(trip_board);
+			trip.setNum_seat(num_seat);
+			trip.setPrice(price);
+			trip.setGarageID(garageid);
+			System.out.println("678678678");
+			return trip;
+		}
+		return null;
+	}
+
+	public static void updateTrip(Connection conn, String departure, String destination, String departure_time,
+			int price, int num_seat, String trip_board, int id) throws SQLException {
+		String sql = "UPDATE Trip SET departure = ?, destination = ?, departure_time = ?, price = ?, num_seat = ?, trip_board = ? WHERE id = ?";
+
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setString(1, departure);
+		pstm.setString(2, destination);
+		pstm.setString(3, departure_time);
+		pstm.setInt(4, price);
+		pstm.setInt(5, num_seat);
+		pstm.setString(6, trip_board);
+		pstm.setInt(7, id);
+		pstm.executeUpdate();
+	}
+
+	public static void deleteTrip(Connection conn, int id) throws SQLException {
+		String sql = "DELETE FROM Trip WHERE id = ?";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setInt(1, id);
+		pstm.executeUpdate();
+
+		String sql2 = "DELETE FROM Seat WHERE trip_id = ?";
+		PreparedStatement pstm2 = conn.prepareStatement(sql2);
+		pstm2.setInt(1, id);
+		pstm2.executeUpdate();
+	}
+
 }

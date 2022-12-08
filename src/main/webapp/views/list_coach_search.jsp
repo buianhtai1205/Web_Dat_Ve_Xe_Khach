@@ -48,15 +48,15 @@
 <style>
 .invalid {
 	border-color: red !important;
+	color: red;
 }
 
-#error {
-	color: red
+#errorUserName,#errorNumberPhone,#errorUserEmail {
+	border-color: red !important;
+	color: red;
 }
 
-#error2 {
-	color: red
-}
+
 </style>
 
 
@@ -383,7 +383,7 @@
 							
 							<c:forEach items="${ list_trip }" var="trip" varStatus="loop">
 								<% Trip tr = (Trip) pageContext.getAttribute("trip"); %>  
-								<form action="${pageContext.request.contextPath}/timghe" method="POST" style="margin-bottom: 32px;" id ="${ trip.id }">
+								<form action="${pageContext.request.contextPath}/dat_ve" method="POST" style="margin-bottom: 32px;" id ="${ trip.id }">
 									<div class="tab-pane fade show active" id="all${ trip.id }" role="tabpanel"
 										aria-labelledby="pills-home-tab${ trip.id }"
 										>
@@ -850,31 +850,31 @@
 
 																			<div>
 																				<div class="form-group ">
-																					<input type="text" class="form-control top"
+																					<input type="text" class="form-control top inputName"
 																						id="inputName${trip.id}" placeholder="First and Last name "
-																						name="nameUser${trip.id}" value="" required="required">
+																						name="nameUser${trip.id}" value="" required="required" onclick="onClickGetID('${ trip.id}')">
 																					<div>
-																						<p id="error1"></p>
+																						<p id="errorUserName${trip.id}" class="errorUserName"></p>
 																					</div>
 																				</div>
 
 																				<div class="form-group ">
 																					<input type="text"
-																						class="form-control top inputPhone1"
+																						class="form-control top inputPhone"
 																						id="inputPhone${trip.id}" placeholder="Number phone "
-																						name="phoneUser${trip.id}" value="" required="required">
+																						name="phoneUser${trip.id}" value="" required="required" onclick="onClickGetID('${ trip.id}')">
 
-																					<p id="error2"></p>
+																					<p id="errorNumberPhone"></p>
 
 																				</div>
 
 																				<div class="form-group ">
-																					<input type="text" class="form-control top"
+																					<input type="text" class="form-control top inputEmail"
 																						id="inputEmail${trip.id}"
 																						placeholder="Email (abc@gmail.com)"
-																						name="emailUser${trip.id}" value="" required="required">
+																						name="emailUser${trip.id}" value="" required="required" onclick="onClickGetID('${ trip.id}')">
 																					<div>
-																						<p id="error3"></p>
+																						<p id="errorUserEmail"></p>
 																					</div>
 																				</div>
 																				<div class="form-group ">
@@ -945,6 +945,7 @@
     <script>
         var count = 0;
       
+        
         function clickSeatFunction(seat_id,trip_id) {
           let seat = document.getElementsByClassName(seat_id);
           let seat_result = document.getElementById("seat_result"+trip_id);
@@ -961,7 +962,7 @@
                 seatItem.setAttribute("id", name);
                 seatItem.setAttribute("name", name);
                 seatItem.setAttribute("value", seat_id);
-                // seatItem.setAttribute('hidden', true);
+                seatItem.setAttribute('hidden', true);
                 seat_result.appendChild(seatItem);
               } else {
                   alert(
@@ -1033,22 +1034,34 @@
 		});
 
 		/* //check validatate */
+		var inputName = document.getElementsByClassName("inputName"+idChuyen);
+		var inputPhone = document.getElementById("inputPhone"+idChuyen);
+		var inputEmail = document.getElementById("inputEmail"+idChuyen);
+		var errorUserName = document.getElementById("errorUserName"+idChuyen);
+		var errorUserName1 = document.getElementsByClassName("errorUserName"+idChuyen);
+		var errorNumberPhone = document.getElementById("errorNumberPhone"+idChuyen);
+		var errorUserEmail = document.getElementById("errorUserEmail"+idChuyen);
+		var idChuyen = "";
+    function onClickGetID(id){
+			console.log(id);
+      idChuyen = id;
+			console.log("a"+inputName)
+			console.log("b"+errorUserName)
+			console.log("c"+errorUserName1)
+        }
 
-		var input1 = document.getElementById("inputName");
-		var input2 = document.getElementById("inputPhone");
-		var input3 = document.getElementById("inputEmail");
-
-		var error2 = document.getElementById("error2");
-		input1.onblur = function () {
-				if (input1.value.length == 0) {
-						input1.classList.add('invalid');
-						error1.innerHTML = 'Please enter a correct first name and last name.'
+		
+		inputName.onblur = function () {
+			console.log(inputName)
+				if (inputName.value.length == 0) {
+						inputName.classList.add('invalid');
+						errorUserName.innerHTML = 'Please enter a correct first name and last name.'
 				}
 		};
 
-		input1.onfocus = function () {
-				input1.classList.remove('invalid');
-				error1.innerHTML = "";
+		inputName.onfocus = function () {
+				inputName.classList.remove('invalid');
+				errorUserName.innerHTML = "";
 		};
 
 		function validatePhoneNumber(input_str) {
@@ -1058,34 +1071,34 @@
 		}
 
 
-		input2.onblur = function () {
-				if (!validatePhoneNumber(input2.value)) {
-						input2.classList.add('invalid');
-						error2.innerHTML = 'Please enter a correct number phone.';
-						/* 				error2.innerText = 'Please enter a correct number phone.'; */
-						/* 				console.log(error2) */
+		inputPhone.onblur = function () {
+				if (!validatePhoneNumber(inputPhone.value)) {
+						inputPhone.classList.add('invalid');
+						errorNumberPhone.innerHTML = 'Please enter a correct number phone.';
+						/* 				errorNumberPhone.innerText = 'Please enter a correct number phone.'; */
+						/* 				console.log(errorNumberPhone) */
 				}
 		};
 
-		input2.onfocus = function () {
-				if (this.classList.contains('invalid2')) {
-						this.classList.remove('invalid2');
-						error2.innerHTML = "";
-				}
-		};
-
-
-		input3.onblur = function () {
-				if (input3.value.length === 0) {
-						input3.classList.add('invalid');
-						error3.innerHTML = 'Please enter a correct email.'
-				}
-		};
-
-		input3.onfocus = function () {
+		inputPhone.onfocus = function () {
 				if (this.classList.contains('invalid')) {
 						this.classList.remove('invalid');
-						error3.innerHTML = "";
+						errorNumberPhone.innerHTML = "";
+				}
+		};
+
+
+		inputEmail.onblur = function () {
+				if (inputEmail.value.length === 0) {
+						inputEmail.classList.add('invalid');
+						errorUserEmail.innerHTML = 'Please enter a correct email.'
+				}
+		};
+
+		inputEmail.onfocus = function () {
+				if (this.classList.contains('invalid')) {
+						this.classList.remove('invalid');
+						errorUserEmail.innerHTML = "";
 				}
 		};
 
