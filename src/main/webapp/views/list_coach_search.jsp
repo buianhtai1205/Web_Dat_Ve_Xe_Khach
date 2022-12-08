@@ -865,7 +865,7 @@
 																						id="inputName${trip.id}" placeholder="First and Last name "
 																						name="nameUser${trip.id}" value="" required="required" onclick="onClickGetID('${ trip.id}')">
 																					<div>
-																						<p id="errorUserName"></p>
+																						<p id="errorUserName${trip.id}" class="errorUserName"></p>
 																					</div>
 																				</div>
 
@@ -973,7 +973,7 @@
                 seatItem.setAttribute("id", name);
                 seatItem.setAttribute("name", name);
                 seatItem.setAttribute("value", seat_id);
-                // seatItem.setAttribute('hidden', true);
+                seatItem.setAttribute('hidden', true);
                 seat_result.appendChild(seatItem);
               } else {
                   alert(
@@ -1045,19 +1045,25 @@
 		});
 
 		/* //check validatate */
+		var inputName = document.getElementsByClassName("inputName"+idChuyen);
+		var inputPhone = document.getElementById("inputPhone"+idChuyen);
+		var inputEmail = document.getElementById("inputEmail"+idChuyen);
+		var errorUserName = document.getElementById("errorUserName"+idChuyen);
+		var errorUserName1 = document.getElementsByClassName("errorUserName"+idChuyen);
+		var errorNumberPhone = document.getElementById("errorNumberPhone"+idChuyen);
+		var errorUserEmail = document.getElementById("errorUserEmail"+idChuyen);
 		var idChuyen = "";
     function onClickGetID(id){
 			console.log(id);
-        	idChuyen = id;
+      idChuyen = id;
+			console.log("a"+inputName)
+			console.log("b"+errorUserName)
+			console.log("c"+errorUserName1)
         }
-		var inputName = document.getElementById("inputName"+idChuyen)[0];
-		var inputPhone = document.getElementById("inputPhone"+idChuyen)[0];
-		var inputEmail = document.getElementById("inputEmail"+idChuyen)[0];
 
-		var errorUserName = document.getElementById("errorUserName")[0];
-		var errorNumberPhone = document.getElementById("errorNumberPhone")[0];
-		var errorUserEmail = document.getElementById("errorUserEmail")[0];
+		
 		inputName.onblur = function () {
+			console.log(inputName)
 				if (inputName.value.length == 0) {
 						inputName.classList.add('invalid');
 						errorUserName.innerHTML = 'Please enter a correct first name and last name.'
