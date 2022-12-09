@@ -91,7 +91,7 @@
 											name="username" value="${user.phone_number}"
 											pattern="[0-9]{10}" required>
 										<div>
-											<p id="error"></p>
+											<!-- <p id="error"></p> -->
 										</div>
 									</div>
 
@@ -101,7 +101,7 @@
 											placeholder="Password" required name="password"
 											value="${user.password}">
 										<div>
-											<p id="error2"></p>
+											<!-- <p id="error2"></p> -->
 										</div>
 									</div>
 
@@ -159,7 +159,7 @@
 												name="numberPhoneForgotPassword" value=""
 												pattern="[0-9]{10}" required />
 
-											<p id="errorNumberPhone" style="display: flex;"></p>
+											<!-- <p id="errorNumberPhone" style="display: flex;"></p> -->
 										</div>
 										<div class=""
 											style="display: flex; justify-content: space-between;">

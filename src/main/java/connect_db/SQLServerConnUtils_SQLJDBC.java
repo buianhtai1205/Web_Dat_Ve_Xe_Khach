@@ -30,7 +30,7 @@ public class SQLServerConnUtils_SQLJDBC {
 		// Database name to access
 		String dbName = "VEXEONLINE";
 		String dbUsername = "sa";
-		String dbPassword = "linhtando";
+		String dbPassword = "123456";
 		String connectionURL = dbURL + ";databaseName=" + dbName;
 		Connection conn = null;
 		try {

@@ -83,9 +83,9 @@
 												aria-describedby="phoneHelp" placeholder="Phone number"
 												name="username" value="${user.phone_number}"
 												pattern="[0-9]{10}" required>
-											<div>
+											<!-- <div>
 												<p id="error"></p>
-											</div>
+											</div> -->
 										</div>
 
 
@@ -93,9 +93,9 @@
 											<input type="password" class="form-control top" id="password"
 												placeholder="Password" required name="password"
 												value="${user.password}">
-											<div>
+											<!-- <div>
 												<p id="error2"></p>
-											</div>
+											</div> -->
 										</div>
 
 										<div class="form-group content">
@@ -158,7 +158,7 @@
 												aria-describedby="phoneHelp" placeholder="Phone number"
 												name="numberPhoneForgotPassword" value=""
 												pattern="[0-9]{10}" required />
-											<p id="errorNumberPhone" style="display: flex;"></p>
+											<!-- <p id="errorNumberPhone" style="display: flex;"></p> -->
 										</div>
 										<p style="color: red;">${ notifi }</p>
 										<div class=""
