@@ -127,7 +127,7 @@ public class TripDAO {
 			String departure_time) {
 		ArrayList<Trip> list_trip = new ArrayList<Trip>();
 		String sql = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
-				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ " WHERE CAST(departure_time AS DATE) = '" + departure_time + "' and departure = N'" + departute
 				+ "' and destination = N'" + destination + "' and Garage.deleted = 0";
 		PreparedStatement pre = null;
 
@@ -345,7 +345,7 @@ public class TripDAO {
 			String departure_time) {
 		ArrayList<Trip> list_trip = new ArrayList<Trip>();
 		String sql = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
-				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ " WHERE CAST(departure_time AS DATE) = '" + departure_time + "' and departure = N'" + departute
 				+ "' and destination = N'" + destination + "' and Garage.deleted = 0 ORDER BY departure_time";
 		PreparedStatement pre = null;
 
@@ -377,7 +377,7 @@ public class TripDAO {
 			String departure_time) {
 		ArrayList<Trip> list_trip = new ArrayList<Trip>();
 		String sql = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
-				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ " WHERE CAST(departure_time AS DATE) = '" + departure_time + "' and departure = N'" + departute
 				+ "' and destination = N'" + destination + "' and Garage.deleted = 0 ORDER BY departure_time DESC";
 		PreparedStatement pre = null;
 
@@ -409,7 +409,7 @@ public class TripDAO {
 			String departure_time) {
 		ArrayList<Trip> list_trip = new ArrayList<Trip>();
 		String sql = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
-				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ " WHERE CAST(departure_time AS DATE) = '" + departure_time + "' and departure = N'" + departute
 				+ "' and destination = N'" + destination + "' and Garage.deleted = 0 ORDER BY price";
 		PreparedStatement pre = null;
 
@@ -441,7 +441,7 @@ public class TripDAO {
 			String departure_time) {
 		ArrayList<Trip> list_trip = new ArrayList<Trip>();
 		String sql = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
-				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ " WHERE CAST(departure_time AS DATE) = '" + departure_time + "' and departure = N'" + departute
 				+ "' and destination = N'" + destination + "' and Garage.deleted = 0 ORDER BY price DESC";
 		PreparedStatement pre = null;
 
@@ -476,7 +476,7 @@ public class TripDAO {
 		ArrayList<Trip> list_trip = new ArrayList<Trip>();
 		String sql = "";
 		String sqlStart = "SELECT Trip.*, Garage.fullname, Garage.address, Garage.description  FROM Trip JOIN Garage ON garage_id = Garage.id"
-				+ " WHERE CONVERT(date, departure_time) = '" + departure_time + "' and departure = N'" + departute
+				+ " WHERE CAST(departure_time AS DATE) = '" + departure_time + "' and departure = N'" + departute
 				+ "' and destination = N'" + destination + "' and Garage.deleted = 0 ";
 		String sqlFilterTime = "";
 		String timeStr = " and (\r\n"
