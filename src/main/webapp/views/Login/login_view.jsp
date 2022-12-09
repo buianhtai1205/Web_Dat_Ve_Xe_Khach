@@ -131,7 +131,7 @@
 									<div class="logo">
 										<img src="assets/user/images/logo1.png" alt="">
 									</div>
-									<
+									
 									<div class="log">
 										<img alt="" src="assets/user/images/buy_ticket_login.jpg"
 											style="width: 300px; height: 300px;">
