@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import DAO.CustomerDAO;
+import connect_db.MySQLConnUtils;
 import connect_db.SQLServerConnUtils_SQLJDBC;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -39,7 +40,7 @@ public class AccountCustomer extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		try {
-			conn = SQLServerConnUtils_SQLJDBC.getSQLServerConnection_SQLJDBC();
+			conn = MySQLConnUtils.getMySQLConnection();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

@@ -24,7 +24,7 @@ public class SQLServerConnUtils_SQLJDBC {
 		}
 	}
 
-	public static Connection getSQLServerConnection_SQLJDBC() throws SQLException, ClassNotFoundException {
+	public static Connection getSQLServerConnection_SQLJDBC1() throws SQLException, ClassNotFoundException {
 		String dbDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 		String dbURL = "jdbc:sqlserver://localhost:1433";
 		// Database name to access

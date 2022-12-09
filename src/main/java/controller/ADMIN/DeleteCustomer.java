@@ -34,7 +34,7 @@ public class DeleteCustomer extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		try {
-			conn = SQLServerConnUtils_SQLJDBC.getSQLServerConnection_SQLJDBC();
+			conn = MySQLConnUtils.getMySQLConnection();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

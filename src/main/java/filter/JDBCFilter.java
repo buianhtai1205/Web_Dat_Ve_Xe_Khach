@@ -90,7 +90,7 @@ public class JDBCFilter implements Filter{
 				Connection conn = null;
 				try {
 					// Tạo đối tượng Connection kết nối database.
-					conn = SQLServerConnUtils_SQLJDBC.getSQLServerConnection_SQLJDBC();
+					conn = MySQLConnUtils.getMySQLConnection();;
 					// Sét tự động commit false, để chủ động điều khiển.
 					conn.setAutoCommit(false);
 
