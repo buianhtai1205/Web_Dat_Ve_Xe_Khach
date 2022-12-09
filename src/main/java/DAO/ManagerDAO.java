@@ -88,6 +88,55 @@ public class ManagerDAO {
 		return null;
 	}
 
+	public static Manager findManagerByPhone(Connection connection, String phoneManager) throws SQLException {
+		String sql = "Select * from Manager " //
+				+ " where phone_number = ?";
+		PreparedStatement pstm = connection.prepareStatement(sql);
+		pstm.setString(1, phoneManager);
+		ResultSet rs = pstm.executeQuery();
+		System.out.println("da vo ham tim");
+		if (rs.next()) {
+			Manager manager = new Manager();
+			String fullName = rs.getString("fullname");
+			String email = rs.getString("email");
+			manager.setPhone_number(phoneManager);
+			manager.setFullname(fullName);
+			manager.setEmail(email);
+			System.out.println(email);
+			System.out.println(fullName);
+
+			return manager;
+		}
+		return null;
+	}
+
+	public static void updatePassword(Connection conn, String password, String numberPhone) throws SQLException {
+		String sql = "Update Manager set password =? where phone_number=? ";
+
+		PreparedStatement pstm = conn.prepareStatement(sql);
+
+		pstm.setString(1, password);
+		pstm.setString(2, numberPhone);
+		pstm.executeUpdate();
+	}
+
+	public static int checkDesist(Connection conn, String phoneManager, String passManager) throws SQLException {
+		String sql = "Select gr.deleted From Garage gr, Manager mg Where mg.phone_number=? and mg.password =? and gr.id = mg.garage_id";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setString(1, phoneManager);
+		pstm.setString(2, passManager);
+		int delete = 2;
+		System.out.println("11111111111" + delete);
+		ResultSet rs = pstm.executeQuery();
+		// delete = rs.getInt("delete");
+		// System.out.println("3333333333" + delete);
+		if (rs.next()) {
+			delete = rs.getInt("deleted");
+			System.out.println("11111111111" + delete);
+		}
+		return delete;
+	}
+
 	public static void insertManager(Connection conn, String fullname, String phone_number, String email,
 			String password, int garage_id) throws SQLException {
 		String sql = "Insert into Manager values (?, ?, ?, ?, ?)";

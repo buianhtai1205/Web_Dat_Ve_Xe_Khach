@@ -58,9 +58,9 @@ cursor: pointer;
 			<a class="text text__Manager" href="managerList">Manager</a>
 		</div>
 		<div class="clearfix"></div>
-		<div class="area-feat" >
+<!-- 		<div class="area-feat" >
 			<a class="btn btn-success" href="createManager">Thêm Tài Khoản</a>
-		</div>
+		</div> -->
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
         		<input id="searchContent" class="form-control me-1" type="search" placeholder="Nhập Thông Tin" aria-label="Search">

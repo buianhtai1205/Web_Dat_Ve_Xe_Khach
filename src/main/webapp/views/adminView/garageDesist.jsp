@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HomePage</title>
+<title>Hãng xe tạm ngưng</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -26,50 +26,43 @@
 <body>
 
 
-	<jsp:include page="/views/managerView/layout/sidebar.jsp" />
+	<jsp:include page="/views/adminView/layout/sidebar.jsp" />
 
 	<section class="home">
-		<div class="text">Danh Sách Vé</div>
+		<div class="text">Danh Sách Hãng Xe Ngưng Hoạt Động</div>
 		<div class="area-feat">
-	
-			<a class="btn btn-success" href= "exportTicket">Tải Xuống</a>
 		</div>
 		<div class="content">
 			<div style="width: 50%;" class="d-flex">
 				<input id="searchContent" class="form-control me-1" type="search"
-					placeholder="Nhập số điện thoại" aria-label="Search">
-				<a onclick="Search();" class="btn btn-primary" type="submit">Search</a>
+					placeholder="Nhập thông tin" aria-label="Search"> <a
+					onclick="Search();" class="btn btn-primary" type="submit">Search</a>
 			</div>
 			<br>
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
 						<th scope="col">id</th>
-						<th scope="col">Họ Tên</th>
-						<th scope="col">Số điện thoại</th>
-						<th scope="col">Điểm đón</th>
-						<th scope="col">Điểm đến</th>
-						<th scope="col">Số ghế</th>
-						<th scope="col">Biển số xe</th>
-						<th scope="col">Giá</th>
+						<th scope="col">Tên Hãng Xe</th>
+						<th scope="col">Địa Chỉ</th>
+						<th scope="col">Mô Tả</th>
+						<th scope="col">Trạng Thái</th>
+						<th>Khôi phục</th>
 					</tr>
 				</thead>
-					<tbody>
-			  	<c:forEach items="${ ticketList }" var="ticket" varStatus="loop">
-				    <tr>
-					      
-					      <td>${ticket.tripid }</td>
-					     <td>${ ticket.fullname }</td> 
-					     <td>${ ticket.phonenumber }</td>
-					     <td>${ ticket.starts }</td>
-					     <td>${ ticket.musty }</td>
-					   <td>${ ticket.numberchair }</td>
-					   <td>${ ticket.tripbroad }</td>
-					   <td>${ ticket.price }</td>
-					      
-				    </tr>
-				</c:forEach>
-			  	</tbody>
+				<tbody>
+					<c:forEach var="item" items="${ listGaragesDesist }">
+						<tr>
+							<td>${ item.id }</td>
+							<td>${ item.fullname }</td>
+							<td>${ item.address }</td>
+							<td>${ item.description }</td>
+							<td>Hoạt động</td>
+							<td><a class="btn btn-primary"
+								href="editGarageDesist?id=${ item.id }">Khôi phục</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 	</section>
@@ -108,11 +101,11 @@
     </script>
 	<script type="text/javascript" src="lib.js"></script>
 	<script type="text/javascript">
-    	function testConfirmDialog(maso_monhoc) {
-    		var result = confirm("Bạn chắc chắn muốn xóa môn học này?");
+    	function testConfirmDialog(id) {
+    		var result = confirm("Bạn chắc chắn muốn tạm ngưng hoạt động hãng xe này?");
     		
     		if (result) {
-    			window.location.href = "deleteMonHoc?maso_monhoc=" + maso_monhoc;
+    			window.location.href = "garageDesist?id=" + id;
     		} else {
     			return false;
     		}
@@ -121,7 +114,7 @@
     		let searchContent = document.getElementById("searchContent").value;
     		
     		if (searchContent != null) {
-    			window.location.href = "searchTicket?searchContent=" + searchContent;
+    			window.location.href = "searchListGarageDisist?searchContent=" + searchContent;
     		}
     	};
     </script>

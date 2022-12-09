@@ -37,7 +37,7 @@ public class CheckLoginManagerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.MANAGER_HOME);
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.LOGIN_MANAGER);
 		dispatcher.forward(request, response);
 	}
 
@@ -51,7 +51,10 @@ public class CheckLoginManagerServlet extends HttpServlet {
 		Connection conn = MyUtils.getStoredConnection(request);
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
+		System.out.println(userName);
+		System.out.println(password);
 		HttpSession session = request.getSession();
+		// ManagerDAO managerDAO = new ManagerDAO();
 		Manager manager = null;
 		boolean hasError = false;
 		String errorString = null;
@@ -63,10 +66,17 @@ public class CheckLoginManagerServlet extends HttpServlet {
 				manager = ManagerDAO.findManager(conn, userName, password);
 				if (manager == null) {
 					hasError = true;
-					errorString = "Phone number or password invalid";
+					errorString = "Tài khoản hoặc mật khẩu không đúng!";
 				} else {
+					int check = ManagerDAO.checkDesist(conn, userName, password);
+					if (check == 1) {
+						errorString = "Tài khoản của bạn đã bị khóa!";
+						hasError = true;
+					}
+					System.out.println(check);
 					session.setAttribute("userManager", userName);
 				}
+
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -75,7 +85,9 @@ public class CheckLoginManagerServlet extends HttpServlet {
 			}
 		}
 		if (hasError) {
-			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.MANAGER_LOGIN);
+			request.setAttribute("errorString", errorString);
+			System.out.println(errorString);
+			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.LOGIN_MANAGER);
 			dispatcher.forward(request, response);
 		} else {
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.MANAGER_HOME);

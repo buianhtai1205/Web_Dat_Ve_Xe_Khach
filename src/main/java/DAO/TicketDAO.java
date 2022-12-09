@@ -1,5 +1,11 @@
 package DAO;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.servlet.ServletException;
 import model.Ticket;
 
 public class TicketDAO {
@@ -93,5 +100,16 @@ public class TicketDAO {
 		}
 		return list;
 	}
-
+	public static void getData(Connection conn, File ticket,String phone) throws SQLException,ServletException, IOException {
+		
+		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(ticket), Charset.forName("UTF-8"));
+	    PrintWriter out = new PrintWriter(outputStreamWriter);
+		
+		out.println("id\t Họ Tên\t Số điện thoại\t Điểm đón\t Điểm đến\t Số ghế\t Biển số xe\t Giá");
+		List<Ticket> list = getlistTicket(conn,phone);
+		for (Ticket emp : list) {			
+           out.println(emp.getTripid() + "\t " + emp.getFullname() + "\t " + emp.getPhonenumber() + "\t " + emp.getStarts() + "\t " + emp.getMusty() + "\t " + emp.getNumberchair() + "\t " + emp.getTripbroad() + "\t " + emp.getPrice());            
+        }
+		out.close();
+	}
 }

@@ -4,7 +4,7 @@
 <nav class="sidebar close">
 	<header>
 		<div class="image-text">
-			<span class="image"> <img src="assets/user/images/logo4.png" style="margin-left:0; width:100px;" alt="">
+			<span class="image"> <img src="assets/admin/images/bus-car-icon.svg" style="margin-left:0; width:100px;" alt="">
 			</span>
 
 			<div class="text logo-text" style="text-align: center; margin-left: 10px;" >
@@ -39,9 +39,9 @@
 						class='bx bx-pie-chart-alt icon'></i> <span class="text nav-text">Quản Lý ACCOUNT</span>
 				</a></li>
 
-				<li class="nav-link"><a href="#"> <i
+<!-- 				<li class="nav-link"><a href="#"> <i
 						class='bx bx-heart icon'></i> <span class="text nav-text">Liên Hệ</span>
-				</a></li>
+				</a></li> -->
 
 			
 			</ul>
