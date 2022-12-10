@@ -54,7 +54,6 @@
 }
 
 #errorUserName,#errorNumberPhone,#errorUserEmail {
-	border-color: red !important;
 	color: red;
 }
 
@@ -746,9 +745,9 @@
 																		style="display: block; border-bottom: 10px;"></div>
 																	<div
 																		style="display: flex; justify-content: flex-end; margin-top: 10px;">
-																		<p
+																		<!-- <p
 																			style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
-																			cộng: 0đ</p>
+																			cộng: 0đ</p> -->
 																		<button type="button" class="btn btn-primary btnNext"  onclick="btnNext('${ trip.id }',0)">Tiếp
 																			tục</button>
 																	</div>
@@ -921,9 +920,10 @@
 																						class="btn btn-secondary btnPrevious"
 																						style="margin-top: 20px" onclick="btnPrevious('${ trip.id }',1)">Quay lại</button>
 																					<div style="display: flex; margin-top: 10px;">
+																						<input id="price${trip.id}" name="priceTrip" value="${trip.price}" type="hidden">
 																						<p
-																							style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;">Tổng
-																							cộng: ${trip.price}0đ</p>
+																							style="margin-right: 16px; margin-bottom: 0; margin-top: 5px;" id="sumPrice${trip.id}">
+																							</p>
 																						<button type="submit" class="btn btn-primary">Xác
 																							nhận</button>
 																					</div>
@@ -965,26 +965,22 @@
 
     <!-- owlCousel -->
     <script src="/lib/owl.carousel.min.js"></script>
-    <script>
+        <script>
         var count = 0;
       
-				
         function clickSeatFunction(seat_id,trip_id) {
           let seat = document.getElementsByClassName(seat_id);
-          var price = document.getElementById("price"+trip_id).value;
-          var sumPrice = document.getElementById("sumPrice"+trip_id);
-          
           let seat_result = document.getElementById("seat_result"+trip_id);
+          var price = document.getElementById("price"+trip_id);
+          var sumPrice = document.getElementById("sumPrice"+trip_id);
           if (seat[0].classList[3] != "ArHJS")
           {
             if (seat[0].classList[4] == null) {
             count++;
             
-           
-            
               if (count < 4)
               {
-                  seat[0].classList.add("cUIhrn");
+                seat[0].classList.add("cUIhrn");
                 let seatItem = document.createElement("input");
                 let name = "seatID" + count.toString();
                 seatItem.setAttribute("id", name);
@@ -992,16 +988,12 @@
                 seatItem.setAttribute("value", seat_id);
                 seatItem.setAttribute('hidden', true);
                 seat_result.appendChild(seatItem);
-              
-              } 
-              
-              else {
+              } else {
                   alert(
                 "Bạn được chọn tối đa 3 ghế! Xin thông cảm vì sự bất tiện này. Nếu bạn muốn đặt nhiều hơn, Vui lòng liên hệ trực tiếp với thu ngân qua số điện thoại của hãng."
               );
               count--;
               }
-							
             
             } else {
               seat[0].classList.remove("cUIhrn");
@@ -1011,12 +1003,13 @@
               count--;
             }
           }
-
-					var priceSeat = count*price;
+          
+          var priceSeat = count*price?.value;
           sumPrice.innerHTML = priceSeat + ".000đ"; 
-		  
+          
         }
-    </script>
+      </script>
+    
 	 <script type="text/javascript">
 		const nextBtn = document.querySelectorAll(".btnNext");
 		const prevBtn = document.querySelectorAll(".btnPrevious");
@@ -1046,7 +1039,6 @@
 		}
 		/* nextTab */
  
-
 		nextBtn.forEach(function (item, index) {
 
 				item.addEventListener('click', function () {
@@ -1078,7 +1070,7 @@
 		var errorUserEmail = document.getElementById("errorUserEmail"+idChuyen);
 		var idChuyen = "";
     function onClickGetID(id){
-			console.log(id);
+			
       idChuyen = id;
 			console.log("a"+inputName)
 			console.log("b"+errorUserName)

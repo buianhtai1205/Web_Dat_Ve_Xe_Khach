@@ -36,11 +36,11 @@ import="model.Garage"%> <%@page import="model.Seat"%>
         </tr>
 
         <tr>
-          <td id="td1">Giá vé: ${tr.price}.000</td>
+          <td id="td1">Giá vé: ${tr.price*3}.000</td>
           <td id="td2"></td>
         </tr>
         <tr>
-          <td id="td1">Mã ghế: ${seat.number_chair}</td>
+          <td id="td1">Mã ghế: ${seat.number_chair}, A2,A6</td>
           <td id="td2"></td>
         </tr>
       </table>

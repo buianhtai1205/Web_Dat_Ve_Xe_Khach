@@ -125,10 +125,13 @@ public class DatVe extends HttpServlet {
 							}
 								int _nbSeats =Integer.parseInt(seatDAO.getNumberSeat(con,idChuyen));
 								String priceSeat = String.valueOf(_nbSeats * Integer.parseInt(priceTrip));
+								session.setAttribute("priceSeat",priceSeat);
 								Seat numberChairSeat1 = seatDAO.getChairByIdSeat(con, idGhe1);
 								Seat numberChairSeat2 = seatDAO.getChairByIdSeat(con, idGhe2);
 								Seat numberChairSeat3 = seatDAO.getChairByIdSeat(con, idGhe3);
-								
+								session.setAttribute("numberChairSeat1",numberChairSeat1);
+								session.setAttribute("numberChairSeat2",numberChairSeat2);
+								session.setAttribute("numberChairSeat3",numberChairSeat3);
 								String noiDung = "Chuyến số: "  + "Ghế số: " + numberChairSeat1.getNumber_chair() + " "+numberChairSeat2.getNumber_chair() + " "+numberChairSeat3.getNumber_chair() + " "+ "Địa điểm đón: " + _diemDon + "\nĐịa điểm trả: " + _diemTra + "\nGìa vé: " + priceSeat  
 										+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "\nMật khẩu: "+ pass;
 								SendEmail.getInstant().guiMail(email, noiDung);

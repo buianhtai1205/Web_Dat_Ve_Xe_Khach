@@ -106,8 +106,6 @@
 										</div>
 										<button class="button3" type="submit">Login</button>
 									</form>
-
-
 								</div>
 							</div>
 						</div>
@@ -115,7 +113,6 @@
 				</div>
 			</div>
 		</div>
-
 	</section>
 
 
