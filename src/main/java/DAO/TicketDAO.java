@@ -27,7 +27,7 @@ public class TicketDAO {
 		if (rs1.next()) {
 			_garageid = rs1.getInt("garage_id");
 		}
-		String sql = "Select tk.trip_id,c.fullname,c.phone_number,t.departure,sc.musty,s.number_chair,t.trip_board,t.price  From Ticket tk, Trip t, Seat s, Customer c, Schedule sc Where tk.trip_id=t.id and t.garage_id=? and tk.seat_id=s.id and tk.schedule_id=sc.id and tk.customer_id=c.id ";
+		String sql = "Select tk.trip_id,c.fullname,c.phone_number,t.departure,sc.musty,s.number_chair,t.trip_board,t.price,  tk.seat_id, tk.customer_id  From Ticket tk, Trip t, Seat s, Customer c, Schedule sc Where tk.trip_id=t.id and t.garage_id=? and tk.seat_id=s.id and tk.schedule_id=sc.id and tk.customer_id=c.id ";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -44,7 +44,9 @@ public class TicketDAO {
 			String numberchair = rs.getString("number_chair");
 			String board = rs.getString("trip_board");
 			int price = rs.getInt("price");
-
+			
+			int seatid  = rs.getInt("seat_id");
+			int customid = rs.getInt("customer_id");
 			Ticket mh = new Ticket();
 			mh.setTripid(id);
 			mh.setFullname(ten);
@@ -54,6 +56,8 @@ public class TicketDAO {
 			mh.setNumberchair(numberchair);
 			mh.setTripbroad(board);
 			mh.setPrice(price);
+			mh.setSeatid(seatid);
+			mh.setCustomerid(customid);
 			list.add(mh);
 		}
 
@@ -69,7 +73,7 @@ public class TicketDAO {
 		if (rs1.next()) {
 			_garageid = rs1.getInt("garage_id");
 		}
-		String sql = "Select tk.trip_id,c.fullname,c.phone_number,t.departure ,sc.musty,s.number_chair,t.trip_board ,t.price From Ticket tk, Trip t, Seat s, Customer c, Schedule sc Where tk.trip_id=t.id and t.garage_id=? and tk.seat_id=s.id and tk.schedule_id=sc.id and tk.customer_id=c.id and c.phone_number like '%"
+		String sql = "Select tk.trip_id,c.fullname,c.phone_number,t.departure ,sc.musty,s.number_chair,t.trip_board ,t.price,  tk.seat_id, tk.customer_id From Ticket tk, Trip t, Seat s, Customer c, Schedule sc Where tk.trip_id=t.id and t.garage_id=? and tk.seat_id=s.id and tk.schedule_id=sc.id and tk.customer_id=c.id and c.phone_number like '%"
 				+ require + "%'";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
@@ -86,7 +90,9 @@ public class TicketDAO {
 			String numberchair = rs.getString("number_chair");
 			String board = rs.getString("trip_board");
 			int price = rs.getInt("price");
-
+			
+			int seatid  = rs.getInt("seat_id");
+			int customid = rs.getInt("customer_id");
 			Ticket mh = new Ticket();
 			mh.setTripid(id);
 			mh.setFullname(ten);
@@ -96,6 +102,8 @@ public class TicketDAO {
 			mh.setNumberchair(numberchair);
 			mh.setTripbroad(board);
 			mh.setPrice(price);
+			mh.setSeatid(seatid);
+			mh.setCustomerid(customid);
 			list.add(mh);
 		}
 		return list;
@@ -112,4 +120,14 @@ public class TicketDAO {
         }
 		out.close();
 	}
+	public static void deleteTicket(Connection conn, int idIn, int seatid, int customid) throws SQLException {
+        String sql = "Delete from Ticket where trip_id=? and seat_id=? and customer_id=?";
+        
+        PreparedStatement pstm = conn.prepareStatement(sql);
+       
+        pstm.setInt(1, idIn);  
+        pstm.setInt(2, seatid); 
+        pstm.setInt(3, customid);  
+        pstm.executeUpdate();
+    }
 }

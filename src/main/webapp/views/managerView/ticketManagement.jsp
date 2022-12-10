@@ -52,6 +52,7 @@
 						<th scope="col">Số ghế</th>
 						<th scope="col">Biển số xe</th>
 						<th scope="col">Giá</th>
+						<th scope="col">Huỷ Vé</th>
 					</tr>
 				</thead>
 					<tbody>
@@ -66,7 +67,9 @@
 					   <td>${ ticket.numberchair }</td>
 					   <td>${ ticket.tripbroad }</td>
 					   <td>${ ticket.price }</td>
-					      
+					      <td>
+					      	<a class="btn btn-danger" href="#" onclick="testConfirmDialog(${ticket.tripid},${ticket.seatid},${ticket.customerid});">Huỷ</a>
+					      </td>
 				    </tr>
 				</c:forEach>
 			  	</tbody>
@@ -108,15 +111,15 @@
     </script>
 	<script type="text/javascript" src="lib.js"></script>
 	<script type="text/javascript">
-    	function testConfirmDialog(maso_monhoc) {
-    		var result = confirm("Bạn chắc chắn muốn xóa môn học này?");
-    		
-    		if (result) {
-    			window.location.href = "deleteMonHoc?maso_monhoc=" + maso_monhoc;
-    		} else {
-    			return false;
-    		}
-    	};
+	function testConfirmDialog(trip,seat,custom) {
+		var result = confirm("Bạn chắc chắn muốn huỷ vé này?");
+		
+		if (result) {
+			window.location.href = "deleteTicket?id="+ trip +"&seat="+ seat +  "&custom=" + custom;
+		} else {
+			return false;
+		}
+	};
     	function Search() {
     		let searchContent = document.getElementById("searchContent").value;
     		
