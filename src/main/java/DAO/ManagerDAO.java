@@ -139,7 +139,7 @@ public class ManagerDAO {
 
 	public static void insertManager(Connection conn, String fullname, String phone_number, String email,
 			String password, int garage_id) throws SQLException {
-		String sql = "Insert into Manager values (?, ?, ?, ?, ?)";
+		String sql = "Insert into Manager(fullname,phone_number,email,password,garage_id) values (?, ?, ?, ?, ?)";
 		//
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -200,7 +200,7 @@ public class ManagerDAO {
 	}
 
 	public static void insertManager(Connection conn, Manager mh) throws SQLException {
-		String sql = "Insert into Manager values (?, ?, ?, ?, ?)";
+		String sql = "Insert into ManagerManager(fullname,phone_number,email,password,garage_id) values (?, ?, ?, ?, ?)";
 		//
 		PreparedStatement pstm = conn.prepareStatement(sql);
 

@@ -92,6 +92,8 @@ public class ForgotPassManager extends HttpServlet {
 		} else {
 			try {
 				// Cập nhật password trong DB.
+				errorString = "Yêu cầu đặt lại mật khẩu thành công, vui lòng kiểm tra email của bạn !";
+				request.setAttribute("errorString", errorString);
 				String pass = MyUtils.generatePassword(8);
 				ManagerDAO.updatePassword(conn, pass, numberPhone);
 				manager = ManagerDAO.findManagerByPhone(conn, numberPhone);

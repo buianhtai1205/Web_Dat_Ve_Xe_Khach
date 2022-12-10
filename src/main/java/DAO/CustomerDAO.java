@@ -139,7 +139,7 @@ public class CustomerDAO {
         pstm.executeUpdate();
     }
 	public static void insertCustomer(Connection conn, Customer mh) throws SQLException {
-        String sql = "Insert into Customer values (?, ?, ?, ?)";
+        String sql = "Insert into Customer(fullname,phone_number,email,password) values (?, ?, ?, ?)";
  //
         PreparedStatement pstm = conn.prepareStatement(sql);
       

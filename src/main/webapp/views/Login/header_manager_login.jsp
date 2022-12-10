@@ -80,7 +80,6 @@
 									<!-- <svg class="bi flex-shrink-0 me-2" role="img"
 											aria-label="Danger:">
 											<use xlink:href="#exclamation-triangle-fill" /></svg> -->
-									<div style="color: red">${errorString}</div>
 								</div>
 
 								<form action="${pageContext.request.contextPath}/managerHome"
@@ -101,6 +100,7 @@
 											placeholder="Password" required name="password"
 											value="${user.password}">
 										<div>
+										<div style="color: red">${errorString}</div>
 											<!-- <p id="error2"></p> -->
 										</div>
 									</div>

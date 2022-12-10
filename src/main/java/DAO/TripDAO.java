@@ -191,8 +191,18 @@ public class TripDAO {
 		return list;
 	}
 
-	public List<Trip> searchListTrips(Connection conn, String trip_board) throws SQLException {
-		String sql = "select * from Trip where trip_board = '" + trip_board + "' ";
+	public List<Trip> searchListTrips(Connection conn, String tripboard,String userManager) throws SQLException {
+		// lấy id garage
+		String garage_id = "select garage_id from Manager where phone_number = " + userManager;
+		PreparedStatement pstm2 = conn.prepareStatement(garage_id);
+		ResultSet rs2 = pstm2.executeQuery();
+		int _garageid = 0;
+
+		if (rs2.next()) {
+			_garageid = rs2.getInt("garage_id");
+		}
+		
+		String sql = "select * from Trip where trip_board like '%" + tripboard + "%' and garage_id = "+_garageid;
 		PreparedStatement pstm1 = conn.prepareStatement(sql);
 		ResultSet rs = pstm1.executeQuery();
 
@@ -201,7 +211,8 @@ public class TripDAO {
 			String departure = rs.getString("departure");
 			String destination = rs.getString("destination");
 			String departure_time = rs.getString("departure_time");
-			int garage_id = rs.getInt("garage_id");
+			String trip_board = rs.getString("trip_board");
+			//int garage_id = rs.getInt("garage_id");
 			int price = rs.getInt("price");
 			int id = rs.getInt("id");
 			int num_seat = rs.getInt("num_seat");
@@ -213,13 +224,13 @@ public class TripDAO {
 			trip.setTrip_board(trip_board);
 			trip.setNum_seat(num_seat);
 			trip.setPrice(price);
-			trip.setGarageID(garage_id);
+			trip.setGarageID(_garageid);
 			list.add(trip);
 		}
 		return list;
 	}
 
-	public void addTrip(Connection conn, String departure, String destination, String departure_time, int price,
+	public int addTrip(Connection conn, String departure, String destination, String departure_time, int price,
 			int num_seat, String trip_board, String userManager) throws SQLException {
 		// kiểm tra xem có tốn tại chuyến xe nào có trùng biển số và thời gian chạy
 		// không
@@ -233,6 +244,7 @@ public class TripDAO {
 		if (rs3.next()) {
 			check = rs3.getInt("id");
 		}
+		int checkTripID = 0;
 		// nếu không tồn tại chuyến xe trùng
 		if (check == 0) {
 			String garage_id = "select garage_id from Manager where phone_number = " + userManager;
@@ -267,18 +279,18 @@ public class TripDAO {
 				}
 			}
 		} else {
-			System.out.println("99999999999999999999999999999999");
+			checkTripID = 1;
 		}
+		return checkTripID;
 	}
 
-	public int getIdTrip(Connection conn, String tripBoard) throws SQLException {
-		String trip_id = "select id from Trip where trip_board = '" + tripBoard + "' ";
+	public int getIdTrip(Connection conn, String tripBoard,String departure_time) throws SQLException {
+		String trip_id = "select id from Trip where trip_board = '" + tripBoard + "' and departure_time = '" + departure_time + "' ";
 		PreparedStatement pstm2 = conn.prepareStatement(trip_id);
 		ResultSet rs2 = pstm2.executeQuery();
 		int tripid = 0;
 		if (rs2.next()) {
 			tripid = rs2.getInt("id");
-			System.out.println(tripid);
 			return tripid;
 		}
 		return 0;

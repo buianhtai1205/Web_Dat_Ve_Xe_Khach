@@ -32,7 +32,6 @@
 		<div class="text">Thêm chuyến xe</div>
 
 		<div class="content">
-			<p style="color: red;">${ errorString }</p>
 			<form action="${ pageContext.request.contextPath }/addTrip"
 				method="POST">
 				<div class="form-row">
@@ -50,9 +49,9 @@
 				</div>
 				<br>
 				<div class="form-row">
-					<div class="form-group col-md-4">
-						<label for="simpleinput">Thời gian</label> <input required
-							type="text" id="simpleinput" class="form-control" name="departure_time">
+					<div class="col-3 custom_flex">
+						<label for="simpleinput">Thời gian</label> <input name="departure_time" class="form-control" type="date"
+							required>
 					</div>
 				</div>
 				<br>
@@ -72,6 +71,8 @@
 						type="text" id="simpleinput" class="form-control"
 						name="trip_board">
 				</div>
+				<br>
+				<p style="color: red;">${ errorString }</p>
 				<br>
 				<button class="btn btn-success">Thêm</button>
 				<a class="btn btn-primary"

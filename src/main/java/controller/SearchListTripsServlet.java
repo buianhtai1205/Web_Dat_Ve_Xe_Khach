@@ -46,22 +46,10 @@ public class SearchListTripsServlet extends HttpServlet {
 		String userManager = (String) session.getAttribute("userManager");
 		String searchContent = request.getParameter("searchContent");
 		List<Trip> list = null;
-		if (searchContent.equals("")) {
-//			try {
-//				list = tripDAO.listTrips(conn, userManager);
-//			} catch (Exception e) {
-//				// TODO: handle exception
-//				e.printStackTrace();
-//			}
-			//response.sendRedirect(request.getContextPath() + "/tripManagement");
-			System.out.println("000000000000000000000000000000");
-//			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(Router.MANAGER_TRIPMANAGEMENT);
-//			dispatcher.forward(request, response);
-		}
-
 		try {
-			list = tripDAO.searchListTrips(conn, searchContent);
+			list = tripDAO.searchListTrips(conn, searchContent,userManager);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
