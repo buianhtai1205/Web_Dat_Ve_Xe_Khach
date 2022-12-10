@@ -482,20 +482,20 @@ public class TripDAO {
 		String timeStr = " and (\r\n"
 				+ "( 1 = 2";
 		if (filter_time1 == 1) {
-			timeStr = timeStr + " or (CONVERT(varchar(20),CONVERT(time, departure_time), 114) >= CONVERT(varchar(20),CONVERT(time, '00:00:00'), 114) \r\n"
-					+ "	and CONVERT(varchar(20),CONVERT(time, departure_time), 114) <= CONVERT(varchar(20),CONVERT(time, '06:00:00'), 114))";
+			timeStr = timeStr + " OR ( CAST(departure_time AS TIME) >= CAST('00:00:00' AS TIME)\r\n"
+					+ "	and CAST(departure_time AS TIME) <=  CAST('06:00:00' AS TIME) )";
 		}
 		if (filter_time2 == 1) {
-			timeStr = timeStr + " or (CONVERT(varchar(20),CONVERT(time, departure_time), 114) >= CONVERT(varchar(20),CONVERT(time, '06:01:00'), 114) \r\n"
-					+ "	and CONVERT(varchar(20),CONVERT(time, departure_time), 114) <= CONVERT(varchar(20),CONVERT(time, '12:00:00'), 114))";
+			timeStr = timeStr + " OR ( CAST(departure_time AS TIME) >=  CAST('06:01:00' AS TIME)\r\n"
+					+ "	and CAST(departure_time AS TIME) <=  CAST('12:00:00' AS TIME) )";
 		}
 		if (filter_time3 == 1) {
-			timeStr = timeStr + " or (CONVERT(varchar(20),CONVERT(time, departure_time), 114) >= CONVERT(varchar(20),CONVERT(time, '12:01:00'), 114) \r\n"
-					+ "	and CONVERT(varchar(20),CONVERT(time, departure_time), 114) <= CONVERT(varchar(20),CONVERT(time, '18:00:00'), 114))";
+			timeStr = timeStr + " OR ( CAST(departure_time AS TIME) >=  CAST('12:01:00' AS TIME)\r\n"
+					+ "	and CAST(departure_time AS TIME) <=  CAST('18:00:00' AS TIME) )";
 		}
 		if (filter_time4 == 1) {
-			timeStr = timeStr + " or(CONVERT(varchar(20),CONVERT(time, departure_time), 114) >= CONVERT(varchar(20),CONVERT(time, '18:01:00'), 114) \r\n"
-					+ "	and CONVERT(varchar(20),CONVERT(time, departure_time), 114) < CONVERT(varchar(20),CONVERT(time, '00:00:00'), 114))";
+			timeStr = timeStr + " OR ( CAST(departure_time AS TIME) >= CAST('18:01:00' AS TIME)\r\n"
+					+ "	and CAST(departure_time AS TIME) < CAST('00:00:00' AS TIME) )";
 		}
 		
 		if (filter_time1 == 0 && filter_time2 == 0 && filter_time3 == 0 && filter_time4 == 0) {
