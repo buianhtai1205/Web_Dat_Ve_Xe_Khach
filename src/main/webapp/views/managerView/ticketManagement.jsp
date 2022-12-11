@@ -51,6 +51,7 @@
 						<th scope="col">Điểm đến</th>
 						<th scope="col">Số ghế</th>
 						<th scope="col">Biển số xe</th>
+						<th scope="col">Thời gian</th>
 						<th scope="col">Giá</th>
 						<th scope="col">Huỷ Vé</th>
 					</tr>
@@ -66,6 +67,7 @@
 					     <td>${ ticket.musty }</td>
 					   <td>${ ticket.numberchair }</td>
 					   <td>${ ticket.tripbroad }</td>
+					   <td>${ ticket.startstime }</td>
 					   <td>${ ticket.price }</td>
 					      <td>
 					      	<a class="btn btn-danger" href="#" onclick="testConfirmDialog(${ticket.tripid},${ticket.seatid},${ticket.customerid});">Huỷ</a>

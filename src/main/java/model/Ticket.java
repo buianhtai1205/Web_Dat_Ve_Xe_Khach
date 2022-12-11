@@ -8,6 +8,7 @@ public class Ticket {
 	private String musty;
 	private String numberchair;
 	private String tripbroad;
+	private String startstime;
 	private int price;
 
 	private int seatid;
@@ -16,7 +17,7 @@ public class Ticket {
 	}
 
 	public Ticket(int id, String name, String phone, String starts, String musty, String chair, String tripbroad,
-			int price, int seatid, int customid) {
+			int price,String time, int seatid, int customid) {
 		super();
 		this.setTripid(id);
 		this.setFullname(name);
@@ -25,6 +26,7 @@ public class Ticket {
 		this.setMusty(musty);
 		this.setNumberchair(chair);
 		this.setTripbroad(tripbroad);
+		this.setStartstime(time);
 		this.setPrice(price);
 		
 		this.setSeatid(seatid);
@@ -109,6 +111,14 @@ public class Ticket {
 
 	public void setCustomerid(int customerid) {
 		this.customerid = customerid;
+	}
+
+	public String getStartstime() {
+		return startstime;
+	}
+
+	public void setStartstime(String startstime) {
+		this.startstime = startstime;
 	}
 
 }

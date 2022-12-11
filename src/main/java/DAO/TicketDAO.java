@@ -27,7 +27,7 @@ public class TicketDAO {
 		if (rs1.next()) {
 			_garageid = rs1.getInt("garage_id");
 		}
-		String sql = "Select tk.trip_id,c.fullname,c.phone_number,t.departure,sc.musty,s.number_chair,t.trip_board,t.price,  tk.seat_id, tk.customer_id  From Ticket tk, Trip t, Seat s, Customer c, Schedule sc Where tk.trip_id=t.id and t.garage_id=? and tk.seat_id=s.id and tk.schedule_id=sc.id and tk.customer_id=c.id ";
+		String sql = "Select tk.trip_id,c.fullname,c.phone_number,t.departure,sc.musty,s.number_chair,t.trip_board, t.departure_time,t.price,  tk.seat_id, tk.customer_id  From Ticket tk, Trip t, Seat s, Customer c, Schedule sc Where tk.trip_id=t.id and t.garage_id=? and tk.seat_id=s.id and tk.schedule_id=sc.id and tk.customer_id=c.id ";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -43,6 +43,7 @@ public class TicketDAO {
 			String musty = rs.getString("musty");
 			String numberchair = rs.getString("number_chair");
 			String board = rs.getString("trip_board");
+			String timestart = rs.getString("departure_time");
 			int price = rs.getInt("price");
 			
 			int seatid  = rs.getInt("seat_id");
@@ -55,6 +56,7 @@ public class TicketDAO {
 			mh.setMusty(musty);
 			mh.setNumberchair(numberchair);
 			mh.setTripbroad(board);
+			mh.setStartstime(timestart);
 			mh.setPrice(price);
 			mh.setSeatid(seatid);
 			mh.setCustomerid(customid);
@@ -73,7 +75,7 @@ public class TicketDAO {
 		if (rs1.next()) {
 			_garageid = rs1.getInt("garage_id");
 		}
-		String sql = "Select tk.trip_id,c.fullname,c.phone_number,t.departure ,sc.musty,s.number_chair,t.trip_board ,t.price,  tk.seat_id, tk.customer_id From Ticket tk, Trip t, Seat s, Customer c, Schedule sc Where tk.trip_id=t.id and t.garage_id=? and tk.seat_id=s.id and tk.schedule_id=sc.id and tk.customer_id=c.id and c.phone_number like '%"
+		String sql = "Select tk.trip_id,c.fullname,c.phone_number,t.departure ,sc.musty,s.number_chair,t.trip_board,t.departure_time ,t.price,  tk.seat_id, tk.customer_id From Ticket tk, Trip t, Seat s, Customer c, Schedule sc Where tk.trip_id=t.id and t.garage_id=? and tk.seat_id=s.id and tk.schedule_id=sc.id and tk.customer_id=c.id and c.phone_number like '%"
 				+ require + "%'";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
@@ -89,6 +91,7 @@ public class TicketDAO {
 			String musty = rs.getString("musty");
 			String numberchair = rs.getString("number_chair");
 			String board = rs.getString("trip_board");
+			String timestart = rs.getString("departure_time");
 			int price = rs.getInt("price");
 			
 			int seatid  = rs.getInt("seat_id");
@@ -101,6 +104,7 @@ public class TicketDAO {
 			mh.setMusty(musty);
 			mh.setNumberchair(numberchair);
 			mh.setTripbroad(board);
+			mh.setStartstime(timestart);
 			mh.setPrice(price);
 			mh.setSeatid(seatid);
 			mh.setCustomerid(customid);
@@ -113,10 +117,10 @@ public class TicketDAO {
 		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(ticket), Charset.forName("UTF-8"));
 	    PrintWriter out = new PrintWriter(outputStreamWriter);
 		
-		out.println("id\t Họ Tên\t Số điện thoại\t Điểm đón\t Điểm đến\t Số ghế\t Biển số xe\t Giá");
+		out.println("id\t Họ Tên\t Số điện thoại\t Điểm đón\t Điểm đến\t Số ghế\t Biển số xe\t Thời gian\t Giá");
 		List<Ticket> list = getlistTicket(conn,phone);
 		for (Ticket emp : list) {			
-           out.println(emp.getTripid() + "\t " + emp.getFullname() + "\t " + emp.getPhonenumber() + "\t " + emp.getStarts() + "\t " + emp.getMusty() + "\t " + emp.getNumberchair() + "\t " + emp.getTripbroad() + "\t " + emp.getPrice());            
+           out.println(emp.getTripid() + "\t " + emp.getFullname() + "\t " + emp.getPhonenumber() + "\t " + emp.getStarts() + "\t " + emp.getMusty() + "\t " + emp.getNumberchair() + "\t " + emp.getTripbroad() + "\t " + emp.getStartstime() + "\t " + emp.getPrice());            
         }
 		out.close();
 	}

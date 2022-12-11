@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import connect_db.MySQLConnUtils;
 import connect_db.SQLServerConnUtils_SQLJDBC;
 import jakarta.servlet.RequestDispatcher;
@@ -49,7 +52,7 @@ public class EditCustomer extends HttpServlet {
 		String idStr = (String) request.getParameter("id");
 		int id = 0;
 		try {
-			id = Integer.parseInt(idStr);
+			id = Integer.parseInt(idStr);			
 		} catch (Exception e) {
 		}
 
