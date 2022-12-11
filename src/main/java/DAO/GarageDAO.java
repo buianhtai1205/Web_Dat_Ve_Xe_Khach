@@ -90,7 +90,7 @@ public class GarageDAO {
 
 	public static void insertGarage(Connection conn, String fullname, String address, String description)
 			throws SQLException {
-		String sql = "Insert into Garage(fullname,address,description) values (?, ?, ?, ?)";
+		String sql = "Insert into Garage(fullname,address,description,deleted) values (?, ?, ?, ?)";
 		//
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		int deleted = 0;

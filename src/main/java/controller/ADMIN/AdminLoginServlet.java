@@ -1,4 +1,4 @@
-package controller;
+package controller.ADMIN;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -11,16 +11,16 @@ import utils.Router;
 import java.io.IOException;
 
 /**
- * Servlet implementation class ManagerLoginServlet
+ * Servlet implementation class AdminLoginServlet
  */
-@WebServlet(name = "manager", urlPatterns = { "/manager" })
-public class ManagerLoginServlet extends HttpServlet {
+@WebServlet(name = "admin",urlPatterns = { "/admin" })
+public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ManagerLoginServlet() {
+	public AdminLoginServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,8 +32,7 @@ public class ManagerLoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher //
-				= this.getServletContext().getRequestDispatcher(Router.MANAGER_LOGIN);
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Router.ADMIN_LOGIN);
 
 		dispatcher.forward(request, response);
 	}
@@ -45,7 +44,7 @@ public class ManagerLoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
+		
 	}
-
 }

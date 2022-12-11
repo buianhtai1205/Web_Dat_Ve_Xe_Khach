@@ -87,15 +87,17 @@ public class CreateManager extends HttpServlet {
 
 		request.setAttribute("errorString", errorString);
 
-		if (errorString != null) {
-			RequestDispatcher dispatcher = request.getServletContext()
-					.getRequestDispatcher(Router.ADMIN_GARAGEMANAGEMENT);
-			dispatcher.forward(request, response);
-		}
-
-		else {
-			response.sendRedirect(request.getContextPath() + "/managerList");
-		}
+		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(Router.ADMIN_GARAGEMANAGEMENT);
+		dispatcher.forward(request, response);
+//		if (errorString != null) {
+//			RequestDispatcher dispatcher = request.getServletContext()
+//					.getRequestDispatcher(Router.ADMIN_GARAGEMANAGEMENT);
+//			dispatcher.forward(request, response);
+//		}
+//
+//		else {
+//			response.sendRedirect(request.getContextPath() + "/managerList");
+//		}
 	}
 
 }

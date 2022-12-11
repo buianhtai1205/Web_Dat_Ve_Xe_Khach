@@ -1,4 +1,4 @@
-package controller;
+package controller.MANAGER;
 
 import java.io.IOException;
 import java.sql.Connection;
