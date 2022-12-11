@@ -58,6 +58,7 @@ public class DatVe extends HttpServlet {
 		String errorString = null;
 		//String idChuyen = (String) session.getAttribute("idChuyen");
 		String idChuyen= request.getParameter("inputIdChuyenXe");
+		String inputTripBoard= request.getParameter("inputTripBoard");
 		String idGhe1 = request.getParameter("seatID1");
 		String idGhe2= request.getParameter("seatID2");
 		String idGhe3= request.getParameter("seatID3");
@@ -116,7 +117,7 @@ public class DatVe extends HttpServlet {
 								}
 							}
 							
-							if(idGhe3!="") {
+							if(idGhe3.length() > 0) {
 								seat = seatDAO.getIdSeat(con, idGhe3);
 								int idSeat3 = seat.getId();
 								if(String.valueOf(idSeat3) != null) {
@@ -125,14 +126,23 @@ public class DatVe extends HttpServlet {
 							}
 								int _nbSeats =Integer.parseInt(seatDAO.getNumberSeat(con,idChuyen));
 								String priceSeat = String.valueOf(_nbSeats * Integer.parseInt(priceTrip));
-								session.setAttribute("priceSeat",priceSeat);
 								Seat numberChairSeat1 = seatDAO.getChairByIdSeat(con, idGhe1);
-								Seat numberChairSeat2 = seatDAO.getChairByIdSeat(con, idGhe2);
-								Seat numberChairSeat3 = seatDAO.getChairByIdSeat(con, idGhe3);
+								Seat numberChairSeat2 = null;
+								Seat numberChairSeat3 = null;
+								if(idGhe2.length() > 0) {
+									numberChairSeat2 = seatDAO.getChairByIdSeat(con, idGhe2);
+								}
+								if(idGhe3.length() > 0) {
+									
+									numberChairSeat3 = seatDAO.getChairByIdSeat(con, idGhe3);
+								}
+								
+								session.setAttribute("priceSeat",priceSeat);
 								session.setAttribute("numberChairSeat1",numberChairSeat1);
 								session.setAttribute("numberChairSeat2",numberChairSeat2);
 								session.setAttribute("numberChairSeat3",numberChairSeat3);
-								String noiDung = "Chuyến số: "  + "Ghế số: " + numberChairSeat1.getNumber_chair() + " "+numberChairSeat2.getNumber_chair() + " "+numberChairSeat3.getNumber_chair() + " "+ "Địa điểm đón: " + _diemDon + "\nĐịa điểm trả: " + _diemTra + "\nGìa vé: " + priceSeat  
+								//session.setAttribute("numberChairSeat3",numberChairSeat3);
+								String noiDung = "Chuyến số: "  +"\nBiển số" + inputTripBoard + "\nGhế số: " + numberChairSeat1.getNumber_chair() + " "+numberChairSeat2.getNumber_chair() + " "+numberChairSeat3.getNumber_chair() + " "+ "\nĐịa điểm đón: " + _diemDon + "\nĐịa điểm trả: " + _diemTra + "\nGìa vé: " + priceSeat + ".000đ"  
 										+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "\nMật khẩu: "+ pass;
 								SendEmail.getInstant().guiMail(email, noiDung);
 								String mes = "Email của quý khách đã gửi thành công!";

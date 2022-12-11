@@ -16,6 +16,7 @@ import utils.Router;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import DAO.GarageDAO;
 import DAO.SeatDAO;
@@ -54,6 +55,10 @@ public class UserInfoServlet extends HttpServlet {
 		request.setAttribute("user", loginedUser);
 	
 		String phone = (String) session.getAttribute("phone");
+		session.getAttribute("priceSeat");
+		session.getAttribute("numberChairSeat1");
+		session.getAttribute("numberChairSeat2");
+		session.getAttribute("numberChairSeat3");
 		
 		TripDAO trDAO = new TripDAO();
 		Trip tr = new Trip();
@@ -63,6 +68,7 @@ public class UserInfoServlet extends HttpServlet {
 		
 		SeatDAO seatDAO = new SeatDAO();
 		Seat seat = new Seat();
+		ArrayList<String> list = new ArrayList<String>();
 		try {
 			tr = trDAO.getTripByTicket(conn, phone);
 			session.setAttribute("tr", tr);
@@ -70,12 +76,13 @@ public class UserInfoServlet extends HttpServlet {
 			xe = grDAO.getGarage(conn, idGarage);
 			session.setAttribute("xe", xe);
 			
-			seat = seatDAO.getSeat(conn, phone);
-			session.setAttribute("seat", seat);
+			list = seatDAO.getListNumberChair(conn, phone);
+			session.setAttribute("list", list);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		RequestDispatcher dispatcher //
 				= this.getServletContext().getRequestDispatcher(Router.USER_INFO_VIEW);
 		dispatcher.forward(request, response);

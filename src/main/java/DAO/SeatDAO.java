@@ -13,44 +13,55 @@ public class SeatDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Seat getSeat(Connection con, String phoneNumber) {
+	public ArrayList<String> getSeat(Connection con, String phoneNumber) {
 		String idSeat = "select seat_id from Ticket join Customer on Customer.id= Ticket.customer_id where phone_number = "
 				+ phoneNumber;
 		String _idSeat = null;
+		ArrayList<String> listIdSeat = new ArrayList<String>();
 		try {
 			PreparedStatement pstm1 = con.prepareStatement(idSeat);
 			ResultSet rs1 = pstm1.executeQuery();
-
-			if (rs1.next()) {
+			while (rs1.next()) {
 				_idSeat = rs1.getString("seat_id");
+				listIdSeat.add(_idSeat);
 			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-
-		String sql1 = "SELECT number_chair,status FROM Seat WHERE id = " + _idSeat;
-
-		Seat seat = new Seat();
-		PreparedStatement pre = null;
-		ResultSet res;
-		try {
-			pre = con.prepareStatement(sql1);
-			res = pre.executeQuery();
-			while (res.next()) {
-				String number_chair = res.getString("number_chair");
-				int status = res.getInt("status");
-				seat.setNumber_chair(number_chair);
-				seat.setStatus(status);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-
-		}
-		return seat;
+		return listIdSeat;
 
 	}
+	
+	
+	public ArrayList<String> getListNumberChair(Connection con, String phoneNumber)
+	{
+		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> listIDSeat = new ArrayList<String>();
+		SeatDAO seatDAO = new SeatDAO();
+		listIDSeat = seatDAO.getSeat(con,phoneNumber);
+		
+		
+		for(int i = 0;i<listIDSeat.size();i++) {
+			String sql = "SELECT number_chair,status FROM Seat WHERE id = " + listIDSeat.get(i);
+			PreparedStatement pre = null;
+			try {
+				pre = con.prepareStatement(sql);
+				ResultSet res = pre.executeQuery();
+				while (res.next()) {
+					String item = res.getString("number_chair");
+					list.add(item);
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+
+		return list;
+	}
+	
 	
 	public Seat getChairByIdSeat(Connection con, String idSeat) {
 
@@ -109,6 +120,8 @@ public class SeatDAO {
 		}
 		return null;
 	}
+	
+	
 	
 	public static ArrayList<Seat> getListSeat(Connection con, int trip_id)
 	{
