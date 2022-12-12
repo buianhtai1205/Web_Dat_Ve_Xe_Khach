@@ -48,9 +48,10 @@ public class CreateGarageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request);
-		String fullname = new String(request.getParameter("fullname").getBytes("UTF-8"));
-		String address = new String(request.getParameter("address").getBytes("UTF-8"));
-		String description = new String(request.getParameter("description").getBytes("UTF-8"));
+		
+		String fullname = new String(request.getParameter("fullname").getBytes("ISO-8859-1"), "UTF-8");
+		String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
+		String description = new String(request.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");
 		GarageDAO garageDAO = new GarageDAO();
 		String errorString = null;
 

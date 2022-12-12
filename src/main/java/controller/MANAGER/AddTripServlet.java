@@ -50,12 +50,12 @@ public class AddTripServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request);
 		HttpSession session = request.getSession();
-		String departure = new String(request.getParameter("departure").getBytes("UTF-8"));
-		String destination = new String(request.getParameter("destination").getBytes("UTF-8"));
-		String departure_time = new String(request.getParameter("departure_time").getBytes("UTF-8"));
-		String price = request.getParameter("price");
-		String num_seat = request.getParameter("num_seat");
-		String trip_board = new String(request.getParameter("trip_board").getBytes("UTF-8"));
+		String departure = new String(request.getParameter("departure").getBytes("ISO-8859-1"), "UTF-8");
+		String destination = new String(request.getParameter("destination").getBytes("ISO-8859-1"), "UTF-8");
+		String departure_time = new String(request.getParameter("departure_time").getBytes("ISO-8859-1"), "UTF-8");
+		String price = new String(request.getParameter("price").getBytes("ISO-8859-1"), "UTF-8");
+		String num_seat = new String(request.getParameter("num_seat").getBytes("ISO-8859-1"), "UTF-8");
+		String trip_board = new String(request.getParameter("trip_board").getBytes("ISO-8859-1"), "UTF-8");
 		String userManager = (String) session.getAttribute("userManager");
 		int priceM = Integer.parseInt(price);
 		int numSeat = Integer.parseInt(num_seat);
