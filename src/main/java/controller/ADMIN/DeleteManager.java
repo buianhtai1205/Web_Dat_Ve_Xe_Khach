@@ -57,9 +57,11 @@ public class DeleteManager extends HttpServlet {
 
         try {
             DAO.ManagerDAO.deleteManager(conn, id);
+            DAO.NotifiDAO.DoneDelete(true);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
+            DAO.NotifiDAO.DoneDelete(false);
         }
   
         response.sendRedirect(request.getContextPath() + "/managerList");

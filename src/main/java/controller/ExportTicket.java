@@ -63,8 +63,10 @@ public class ExportTicket extends HttpServlet {
 		String userManager = (String) session.getAttribute("userManager");
 		try {
 			DAO.TicketDAO.getData(conn, myObj,userManager);
+			DAO.NotifiDAO.DoneExport(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			DAO.NotifiDAO.DoneExport(false);
 		}
 		response.setContentType("text/html;charset=UTF-8");
 		RequestDispatcher dispatcher = request.getServletContext()

@@ -114,9 +114,11 @@ public class EditManager extends HttpServlet {
 
 		try {
 			DAO.ManagerDAO.updateManager(conn, mh);
+			DAO.NotifiDAO.DoneUpdate(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			errorString = e.getMessage();
+			DAO.NotifiDAO.DoneUpdate(false);
 		}
 
 		request.setAttribute("errorString", errorString);

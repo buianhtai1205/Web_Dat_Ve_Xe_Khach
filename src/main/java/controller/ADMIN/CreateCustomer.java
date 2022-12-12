@@ -70,9 +70,11 @@ public class CreateCustomer extends HttpServlet {
 
 		try {
 			DAO.CustomerDAO.insertCustomer(conn, mh);
+			DAO.NotifiDAO.DoneSave(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			errorString = e.getMessage();
+			DAO.NotifiDAO.DoneSave(false);
 		}
 
 		request.setAttribute("errorString", errorString);

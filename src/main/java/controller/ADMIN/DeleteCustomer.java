@@ -54,9 +54,11 @@ public class DeleteCustomer extends HttpServlet {
 
         try {
             DAO.CustomerDAO.deleteCustomer(conn, id);
+            DAO.NotifiDAO.DoneDelete(true);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
+            DAO.NotifiDAO.DoneDelete(false);
         }
   
         response.sendRedirect(request.getContextPath() + "/customerList");

@@ -80,9 +80,11 @@ public class CreateManager extends HttpServlet {
 
 		try {
 			managerDAO.insertManager(conn, fullname, phone_number, email, password, garage_id);
+			DAO.NotifiDAO.DoneSave(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			errorString = e.getMessage();
+			DAO.NotifiDAO.DoneSave(false);
 		}
 
 		request.setAttribute("errorString", errorString);
