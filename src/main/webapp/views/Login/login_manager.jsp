@@ -79,23 +79,23 @@
 									<form action="${pageContext.request.contextPath}/managerHome"
 										method="POST">
 										<div class="form-group ">
-											<input type="tel" class="form-control top" id="input"
+											<input type="tel" class="form-control top" id="input11"
 												aria-describedby="phoneHelp" placeholder="Phone number"
 												name="username" value="${user.phone_number}"
 												pattern="[0-9]{10}" required>
-											<!-- <div>
-												<p id="error"></p>
-											</div> -->
+											  <div>
+												<p id="error11"></p>
+											</div>  
 										</div>
 
 
 										<div class="form-group ">
-											<input type="password" class="form-control top" id="password"
+											<input type="password" class="form-control top" id="password22"
 												placeholder="Password" required name="password"
 												value="${user.password}">
-											<!-- <div>
-												<p id="error2"></p>
-											</div> -->
+											  <div>
+												<p id="error22"></p>
+											</div>  
 										</div>
 
 										<div class="form-group content">
@@ -154,11 +154,11 @@
 											<div>${errorString}</div>
 										</div>
 										<div class="form-group">
-											<input type="tel" class="form-control top" id="_phoneNumber"
+											<input type="tel" class="form-control top" id="_phoneNumber11"
 												aria-describedby="phoneHelp" placeholder="Phone number"
 												name="numberPhoneForgotPassword" value=""
 												pattern="[0-9]{10}" required />
-											<!-- <p id="errorNumberPhone" style="display: flex;"></p> -->
+											 <p id="errorNumberPhone11" style="display: flex;"></p>  
 										</div>
 										<p style="color: red;">${ notifi }</p>
 										<div class=""
@@ -184,36 +184,36 @@
 			return re.test(input_str);
 		}
 
-		var input = document.getElementById("input");
-		var password = document.getElementById("password");
-		input.onblur = function() {
-			if (!validatePhoneNumber(input.value)) {
-				input.classList.add('invalid');
-				error.innerHTML = 'Please enter a correct number phone.'
+		var input11 = document.getElementById("input11");
+		var password22 = document.getElementById("password22");
+		input11.onblur = function() {
+			if (!validatePhoneNumber(input11.value)) {
+				input11.classList.add('invalid');
+				error11.innerHTML = 'Please enter a correct number phone.'
 			}
 		};
 
-		input.onfocus = function() {
+		input11.onfocus = function() {
 			if (this.classList.contains('invalid')) {
 
 				this.classList.remove('invalid');
-				error.innerHTML = "";
+				error11.innerHTML = "";
 			}
 		};
 
-		password.onblur = function() {
-			if (password.value.length === 0) {
-				password.classList.add('invalid');
-				error2.innerHTML = 'Please enter a correct password.'
+		password22.onblur = function() {
+			if (password22.value.length === 0) {
+				password22.classList.add('invalid');
+				error22.innerHTML = 'Please enter a correct password.'
 
 			}
 		};
 
-		password.onfocus = function() {
+		password22.onfocus = function() {
 			if (this.classList.contains('invalid')) {
 
 				this.classList.remove('invalid');
-				error2.innerHTML = "";
+				error22.innerHTML = "";
 			}
 		};
 
@@ -235,18 +235,18 @@
 			return re.test(input_str);
 		}
 
-		var _phoneNumber = document.getElementById("_phoneNumber");
-		_phoneNumber.onblur = function() {
-			if (!validatePhoneNumber(_phoneNumber.value)) {
-				_phoneNumber.classList.add("invalid");
-				errorNumberPhone.innerHTML = "Please enter a correct number phone.";
+		var _phoneNumber11 = document.getElementById("_phoneNumber11");
+		_phoneNumber11.onblur = function() {
+			if (!validatePhoneNumber(_phoneNumber11.value)) {
+				_phoneNumber11.classList.add("invalid");
+				errorNumberPhone11.innerHTML = "Please enter a correct number phone.";
 			}
 		};
 
-		_phoneNumber.onfocus = function() {
+		_phoneNumber11.onfocus = function() {
 			if (this.classList.contains("invalid")) {
 				this.classList.remove("invalid");
-				errorNumberPhone.innerHTML = "";
+				errorNumberPhone11.innerHTML = "";
 			}
 		};
 	</script>
