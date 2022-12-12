@@ -133,6 +133,18 @@ cursor: pointer;
 		        
 		    }
 		});
+var str = ${ errorString };
+		
+		if (str == 'null')
+			{
+			alert("Xoá Thành Công");
+			window.location.href =  "managerList";
+			}
+		else if(str == 'error')
+			{
+			alert("Lỗi! Không Xoá Được");
+			window.location.href =  "managerList";
+			}
     </script>
     <script type="text/javascript" src="lib.js"></script>
     <script type="text/javascript">

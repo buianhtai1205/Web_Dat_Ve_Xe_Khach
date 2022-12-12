@@ -61,7 +61,8 @@
 	                </div>
 	            </div>
 	            <br>
-	             <input class="btn btn-success" type="submit" value="Thêm" />
+	       
+	             <input class="btn btn-success" type="submit" value="Thêm"/>
 	            <a class="btn btn-primary" href="${ pageContext.request.contextPath }/customerList">Hủy</a>
         </form>
 		</div> 
@@ -98,6 +99,17 @@
 		        
 		    }
 		});
+		var str = ${ errorString };
+	
+		if (str == 'null')
+			{
+			alert("Thêm Thành Công");
+			window.location.href =  "customerList";
+			}
+		
+		
+			
+	
     </script>
 </body>
 </html>

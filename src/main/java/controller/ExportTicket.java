@@ -58,16 +58,25 @@ public class ExportTicket extends HttpServlet {
 		fd.setVisible(true);
 		String path = fd.getDirectory()+fd.getFile();
 		System.out.println("File ...  "+path);
+		String errorfile = "'done'";
+		if (fd.getFile() == null)
+		{
+			 errorfile = "'null'";
+		}
+		
 		File myObj = new File(path);
 		HttpSession session = request.getSession();
 		String userManager = (String) session.getAttribute("userManager");
+		String errorString = "'done'";
 		try {
 			DAO.TicketDAO.getData(conn, myObj,userManager);
-			DAO.NotifiDAO.DoneExport(true);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			DAO.NotifiDAO.DoneExport(false);
+			errorString = "'error'";
 		}
+		request.setAttribute("errorString", errorString);
+		request.setAttribute("errorFile",errorfile);
 		response.setContentType("text/html;charset=UTF-8");
 		RequestDispatcher dispatcher = request.getServletContext()
 				.getRequestDispatcher("/quanlyve");

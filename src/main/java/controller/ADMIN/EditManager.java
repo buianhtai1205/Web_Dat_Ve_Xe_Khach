@@ -110,29 +110,29 @@ public class EditManager extends HttpServlet {
 
 		Manager mh = new Manager(id, fullname, phone_number, email, password,idgarage);
 
-		String errorString = null;
+		String errorString = "'null'";
 
 		try {
 			DAO.ManagerDAO.updateManager(conn, mh);
-			DAO.NotifiDAO.DoneUpdate(true);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			errorString = e.getMessage();
-			DAO.NotifiDAO.DoneUpdate(false);
+			errorString = "'Lỗi! vui lòng xem lại.'";
 		}
 
 		request.setAttribute("errorString", errorString);
 		request.setAttribute("manager", mh);
 
-		if (errorString != null) {
+	//	if (errorString != null) {
 			RequestDispatcher dispatcher = request.getServletContext()
 					.getRequestDispatcher("/views/adminView/editManager.jsp");
 			dispatcher.forward(request, response);
-		}
+	//	}
 
-		else {
-			response.sendRedirect(request.getContextPath() + "/managerList");
-		}
+//		else {
+	//		response.sendRedirect(request.getContextPath() + "/managerList");
+		//}
 	}
 
 }

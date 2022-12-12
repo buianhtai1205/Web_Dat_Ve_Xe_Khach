@@ -1,5 +1,6 @@
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -58,18 +59,21 @@ public class DeleteTicket extends HttpServlet {
 	            
 	        }
 	
-	        String errorString = null;
+	        String errorString = "'null'";
 	       
 	        try {
 	            DAO.TicketDAO.deleteTicket(conn, id,idseat,idcustom);
-	            DAO.NotifiDAO.DoneDeleteTicket(true);
+	           
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            errorString = e.getMessage();
-	            DAO.NotifiDAO.DoneDeleteTicket(false);
+	            errorString = "'error1'";
 	        }
-	  
-	        response.sendRedirect(request.getContextPath() + "/quanlyve");
+	        request.setAttribute("errorString", errorString);
+	        RequestDispatcher dispatcher = request.getServletContext()
+					.getRequestDispatcher("/quanlyve");
+			dispatcher.forward(request, response);
+	       // response.sendRedirect(request.getContextPath() + "/quanlyve");
 	}
 
 	/**

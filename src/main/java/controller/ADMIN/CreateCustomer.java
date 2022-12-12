@@ -66,28 +66,28 @@ public class CreateCustomer extends HttpServlet {
 		String password = new String(request.getParameter("password").getBytes("ISO-8859-1"), "UTF-8");
 
 		Customer mh = new Customer(fullname, phone_number, email, password);
-		String errorString = null;
+		String errorString = "'null'";
 
 		try {
 			DAO.CustomerDAO.insertCustomer(conn, mh);
-			DAO.NotifiDAO.DoneSave(true);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			errorString = "Trùng số điện thoại";
-			DAO.NotifiDAO.DoneSave(false);
+			errorString = "'Trùng số điện thoại'";
 		}
 
 		request.setAttribute("errorString", errorString);
 
-		if (errorString != null) {
+		//if (errorString != null) {
 			RequestDispatcher dispatcher = request.getServletContext()
 					.getRequestDispatcher("/views/adminView/createCustomer.jsp");
 			dispatcher.forward(request, response);
-		}
+	//	}
 
-		else {
-			response.sendRedirect(request.getContextPath() + "/customerList");
-		}
+	//	else {
+	//		response.sendRedirect(request.getContextPath() + "/customerList");
+			
+	//	}
 	}
 
 }

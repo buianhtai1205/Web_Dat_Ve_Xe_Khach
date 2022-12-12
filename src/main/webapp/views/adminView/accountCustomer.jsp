@@ -133,6 +133,18 @@ cursor: pointer;
 		        
 		    }
 		});
+	var str = ${ errorString };
+		
+		if (str == 'null')
+			{
+			alert("Xoá Thành Công");
+			window.location.href =  "customerList";
+			}
+		else if(str == 'error')
+			{
+			alert("Lỗi! Không Xoá Được");
+			window.location.href =  "customerList";
+			}
     </script>
     <script type="text/javascript" src="lib.js"></script>
     <script type="text/javascript">
@@ -152,6 +164,7 @@ cursor: pointer;
     			window.location.href = "searchCustomer?searchContent=" + searchContent;
     		}
     	};
+	
     </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package controller.ADMIN;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -50,18 +51,21 @@ public class DeleteCustomer extends HttpServlet {
         } catch (Exception e) {
         }
  
-        String errorString = null;
+        String errorString = "'null'";
 
         try {
             DAO.CustomerDAO.deleteCustomer(conn, id);
-            DAO.NotifiDAO.DoneDelete(true);
+           
         } catch (SQLException e) {
             e.printStackTrace();
-            errorString = e.getMessage();
-            DAO.NotifiDAO.DoneDelete(false);
+            errorString = "'error'";
+          
         }
-  
-        response.sendRedirect(request.getContextPath() + "/customerList");
+        request.setAttribute("errorString", errorString);
+        RequestDispatcher dispatcher = request.getServletContext()
+				.getRequestDispatcher("/views/adminView/accountCustomer.jsp");
+		dispatcher.forward(request, response);
+        //response.sendRedirect(request.getContextPath() + "/customerList");
 	}
 
 	/**

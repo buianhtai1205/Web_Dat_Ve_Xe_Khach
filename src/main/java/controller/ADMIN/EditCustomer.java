@@ -113,29 +113,30 @@ public class EditCustomer extends HttpServlet {
 
 		Customer mh = new Customer(id, fullname, phone_number, email, password);
 
-		String errorString = null;
+		String errorString = "'null'";
 
 		try {
 			DAO.CustomerDAO.updateCustomer(conn, mh);
-			DAO.NotifiDAO.DoneUpdate(true);
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 			errorString = e.getMessage();
-			DAO.NotifiDAO.DoneUpdate(false);
+			errorString = "'Lỗi! vui lòng xem lại.'";
+			
 		}
 
 		request.setAttribute("errorString", errorString);
 		request.setAttribute("khachhang", mh);
 
-		if (errorString != null) {
+	//	if (errorString != null) {
 			RequestDispatcher dispatcher = request.getServletContext()
 					.getRequestDispatcher("/views/adminView/editCustomer.jsp");
 			dispatcher.forward(request, response);
-		}
+	//	}
 
-		else {
-			response.sendRedirect(request.getContextPath() + "/customerList");
-		}
+	//	else {
+		//	response.sendRedirect(request.getContextPath() + "/customerList");
+	//	}
 	}
 
 }
