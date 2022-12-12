@@ -61,19 +61,28 @@ html {
   border-radius: 100px;
   font-size: 1.6rem;
   position: relative; }
-  .btn:hover {
+  button:link, button:visited{
+      
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  font-size: 1.6rem;
+  position: relative; }
+  button:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); }
-  .btn:hover::after {
+  button:hover::after {
     transform: scale(1.4);
     opacity: 0; }
 
-.btn:active {
+button:active {
   outline: none;
   transform: translateY(-1px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
 
-.btn::after {
+button::after {
   content: "";
   display: inline-block;
   height: 100%;
