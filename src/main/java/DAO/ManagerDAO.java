@@ -137,18 +137,45 @@ public class ManagerDAO {
 		return delete;
 	}
 
-	public static void insertManager(Connection conn, String fullname, String phone_number, String email,
-			String password, int garage_id) throws SQLException {
-		String sql = "Insert into Manager(fullname,phone_number,email,password,garage_id) values (?, ?, ?, ?, ?)";
-		//
-		PreparedStatement pstm = conn.prepareStatement(sql);
-
-		pstm.setString(1, fullname);
-		pstm.setString(2, phone_number);
-		pstm.setString(3, email);
-		pstm.setString(4, password);
-		pstm.setInt(5, garage_id);
-		pstm.executeUpdate();
+	public int insertManager(Connection conn, String fullname, String phone_number, String email, String password,
+			int garage_id) throws SQLException {
+		String checkPhone = "select * from Manager where phone_number = ?";
+		PreparedStatement pstm3 = conn.prepareStatement(checkPhone);
+		pstm3.setString(1, phone_number);
+		ResultSet rs3 = pstm3.executeQuery();
+		int check1 = 0;
+		if (rs3.next()) {
+			check1 = rs3.getInt("id");
+		}
+		System.out.println(check1);
+		String checkEmail = "select * from Manager where email = ?";
+		PreparedStatement pstm4 = conn.prepareStatement(checkEmail);
+		pstm4.setString(1, email);
+		ResultSet rs4 = pstm4.executeQuery();
+		int check2 = 0;
+		if (rs4.next()) {
+			check2 = rs4.getInt("id");
+		}
+		System.out.println(check2);
+		int checkMana = 0;
+		if (check1 == 0 & check2 == 0) {
+			String sql = "Insert into Manager(fullname,phone_number,email,password,garage_id) values (?, ?, ?, ?, ?)";
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, fullname);
+			pstm.setString(2, phone_number);
+			pstm.setString(3, email);
+			pstm.setString(4, password);
+			pstm.setInt(5, garage_id);
+			pstm.executeUpdate();
+		} else if (check1 == 0 & check2 != 0) {
+			checkMana = 1;
+		} else if (check1 != 0 & check2 == 0) {
+			checkMana = 2;
+		} else {
+			checkMana = 3;
+		}
+		System.out.println(checkMana);
+		return checkMana;
 	}
 
 	public static void deleteManager(Connection conn, int idIn) throws SQLException {
@@ -176,7 +203,7 @@ public class ManagerDAO {
 			String phone = rs.getString("phone_number");
 			String email = rs.getString("email");
 			String pass = rs.getString("password");
-			int idgara = rs.getInt("idgara");
+			int idgara = rs.getInt("garage_id");
 			Manager mh = new Manager(id, ten, phone, email, pass, idgara);
 
 			return mh;

@@ -30,7 +30,6 @@
 		<div class="text">Thêm Tài Khoản</div>
 		
 		<div class="content">
-			<p style="color: red;">${ errorString }</p>
 			<form action="${ pageContext.request.contextPath }/createManager" method="POST">
 	            <div class="form-row">
 	                <div class="form-group col-md-4">
@@ -69,6 +68,7 @@
 	                    <input required type="text" id="simpleinput" class="form-control" name="password">
 	                </div>
 	            </div>
+	            <p style="color: red;">${ errorString }</p>
 	            <br>
 	             <input class="btn btn-success" type="submit" value="Thêm" />
 	            <a class="btn btn-primary" href="${ pageContext.request.contextPath }/garageacctive">Hủy</a>

@@ -69,6 +69,15 @@
 	                </div>
 	            </div>
 	            <br>
+	            <div class="form-row">
+	            	
+	                <div class="form-group col-md-4">
+	                    <label for="simpleinput">Gara ID</label>
+	                     <td><input class="form-control" type="text" name="garaid" value="${manager.garaid}" /></td>
+	                  
+	                </div>
+	            </div>
+	            <br>	            
 	            <button class="btn btn-success">Cập nhật</button>
 	            <a class="btn btn-primary" href="${ pageContext.request.contextPath }/managerList">Hủy</a>
         </form>
