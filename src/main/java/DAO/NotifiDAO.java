@@ -63,7 +63,23 @@ public class NotifiDAO{
 		}
 		else {
 			JOptionPane.showMessageDialog(frame,
-				    "Không ghi file!!",
+				    "Ghi file thất bại!",
+				    "Lỗi",
+				    JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	public static void DoneDeleteTicket(boolean a)
+	{
+		JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+		if(a) {
+			JOptionPane.showMessageDialog(frame,
+	                "Huỷ Vé Thành Công",
+	                "THÔNG BÁO",
+	                JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			JOptionPane.showMessageDialog(frame,
+				    "Không thể huỷ vé!!",
 				    "Lỗi",
 				    JOptionPane.WARNING_MESSAGE);
 		}

@@ -62,9 +62,11 @@ public class DeleteTicket extends HttpServlet {
 	       
 	        try {
 	            DAO.TicketDAO.deleteTicket(conn, id,idseat,idcustom);
+	            DAO.NotifiDAO.DoneDeleteTicket(true);
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            errorString = e.getMessage();
+	            DAO.NotifiDAO.DoneDeleteTicket(false);
 	        }
 	  
 	        response.sendRedirect(request.getContextPath() + "/quanlyve");
