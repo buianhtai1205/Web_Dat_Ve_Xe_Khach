@@ -73,7 +73,7 @@ public class CreateCustomer extends HttpServlet {
 			DAO.NotifiDAO.DoneSave(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			errorString = e.getMessage();
+			errorString = "Trùng số điện thoại";
 			DAO.NotifiDAO.DoneSave(false);
 		}
 
