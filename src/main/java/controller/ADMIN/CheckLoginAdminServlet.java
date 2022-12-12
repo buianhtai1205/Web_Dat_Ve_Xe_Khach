@@ -48,7 +48,8 @@ public class CheckLoginAdminServlet extends HttpServlet {
 		Connection conn = MyUtils.getStoredConnection(request);
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-
+		System.out.print(userName);
+		System.out.print(password);
 		Admin admin = null;
 		boolean hasError = false;
 		String errorString = null;

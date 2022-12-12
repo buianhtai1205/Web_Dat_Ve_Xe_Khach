@@ -1,41 +1,105 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Login</title>
- <link rel="stylesheet" href="././assets/admin/css/login.css">
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Tạo Trang Login</title>
+     <link rel="stylesheet" href="style.css">
+     <link rel="preconnect" href="https://fonts.gstatic.com">
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<section class="section-enroll">
-            <div class="row">
-                <div class="enroll">
-                    <div class="enroll_form">
-                        <form class="form">
-                            <div>
-                                <h2 class="heading-secondary">
-                                    Login
-                                </h2>
-                            </div>
-                            <div class="form__group">
-                                <input type="text" id="username" class="form__input" placeholder="user name" required>
-                                <label for="username" class="form__label">Username</label>
-                            </div>
-                            <div class="form__group">
-                                <input type="text" id="password" class="form__input" placeholder="password" required>
-                                <label for="password" class="form__label">Password</label>
-                            </div>
-                            
-                            <div class="form-group">
-                                <a href="#" class="btn btn--blue">
-                                    Submit &rarr;
-                                </a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
 </body>
 </html>
+<section>
+    <!--Bắt Đầu Phần Hình Ảnh-->
+    <div class="img-bg">
+        <img src="https://niemvuilaptrinh.ams3.cdn.digitaloceanspaces.com/tao_trang_dang_nhap/hinh_anh_minh_hoa.jpg" alt="Hình Ảnh Minh Họa">
+    </div>
+    <!--Kết Thúc Phần Hình Ảnh-->
+    <!--Bắt Đầu Phần Nội Dung-->
+    <div class="noi-dung">
+        <div class="form">
+            <h2>Trang Đăng Nhập</h2>
+            <form action="">
+                <div class="input-form">
+                    <span>Tên Người Dùng</span>
+                    <input type="text" name="username">
+                </div>
+                <div class="input-form">
+                    <span>Mật Khẩu</span>
+                    <input type="password" name="password">
+                </div>
+                <div class="nho-dang-nhap">
+                    <label><input type="checkbox" name=""> Nhớ Đăng Nhập</label>
+                </div>
+                <div class="input-form">
+                    <input type="submit" value="Đăng Nhập">
+                </div>
+                <div class="input-form">
+                    <p>Bạn Chưa Có Tài Khoản? <a href="#">Đăng Ký</a></p>
+                </div>
+            </form>
+            <h3>Đăng Nhập Bằng Mạng Xã Hội</h3>
+            <ul class="icon-dang-nhap">
+                <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
+                <li><i class="fa fa-google" aria-hidden="true"></i></li>
+                <li><i class="fa fa-twitter" aria-hidden="true"></i></li>
+            </ul>
+        </div>
+    </div>
+    <!--Kết Thúc Phần Nội Dung-->
+</section>
+<script type="text/javascript">
+    function validatePhoneNumber(input_str) {
+        var re = 'tuan123';
+
+        return re.test(input_str);
+    }
+
+    var input = document.getElementById("input");
+    var password = document.getElementById("password");
+    input.onblur = function() {
+        if (!validatePhoneNumber(input.value)) {
+            input.classList.add('invalid');
+            error.innerHTML = 'Please enter a correct number phone.'
+        }
+    };
+
+    input.onfocus = function() {
+        if (this.classList.contains('invalid')) {
+
+            this.classList.remove('invalid');
+            error.innerHTML = "";
+        }
+    };
+
+    password.onblur = function() {
+        if (password.value.length === 0) {
+            password.classList.add('invalid');
+            error2.innerHTML = 'Please enter a correct password.'
+
+        }
+    };
+
+    password.onfocus = function() {
+        if (this.classList.contains('invalid')) {
+
+            this.classList.remove('invalid');
+            error2.innerHTML = "";
+        }
+    };
+
+    function sweetAlert() {
+        Swal.fire({
+            title : 'Error!',
+            text : 'Do you want to continue',
+            icon : 'error',
+            confirmButtonText : 'Cool'
+        })
+    }
+    sweetAlert();
+</script>
