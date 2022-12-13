@@ -1,6 +1,7 @@
 package controller.ADMIN;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -47,11 +48,26 @@ public class CreateGarageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		Connection conn = MyUtils.getStoredConnection(request);
 		
-		String fullname = new String(request.getParameter("fullname").getBytes("ISO-8859-1"), "UTF-8");
-		String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
-		String description = new String(request.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");
+		//String fullname = new String(request.getParameter("fullname").getBytes("ISO-8859-1"), "UTF-8");
+		String fullname = request.getParameter("fullname"); 
+		System.out.print(fullname);
+		byte[] bytes1 = fullname.getBytes(StandardCharsets.ISO_8859_1);
+		fullname = new String(bytes1, StandardCharsets.UTF_8);
+		System.out.print(fullname);
+		
+		//String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
+		String address = request.getParameter("address"); 
+		byte[] bytes2 = address.getBytes(StandardCharsets.ISO_8859_1);
+		address = new String(bytes2, StandardCharsets.UTF_8);
+		
+		//String description = new String(request.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");
+		
+		String description = request.getParameter("description"); 
+		byte[] bytes3 = description.getBytes(StandardCharsets.ISO_8859_1);
+		description = new String(bytes3, StandardCharsets.UTF_8);
 		GarageDAO garageDAO = new GarageDAO();
 		String errorString = null;
 
