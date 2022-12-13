@@ -98,7 +98,7 @@ public class EditCustomer extends HttpServlet {
 		}
 
 		String idStr = (String) request.getParameter("id");
-		String fullname = new String(request.getParameter("fullname"));
+		String fullname = new String(request.getParameter("fullname").getBytes("ISO-8859-1"), "UTF-8");
 		String phone_number = new String(request.getParameter("phone_number").getBytes("ISO-8859-1"), "UTF-8");
 		String email = new String(request.getParameter("email").getBytes("ISO-8859-1"), "UTF-8");
 		String password = new String(request.getParameter("password").getBytes("ISO-8859-1"), "UTF-8");
@@ -113,27 +113,30 @@ public class EditCustomer extends HttpServlet {
 
 		Customer mh = new Customer(id, fullname, phone_number, email, password);
 
-		String errorString = null;
+		String errorString = "'null'";
 
 		try {
 			DAO.CustomerDAO.updateCustomer(conn, mh);
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 			errorString = e.getMessage();
+			errorString = "'Lỗi! vui lòng xem lại.'";
+			
 		}
 
 		request.setAttribute("errorString", errorString);
 		request.setAttribute("khachhang", mh);
 
-		if (errorString != null) {
+	//	if (errorString != null) {
 			RequestDispatcher dispatcher = request.getServletContext()
 					.getRequestDispatcher("/views/adminView/editCustomer.jsp");
 			dispatcher.forward(request, response);
-		}
+	//	}
 
-		else {
-			response.sendRedirect(request.getContextPath() + "/customerList");
-		}
+	//	else {
+		//	response.sendRedirect(request.getContextPath() + "/customerList");
+	//	}
 	}
 
 }

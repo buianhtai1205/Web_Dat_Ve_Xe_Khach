@@ -95,7 +95,7 @@ public class EditManager extends HttpServlet {
 		}
 
 		String idStr = (String) request.getParameter("id");
-		String fullname = new String(request.getParameter("fullname"));
+		String fullname = new String(request.getParameter("fullname").getBytes("ISO-8859-1"), "UTF-8");
 		String phone_number = new String(request.getParameter("phone_number").getBytes("ISO-8859-1"), "UTF-8");
 		String email = new String(request.getParameter("email").getBytes("ISO-8859-1"), "UTF-8");
 		String password = new String(request.getParameter("password").getBytes("ISO-8859-1"), "UTF-8");
@@ -110,27 +110,29 @@ public class EditManager extends HttpServlet {
 
 		Manager mh = new Manager(id, fullname, phone_number, email, password,idgarage);
 
-		String errorString = null;
+		String errorString = "'null'";
 
 		try {
 			DAO.ManagerDAO.updateManager(conn, mh);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			errorString = e.getMessage();
+			errorString = "'Lỗi! vui lòng xem lại.'";
 		}
 
 		request.setAttribute("errorString", errorString);
 		request.setAttribute("manager", mh);
 
-		if (errorString != null) {
+	//	if (errorString != null) {
 			RequestDispatcher dispatcher = request.getServletContext()
 					.getRequestDispatcher("/views/adminView/editManager.jsp");
 			dispatcher.forward(request, response);
-		}
+	//	}
 
-		else {
-			response.sendRedirect(request.getContextPath() + "/managerList");
-		}
+//		else {
+	//		response.sendRedirect(request.getContextPath() + "/managerList");
+		//}
 	}
 
 }

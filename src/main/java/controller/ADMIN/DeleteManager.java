@@ -1,5 +1,6 @@
 package controller.ADMIN;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -53,16 +54,21 @@ public class DeleteManager extends HttpServlet {
         }
         Manager mg = null;
  
-        String errorString = null;
+        String errorString = "'null'";
 
         try {
             DAO.ManagerDAO.deleteManager(conn, id);
+         
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
+            errorString = "'error'";
         }
-  
-        response.sendRedirect(request.getContextPath() + "/managerList");
+        request.setAttribute("errorString", errorString);
+        RequestDispatcher dispatcher = request.getServletContext()
+				.getRequestDispatcher("/views/adminView/accountManager.jsp");
+		dispatcher.forward(request, response);
+     //   response.sendRedirect(request.getContextPath() + "/managerList");
 	}
 
 	/**

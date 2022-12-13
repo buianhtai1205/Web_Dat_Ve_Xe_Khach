@@ -79,25 +79,39 @@ public class CreateManager extends HttpServlet {
 		String errorString = null;
 
 		try {
-			managerDAO.insertManager(conn, fullname, phone_number, email, password, garage_id);
+			int checkManaID = 0;
+			checkManaID = managerDAO.insertManager(conn, fullname, phone_number, email, password, garage_id);
+			if (checkManaID == 1) {
+				errorString = "Email này đã tồn tại, vui lòng nhập Email khác!";
+			}
+			if (checkManaID == 2) {
+				errorString = "Số điện thoại này đã tồn tại, vui lòng nhập số điện thoại khác!";
+			}
+			if (checkManaID == 3) {
+				errorString = "Số điện thoại và Email này đã tồn tại, vui lòng nhập Số điện thoại và Email khác!";
+			}
+			// DAO.NotifiDAO.DoneSave(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			errorString = e.getMessage();
+			// DAO.NotifiDAO.DoneSave(false);
+		}
+		if (errorString != null) {
+			request.setAttribute("errorString", errorString);
+			GarageDAO garageDAO = new GarageDAO();
+			System.out.println(errorString);
+			String idGarage = request.getParameter("id");
+			Garage garage = null;
+			garage = garageDAO.getInfoGarage(conn, idGarage);
+			request.setAttribute("garage", garage);
+			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(Router.ADMIN_CREATEMANAGER);
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getServletContext()
+					.getRequestDispatcher(Router.ADMIN_GARAGEMANAGEMENT);
+			dispatcher.forward(request, response);
 		}
 
-		request.setAttribute("errorString", errorString);
-
-		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(Router.ADMIN_GARAGEMANAGEMENT);
-		dispatcher.forward(request, response);
-//		if (errorString != null) {
-//			RequestDispatcher dispatcher = request.getServletContext()
-//					.getRequestDispatcher(Router.ADMIN_GARAGEMANAGEMENT);
-//			dispatcher.forward(request, response);
-//		}
-//
-//		else {
-//			response.sendRedirect(request.getContextPath() + "/managerList");
-//		}
 	}
 
 }

@@ -164,6 +164,7 @@ public class TripDAO {
 		if (rs1.next()) {
 			_garageid = rs1.getInt("garage_id");
 		}
+		System.out.print(_garageid);
 		String sql = "select * from Trip where garage_id =" + _garageid;
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		ResultSet rs = pstm.executeQuery();

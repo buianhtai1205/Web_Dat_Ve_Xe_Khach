@@ -110,6 +110,35 @@
 		        
 		    }
 		});
+		var str = ${ errorString };
+		var strpath = ${ errorFile };
+		if (strpath == 'null')
+		{
+		alert("Huỷ Tạo File");
+		window.location.href =  "quanlyve";
+		}
+		else {
+			if(str == 'error')
+			{
+			alert("Lỗi! Không thể ghi file");
+			window.location.href =  "quanlyve";
+			}
+			else if(str == 'done')
+			{
+			alert("Export file thành công");
+			window.location.href =  "quanlyve";
+			}
+		}
+		if (str == 'null')
+			{
+			alert("Huỷ Vé Thành Công");
+			window.location.href =  "quanlyve";
+			}
+		else if(str == 'error1')
+		{
+		alert("Lỗi! Không thể huỷ vé");
+		window.location.href =  "quanlyve";
+		}
     </script>
 	<script type="text/javascript" src="lib.js"></script>
 	<script type="text/javascript">

@@ -47,7 +47,7 @@
 				</div>
 				<div class="input-form">
 					<p>
-						Bạn Chưa Có Tài Khoản? <a href="#">Đăng Ký</a>
+						Quay về trang chủ VEXERE ? <a href="${pageContext.request.contextPath}/">Quay lại</a>
 					</p>
 				</div>
 			</form>

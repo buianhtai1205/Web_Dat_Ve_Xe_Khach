@@ -72,9 +72,9 @@ public class editGarageServlet extends HttpServlet {
 		String idGarage = request.getParameter("id");
 		int id_Garage = Integer.parseInt(idGarage);
 		System.out.println(id_Garage);
-		String fullname = new String(request.getParameter("fullname").getBytes("UTF-8"));
-		String address = new String(request.getParameter("address").getBytes("UTF-8"));
-		String description = new String(request.getParameter("description").getBytes("UTF-8"));
+		String fullname = new String(request.getParameter("fullname").getBytes("ISO-8859-1"), "UTF-8");
+		String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
+		String description = new String(request.getParameter("description").getBytes("ISO-8859-1"), "UTF-8");
 
 		String errStr = null;
 
