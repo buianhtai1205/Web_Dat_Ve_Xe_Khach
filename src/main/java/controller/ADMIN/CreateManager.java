@@ -1,6 +1,7 @@
 package controller.ADMIN;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -71,10 +72,26 @@ public class CreateManager extends HttpServlet {
 		Connection conn = MyUtils.getStoredConnection(request);
 		String id = request.getParameter("id");
 		int garage_id = Integer.parseInt(id);
-		String fullname = new String(request.getParameter("fullname").getBytes("UTF-8"));
-		String phone_number = new String(request.getParameter("phone_number").getBytes("ISO-8859-1"), "UTF-8");
-		String email = new String(request.getParameter("email").getBytes("ISO-8859-1"), "UTF-8");
-		String password = new String(request.getParameter("password").getBytes("ISO-8859-1"), "UTF-8");
+		//String fullname = new String(request.getParameter("fullname").getBytes("UTF-8"));
+		String fullname = request.getParameter("fullname"); 
+		byte[] bytes1 = fullname.getBytes(StandardCharsets.ISO_8859_1);
+		fullname = new String(bytes1, StandardCharsets.UTF_8);
+		
+		//String phone_number = new String(request.getParameter("phone_number").getBytes("ISO-8859-1"), "UTF-8");
+		String phone_number = request.getParameter("phone_number"); 
+		byte[] bytes2 = phone_number.getBytes(StandardCharsets.ISO_8859_1);
+		phone_number = new String(bytes2, StandardCharsets.UTF_8);
+	
+		//String email = new String(request.getParameter("email").getBytes("ISO-8859-1"), "UTF-8");
+		String email = request.getParameter("email"); 
+		byte[] bytes3 = email.getBytes(StandardCharsets.ISO_8859_1);
+		email = new String(bytes3, StandardCharsets.UTF_8);
+		
+		//String password = new String(request.getParameter("password").getBytes("ISO-8859-1"), "UTF-8");
+		String password = request.getParameter("password"); 
+		byte[] bytes4 = password.getBytes(StandardCharsets.ISO_8859_1);
+		password = new String(bytes4, StandardCharsets.UTF_8);
+		
 		ManagerDAO managerDAO = new ManagerDAO();
 		String errorString = null;
 
