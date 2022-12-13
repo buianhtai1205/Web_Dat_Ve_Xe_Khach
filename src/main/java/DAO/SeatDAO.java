@@ -121,6 +121,16 @@ public class SeatDAO {
 		return null;
 	}
 	
+	public void updateStatusSeat(Connection conn, int idGhe) throws SQLException {
+
+		String sql = "Update Seat Set status = 1 where id = ?";
+
+		PreparedStatement pstm = conn.prepareStatement(sql);
+
+		pstm.setInt(1, idGhe);
+		pstm.executeUpdate();
+	}
+	
 	
 	
 	public static ArrayList<Seat> getListSeat(Connection con, int trip_id)

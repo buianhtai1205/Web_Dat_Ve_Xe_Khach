@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -37,10 +38,17 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		Connection conn = MyUtils.getStoredConnection(request);
 		HttpSession session = request.getSession();
-		String numberPhone = request.getParameter("numberPhone");
-		String password = request.getParameter("password");
+		String numberPhone= request.getParameter("numberPhone");
+		byte[] bytes1 = numberPhone.getBytes(StandardCharsets.ISO_8859_1);
+		numberPhone = new String(bytes1, StandardCharsets.UTF_8);
+		
+		String password= request.getParameter("password");
+		byte[] bytes2 = password.getBytes(StandardCharsets.ISO_8859_1);
+		password = new String(bytes2, StandardCharsets.UTF_8);
 
 		Customer user = null;
 		boolean hasError = false;

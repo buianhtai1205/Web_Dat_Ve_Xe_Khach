@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -58,19 +59,61 @@ public class DatVe extends HttpServlet {
 		String errorString = null;
 		//String idChuyen = (String) session.getAttribute("idChuyen");
 		String idChuyen= request.getParameter("inputIdChuyenXe");
+		System.out.println("id"+ idChuyen);
+		/*
+		 * byte[] bytes1 = idChuyen.getBytes(StandardCharsets.ISO_8859_1); idChuyen =
+		 * new String(bytes1, StandardCharsets.UTF_8);
+		 */
+		
 		String inputTripBoard= request.getParameter("inputTripBoard");
-		String idGhe1 = request.getParameter("seatID1");
-		String idGhe2= request.getParameter("seatID2");
-		String idGhe3= request.getParameter("seatID3");
-		String priceTrip= request.getParameter("priceTrip");
-		String diemDon= request.getParameter("checkbox_"+idChuyen);
-		String diemTra= request.getParameter("checkbox"+idChuyen);
+		byte[] bytes2 = inputTripBoard.getBytes(StandardCharsets.ISO_8859_1);
+		inputTripBoard = new String(bytes2, StandardCharsets.UTF_8);
+		
+		String idGhe1= request.getParameter("seatID1");
+		byte[] bytes3 = idGhe1.getBytes(StandardCharsets.ISO_8859_1);
+		idGhe1 = new String(bytes3, StandardCharsets.UTF_8);
 		session.setAttribute("idGhe1", idGhe1);
-		session.setAttribute("idGhe2", idGhe2);
-		session.setAttribute("idGhe3", idGhe3);
-		String tenKh = request.getParameter("nameUser"+idChuyen);
-		String phoneUser = request.getParameter("phoneUser"+idChuyen);
-		String email = request.getParameter("emailUser"+idChuyen);
+		String idGhe2= request.getParameter("seatID2");
+		if(idGhe2 != null) {
+			byte[] bytes4 = idGhe2.getBytes(StandardCharsets.ISO_8859_1);
+			idGhe2 = new String(bytes4, StandardCharsets.UTF_8);
+			session.setAttribute("idGhe2", idGhe2);
+		}
+		
+		String idGhe3= request.getParameter("seatID3");
+		if(idGhe3 != null) {
+			byte[] bytes5 = idGhe3.getBytes(StandardCharsets.ISO_8859_1);
+			idGhe3 = new String(bytes5, StandardCharsets.UTF_8);
+			session.setAttribute("idGhe3", idGhe3);
+		}
+		
+		String priceTrip= request.getParameter("priceTrip");
+		System.out.println("priceTrip"+ priceTrip);
+		/*
+		 * byte[] bytes6 = priceTrip.getBytes(StandardCharsets.ISO_8859_1); priceTrip =
+		 * new String(bytes6, StandardCharsets.UTF_8);
+		 */
+		
+		String diemDon= request.getParameter("checkbox_"+idChuyen);
+		byte[] bytes7 = diemDon.getBytes(StandardCharsets.ISO_8859_1);
+		diemDon = new String(bytes7, StandardCharsets.UTF_8);
+		
+		String diemTra= request.getParameter("checkbox"+idChuyen);
+		byte[] bytes8 = diemTra.getBytes(StandardCharsets.ISO_8859_1);
+		diemTra = new String(bytes8, StandardCharsets.UTF_8);
+		
+		String tenKh= request.getParameter("nameUser"+idChuyen);
+		byte[] bytes9 = tenKh.getBytes(StandardCharsets.ISO_8859_1);
+		tenKh = new String(bytes9, StandardCharsets.UTF_8);
+		
+		String phoneUser= request.getParameter("phoneUser"+idChuyen);
+		byte[] bytes10 = phoneUser.getBytes(StandardCharsets.ISO_8859_1);
+		phoneUser = new String(bytes10, StandardCharsets.UTF_8);
+		
+		String email= request.getParameter("emailUser"+idChuyen);
+		byte[] bytes11 = email.getBytes(StandardCharsets.ISO_8859_1);
+		email = new String(bytes11, StandardCharsets.UTF_8);
+		
 		String pass = MyUtils.generatePassword(8);
 		
 		Customer user = null;
@@ -96,53 +139,53 @@ public class DatVe extends HttpServlet {
 //						int id = Integer.parseInt(idGhe);
 						int idchuyen = Integer.parseInt(idChuyen);
 						int idDiemDon = Integer.parseInt(diemDon);
-						int idDiemTra = Integer.parseInt(diemTra);
+						//int idDiemTra = Integer.parseInt(diemTra);
+						Seat numberChairSeat1 = null;
+						Seat numberChairSeat2 = null;
+						Seat numberChairSeat3 = null;
+						
 						try {
-							//lay seat de them vao ticket
 							SeatDAO seatDAO = new SeatDAO();
+							
+							//lay seat de them vao ticket
 							Seat seat = new Seat();
 							//kiem tra tung seat hop le thi se them chuyen
-							if(idGhe1!="") {
+							if(idGhe1!=null) {
 								seat = seatDAO.getIdSeat(con, idGhe1);
 								int idSeat = seat.getId();		
 								if(String.valueOf(idSeat) != null) {
+									seatDAO.updateStatusSeat(con,idSeat);
 									c.addChuyen(con, idchuyen, idSeat,idDiemDon, idUser);
+									numberChairSeat1 = seatDAO.getChairByIdSeat(con, idGhe1);
+									session.setAttribute("numberChairSeat1",numberChairSeat1);
 								}
 							}
-							if(idGhe2!="") {
+							if(idGhe2 != null) {
 								seat = seatDAO.getIdSeat(con, idGhe2);
 								int idSeat2 = seat.getId();
 								if(String.valueOf(idSeat2) != null) {
+									seatDAO.updateStatusSeat(con,idSeat2);
 									c.addChuyen(con, idchuyen, idSeat2,idDiemDon, idUser);
+									numberChairSeat2 = seatDAO.getChairByIdSeat(con, idGhe2);
+									session.setAttribute("numberChairSeat2",numberChairSeat2);
 								}
 							}
 							
-							if(idGhe3.length() > 0) {
+							if(idGhe3 != null) {
 								seat = seatDAO.getIdSeat(con, idGhe3);
 								int idSeat3 = seat.getId();
 								if(String.valueOf(idSeat3) != null) {
+									seatDAO.updateStatusSeat(con,idSeat3);
 									c.addChuyen(con, idchuyen, idSeat3,idDiemDon, idUser);
+									numberChairSeat3 = seatDAO.getChairByIdSeat(con, idGhe3);
+									session.setAttribute("numberChairSeat3",numberChairSeat3);
 								}
 							}
-								int _nbSeats =Integer.parseInt(seatDAO.getNumberSeat(con,idChuyen));
-								String priceSeat = String.valueOf(_nbSeats * Integer.parseInt(priceTrip));
-								Seat numberChairSeat1 = seatDAO.getChairByIdSeat(con, idGhe1);
-								Seat numberChairSeat2 = null;
-								Seat numberChairSeat3 = null;
-								if(idGhe2.length() > 0) {
-									numberChairSeat2 = seatDAO.getChairByIdSeat(con, idGhe2);
-								}
-								if(idGhe3.length() > 0) {
-									
-									numberChairSeat3 = seatDAO.getChairByIdSeat(con, idGhe3);
-								}
+							int _nbSeats =Integer.parseInt(seatDAO.getNumberSeat(con,idChuyen));
+							String priceSeat = String.valueOf(_nbSeats * Integer.parseInt(priceTrip));
+							System.out.println("priceTrip"+ priceSeat);
 								
-								session.setAttribute("priceSeat",priceSeat);
-								session.setAttribute("numberChairSeat1",numberChairSeat1);
-								session.setAttribute("numberChairSeat2",numberChairSeat2);
-								session.setAttribute("numberChairSeat3",numberChairSeat3);
-								//session.setAttribute("numberChairSeat3",numberChairSeat3);
-								String noiDung = "Chuyến số: "  +"\nBiển số" + inputTripBoard + "\nGhế số: " + numberChairSeat1.getNumber_chair() + " "+numberChairSeat2.getNumber_chair() + " "+numberChairSeat3.getNumber_chair() + " "+ "\nĐịa điểm đón: " + _diemDon + "\nĐịa điểm trả: " + _diemTra + "\nGìa vé: " + priceSeat + ".000đ"  
+								String noiDung = "Chuyến số: " + idChuyen +"\nBiển số" + inputTripBoard + "\nGhế số: " + numberChairSeat1.getNumber_chair() + " "+numberChairSeat2.getNumber_chair() + " "+numberChairSeat3.getNumber_chair() + " "+ "\nĐịa điểm đón: " + _diemDon + "\nĐịa điểm trả: " + _diemTra + "\nGìa vé: " + priceSeat + ".000đ"  
 										+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "\nMật khẩu: "+ pass;
 								SendEmail.getInstant().guiMail(email, noiDung);
 								String mes = "Email của quý khách đã gửi thành công!";
@@ -153,7 +196,7 @@ public class DatVe extends HttpServlet {
 						} catch (Exception e) {
 							// TODO: handle exception
 							e.printStackTrace();
-							response.sendRedirect(request.getContextPath() + Router.PAGE_BUY_TICKET);
+							response.sendRedirect(request.getContextPath() + Router.THONG_BAO);
 						}
 						
 						
