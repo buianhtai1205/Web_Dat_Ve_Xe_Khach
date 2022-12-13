@@ -49,8 +49,7 @@ public class DatVe extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
+	
 		HttpSession session = request.getSession();
 		Connection con = MyUtils.getStoredConnection(request);
 		ChuyenDAO c = new ChuyenDAO();
@@ -146,9 +145,11 @@ public class DatVe extends HttpServlet {
 						
 						try {
 							SeatDAO seatDAO = new SeatDAO();
-							
+							String noiDung = "";
 							//lay seat de them vao ticket
 							Seat seat = new Seat();
+							int _nbSeats = 0;
+							String priceSeat = "";
 							//kiem tra tung seat hop le thi se them chuyen
 							if(idGhe1!=null) {
 								seat = seatDAO.getIdSeat(con, idGhe1);
@@ -159,6 +160,10 @@ public class DatVe extends HttpServlet {
 									numberChairSeat1 = seatDAO.getChairByIdSeat(con, idGhe1);
 									session.setAttribute("numberChairSeat1",numberChairSeat1);
 								}
+								 _nbSeats =Integer.parseInt(seatDAO.getNumberSeat(con,idChuyen));
+								 priceSeat = String.valueOf(_nbSeats * Integer.parseInt(priceTrip));
+								 noiDung = "Chuyến số: " + idChuyen +"\nBiển số" + inputTripBoard + "\nGhế số: " + numberChairSeat1.getNumber_chair() + " " + " "+ "\nĐịa điểm đón: " + _diemDon + "\nĐịa điểm trả: " + _diemTra + "\nGìa vé: " + priceSeat + ".000đ"  
+										+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "\nMật khẩu: "+ pass;
 							}
 							if(idGhe2 != null) {
 								seat = seatDAO.getIdSeat(con, idGhe2);
@@ -169,6 +174,10 @@ public class DatVe extends HttpServlet {
 									numberChairSeat2 = seatDAO.getChairByIdSeat(con, idGhe2);
 									session.setAttribute("numberChairSeat2",numberChairSeat2);
 								}
+								 _nbSeats =Integer.parseInt(seatDAO.getNumberSeat(con,idChuyen));
+								 priceSeat = String.valueOf(_nbSeats * Integer.parseInt(priceTrip));
+								 noiDung = "Chuyến số: " + idChuyen +"\nBiển số" + inputTripBoard + "\nGhế số: " + numberChairSeat1.getNumber_chair() + " "+numberChairSeat2.getNumber_chair() +  " "+ "\nĐịa điểm đón: " + _diemDon + "\nĐịa điểm trả: " + _diemTra + "\nGìa vé: " + priceSeat + ".000đ"  
+										+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "\nMật khẩu: "+ pass;
 							}
 							
 							if(idGhe3 != null) {
@@ -180,13 +189,15 @@ public class DatVe extends HttpServlet {
 									numberChairSeat3 = seatDAO.getChairByIdSeat(con, idGhe3);
 									session.setAttribute("numberChairSeat3",numberChairSeat3);
 								}
+								 _nbSeats =Integer.parseInt(seatDAO.getNumberSeat(con,idChuyen));
+								 priceSeat = String.valueOf(_nbSeats * Integer.parseInt(priceTrip));
+								 noiDung = "Chuyến số: " + idChuyen +"\nBiển số" + inputTripBoard + "\nGhế số: " + numberChairSeat1.getNumber_chair() + " "+numberChairSeat2.getNumber_chair() + " "+numberChairSeat3.getNumber_chair() + " "+ "\nĐịa điểm đón: " + _diemDon + "\nĐịa điểm trả: " + _diemTra + "\nGìa vé: " + priceSeat + ".000đ"  
+										+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "\nMật khẩu: "+ pass;
 							}
-							int _nbSeats =Integer.parseInt(seatDAO.getNumberSeat(con,idChuyen));
-							String priceSeat = String.valueOf(_nbSeats * Integer.parseInt(priceTrip));
+							
 							System.out.println("priceTrip"+ priceSeat);
 								
-								String noiDung = "Chuyến số: " + idChuyen +"\nBiển số" + inputTripBoard + "\nGhế số: " + numberChairSeat1.getNumber_chair() + " "+numberChairSeat2.getNumber_chair() + " "+numberChairSeat3.getNumber_chair() + " "+ "\nĐịa điểm đón: " + _diemDon + "\nĐịa điểm trả: " + _diemTra + "\nGìa vé: " + priceSeat + ".000đ"  
-										+ "\nTài khoản để đăng nhập để kiểm tra vé là: Tên đăng nhập: " + phoneUser +" " + "\nMật khẩu: "+ pass;
+								
 								SendEmail.getInstant().guiMail(email, noiDung);
 								String mes = "Email của quý khách đã gửi thành công!";
 								request.setAttribute("mes", mes);
