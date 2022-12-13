@@ -10,6 +10,8 @@ public class ChuyenDAO{
 	
 	public void addKhachHang(Connection con, String fullname, String phone_number, String email, String password) {
 		String sqlThongTinKhachHang = "insert into Customer (fullname, phone_number, email,password) values (?,?,?,?)";
+		System.out.println("ChuyenDAO_addKhachHang");
+		System.out.println("sql"+sqlThongTinKhachHang);
 		PreparedStatement pre = null;
 		try {
 			con.setAutoCommit(false);
@@ -38,6 +40,8 @@ public class ChuyenDAO{
 		String sqlAddChuyen = ""
 				+ "INSERT into Ticket(trip_id,seat_id,schedule_id,customer_id) VALUES (?,?,?,?)";
 		PreparedStatement pre = null;
+		System.out.println("ChuyenDAO_addChuyen");
+		System.out.println("sql"+sqlAddChuyen);
 		try {
 			con.setAutoCommit(false);
 			pre = con.prepareStatement(sqlAddChuyen);

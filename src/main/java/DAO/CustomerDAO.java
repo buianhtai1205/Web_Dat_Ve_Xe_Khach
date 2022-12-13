@@ -20,6 +20,8 @@ public class CustomerDAO {
 
 		String sql = "Select * from Customer " //
 				+ " where phone_number = ? and password= ?";
+		System.out.println("CustomerDAO_findUser");
+		System.out.println("sql"+sql);
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		pstm.setString(1, numberPhone);
 		pstm.setString(2, password);
@@ -42,7 +44,8 @@ public class CustomerDAO {
 
 		String sql = "Select * from Customer a "//
 				+ " where a.phone_number = ? ";
-
+		System.out.println("CustomerDAO_findUser");
+		System.out.println("sql"+sql);
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		pstm.setString(1, phone_number);
 
@@ -64,7 +67,8 @@ public class CustomerDAO {
 
 	public static void updatePassword(Connection conn, String password, String numberPhone) throws SQLException {
 		String sql = "Update Customer set password =? where phone_number=? ";
-
+		System.out.println("CustomerDAO_updatePassword");
+		System.out.println("sql"+sql);
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
 		pstm.setString(1, password);
@@ -74,7 +78,8 @@ public class CustomerDAO {
 	public static List<Customer> getlistCustomer(Connection conn)
 			throws SQLException {
 			String sql = "SELECT * FROM Customer";
-			
+			System.out.println("CustomerDAO_getlistCustomer");
+			System.out.println("sql"+sql);
 			PreparedStatement pstm = conn.prepareStatement(sql);
 			
 			ResultSet rs = pstm.executeQuery();
@@ -98,7 +103,8 @@ public class CustomerDAO {
 		}
 	public static void deleteCustomer(Connection conn, int idIn) throws SQLException {
         String sql = "Delete from Customer where id=?";
-        
+        System.out.println("CustomerDAO_deleteCustomer");
+		System.out.println("sql"+sql);
         PreparedStatement pstm = conn.prepareStatement(sql);
  
         pstm.setInt(1, idIn);  
