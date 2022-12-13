@@ -14,8 +14,8 @@ import javax.mail.internet.MimeMessage;
 public class SendEmail {
 	private static SendEmail instant = new SendEmail();
 	private static Session session;
-	private static final String USER = "duytaovo@gmail.com";
-	private static final String PASSWORD = "etbnkphnuxajltbn";
+	private static final String USER = "quendiquakhu2002@gmail.com";
+	private static final String PASSWORD = "xhtcmajuommsxdqu";
 
 	private SendEmail() {
 		Properties prop = System.getProperties();

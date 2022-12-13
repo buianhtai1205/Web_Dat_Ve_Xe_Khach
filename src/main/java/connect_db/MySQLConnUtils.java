@@ -14,7 +14,7 @@ public class MySQLConnUtils {
 	     String hostName = "localhost";
 	     String dbName = "VEXEONLINE_JAVA";
 	     String userName = "root";
-	     String password = "123456";
+	     String password = "";
 	     return getMySQLConnection(hostName, dbName, userName, password);
 	 }
 	

@@ -12,6 +12,7 @@ import utils.Router;
 import utils.SendEmail;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -45,8 +46,10 @@ public class ForgotPassword extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = MyUtils.getStoredConnection(request);
-		String numberPhone = request.getParameter("numberPhoneForgotPassword");
-		
+		//String numberPhone = request.getParameter("numberPhoneForgotPassword");
+		String numberPhone= request.getParameter("numberPhoneForgotPassword");
+		byte[] bytes2 = numberPhone.getBytes(StandardCharsets.ISO_8859_1);
+		numberPhone = new String(bytes2, StandardCharsets.UTF_8);
 		Customer user = null;
 		boolean hasError = false;
 		String errorString = null;

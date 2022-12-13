@@ -17,9 +17,11 @@ public class TripDAO {
 	}
 
 	public Trip getTripByTicket(Connection conn, String phoneNumber) throws SQLException {
-
+		
 		String idTrip = "select trip_id,seat_id from Ticket join Customer on Customer.id= Ticket.customer_id where phone_number = "
 				+ phoneNumber;
+		System.out.println("TripDAO_getTripByTicket");
+		System.out.println("idTrip"+idTrip);
 		PreparedStatement pstm1 = conn.prepareStatement(idTrip);
 		ResultSet rs1 = pstm1.executeQuery();
 		String _idTrip = null;
@@ -55,10 +57,12 @@ public class TripDAO {
 	}
 
 	public List<Seat> getAllGheOnTrip(Connection con, int idChuyen) {
-
+		
 		/* List<Seat> list = new ArrayList<Seat>(); */
 		List<Seat> list = new ArrayList<>();
 		String sql1 = "select * from seat where trip_id = ?";
+		System.out.println("TripDAO_getAllGheOnTrip");
+		System.out.println("sql1"+sql1);
 		PreparedStatement pre = null;
 
 		try {
@@ -88,6 +92,8 @@ public class TripDAO {
 	public static ArrayList<String> getListDeparture(Connection con) {
 		ArrayList<String> list = new ArrayList<String>();
 		String sql = "SELECT DISTINCT departure FROM Trip";
+		System.out.println("TripDAO_getListDeparture");
+		System.out.println("sql"+sql);
 		PreparedStatement pre = null;
 
 		try {
@@ -107,6 +113,8 @@ public class TripDAO {
 	public static ArrayList<String> getListDestination(Connection con) {
 		ArrayList<String> list = new ArrayList<String>();
 		String sql = "SELECT DISTINCT destination FROM Trip";
+		System.out.println("TripDAO_getListDestination");
+		System.out.println("sql"+sql);
 		PreparedStatement pre = null;
 
 		try {
@@ -130,7 +138,8 @@ public class TripDAO {
 				+ " WHERE CAST(departure_time AS DATE) = '" + departure_time + "' and departure = N'" + departute
 				+ "' and destination = N'" + destination + "' and Garage.deleted = 0";
 		PreparedStatement pre = null;
-
+		System.out.println("TripDAO_getListTrip");
+		System.out.println("sql"+sql);
 		try {
 			pre = con.prepareStatement(sql);
 			ResultSet res = pre.executeQuery();
@@ -159,6 +168,8 @@ public class TripDAO {
 		String garage_id = "select garage_id from Manager where phone_number = " + userManager;
 		PreparedStatement pstm1 = conn.prepareStatement(garage_id);
 		ResultSet rs1 = pstm1.executeQuery();
+		System.out.println("TripDAO_listTrips");
+		System.out.println("sql"+garage_id);
 		int _garageid = 0;
 
 		if (rs1.next()) {
@@ -196,6 +207,8 @@ public class TripDAO {
 		// lấy id garage
 		String garage_id = "select garage_id from Manager where phone_number = " + userManager;
 		PreparedStatement pstm2 = conn.prepareStatement(garage_id);
+		System.out.println("TripDAO_searchListTrips");
+		System.out.println("sql"+garage_id);
 		ResultSet rs2 = pstm2.executeQuery();
 		int _garageid = 0;
 

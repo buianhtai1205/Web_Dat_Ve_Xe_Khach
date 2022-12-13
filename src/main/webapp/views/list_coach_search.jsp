@@ -441,6 +441,9 @@
 															<input class="form-check-input" type="hidden"
 																value="${ trip.id }"
 																name="inputIdChuyenXe" id="inputIdChuyenXe"> 
+																<input class="form-check-input" type="hidden"
+																value="${ trip.trip_board }"
+																name="inputTripBoard" id="inputTripBoard"> 
 														</div>
 													</div>
 	
